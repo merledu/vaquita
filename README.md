@@ -6,10 +6,13 @@ This guide provides step-by-step instructions for creating and managing branches
 
 ## Table of Contents
 
-1. [Cloning the Repository](#cloning-the-repository)
-2. [Creating a New Branch](#creating-a-new-branch)
-3. [Switching to a Different Branch](#switching-to-a-different-branch)
-4. [Branch Management Table](#branch-management-table)
+- [rvv-core](#rvv-core)
+- [Repository Setup and Branch Management Guide](#repository-setup-and-branch-management-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Cloning the Repository](#cloning-the-repository)
+  - [Creating a New Branch](#creating-a-new-branch)
+  - [Switching to a Different Branch](#switching-to-a-different-branch)
+  - [Branch Management Table](#branch-management-table)
 
 ---
 
@@ -70,7 +73,7 @@ Use the table below to keep track of team members and their corresponding branch
 | Team Member | Branch Name |
 |-------------|-------------|
 | Hamna, Maira , Abdul Samad   | HMS       |
-| Hafsa Shoaib                 | pandora   |
+| Hafsa, Hassan                | HH        |
 
 
 Feel free to update this table as your team members create and work on different branches.
