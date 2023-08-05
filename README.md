@@ -69,7 +69,8 @@ Use the table below to keep track of team members and their corresponding branch
 
 | Team Member | Branch Name |
 |-------------|-------------|
-| Hamna, Maira , Abdul Samad   | HMS   |
+| Hamna, Maira , Abdul Samad   | HMS       |
+| Hafsa Shoaib                 | pandora   |
 
 
 Feel free to update this table as your team members create and work on different branches.
