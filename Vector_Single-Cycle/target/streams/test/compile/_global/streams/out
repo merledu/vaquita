@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/INST_MEM/INST_MEMTest.scala:9:17: not found: type InstMem1[0m
+[0m[[0m[31merror[0m] [0m[0m       test(new InstMem1 ( "/home/hafsa/Scala-Chisel-Learning-Journey/vector_input.txt" ) ){c =>[0m
+[0m[[0m[31merror[0m] [0m[0m                ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

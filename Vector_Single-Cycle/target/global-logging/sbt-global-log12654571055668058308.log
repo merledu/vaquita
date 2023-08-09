@@ -1,0 +1,22 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.ALUCONTROLTest, Some(74dec803-376d-4fb3-b2b7-2d1f5f1c3178), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mALUCONTROLTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- ALUCONTROLTest test *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  firrtl.passes.PassExceptions: firrtl.passes.CheckInitialization$RefNotInitializedException:  : [module Alu_Control]  Reference io is not fully initialized.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m   : io.out_V <= mux(_T, _GEN_11, mux(_T_9, _GEN_13, VOID))[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mfirrtl.passes.CheckInitialization$RefNotInitializedException:  : [module Alu_Control]  Reference io is not fully initialized.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m   : io.out <= mux(_T, _GEN_10, mux(_T_9, _GEN_12, VOID))[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mfirrtl.passes.PassException: 2 errors detected![0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 1 second, 824 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 0, failed 1, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	Vpractice.ALUCONTROLTest[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtestOnly[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 5 s, completed Aug 7, 2023, 3:10:04 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

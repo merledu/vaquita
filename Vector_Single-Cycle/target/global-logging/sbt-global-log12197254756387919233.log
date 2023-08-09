@@ -1,0 +1,14 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.RISC5Test -- -DwriteVcd=1, Some(d0f3442d-2111-47f6-9f15-52f59093a4d6), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mRISC5Test:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- RISC5Test test[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 5 seconds, 898 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 1, failed 0, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mAll tests passed.[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 8 s, completed Aug 8, 2023, 3:58:19 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

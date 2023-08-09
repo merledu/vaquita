@@ -1,0 +1,21 @@
+[
+  {
+    "class":"firrtl.stage.FirrtlFileAnnotation",
+    "file":"test_run_dir/RISC5Test_test/Top.lo.fir"
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.LowFirrtlEmitter"
+  },
+  {
+    "class":"firrtl.annotations.LoadMemoryAnnotation",
+    "target":"Top.InstMem1.imem",
+    "fileName":"/home/hafsa/Scala-Chisel-Learning-Journey/vector_input.txt",
+    "hexOrBinary":"h",
+    "originalMemoryNameOpt":"imem"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"test_run_dir/RISC5Test_test"
+  }
+]
