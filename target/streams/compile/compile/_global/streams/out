@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/home/maira/Arsh-SingleCycleCore/src/main/scala/singlecycle/configure.scala:110:8: too many arguments (4) for macro method apply: (cond: chisel3.Bool, con: T, alt: T)T in object Mux[0m
+[0m[[0m[31merror[0m] [0m[0m    Mux(io.rs1 === 0.U && io.rd === 0.U, io.current_vl, 0.S))[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

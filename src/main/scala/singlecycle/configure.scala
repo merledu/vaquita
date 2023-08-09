@@ -13,9 +13,9 @@ class configure extends Module {
     // val vlmax = Output(UInt(32.W))
     val vl = Output(SInt(32.W))
     val rd_out = Output(UInt(5.W))
-    // val avl = Output(UInt(32.W))
-    })
-    
+    val avl_o = Output(SInt(32.W))
+    val valmax_o = Output(SInt(32.W))
+
     val vlmul = io.zimm(2,0).asUInt
     val vsew =io.zimm(5,3).asUInt
     // val sew = 0.U(32.W)
@@ -103,13 +103,10 @@ class configure extends Module {
     }
     // io.vlmax = valmax
 
-    when (io.rs1 =/= 0.U){
-        avl = io.rs1_readdata
-    }.elsewhen(io.rd =/= 0.U && io.rs1 === 0.U){
-        avl= ~(0.S)
-    }.otherwise {
-        avl= io.current_vl
-    }
+avl = Mux(io.rs1 =/= "b00000".U, io.rs1_readdata,
+    Mux(io.rd =/= "b00000".U && io.rs1 === "b00000".U, valmax,
+    Mux(io.rs1 === 0.U && io.rd === 0.U, io.current_vl, 0.S)))
+
     // io.avl =avl
 
     when (avl <= valmax){
@@ -119,5 +116,8 @@ class configure extends Module {
     }
         
 io.rd_out:= io.rd
+
+io.valmax_o := valmax
+io.avl_o := avl
 
 }
