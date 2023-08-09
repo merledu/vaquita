@@ -72,7 +72,7 @@ Use the table below to keep track of team members and their corresponding branch
 
 | Team Member | Branch Name |
 |-------------|-------------|
-| Hamna, Maira  | HMS       |
+| Hamna,Maira  | HMS       |
 | Abdul Samad, Saad    | SS   |
 | Hafsa, Hassan  | HH        |
 
