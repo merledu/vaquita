@@ -20,7 +20,9 @@ val instmemMod = Module (new InstMem)
 val jalrCompMod = Module (new jalr)
 val regfileMod = Module (new regfile)
 val config= Module(new configure)
+
 dontTouch(config.io)
+
 PCMod.io.input := PCMod.io.pc4
 
 instmemMod.io.addr := PCMod.io.pc(11,2)
@@ -72,6 +74,7 @@ ALUMod.io.aluc := ALUcMod.io.aluc
         config.io. rs1_readdata := regfileMod.io.rdata1
         config.io.zimm := ALUMod.io.in_B
         config.io.current_vl :=2.S
+
 		regfileMod.io.rd := config.io.rd_out
 
 
