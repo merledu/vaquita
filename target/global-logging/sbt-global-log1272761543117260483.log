@@ -1,0 +1,29 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly rvv.Topfile_Test -- -DwriteVcd=1, Some(7206dc03-aa5c-45bc-8768-b7291f5f9c97), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hassan/rvv-core/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hassan/rvv-core/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTopfile_Test:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- Top File Test *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  firrtl.passes.PassExceptions: firrtl.passes.CheckInitialization$RefNotInitializedException:  : [module control]  Reference io is not fully initialized.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m   : io.avl_sel <= mux(_T, VOID, mux(_T_1, VOID, mux(_T_2, VOID, mux(_T_3, VOID, mux(_T_4, VOID, mux(_T_5, VOID, mux(_T_6, VOID, mux(_T_7, VOID, mux(_T_8, VOID, _GEN_7)))))))))[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mfirrtl.passes.CheckInitialization$RefNotInitializedException:  : [module aluControl]  Reference io is not fully initialized.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m   : io.out_V <= mux(_T_9, mux(_T_10, UInt<1>("h1"), VOID), VOID)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mfirrtl.passes.CheckInitialization$RefNotInitializedException:  : [module aluControl]  Reference io is not fully initialized.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m   : io.out_I <= VOID[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mfirrtl.passes.CheckInitialization$RefNotInitializedException:  : [module aluControl]  Reference io is not fully initialized.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m   : io.out <= mux(_T_9, mux(_T_10, _io_out_T_3, mux(_T, _GEN_7, VOID)), mux(_T, _GEN_7, VOID))[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31mfirrtl.passes.PassException: 4 errors detected![0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 2 seconds, 425 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 0, failed 1, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	rvv.Topfile_Test[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtestOnly[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 5 s, completed Aug 9, 2023, 11:53:38 AM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[0minfo[0m] [0m[0mshutting down sbt server[0m

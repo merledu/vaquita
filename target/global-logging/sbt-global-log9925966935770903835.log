@@ -1,0 +1,27 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly rvv.Topfile_Test -- -DwriteVcd=1, Some(72cc935c-5a76-452f-8a1a-2617774d637c), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mTopfile_Test:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- Top File Test *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  chisel3.internal.ChiselException: Connection between sink (SInt<32>(IO in unelaborated ALU)) and source (UInt<1>(0)) failed @: Sink (SInt<32>(IO in unelaborated ALU)) and Source (UInt<1>(0)) have different types.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at ... ()[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at rvv.ALU.$anonfun$new$43(ALU.scala:94)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.WhenContext.<init>(When.scala:124)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.WhenContext.otherwise(When.scala:112)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at rvv.ALU.$anonfun$new$36(ALU.scala:93)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.WhenContext.<init>(When.scala:124)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.when$.apply(When.scala:31)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.util.SwitchContext.is(Conditional.scala:40)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 1 second, 770 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 0, failed 1, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	rvv.Topfile_Test[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtestOnly[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 4 s, completed Aug 8, 2023, 4:14:42 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
