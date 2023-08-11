@@ -2,7 +2,7 @@
 
 # Repository Setup and Branch Management Guide
 
-This guide provides step-by-step instructions for creating and managing branches in the **rvv-core** GitHub repository. It also includes information on how to clone the repository for initial setup.
+This guide provides step-by-step instructions for creating and managing branches in the **rvv-core** GitHub Repository. It also includes information on how to clone the repository for initial setup.
 
 ## Table of Contents
 
@@ -72,7 +72,7 @@ Use the table below to keep track of team members and their corresponding branch
 
 | Team Member | Branch Name |
 |-------------|-------------|
-| Hamna,Maira  | HMS       |
+| Hamna, Maira | HMS       |
 | Abdul Samad, Saad    | SS   |
 | Hafsa, Hassan  | HH        |
 
