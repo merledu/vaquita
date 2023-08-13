@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/home/mohammad/Scala-Chisel-Learning-Journey/src/main/scala/riscv/top_file.scala:95:168: ';' expected but ')' found.[0m
+[0m[[0m[31merror[0m] [0m[0m    vector_file_module.io.vec_data := (Mux(control_unit_module.io.vec_write,Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt),alu_module.io.out)).asSInt[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
