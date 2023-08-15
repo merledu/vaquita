@@ -12,6 +12,6 @@ class InstMem extends Module {
 
 val imemm = Mem ( 1024 , UInt ( 32 . W ) )
 
-loadMemoryFromFile (imemm,"E:/MERL-Vecto/MERL/rvv-core/src/main/scala/singlecycle/abc.txt")
+loadMemoryFromFile (imemm,"E:/MERL-Vector/MERL/rvv-core/src/main/scala/singlecycle/abc.txt")
 io.inst := imemm.read(io.addr)
 }

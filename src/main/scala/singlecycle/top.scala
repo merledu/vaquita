@@ -18,7 +18,7 @@ val datamemMod = Module (new datamem)
 val ImmgenMod = Module(new ImmdValGen1)
 val instmemMod = Module (new InstMem)
 val jalrCompMod = Module (new jalr)
-val regfileMod = Module (new regfile)
+val regfileMod = Module (new regfile(32))
 val config= Module(new configure)
 
 PCMod.io.input := PCMod.io.pc4

@@ -1,0 +1,21 @@
+[
+  {
+    "class":"firrtl.stage.FirrtlFileAnnotation",
+    "file":"test_run_dir\\top_Test\\Top.lo.fir"
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.LowFirrtlEmitter"
+  },
+  {
+    "class":"firrtl.annotations.LoadMemoryAnnotation",
+    "target":"Top.InstMem.imemm",
+    "fileName":"E:/MERL-Vector/MERL/rvv-core/src/main/scala/singlecycle/abc.txt",
+    "hexOrBinary":"h",
+    "originalMemoryNameOpt":"imemm"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"test_run_dir\\top_Test"
+  }
+]
