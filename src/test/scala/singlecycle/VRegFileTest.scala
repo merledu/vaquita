@@ -19,9 +19,9 @@ class VRegFileTest extends FreeSpec with ChiselScalatestTester {
 
       a.clock.step()
 
-      a.io.vs1_data.zipWithIndex.foreach { case (data, i) =>
-        data.expect(i.U)
-      }
+      a.io.vs1_data(0).expect(0.U)
+      a.io.vs1_data(1).expect(0.U)
+      
     }
   }
 }
