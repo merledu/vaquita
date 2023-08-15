@@ -1,34 +1,31 @@
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:14:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:16:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(instrMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:18:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(control_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:20:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(immdGen_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:22:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(aluControl_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:24:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:26:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:28:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:30:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:32:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:34:5: not found: value DontTouch[0m
-[0m[[0m[31merror[0m] [0m[0m    DontTouch(dataMem_mod.io)[0m
-[0m[[0m[31merror[0m] [0m[0m    ^[0m
-[0m[[0m[31merror[0m] [0m[0m11 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:76:20: value rs1_addr is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    regFile_mod.io.rs1_addr := io.instruction(19, 15)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:77:20: value rs2_addr is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    regFile_mod.io.rs2_addr := io.instruction(24, 20)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:78:20: value rd_addr is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    regFile_mod.io.rd_addr := io.instruction(11, 7)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:88:33: value rs1 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    ("b00".U) -> regFile_mod.io.rs1.asUInt(),[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:95:34: value rs1 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    ("b000".U) -> regFile_mod.io.rs1.asSInt(),[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:98:34: value rs1 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    ("b011".U) -> regFile_mod.io.rs1.asSInt(),[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:102:37: value rs2 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m        ("b00".U) -> regFile_mod.io.rs2,[0m
+[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:119:45: value rs2 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    dataMem_mod.io.dataIn := regFile_mod.io.rs2.asSInt()[0m
+[0m[[0m[31merror[0m] [0m[0m                                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:127:39: value rs1 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    jalr_mod.io.rs1 := regFile_mod.io.rs1.asUInt()[0m
+[0m[[0m[31merror[0m] [0m[0m                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala:137:30: value rs1 is not a member of chisel3.Bundle{val writeData: chisel3.SInt; val vs1_addr: chisel3.UInt; val vs2_addr: chisel3.UInt; val vd_addr: chisel3.UInt; val vs1: chisel3.SInt; val vs2: chisel3.SInt}[0m
+[0m[[0m[31merror[0m] [0m[0m    io.out := regFile_mod.io.rs1[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m10 errors found[0m

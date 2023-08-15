@@ -32,7 +32,9 @@ class top extends Module{
     val vlmax_mod = Module(new Vlmax)
     dontTouch(dataMem_mod.io)
     val csr_mod = Module(new v_csr)
-    dontTouch(dataMem_mod.io)
+    dontTouch(csr_mod.io)
+    // val vec_regFile_mod = Module(new vregfile)
+    // dontTouch(vec_regFile_mod.io)
     
     // PC AND INSTR MEMORY
     instrMem_mod.io.addr := pC_mod.io.out(21, 2).asUInt()
@@ -74,6 +76,12 @@ class top extends Module{
     regFile_mod.io.rs1_addr := io.instruction(19, 15)
     regFile_mod.io.rs2_addr := io.instruction(24, 20)
     regFile_mod.io.rd_addr := io.instruction(11, 7)
+
+    // Vector Reg File
+    // vec_regFile_mod.io.vs1_addr := io.instruction(19, 15)
+    // vec_regFile_mod.io.vs2_addr := io.instruction(24, 20)
+    // vec_regFile_mod.io.vd_addr := io.instruction(11, 7)
+    // vec_regFile_mod.io.vsew := csr_mod.io.o
 
     // AVL Mux
     val avl_mux = MuxLookup(control_mod.io.avl_sel, 0.U, Array(

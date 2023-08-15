@@ -16,6 +16,14 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|v_csr>io_zimm"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|v_csr>io_vl_out"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top|dataMemory>io_writeData"
   },
   {
