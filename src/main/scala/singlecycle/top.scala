@@ -68,10 +68,10 @@ when(CntrlDecMod.io.Ex_sel === "b00".U && CntrlDecMod.io.opBsel === 1.U){
 ALUMod.io.aluc := ALUcMod.io.aluc
 
 		config.io.rs1 :=instmemMod.io.inst(19,15)
-        config.io.rd := instmemMod.io.inst(11,7)
-        config.io. rs1_readdata := regfileMod.io.rdata1
-        config.io.zimm := ALUMod.io.in_B
-        config.io.current_vl :=16.S
+		config.io.rd := instmemMod.io.inst(11,7)
+		config.io. rs1_readdata := regfileMod.io.rdata1
+		config.io.zimm := instmemMod.io.inst(30,20)
+		config.io.current_vl :=2.S
 		regfileMod.io.rd := config.io.rd_out
 
 
