@@ -17,7 +17,8 @@ class Vregfile ( numElem: Int, elemWidth: Int) extends Module {
   })
 
   val register = RegInit(VecInit(Seq.fill(32)(0.U(128.W))))
-
+    io.vs1_data := VecInit(Seq.fill(16)(0.U(128.W))) // Connect numElem elements of elemWidth bits each
+    io.vs2_data := VecInit(Seq.fill(16)(0.U(128.W))) // Connect numElem elements of elemWidth bits each
   when (io.reg_write) {
     when (io.vd_addr =/= "b00000".U) {
       register(io.vd_addr) := io.vd_data(io.vd_addr)
@@ -25,18 +26,7 @@ class Vregfile ( numElem: Int, elemWidth: Int) extends Module {
       register(io.vd_addr) := 0.U
     }
   }
-  io.vs1_data:= VecInit(Seq.tabulate(numElem) { i =>
-  val t3_1 = register(io.vs1_addr)
-  val t3 = t3_1(127, (elemWidth - 1) * 2)
-  val t4 = t3_1((elemWidth - 1) * 2 - 1, 0)
-  Cat(t3, t4)})
 
-  io.vs2_data := VecInit(Seq.tabulate(numElem) { i =>
-  val t3_1 = register(io.vs2_addr)
-  val t3 = t3_1(127, (elemWidth - 1) * 2)
-  val t4 = t3_1((elemWidth - 1) * 2 - 1, 0)
-  Cat(t3, t4)
-})
   when (io.vsew === "b011".U) {
     io.vs1_data := VecInit(Seq.tabulate(numElem) { i =>
       val t1_1 = register(io.vs1_addr)
