@@ -27,3 +27,26 @@ Aug 09, 2023 12:51:25 PM org.flywaydb.core.internal.command.DbMigrate logSummary
 INFO: Successfully applied 4 migrations to schema "PUBLIC", now at version v4 (execution time 00:00.032s)
 2023.08.09 12:51:25 INFO  time: initialize in 0.72s[0m
 2023.08.09 12:51:27 WARN  Build server is not auto-connectable.[0m
+2023.08.09 13:08:29 INFO  Shutting down server[0m
+2023.08.09 13:08:29 INFO  shutting down Metals[0m
+2023.08.09 13:08:29 INFO  Exiting server[0m
+2023.08.15 15:47:04 INFO  Started: Metals version 1.0.0 in folders '/home/maira/rvv-core' for client Visual Studio Code 1.80.2.
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.20.1 by Redgate
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
+INFO: Database: jdbc:h2:file:/home/maira/rvv-core/.metals/metals (H2 2.1)
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.043s)
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Aug 15, 2023 3:47:04 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.08.15 15:47:04 INFO  time: initialize in 0.82s
+2023.08.15 15:47:07 WARN  Build server is not auto-connectable.
+2023.08.15 15:53:20 INFO  Shutting down server
+2023.08.15 15:53:20 INFO  shutting down Metals
+2023.08.15 15:53:20 INFO  Exiting server
