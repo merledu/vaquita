@@ -196,7 +196,7 @@ class alu_control extends Module {
         }
     }
     //vector configure
-    .elsewhen(io.op_code==="b1010111".U){
+    .elsewhen(io.op_code==="b1010111".U && io.fn3==="b111".U){
         when (io.fn3===7.U){
             io.out := 29.U
         }
@@ -213,6 +213,11 @@ class alu_control extends Module {
         .otherwise{
             io.out := 0.U
         }
+    }
+
+    //vector to vector
+    .elsewhen (io.op_code==="b1010111".U && io.fn3==="b000".U && io.fn7==="b0000000".U){
+        io.out := 31.U
     }
 
     .otherwise{

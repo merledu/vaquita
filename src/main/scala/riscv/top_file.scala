@@ -25,12 +25,15 @@ class top_file extends Module {
     dontTouch(vlsu_module.io)
     val vector_file_module = Module(new vector_file)
     dontTouch(vector_file_module.io)
+    // val vec_ls_count_module = Module(new vec_ls_count)
+    // dontTouch(vec_ls_count_module.io)
 
     
     instr_module.io.address := pc_module.io.out >> 2.U
     control_unit_module.io.op_code := instr_module.io.r_data(7,0)
     control_unit_module.io.rs1 := instr_module.io.r_data(19,15)
     control_unit_module.io.rd := instr_module.io.r_data(11,7)
+    control_unit_module.io.fn3 := instr_module.io.r_data(14,12)
 
     register_file_module.io.rs1_in := instr_module.io.r_data(19,15)
     register_file_module.io.rs2_in := instr_module.io.r_data(24,20)
@@ -58,21 +61,37 @@ class top_file extends Module {
         (0.U) -> register_file_module.io.rs1_out.asSInt,
         (1.U) -> pc_module.io.out4.asSInt,
         (2.U) -> pc_module.io.out.asSInt,
-        (3.U) -> register_file_module.io.rs1_out.asSInt)
+        (3.U) -> register_file_module.io.rs1_out.asSInt,
+        (4.U) -> vector_file_module.io.vs1_out
+        )
     )
 
        //Mux(control_unit_module.io.operand_a,immediate_module.io.out,register_file_module.io.rs2_out.asSInt)
     alu_module.io.b32(0) := MuxLookup(control_unit_module.io.operand_b,0.S,Array(
         (0.U) -> register_file_module.io.rs2_out.asSInt,
         (1.U) -> immediate_module.io.out,
-        (2.U) -> vlsu_module.io.out.asSInt)
+        (2.U) -> vlsu_module.io.out.asSInt,
+        (4.U) -> vector_file_module.io.vs2_out)
     )
 
+    alu_module.io.vs1 := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
+        (4.U) -> vector_file_module.io.vs1_out)
+    )
+
+    alu_module.io.vs2 := MuxLookup(control_unit_module.io.operand_b,0.S,Array(
+        (3.U) -> vector_file_module.io.vs2_out)
+    )
+    
+
     alu_module.io.alu := alu_control_module.io.out
-    s_memory_module.io.addr := alu_module.io.out.asUInt
+    s_memory_module.io.addr(0) := alu_module.io.out(0).asUInt
+    s_memory_module.io.addr(1) := alu_module.io.out(1).asUInt
+    s_memory_module.io.addr(2) := alu_module.io.out(2).asUInt
+    s_memory_module.io.addr(3) := alu_module.io.out(3).asUInt
     s_memory_module.io.mem_data := register_file_module.io.rs2_out.asSInt
     s_memory_module.io.w_enable := control_unit_module.io.mem_write
     s_memory_module.io.r_enable := control_unit_module.io.mem_read
+    s_memory_module.io.stall := control_unit_module.io.stall_true
     // register_file_module.io. reg_enable := control_unit_module.io.reg_write
     //val a = Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)).asSInt
@@ -93,7 +112,8 @@ class top_file extends Module {
 
     vector_file_module.io.vec_data := MuxLookup(control_unit_module.io.mem_data_sel,0.S,Array(
         (0.U) -> alu_module.io.out(0),
-        (2.U) -> s_memory_module.io.dataout)
+        (2.U) -> s_memory_module.io.dataout,
+        (3.U) -> alu_module.io.vec_out)
         //(2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt)
     )
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout(0),alu_module.io.out)).asSInt
@@ -104,18 +124,25 @@ class top_file extends Module {
     // vector_file_module.io.vec_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)).asSInt
 
 
+    // vec_ls_count_module.io.pc_in := pc_module.io.out
+    // vec_ls_count_module.io.count := immediate_module.io.stall
 
+
+    immediate_module.io.stall_in := control_unit_module.io.stall_true
+
+    // control_unit_module.io.stall := vec_ls_count_module.io.stall_count
 
     val logically_end = alu_module.io.branch && control_unit_module.io.branch
 
     val mux1 = Mux(logically_end,immediate_module.io.out_j_b,pc_module.io.out4.asSInt)
     val plus = immediate_module.io.out + register_file_module.io.rs1_out
 
-    val nextPC = MuxLookup(control_unit_module.io.next_pc_selector,false.B,Array(
+    val nextPC = MuxLookup(control_unit_module.io.next_pc_selector,0.U,Array(
         (0.U) -> pc_module.io.out4,
         (1.U) -> mux1.asUInt,
         (2.U) -> immediate_module.io.out_j_b.asUInt,
-        (3.U) -> plus.asUInt)
+        (3.U) -> plus.asUInt,
+        (4.U) -> (pc_module.io.out))
     )
     pc_module.io.pc := nextPC
     // register_file_module.io.rd := instr_module.io.r_data(11,7)

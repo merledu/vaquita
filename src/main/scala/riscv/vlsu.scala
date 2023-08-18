@@ -10,6 +10,7 @@ class vlsu extends Module {
         val width_lw = Input(UInt(3.W))
         
         val out = Output(UInt(32.W))
+        // val stall =Output(Bool())
     })
     //configuration  out===out
     when (io.opcode === "b1010111".U){
@@ -58,25 +59,27 @@ class vlsu extends Module {
         }
     }
     // load instruction  out===mem bits
-    .elsewhen(io.opcode==="b0000111".U){
-        when(io.mew===0.U && io.width_lw==="b000".U){
-            io.out := 8.U
-        }
-        .elsewhen(io.mew===0.U && io.width_lw==="b101".U){
-            io.out := 16.U
-        }
-        .elsewhen(io.mew===0.U && io.width_lw==="b110".U){
-            io.out := 32.U
-        }
-        .elsewhen(io.mew===0.U && io.width_lw==="b111".U){
-            io.out := 64.U
-        }
-        .otherwise{
-            io.out := 0.U
-        }
-    }
+    // .elsewhen(io.opcode==="b0000111".U){
+        // when(io.width_lw==="b000".U){
+        //     io.out := 8.U
+        // }
+        // .elsewhen(io.mew===0.U && io.width_lw==="b101".U){
+        //     io.out := 16.U
+        // }
+        // .elsewhen(io.mew===0.U && io.width_lw==="b110".U){
+        //     io.out := 32.U
+        // }
+        // .elsewhen(io.mew===0.U && io.width_lw==="b111".U){
+        //     io.out := 64.U
+        // }
+        // .otherwise{
+        // io.out := 0.U
+        // }
+    // }
     .otherwise{
     io.out := 0.U
     }
-
+    // when(io.opcode==="b0000111".U){
+    //     io.stall := 1.B
+    // }
 }

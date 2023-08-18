@@ -61,7 +61,19 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>io_addr"
+    "target":"~top_file|s_memory>io_addr_0"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_addr_1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_addr_2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_addr_3"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -78,6 +90,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|s_memory>io_dataout"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_stall"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -140,6 +156,14 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|immediate_instruction>io_stall_in"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|immediate_instruction>io_stall"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|control_unit>io_op_code"
   },
   {
@@ -149,6 +173,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|control_unit>io_rs1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|control_unit>io_fn3"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -192,6 +220,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|control_unit>io_stall_true"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_alu"
   },
   {
@@ -204,6 +236,14 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vs1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vs2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_out_0"
   },
   {
@@ -212,7 +252,19 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_out_2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_out_3"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_branch"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vec_out"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

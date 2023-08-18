@@ -5,3 +5,5 @@
 1691564171597:testOnly riscv.top -- -DwriteVcd=1
 1691748876464:testOnly riscv.top
 1691750007250:testOnly riscv.top -- -DwriteVcd=1
+1692255525867:testOnly riscv.top
+1692256024716:testOnly riscv.top -- -DwriteVcd=1

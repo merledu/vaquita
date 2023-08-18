@@ -33,6 +33,7 @@ object alu_op {
     val lw = 28.U(5.W)
     val config = 29.U(5.W)
     val vle32 = 30.U(5.W)
+    val vadd = 31.U(5.W)
 }
 import alu_op._
 class alu() extends Module {
@@ -41,37 +42,136 @@ class alu() extends Module {
         val alu =Input(UInt(5.W))
         val a32 =Input(Vec(1,SInt(32.W)))
         val b32 =Input(Vec(1,SInt(32.W)))
-        val out = Output(Vec(2,SInt(32.W)))
+        val vs1 =Input(SInt(128.W))
+        val vs2 =Input(SInt(128.W))
+        val out = Output(Vec(4,SInt(32.W)))
         val branch = Output(Bool())
+        val vec_out = Output(SInt(128.W))
+        // val stall = Input(UInt(32.W))
     })
-  //         val array = WireInit(VecInit(Seq.fill(4)(0.S(32.W))))
-  // for ( i <- 1 until 4){
-  //   //val k=WireInit(0.S)
-  //   array(i) := io.a32(0) + io.b32(0)
-  //   //k := k+ 4.S
-  // }
-  // array(0) := io.a
-  // dontTouch(array)
+        //val array = WireInit(VecInit(Seq.fill(4)(0.S(32.W))))
+        // array(0) := io.a
+       // dontTouch(array)
   
 
+    when (io.alu === add || io.alu === addi){
+      io.out(0) := io.a32(0) + io.b32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === sll || io.alu === slli){
+      io.out(0) := io.a32(0) << io.b32(0)(15,0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === slt || io.alu === slti){
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+      when (io.a32(0) < io.b32(0)){
+        io.out(0) := 1.S
+      }
+      .otherwise{
+        io.out(0) := 0.S
+      }
+    }
+    .elsewhen(io.alu === sltu || io.alu === sltui){
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+      when (io.a32(0).asUInt < io.b32(0).asUInt){
+        io.out(0) := 1.S
+      }
+      .otherwise{
+        io.out(0) := 0.S
+      }
+    }
+    .elsewhen(io.alu === xor || io.alu === xori){
+      io.out(0) := io.a32(0) ^ io.b32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === srl || io.alu === srli){
+      io.out(0) := io.a32(0) >> io.b32(0)(15,0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === or || io.alu === ori){
+      io.out(0) := io.a32(0) | io.b32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === and || io.alu === andi){
+      io.out(0) := io.a32(0) & io.b32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === sub){
+      io.out(0) := io.a32(0) - io.b32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === sra || io.alu === srai){
+      io.out(0) :=io.a32(0) >> io.b32(0)(15,0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === jal || io.alu === jalr){
+      io.out(0) := io.a32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === sw){
+      io.out(0) := io.a32(0) + io.b32(0)
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+    }
+    .elsewhen(io.alu === config){
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+      when(io.a32(0).asUInt <= io.b32(0).asUInt){
+        io.out(0) := io.a32(0)
+      }
+      .elsewhen(io.a32(0) >= (2.S * io.b32(0))){
+        io.out(0) := io.b32(0)
+      }
+      .otherwise{
+        io.out(0) := 0.S
+      }
+    }
+    .elsewhen(io.alu === vle32){
+      io.out(0) := io.a32(0)
+      io.out(1) := io.a32(0)+4.S
+      io.out(2) := io.a32(0)+8.S
+      io.out(3) := io.a32(0)+12.S
+    }
+    .otherwise{
+      io.out(0) := 0.S
+      io.out(1) := 0.S
+      io.out(2) := 0.S
+      io.out(3) := 0.S
+      
+    }
 
-    io.out(0) := 
-    Mux(io.alu === add || io.alu === addi,io.a32(0) + io.b32(0),
-    Mux(io.alu === sll || io.alu === slli,io.a32(0) << io.b32(0)(15,0),
-    Mux(io.alu === slt || io.alu === slti,Mux(io.a32(0) < io.b32(0),1.S,0.S),
-    Mux(io.alu === sltu || io.alu === sltui ,Mux(io.a32(0).asUInt < io.b32(0).asUInt,1.S,0.S),
-    Mux(io.alu === xor || io.alu === xori, io.a32(0) ^ io.b32(0),
-    Mux(io.alu === srl || io.alu === srli, io.a32(0) >> io.b32(0)(15,0),
-    Mux(io.alu === or || io.alu === ori,io.a32(0) | io.b32(0),
-    Mux(io.alu === and || io.alu === andi,io.a32(0) & io.b32(0),
-    Mux(io.alu === sub,io.a32(0) - io.b32(0),
-    Mux(io.alu === sra || io.alu === srai,io.a32(0) >> io.b32(0)(15,0),
-    Mux(io.alu === jal || io.alu === jalr,io.a32(0),
-    Mux(io.alu === sw,io.a32(0) + io.b32(0),
-    Mux(io.alu === config,Mux(io.a32(0).asUInt <= io.b32(0).asUInt,io.a32(0),Mux(io.a32(0) >= (2.S * io.b32(0)),io.b32(0),0.S)),
-    Mux(io.alu === vle32,io.a32(0),
-    0.S))))))))))))))
-    io.out(1):=Mux(io.alu === vle32,io.a32(0)+4.S,0.S)
+    io.vec_out := Cat(io.vs1(127,96)+io.vs2(127,96),io.vs1(95,64)+io.vs2(95,64),io.vs1(63,32)+io.vs2(63,32),io.vs1(31,0)+io.vs2(31,0)).asSInt
+
+
+
+   
+   
+
+    //io.out(1):=Mux(io.alu === vle32,io.a32(0)+4.S,0.S)
     // io.out(2):=Mux(io.alu === vle32,io.a,0.S)
     // io.out(3):=Mux(io.alu === vle32,io.a,0.S)
     //Cat(io.a(31,16),io.a.asUInt+4.U(15,0)).asSInt
@@ -94,3 +194,21 @@ class alu() extends Module {
   // dontTouch(array)
   
 }
+
+    // io.out(0) := 
+    // Mux(io.alu === add || io.alu === addi,io.a32(0) + io.b32(0),
+    // Mux(io.alu === sll || io.alu === slli,io.a32(0) << io.b32(0)(15,0),
+    // Mux(io.alu === slt || io.alu === slti,Mux(io.a32(0) < io.b32(0),1.S,0.S),
+    // Mux(io.alu === sltu || io.alu === sltui ,Mux(io.a32(0).asUInt < io.b32(0).asUInt,1.S,0.S),
+    // Mux(io.alu === xor || io.alu === xori, io.a32(0) ^ io.b32(0),
+    // Mux(io.alu === srl || io.alu === srli, io.a32(0) >> io.b32(0)(15,0),
+    // Mux(io.alu === or || io.alu === ori,io.a32(0) | io.b32(0),
+    // Mux(io.alu === and || io.alu === andi,io.a32(0) & io.b32(0),
+    // Mux(io.alu === sub,io.a32(0) - io.b32(0),
+    // Mux(io.alu === sra || io.alu === srai,io.a32(0) >> io.b32(0)(15,0),
+    // Mux(io.alu === jal || io.alu === jalr,io.a32(0),
+    // Mux(io.alu === sw,io.a32(0) + io.b32(0),
+    // Mux(io.alu === config,Mux(io.a32(0).asUInt <= io.b32(0).asUInt,io.a32(0),Mux(io.a32(0) >= (2.S * io.b32(0)),io.b32(0),0.S)),
+    // Mux(io.alu === vle32,io.a32(0),
+    // 0.S))))))))))))))
+    // io.out(1):=Mux(io.alu === vle32,io.a32(0)+4.S,0.S)
