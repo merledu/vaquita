@@ -11,8 +11,8 @@ class VRegFileTest extends FreeSpec with ChiselScalatestTester {
     test(new vregfile) { dut =>
       
       dut.io.reg_write.poke(1.B)
-      dut.io.numElem.poke(4.U)
-      dut.io.elemWidth.poke(32.U)
+    //   dut.io.numElem.poke(4.U)
+    //   dut.io.elemWidth.poke(32.U)
       dut.io.vd_addr.poke(1.U)
       dut.io.vd_data(0).poke(42.U) // Writing sequential data
       dut.io.vd_data(1).poke(42.U) // Writing sequential data

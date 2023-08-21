@@ -9,8 +9,8 @@ class vregfile extends Module {
   val io = IO (new Bundle {
     val vlmul = Input(UInt(3.W))
     val vsew = Input(UInt(3.W))
-    val numElem = Input(UInt(4.W))
-    val elemWidth = Input(UInt(5.W))
+    // val numElem = Input(UInt(4.W))
+    // val elemWidth = Input(UInt(5.W))
     val vs1_addr = Input(UInt(5.W))
     val vs2_addr = Input(UInt(5.W))
     val vd_addr = Input(UInt(5.W))
@@ -19,6 +19,11 @@ class vregfile extends Module {
     val vd_data = Input(Vec(16, UInt(128.W)))
     val reg_write = Input(Bool())
   })
+
+//   val numElem = Mux(io.vsew === "b011".U, 2.U,
+//                 Mux(io.vsew === "b010".U, 4.U,
+//                 Mux(io.vsew === "b001".U, 8.U,
+//                 Mux(io.vsew === "b000".U, 16.U, 0.U))))
 
   val register = RegInit(VecInit(Seq.fill(32)(0.U(128.W))))
 
