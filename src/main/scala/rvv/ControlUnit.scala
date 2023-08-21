@@ -172,7 +172,7 @@ class control extends Module{
         }.otherwise{
             io.avl_sel := DontCare
         }
-    }.elsewhen(io.op_code === "b1010111".U && io.func3 =/= "b111".U){//vsetvli
+    }.elsewhen(io.op_code === "b1010111".U && io.func3 =/= "b111".U){//vadd
         io.memWrite := "b0".U
         io.branch := "b0".U
         io.memRead := "b0".U
