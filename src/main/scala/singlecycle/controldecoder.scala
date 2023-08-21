@@ -30,8 +30,8 @@ class controldec extends Module {
     io.aluop := 7.U
     io.vset := 1.B
 
-            val configtype = io.Instruction(31,30)
-            val opcode = io.Instruction(6, 0)
+    val configtype = io.Instruction(31,30)
+    val opcode = io.Instruction(6, 0)
 
     switch (opcode){
         is ("b0110011".U){      //r-type
