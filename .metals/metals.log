@@ -27,3 +27,20 @@ Aug 09, 2023 12:51:25 PM org.flywaydb.core.internal.command.DbMigrate logSummary
 INFO: Successfully applied 4 migrations to schema "PUBLIC", now at version v4 (execution time 00:00.032s)
 2023.08.09 12:51:25 INFO  time: initialize in 0.72s[0m
 2023.08.09 12:51:27 WARN  Build server is not auto-connectable.[0m
+2023.08.21 15:15:24 INFO  Started: Metals version 1.0.0 in folders '/home/hamna/rvv-core' for client Visual Studio Code 1.80.2.
+Aug 21, 2023 3:15:24 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.20.1 by Redgate
+Aug 21, 2023 3:15:24 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Aug 21, 2023 3:15:24 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Aug 21, 2023 3:15:28 PM org.flywaydb.core.internal.database.base.BaseDatabaseType createDatabase
+INFO: Database: jdbc:h2:file:/home/hamna/rvv-core/.metals/metals (H2 2.1)
+Aug 21, 2023 3:15:28 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.061s)
+Aug 21, 2023 3:15:28 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Aug 21, 2023 3:15:28 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.08.21 15:15:29 INFO  time: initialize in 5s
+2023.08.21 15:15:32 WARN  Build server is not auto-connectable.
