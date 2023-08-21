@@ -8,7 +8,7 @@ class instr_memory extends Module {
         //val address4 = Input(UInt(10.W))
         val r_data = Output(UInt(32.W))
     })
-    val initfile = "/home/mohammad/file"
+    val initfile = "/home/mohammad/rvv-core/src/main/scala/riscv/file.txt"
 
     val memory = Mem(1024,UInt(32.W)) //32 bit memory
     loadMemoryFromFile(memory , initfile)

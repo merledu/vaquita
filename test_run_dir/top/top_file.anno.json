@@ -9,6 +9,18 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_vsew"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_vlmul"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_instr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vector_file>io_vs1_in"
   },
   {
@@ -134,7 +146,7 @@
   {
     "class":"firrtl.annotations.LoadMemoryAnnotation",
     "target":"top_file.instr_memory.memory",
-    "fileName":"/home/mohammad/file",
+    "fileName":"/home/mohammad/rvv-core/src/main/scala/riscv/file.txt",
     "hexOrBinary":"h",
     "originalMemoryNameOpt":"memory"
   },
@@ -265,6 +277,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_vec_out"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_sew"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
