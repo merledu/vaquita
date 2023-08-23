@@ -106,20 +106,21 @@ class configure extends Module {
     }
     // io.vlmax = valmax
 
-    avl:= Mux(io.rs1 =/= "b00000".U, io.rs1_readdata,
-        Mux(io.rd =/= "b00000".U && io.rs1 === "b00000".U, valmax,
-        Mux(io.rs1 === 0.U && io.rd === 0.U, io.current_vl, 0.S)))
-        // io.avl =avl
+avl:= Mux(io.rs1 =/= "b00000".U, io.rs1_readdata,
+    Mux(io.rd =/= "b00000".U && io.rs1 === "b00000".U, valmax,
+    Mux(io.rs1 === 0.U && io.rd === 0.U, io.current_vl, 0.S)))
+    // io.avl =avl
 
-        when (avl <= valmax){
-            io.vl:=avl
-        }.otherwise{
-            io.vl:=valmax
-        }
+    when (avl <= valmax){
+        io.vl:=avl
+    }.otherwise{
+        io.vl:=valmax
+    }
         
-    io.rd_out:= io.rd
-    io.valmax_o := valmax
-    io.avl_o := avl
-    io.sew:=vsew
-    io.lmul:=vlmul
+io.rd_out:= io.rd
+io.valmax_o := valmax
+io.avl_o := avl
+io.sew:=vsew
+io.lmul:=vlmul
+
 }
