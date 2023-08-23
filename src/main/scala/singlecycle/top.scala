@@ -20,9 +20,10 @@ val datamemMod = Module (new datamem)
 val ImmgenMod = Module(new ImmdValGen1)
 val instmemMod = Module (new InstMem)
 val jalrCompMod = Module (new jalr)
-val regfileMod = Module (new regfile)
+val regfileMod = Module (new regfile(32))
 val config= Module(new configure)
 dontTouch(config.io)
+
 PCMod.io.input := PCMod.io.pc4
 
 instmemMod.io.addr := PCMod.io.pc(11,2)
@@ -70,11 +71,13 @@ when(CntrlDecMod.io.Ex_sel === "b00".U && CntrlDecMod.io.opBsel === 1.U){
 ALUMod.io.aluc := ALUcMod.io.aluc
 
 
-        config.io.rs1 :=instmemMod.io.inst(19,15)
+
+config.io.rs1 :=instmemMod.io.inst(19,15)
 config.io.rd := instmemMod.io.inst(11,7)
 config.io. rs1_readdata := regfileMod.io.rdata1
 config.io.zimm := instmemMod.io.inst(30,20)
 config.io.current_vl :=2.S
+
 
 
 
