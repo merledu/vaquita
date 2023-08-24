@@ -48,12 +48,12 @@ class immediate_instruction extends Module {
         io.stall := 0.U
 
     }
-    // //vector store
-    // .elsewhen(op_code==="b0100111".U){
-    //     io.out := io.i_instruction(11,7).asSInt
-    //     io.out_j_b := 0.S
-    //     io.stall := 0.U
-    // }
+    //vector to immediate
+    .elsewhen(op_code==="b1010111".U){
+        io.out := io.i_instruction(19,15).asSInt
+        io.out_j_b := 0.S
+        io.stall := 0.U
+    }
     .otherwise{
         io.out := 0.S
         io.out_j_b := 0.S

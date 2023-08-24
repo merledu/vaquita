@@ -78,12 +78,12 @@ class top_file extends Module {
         )
     )
 
-    alu_module.io.vs1 := MuxLookup(control_unit_module.io.operand_a,0.U,Array(
-        (4.U) -> vector_file_module.io.vs1_out)
+    alu_module.io.vs1 := MuxLookup(control_unit_module.io.vec_operand_a,0.U,Array(
+        (1.U) -> vector_file_module.io.vs1_out)
     )
 
-    alu_module.io.vs2 := MuxLookup(control_unit_module.io.operand_b,0.U,Array(
-        (3.U) -> vector_file_module.io.vs2_out)
+    alu_module.io.vs2 := MuxLookup(control_unit_module.io.vec_operand_b,0.U,Array(
+        (1.U) -> vector_file_module.io.vs2_out)
     )
     
 

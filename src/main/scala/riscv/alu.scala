@@ -34,7 +34,8 @@ object alu_op {
     val config = 29.U(32.W)
     val vle32 = 30.U(32.W)
     val vaddvv = 31.U(32.W)
-    val vaddvi = 50.U(32.W)
+    val vaddvx = 50.U(32.W)
+    val vaddvi = 60.U(32.W)
     val vse32 = 32.U(32.W)
 }
 
@@ -252,14 +253,21 @@ class alu extends Module {
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
       //vector to scalar addition
-      .elsewhen(io.sew==="b010".U && io.alu===vaddvi){
+      .elsewhen(io.sew==="b010".U && io.alu===vaddvx){
         out32(0) := io.vs2(31,0) + io.a.asUInt
         out32(1) := io.vs2(63,32) + io.a.asUInt
         out32(2) := io.vs2(95,64) + io.a.asUInt
         out32(3) := io.vs2(127,96) + io.a.asUInt
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
-  
+      //vector to immediate addition
+      .elsewhen(io.sew==="b010".U && io.alu===vaddvi){
+        out32(0) := io.vs2(31,0) + io.b.asUInt
+        out32(1) := io.vs2(63,32) + io.b.asUInt
+        out32(2) := io.vs2(95,64) + io.b.asUInt
+        out32(3) := io.vs2(127,96) + io.b.asUInt
+        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      }
     .otherwise{
         io.vec_out := 0.U
       }

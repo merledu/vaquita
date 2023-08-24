@@ -279,6 +279,34 @@ class alu_control extends Module {
             io.out:=0.U
         }
     }
+     //vector to immediater
+    .elsewhen (io.op_code==="b1010111".U && io.fn3==="b011".U){
+        //vaddvi
+        when(io.fn7(6,1)==="b000000".U){
+            io.out := 60.U
+        }
+        //vsubvi
+        .elsewhen(io.fn7(6,1)==="b000010".U){
+            io.out := 51.U
+        }
+        //vminuvv
+        .elsewhen(io.fn7(6,1)==="b000100".U){
+            io.out := 52.U
+        }
+        //vminvv
+        .elsewhen(io.fn7(6,1)==="b000101".U){
+            io.out := 53.U
+        }
+        .elsewhen(io.fn7(6,1)==="b000000".U){
+            io.out := 54.U
+        }
+        .elsewhen(io.fn7(6,1)==="b000000".U){
+            io.out := 55.U
+        }.otherwise{
+            io.out:=0.U
+        }
+    }
+
 
     .otherwise{
         io.out := 0.U
