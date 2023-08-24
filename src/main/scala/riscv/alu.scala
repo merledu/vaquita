@@ -34,8 +34,8 @@ object alu_op {
     val config = 29.U(32.W)
     val vle32 = 30.U(32.W)
     val vaddvv = 31.U(32.W)
-    val vaddvx = 50.U(32.W)
-    val vaddvi = 60.U(32.W)
+    // val vaddvx = 50.U(32.W)
+    // val vaddvi = 60.U(32.W)
     val vse32 = 32.U(32.W)
     val vsubvv = 33.U(32.W)
 }
