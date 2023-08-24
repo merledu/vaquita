@@ -236,23 +236,28 @@ class alu_control extends Module {
             io.out := 33.U
         }
         // //vrsubvv
+<<<<<<< HEAD
         // .elsewhen(io.fn7(6,1)==="b000011".U){
+=======
+        // .elsewhen(io.fn7(6,1)==="000011".U){
+>>>>>>> 2bf89c3 (push saad)
         //     io.out := 34.U
         // }
         //vminu
         .elsewhen(io.fn7(6,1)==="b000100".U){
-            io.out := 35.U
+            io.out := 34.U
         }
         //vmin
         .elsewhen(io.fn7(6,1)==="b000101".U){
-            io.out := 36.U
+            io.out := 35.U
         }
         //vmaxu
         .elsewhen(io.fn7(6,1)==="b000110".U){
-            io.out := 37.U
+            io.out := 36.U
         }
         //vmax
         .elsewhen(io.fn7(6,1)==="b000111".U){
+<<<<<<< HEAD
             io.out := 38.U
         }
         //vand
@@ -281,8 +286,158 @@ class alu_control extends Module {
         }
         //vor
         .elsewhen(io.fn7(6,1)==="b001111".U){
+=======
+            io.out := 37.U
+        }
+        //vand
+        .elsewhen(io.fn7(6,1)==="b001001".U){
+            io.out := 38.U
+        }
+        //vor
+        .elsewhen(io.fn7(6,1)==="b001010".U){
+            io.out := 39.U
+        }
+        //vxor
+        .elsewhen(io.fn7(6,1)==="b001011".U){
+            io.out := 40.U
+        }
+        //vrgather
+        .elsewhen(io.fn7(6,1)==="b001100".U){
+            io.out := 41.U
+        }
+        // //vslide up 
+        // .elsewhen(io.fn7(6,1)==="b001110".U){
+        //     io.out := 43.U
+        // }
+        //vgatherei16
+        .elsewhen(io.fn7(6,1)==="b001110".U){
+            io.out := 42.U
+        }
+        // //vslidedown
+        // .elsewhen(io.fn7(6,1)==="b001111".U){
+        //     io.out := 45.U
+        // }
+        //vadc
+        .elsewhen(io.fn7(6,1)==="b010000".U){
+            io.out := 43.U
+        }
+        //vmadc
+        .elsewhen(io.fn7(6,1)==="b010001".U){
+            io.out := 44.U
+        }
+        //vsbc
+        .elsewhen(io.fn7(6,1)==="b010010".U){
+>>>>>>> 2bf89c3 (push saad)
             io.out := 45.U
         }
+        //vmsbc
+        .elsewhen(io.fn7(6,1)==="b010011".U){
+            io.out := 46.U
+        }
+        //vmerge
+        .elsewhen(io.fn7(6,1)==="b010111".U){
+            io.out := 47.U
+        }
+        //vmseq
+        .elsewhen(io.fn7(6,1)==="b011000".U){
+            io.out := 48.U
+        }
+        //vmsne
+        .elsewhen(io.fn7(6,1)==="b011001".U){
+            io.out := 49.U
+        }
+        //vmsltu
+        .elsewhen(io.fn7(6,1)==="b011010".U){
+            io.out := 50.U
+        }
+        //vmslt
+        .elsewhen(io.fn7(6,1)==="b011011".U){
+            io.out := 50.U
+        }
+        //vmsleu
+        .elsewhen(io.fn7(6,1)==="b011100".U){
+            io.out := 51.U
+        }
+        //vmsle
+        .elsewhen(io.fn7(6,1)==="b011101".U){
+            io.out := 52.U
+        }
+        //vmsgtu
+        .elsewhen(io.fn7(6,1)==="b011110".U){
+            io.out := 53.U
+        }
+        //vmsgt
+        .elsewhen(io.fn7(6,1)==="011111".U){
+            io.out := 54.U
+        }
+        //vsaddu
+        .elsewhen(io.fn7(6,1)==="b100000".U){
+            io.out := 55.U
+        }
+        //vsadd
+        .elsewhen(io.fn7(6,1)==="b100001".U){
+            io.out := 56.U
+        }
+        //vssubu
+        .elsewhen(io.fn7(6,1)==="b100010".U){
+            io.out := 57.U
+        }
+        //vssub
+        .elsewhen(io.fn7(6,1)==="b100011".U){
+            io.out := 58.U
+        }
+        //vsll
+        .elsewhen(io.fn7(6,1)==="b100101".U){
+            io.out := 59.U
+        }
+        //vsmul
+        .elsewhen(io.fn7(6,1)==="b100111".U){
+            io.out := 60.U
+        }
+        //vsrl
+        .elsewhen(io.fn7(6,1)==="b101000".U){
+            io.out := 61.U
+        }
+        //vsra
+        .elsewhen(io.fn7(6,1)==="b101001".U){
+            io.out := 62.U
+        }
+        //vssrl
+        .elsewhen(io.fn7(6,1)==="b101010".U){
+            io.out := 63.U
+        }
+        //vssra
+        .elsewhen(io.fn7(6,1)==="b101011".U){
+            io.out := 64.U
+        }
+        //vnsrl
+        .elsewhen(io.fn7(6,1)==="b101100".U){
+            io.out := 65.U
+        }
+        //vnsra
+        .elsewhen(io.fn7(6,1)==="b101101".U){
+            io.out := 66.U
+        }
+        //vnclipu
+        .elsewhen(io.fn7(6,1)==="b101110".U){
+            io.out := 67.U
+        }
+        //vnclip
+        .elsewhen(io.fn7(6,1)==="b101111".U){
+            io.out := 68.U
+        }
+        //vwredsumu
+        .elsewhen(io.fn7(6,1)==="b110000".U){
+            io.out := 69.U
+        }
+        //vwredsum
+        .elsewhen(io.fn7(6,1)==="b110001".U){
+            io.out := 70.U
+        }
+
+
+
+
 
 
 
