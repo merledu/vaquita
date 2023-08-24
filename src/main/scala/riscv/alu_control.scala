@@ -6,9 +6,9 @@ class alu_control extends Module {
         val op_code = Input(UInt(7.W))
         val fn3 = Input(UInt(3.W))
         val fn7 = Input(UInt(7.W))
-        val lumop = Input(UInt(5.W))
+        val lumop = Input(UInt(32.W))
 
-        val out = Output(UInt(5.W))
+        val out = Output(UInt(32.W))
     })
     val mop = io.fn7(3,2)
     //r type
@@ -214,16 +214,73 @@ class alu_control extends Module {
             io.out := 0.U
         }
     }
+    //vector store
+
+    .elsewhen(io.op_code==="b0100111".U){
+        when (mop==="b00".U && io.lumop === "b00000".U){
+            io.out := 32.U
+        }
+        .otherwise{
+            io.out := 0.U
+        }
+    }
 
     //vector to vector
-    .elsewhen (io.op_code==="b1010111".U && io.fn3==="b000".U && io.fn7==="b0000000".U){
-        io.out := 31.U
+    .elsewhen (io.op_code==="b1010111".U && io.fn3==="b000".U){
+        //vaddvv
+        when(io.fn7(6,1)==="b000000".U){
+            io.out := 31.U
+        }
+        //vsubvv
+        .elsewhen(io.fn7(6,1)==="b000010".U){
+            io.out := 31.U
+        }
+        //vminuvv
+        .elsewhen(io.fn7(6,1)==="b000100".U){
+            io.out := 31.U
+        }
+        //vminvv
+        .elsewhen(io.fn7(6,1)==="b000101".U){
+            io.out := 31.U
+        }
+        .elsewhen(io.fn7(6,1)==="b000000".U){
+            io.out := 31.U
+        }
+        .elsewhen(io.fn7(6,1)==="b000000".U){
+            io.out := 31.U
+        }.otherwise{
+            io.out:=0.U
+        }
+    }
+    //vector to scalar
+    .elsewhen (io.op_code==="b1010111".U && io.fn3==="b100".U){
+        //vaddvi
+        when(io.fn7(6,1)==="b000000".U){
+            io.out := 50.U
+        }
+        //vsubvi
+        .elsewhen(io.fn7(6,1)==="b000010".U){
+            io.out := 51.U
+        }
+        //vminuvv
+        .elsewhen(io.fn7(6,1)==="b000100".U){
+            io.out := 52.U
+        }
+        //vminvv
+        .elsewhen(io.fn7(6,1)==="b000101".U){
+            io.out := 53.U
+        }
+        .elsewhen(io.fn7(6,1)==="b000000".U){
+            io.out := 54.U
+        }
+        .elsewhen(io.fn7(6,1)==="b000000".U){
+            io.out := 55.U
+        }.otherwise{
+            io.out:=0.U
+        }
     }
 
     .otherwise{
         io.out := 0.U
     }
-    //     val condition = ((mop==="b00".U) && (io.lumop === "b00000".U) && (io.op_code==="b0000111".U)) 
-    // dontTouch(condition)
 }
-//val a = Module(new name)

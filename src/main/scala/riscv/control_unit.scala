@@ -18,7 +18,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         val operand_b =  Output(UInt(4.W))
         val extend_sel =  Output(UInt(4.W))
         val next_pc_selector =Output(UInt(4.W))
-        // val stall = Input(UInt(32.W))
+        val vector =Output(Bool())
+        val vec_store = Output(Bool())
         val stall_true =Output(UInt(32.W))
 
 
@@ -37,8 +38,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := 0.U
         io.next_pc_selector := 0.U
                 io.stall_true := 0.U
-
-
+        io.vector := 0.B
+        io.vec_store := 0.B
     }
 
     //i_type
@@ -54,7 +55,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := 0.U
         io.next_pc_selector := 0.U
                 io.stall_true := 0.U
-
+        io.vector := 0.B
+        io.vec_store := 0.B
 
     }
     
@@ -71,8 +73,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := "b11".U
         io.next_pc_selector := 0.U
                 io.stall_true := 0.U
-
-
+        io.vector := 0.B
+        io.vec_store := 0.B
     }
 
     //b type
@@ -88,8 +90,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := 0.U
         io.next_pc_selector := "b01".U
                 io.stall_true := 0.U
-
-
+        io.vector := 0.B
+        io.vec_store := 0.B
     }
 
     //u type
@@ -105,8 +107,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := 0.U
         io.next_pc_selector := 0.U
                 io.stall_true := 0.U
-
-
+        io.vector := 0.B
+        io.vec_store := 0.B
     }
     //j type
     .elsewhen(io.op_code==="b1101111".U){
@@ -121,8 +123,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := 0.U
         io.next_pc_selector := "b10".U
                 io.stall_true := 0.U
-
-
+        io.vector := 0.B
+        io.vec_store := 0.B
     }
 
     //jalr
@@ -138,8 +140,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := 0.U
         io.next_pc_selector := "b11".U
                 io.stall_true := 0.U
-
-
+        io.vector := 0.B
+        io.vec_store := 0.B
     }
 
     //load
@@ -155,6 +157,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := "b00".U
         io.next_pc_selector := 0.U
                 io.stall_true := 0.U
+        io.vector := 0.B
+        io.vec_store := 0.B
 
     }
     //vector configure
@@ -169,6 +173,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := "b00".U
         io.next_pc_selector := 0.U
                 io.stall_true := 0.U
+        io.vector := 1.B
+        io.vec_store := 0.B
 
         when (io.rs1 === 0.U && io.rd===0.U){
             io.operand_a := 0.U
@@ -191,6 +197,8 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.operand_a := 0.U
         io.operand_b := "b10".U
         io.extend_sel := "b00".U
+        io.vector := 1.B
+        io.vec_store := 0.B
         
         val reg123 = RegInit(3.U(32.W))
         when(reg123 > 0.U && io.op_code==="b0000111".U){
@@ -201,25 +209,41 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
 
         }
         .otherwise{
+            reg123 := 3.U
             io.vec_write := on
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
         }
     }
     //vector store
-    .elsewhen(io.op_code==="b0100111".U){
-        io.mem_write :=on
+    .elsewhen((io.op_code==="b0100111".U)){
+        io.mem_write := on
         io.branch := off
         io.mem_read := off
         io.reg_write := off
-        io.vec_write := off
-       io.mem_data_sel := "b00".U
+       io.mem_data_sel := "b10".U
         io.operand_a := 0.U
         io.operand_b := "b01".U
         io.extend_sel := "b11".U
-        io.next_pc_selector := 0.U
-        io.stall_true := 0.U
+        io.vector := 1.B
+        io.vec_store := 1.B
+        
+        val reg123 = RegInit(3.U(32.W))
+        when(reg123 > 0.U && io.op_code==="b0100111".U){
+            io.next_pc_selector := 4.U
+            reg123 := reg123 -1.U
+            io.vec_write := off
+            io.stall_true := reg123
+
+        }
+        .otherwise{
+            reg123 := 3.U
+            io.vec_write := off
+            io.next_pc_selector := 0.U
+            io.stall_true := 0.U
+        }
     }
+
     //vector to vector
     .elsewhen(io.op_code==="b1010111".U && io.fn3==="b000".U){
         io.mem_write :=off
@@ -233,6 +257,24 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.extend_sel := "b00".U
         io.next_pc_selector := 0.U
         io.stall_true := 0.U
+        io.vector := 1.B
+        io.vec_store := 0.B
+    }
+    //vector to scalar
+    .elsewhen(io.op_code==="b1010111".U && io.fn3==="b100".U){
+        io.mem_write :=off
+        io.branch := off
+        io.mem_read := off
+        io.reg_write := off
+        io.vec_write := on
+       io.mem_data_sel := "b11".U
+        io.operand_a := 0.U
+        io.operand_b := "b11".U
+        io.extend_sel := "b00".U
+        io.next_pc_selector := 0.U
+        io.stall_true := 0.U
+        io.vector := 1.B
+        io.vec_store := 0.B
     }
     
     .otherwise{
@@ -243,11 +285,12 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_write := off
         io.mem_data_sel := 0.B
         io.operand_a := 0.U
-        io.operand_b := "b00".U
+        io.operand_b := "b11".U
         io.extend_sel := 0.U
         io.next_pc_selector :=0.U
                 io.stall_true := 0.U
-
+        io.vector := 1.B
+        io.vec_store := 0.B
     }
 
 }

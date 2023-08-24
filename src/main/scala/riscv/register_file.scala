@@ -18,7 +18,7 @@ class register_file extends Module {
 
 
 
-    val regs = RegInit(VecInit(Seq.fill(32)(0.S(32.W))))   //RegInit(0.U,Vec(32,SInt(32.W)))//RegInit(Vec(Seq.fill(32)(0.U(32.W))))//RegInit(VecInit(0.U(32.W), 32))
+    val regs = RegInit(VecInit(Seq.fill(32)(0.S(32.W))))
     io.rs1_out := Mux((io.rs1_in.orR),regs(io.rs1_in),0.S)
     io.rs2_out := Mux((io.rs2_in.orR),regs(io.rs2_in),0.S)
     when (io.reg_enable & io.rd.orR){

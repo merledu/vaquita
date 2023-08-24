@@ -26,7 +26,7 @@ class vec_csr extends Module {
     val vl =    RegInit("b00000000000000000000000000000100".U(32.W))
     val vlenb = RegInit("b00000000000000000000000000010000".U(32.W))
     //update vtype csr through vsetvli instruction
-    when (opcode==="b1010111".U && io.instr(31)===0.B){
+    when (opcode==="b1010111".U && io.instr(31)===0.B && io.instr(14,12)==="b111".U){
         vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
     }
     //update vtype csr through vsetivli instruction

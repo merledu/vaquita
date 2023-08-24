@@ -60,7 +60,7 @@ class top_file extends Module {
 
     immediate_module.io.pc_in := pc_module.io.out
 
-    alu_module.io.a32(0) := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
+    alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,
         (1.U) -> pc_module.io.out4.asSInt,
         (2.U) -> pc_module.io.out.asSInt,
@@ -70,7 +70,7 @@ class top_file extends Module {
     )
 
        //Mux(control_unit_module.io.operand_a,immediate_module.io.out,register_file_module.io.rs2_out.asSInt)
-    alu_module.io.b32(0) := MuxLookup(control_unit_module.io.operand_b,0.S,Array(
+    alu_module.io.b := MuxLookup(control_unit_module.io.operand_b,0.S,Array(
         (0.U) -> register_file_module.io.rs2_out.asSInt,
         (1.U) -> immediate_module.io.out,
         (2.U) -> vlsu_module.io.out.asSInt
@@ -88,17 +88,23 @@ class top_file extends Module {
     
 
     alu_module.io.alu := alu_control_module.io.out
-    s_memory_module.io.addr(0) := alu_module.io.out(0).asUInt
-    s_memory_module.io.addr(1) := alu_module.io.out(1).asUInt
-    s_memory_module.io.addr(2) := alu_module.io.out(2).asUInt
-    s_memory_module.io.addr(3) := alu_module.io.out(3).asUInt
+
+    s_memory_module.io.vec_addr := alu_module.io.vec_out
+    s_memory_module.io.addr := alu_module.io.out.asUInt
+
     s_memory_module.io.mem_data := register_file_module.io.rs2_out.asSInt
+    s_memory_module.io.vec_datain := vector_file_module.io.vs1_out
+
     s_memory_module.io.w_enable := control_unit_module.io.mem_write
+    s_memory_module.io.vec_en := control_unit_module.io.vector
+
     s_memory_module.io.r_enable := control_unit_module.io.mem_read
     s_memory_module.io.stall := control_unit_module.io.stall_true
 
 
     alu_module.io.sew := vec_csr_module.io.vsew
+    alu_module.io.vec := control_unit_module.io.vector
+
     // register_file_module.io. reg_enable := control_unit_module.io.reg_write
     //val a = Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)).asSInt
@@ -109,17 +115,18 @@ class top_file extends Module {
     //vector
     vector_file_module.io.vd := instr_module.io.r_data(11,7)
     vector_file_module.io. vec_enable := control_unit_module.io.vec_write
+    vector_file_module.io. vec_store := control_unit_module.io.vec_store
 
 
     register_file_module.io.reg_data := MuxLookup(control_unit_module.io.mem_data_sel,0.S,Array(
-        (0.U) -> alu_module.io.out(0),
+        (0.U) -> alu_module.io.out,
         (1.U) -> s_memory_module.io.dataout)
         // (2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt)
     )
 
     vector_file_module.io.vec_data := MuxLookup(control_unit_module.io.mem_data_sel,0.U,Array(
         (3.U) -> alu_module.io.vec_out,
-        (2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)))
+        (2.U) -> s_memory_module.io.vec_dataout)
     )
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout(0),alu_module.io.out)).asSInt
 

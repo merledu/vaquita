@@ -37,6 +37,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vector_file>io_vec_store"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vector_file>io_vec_data"
   },
   {
@@ -73,19 +77,11 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>io_addr_0"
+    "target":"~top_file|s_memory>io_addr"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>io_addr_1"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>io_addr_2"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>io_addr_3"
+    "target":"~top_file|s_memory>io_vec_addr"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -106,6 +102,34 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|s_memory>io_stall"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_vec_dataout"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_vec_datain"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_vec_en"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>vector_data32_0"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>vector_data32_1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>vector_data32_2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>vector_data32_3"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -232,6 +256,14 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|control_unit>io_vector"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|control_unit>io_vec_store"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|control_unit>io_stall_true"
   },
   {
@@ -240,11 +272,11 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_a32_0"
+    "target":"~top_file|alu>io_a"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_b32_0"
+    "target":"~top_file|alu>io_b"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -256,19 +288,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_out_0"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_out_1"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_out_2"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_out_3"
+    "target":"~top_file|alu>io_out"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -281,6 +301,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_sew"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vec"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
