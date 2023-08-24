@@ -19,7 +19,7 @@ class vector_file extends Module {
     }.otherwise{
         io.vs1_out := Mux((io.vs1_in.orR),regs(io.vs1_in),0.U)
     }
-    
+
     io.vs2_out := Mux((io.vs2_in.orR),regs(io.vs2_in),0.U)
     when (io.vec_enable & io.vd.orR){
         regs(io.vd):= io.vec_data

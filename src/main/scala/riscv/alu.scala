@@ -37,6 +37,7 @@ object alu_op {
     val vaddvx = 50.U(32.W)
     val vaddvi = 60.U(32.W)
     val vse32 = 32.U(32.W)
+    val vsubvv = 33.U(32.W)
 }
 
 
@@ -143,107 +144,23 @@ class alu extends Module {
     }
     .otherwise{
       io.out := 0.S
-      
-      
     }
   }
-
-    // io.vec_out := Cat(io.vs1(127,96)+io.vs2(127,96),io.vs1(95,64)+io.vs2(95,64),io.vs1(63,32)+io.vs2(63,32),io.vs1(31,0)+io.vs2(31,0))
-    .otherwise{
-    when (io.alu === vaddvv){
-      // sew =8
-      when (io.sew==="b000".U && io.alu===vaddvv){
-        out8(0) := io.vs1(7,0) + io.vs2(7,0)
-        out8(1) := io.vs1(15,8) + io.vs2(15,8)
-        out8(2) := io.vs1(23,16) + io.vs2(23,16)
-        out8(3) := io.vs1(31,24) + io.vs2(31,24)
-        out8(4) := io.vs1(39,32) + io.vs2(39,32)
-        out8(5) := io.vs1(47,40) + io.vs2(47,40)
-        out8(6) := io.vs1(55,48) + io.vs2(55,48)
-        out8(7) := io.vs1(63,56) + io.vs2(63,56)
-        out8(8) := io.vs1(71,64) + io.vs2(71,64)
-        out8(9) := io.vs1(79,72) + io.vs2(79,72)
-        out8(10) := io.vs1(87,80) + io.vs2(87,80)
-        out8(11) := io.vs1(95,88) + io.vs2(95,88)
-        out8(12) := io.vs1(103,96) + io.vs2(103,96)
-        out8(13) := io.vs1(111,104) + io.vs2(111,104)
-        out8(14) := io.vs1(119,112) + io.vs2(119,112)
-        out8(15) := io.vs1(127,120) + io.vs2(127,120)
-
-      }
-      //sew 16
-      .elsewhen (io.sew==="b001".U && io.alu===vaddvv){
-        out16(0) := io.vs1(15,0) + io.vs2(15,0)
-        out16(1) := io.vs1(31,16) + io.vs2(31,16)
-        out16(2) := io.vs1(47,32) + io.vs2(47,32)
-        out16(3) := io.vs1(63,48) + io.vs2(63,48)
-        out16(4) := io.vs1(79,64) + io.vs2(79,64)
-        out16(5) := io.vs1(95,80) + io.vs2(95,80)
-        out16(6) := io.vs1(111,96) + io.vs2(111,96)
-        out16(7) := io.vs1(127,112) + io.vs2(127,112)
-        io.vec_out := 0.U
-      }
-      //sew =32
-      .elsewhen (io.sew==="b010".U && io.alu===vaddvv){
+  .otherwise{
+      when (io.sew==="b010".U && io.alu===vaddvv){
         out32(0) := io.vs1(31,0) + io.vs2(31,0)
         out32(1) := io.vs1(63,32) + io.vs2(63,32)
         out32(2) := io.vs1(95,64) + io.vs2(95,64)
         out32(3) := io.vs1(127,96) + io.vs2(127,96)
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
-      //sew =64
-      .elsewhen (io.sew==="b011".U && io.alu===vaddvv){
-        out64(0) := io.vs1(63,0) + io.vs2(63,0)
-        out64(1) := io.vs1(127,64) + io.vs2(127,64)
-        io.vec_out := 0.U
-      }
-    }
-    .elsewhen(io.alu === vle32){//all 16 ,8 ,64
-      // // sew =8
-      // when (io.sew==="b000".U && io.alu===io.vle8){
-      //   out8(0) := io.vs1(7,0) + io.vs2(7,0)
-      //   out8(1) := io.vs1(15,8) + io.vs2(15,8)
-      //   out8(2) := io.vs1(23,16) + io.vs2(23,16)
-      //   out8(3) := io.vs1(31,24) + io.vs2(31,24)
-      //   out8(4) := io.vs1(39,32) + io.vs2(39,32)
-      //   out8(5) := io.vs1(47,40) + io.vs2(47,40)
-      //   out8(6) := io.vs1(55,48) + io.vs2(55,48)
-      //   out8(7) := io.vs1(63,56) + io.vs2(63,56)
-      //   out8(8) := io.vs1(71,64) + io.vs2(71,64)
-      //   out8(9) := io.vs1(79,72) + io.vs2(79,72)
-      //   out8(10) := io.vs1(87,80) + io.vs2(87,80)
-      //   out8(11) := io.vs1(95,88) + io.vs2(95,88)
-      //   out8(12) := io.vs1(103,96) + io.vs2(103,96)
-      //   out8(13) := io.vs1(111,104) + io.vs2(111,104)
-      //   out8(14) := io.vs1(119,112) + io.vs2(119,112)
-      //   out8(15) := io.vs1(127,120) + io.vs2(127,120)
-      // }
-      // //sew 16
-      // .elsewhen (io.sew==="b001".U && io.alu===io.vle16){
-      //   out16(0) := io.vs1(15,0) + io.vs2(15,0)
-      //   out16(1) := io.vs1(31,16) + io.vs2(31,16)
-      //   out16(2) := io.vs1(47,32) + io.vs2(47,32)
-      //   out16(3) := io.vs1(63,48) + io.vs2(63,48)
-      //   out16(4) := io.vs1(79,64) + io.vs2(79,64)
-      //   out16(5) := io.vs1(95,80) + io.vs2(95,80)
-      //   out16(6) := io.vs1(111,96) + io.vs2(111,96)
-      //   out16(7) := io.vs1(127,112) + io.vs2(127,112)
-      // }
-      //sew =32
-      when (io.sew==="b010".U && io.alu===vle32){
+    .elsewhen (io.sew==="b010".U && io.alu===vle32){
         out32(0) := io.a.asUInt
         out32(1) := io.a.asUInt+4.U
         out32(2) := io.a.asUInt+8.U
         out32(3) := io.a.asUInt+12.U
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
-      
-      //sew =64
-      // .elsewhen (io.sew==="b011".U && io.alu===io.vle64){
-      //   out32(0) := io.vs1(63,0) + io.vs2(63,0)
-      //   out32(1) := io.vs1(127,64) + io.vs2(127,64)
-      // }
-    }
     //vector store 32 bits
     .elsewhen(io.sew==="b010".U && io.alu===vse32){
         out32(0) := io.a.asUInt
@@ -268,6 +185,14 @@ class alu extends Module {
         out32(3) := io.vs2(127,96) + io.b.asUInt
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
+      //vector to vector subtraction
+      .elsewhen (io.sew==="b010".U && io.alu===vaddvv){
+        out32(0) := io.vs1(31,0) - io.vs2(31,0)
+        out32(1) := io.vs1(63,32) - io.vs2(63,32)
+        out32(2) := io.vs1(95,64) - io.vs2(95,64)
+        out32(3) := io.vs1(127,96) - io.vs2(127,96)
+        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      }
     .otherwise{
         io.vec_out := 0.U
       }
@@ -280,3 +205,54 @@ class alu extends Module {
     Mux(io.alu === bltu,io.a.asUInt < io.b.asUInt,
     Mux(io.alu === bge,io.a >= io.b,0.B))))))
 }
+
+// when (io.alu === vaddvv){
+//       // sew =8
+//       when (io.sew==="b000".U && io.alu===vaddvv){
+//         out8(0) := io.vs1(7,0) + io.vs2(7,0)
+//         out8(1) := io.vs1(15,8) + io.vs2(15,8)
+//         out8(2) := io.vs1(23,16) + io.vs2(23,16)
+//         out8(3) := io.vs1(31,24) + io.vs2(31,24)
+//         out8(4) := io.vs1(39,32) + io.vs2(39,32)
+//         out8(5) := io.vs1(47,40) + io.vs2(47,40)
+//         out8(6) := io.vs1(55,48) + io.vs2(55,48)
+//         out8(7) := io.vs1(63,56) + io.vs2(63,56)
+//         out8(8) := io.vs1(71,64) + io.vs2(71,64)
+//         out8(9) := io.vs1(79,72) + io.vs2(79,72)
+//         out8(10) := io.vs1(87,80) + io.vs2(87,80)
+//         out8(11) := io.vs1(95,88) + io.vs2(95,88)
+//         out8(12) := io.vs1(103,96) + io.vs2(103,96)
+//         out8(13) := io.vs1(111,104) + io.vs2(111,104)
+//         out8(14) := io.vs1(119,112) + io.vs2(119,112)
+//         out8(15) := io.vs1(127,120) + io.vs2(127,120)
+
+//       }
+//       //sew 16
+//       .elsewhen (io.sew==="b001".U && io.alu===vaddvv){
+//         out16(0) := io.vs1(15,0) + io.vs2(15,0)
+//         out16(1) := io.vs1(31,16) + io.vs2(31,16)
+//         out16(2) := io.vs1(47,32) + io.vs2(47,32)
+//         out16(3) := io.vs1(63,48) + io.vs2(63,48)
+//         out16(4) := io.vs1(79,64) + io.vs2(79,64)
+//         out16(5) := io.vs1(95,80) + io.vs2(95,80)
+//         out16(6) := io.vs1(111,96) + io.vs2(111,96)
+//         out16(7) := io.vs1(127,112) + io.vs2(127,112)
+//         io.vec_out := 0.U
+//       }
+//       //sew =32
+      // .elsewhen (io.sew==="b010".U && io.alu===vaddvv){
+      //   out32(0) := io.vs1(31,0) + io.vs2(31,0)
+      //   out32(1) := io.vs1(63,32) + io.vs2(63,32)
+      //   out32(2) := io.vs1(95,64) + io.vs2(95,64)
+      //   out32(3) := io.vs1(127,96) + io.vs2(127,96)
+      //   io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      // }
+//       //sew =64
+//       .elsewhen (io.sew==="b011".U && io.alu===vaddvv){
+//         out64(0) := io.vs1(63,0) + io.vs2(63,0)
+//         out64(1) := io.vs1(127,64) + io.vs2(127,64)
+//         io.vec_out := 0.U
+//       }
+//       .otherwise{
+//         io.vec_out := 0.U
+//       }
