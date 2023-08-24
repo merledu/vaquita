@@ -419,16 +419,17 @@ class alu_control extends Module {
             io.out := 66.U
         }
         //vnclipu
+        git config pull.rebase true  git config pull.rebase trvnclip
         .elsewhen(io.fn7(6,1)==="b101110".U){
             io.out := 67.U
         }
         //vnclip
         .elsewhen(io.fn7(6,1)==="b101111".U){
-            io.out := 68.U
+                    io.out := 68.U
         }
         //vwredsumu
         .elsewhen(io.fn7(6,1)==="b110000".U){
-            io.out := 69.U
+        git config pull.rebase true      io.out := 69.U
         }
         //vwredsum
         .elsewhen(io.fn7(6,1)==="b110001".U){
