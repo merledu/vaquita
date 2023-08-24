@@ -233,8 +233,68 @@ class alu_control extends Module {
         }
         //vsubvv
         .elsewhen(io.fn7(6,1)==="b000010".U){
-            io.out := 31.U
+            io.out := 33.U
         }
+        //vrsubvv
+        .elsewhen(io.fn7(6,1)==="000011".U){
+            io.out := 34.U
+        }
+        //vminu
+        .elsewhen(io.fn7(6,1)==="b000100".U){
+            io.out := 35.U
+        }
+        //vmin
+        .elsewhen(io.fn7(6,1)==="b000101".U){
+            io.out := 36.U
+        }
+        //vmaxu
+        .elsewhen(io.fn7(6,1)==="b000110".U){
+            io.out := 37.U
+        }
+        //vmax
+        .elsewhen(io.fn7(6,1)==="000111".U){
+            io.out := 38.U
+        }
+        //vand
+        .elsewhen(io.fn7(6,1)==="001001".U){
+            io.out := 39.U
+        }
+        //vor
+        .elsewhen(io.fn7(6,1)==="001010".U){
+            io.out := 40.U
+        }
+        //vxor
+        .elsewhen(io.fn7(6,1)==="001011".U){
+            io.out := 41.U
+        }
+        //vrgather
+        .elsewhen(io.fn7(6,1)==="001100".U){
+            io.out := 42.U
+        }
+        //vslide up 
+        .elsewhen(io.fn7(6,1)==="001110".U){
+            io.out := 43.U
+        }
+        //vgatherei16
+        .elsewhen(io.fn7(6,1)==="001110".U){
+            io.out := 44.U
+        }
+        //vor
+        .elsewhen(io.fn7(6,1)==="001111".U){
+            io.out := 45.U
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         //vminuvv
         .elsewhen(io.fn7(6,1)==="b000100".U){
             io.out := 31.U
