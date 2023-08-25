@@ -29,37 +29,72 @@ class top_file extends Module {
     dontTouch(vec_csr_module.io)
 
     
+
+    //instruction module input
     instr_module.io.address := pc_module.io.out >> 2.U
+
+    //control unit module inputs
     control_unit_module.io.op_code := instr_module.io.r_data(7,0)
     control_unit_module.io.rs1 := instr_module.io.r_data(19,15)
     control_unit_module.io.rd := instr_module.io.r_data(11,7)
     control_unit_module.io.fn3 := instr_module.io.r_data(14,12)
 
+    //vector csr module inputs
     vec_csr_module.io.instr := instr_module.io.r_data
 
 
+    //register file input
     register_file_module.io.rs1_in := instr_module.io.r_data(19,15)
     register_file_module.io.rs2_in := instr_module.io.r_data(24,20)
+    register_file_module.io.rd := instr_module.io.r_data(11,7)
+    register_file_module.io. reg_enable := control_unit_module.io.reg_write
 
+    register_file_module.io.reg_data := MuxLookup(control_unit_module.io.mem_data_sel,0.S,Array(
+        (0.U) -> alu_module.io.out,
+        (1.U) -> s_memory_module.io.dataout)
+        // (2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt)
+    )
+
+
+    //vector file input
     vector_file_module.io.vs1_in := instr_module.io.r_data(19,15)
     vector_file_module.io.vs2_in := instr_module.io.r_data(24,20)
+    vector_file_module.io.vd := instr_module.io.r_data(11,7)
+    vector_file_module.io. vec_enable := control_unit_module.io.vec_write
+    vector_file_module.io. vec_store := control_unit_module.io.vec_store
+    vector_file_module.io.lmul := vec_csr_module.io.vlmul
+    vector_file_module.io.vec_data := MuxLookup(control_unit_module.io.mem_data_sel,0.U,Array(
+        (3.U) -> alu_module.io.vec_out,
+        (2.U) -> s_memory_module.io.vec_dataout)
+    )
 
+    
+
+
+    //vlsu module inputs
     vlsu_module.io.vlmul := vec_csr_module.io.vlmul
     vlsu_module.io.vsew := vec_csr_module.io.vsew
-
     vlsu_module.io.opcode := instr_module.io.r_data(7,0)
     vlsu_module.io.mew := instr_module.io.r_data(28)
     vlsu_module.io.width_lw := instr_module.io.r_data(14,12)
 
-    immediate_module.io.i_instruction := instr_module.io.r_data
 
+    //immediate module inputs
+    immediate_module.io.i_instruction := instr_module.io.r_data
+    immediate_module.io.pc_in := pc_module.io.out
+    immediate_module.io.stall_in := control_unit_module.io.stall_true
+    
+    //alu control module inputs
     alu_control_module.io.op_code := instr_module.io.r_data(7,0)
     alu_control_module.io.fn3 := instr_module.io.r_data(14,12)
     alu_control_module.io.fn7 := instr_module.io.r_data(30)
     alu_control_module.io.lumop := instr_module.io.r_data(24,20)
 
-    immediate_module.io.pc_in := pc_module.io.out
 
+    //alu module inputs
+    alu_module.io.sew := vec_csr_module.io.vsew
+    alu_module.io.vec := control_unit_module.io.vector
+    alu_module.io.alu := alu_control_module.io.out
     alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,
         (1.U) -> pc_module.io.out4.asSInt,
@@ -68,8 +103,6 @@ class top_file extends Module {
         // (4.U) -> vector_file_module.io.vs1_out.asSInt
         )
     )
-
-       //Mux(control_unit_module.io.operand_a,immediate_module.io.out,register_file_module.io.rs2_out.asSInt)
     alu_module.io.b := MuxLookup(control_unit_module.io.operand_b,0.S,Array(
         (0.U) -> register_file_module.io.rs2_out.asSInt,
         (1.U) -> immediate_module.io.out,
@@ -77,19 +110,18 @@ class top_file extends Module {
         // (4.U) -> vector_file_module.io.vs2_out.asSInt)
         )
     )
-
     alu_module.io.vs1 := MuxLookup(control_unit_module.io.vec_operand_a,0.U,Array(
         (1.U) -> vector_file_module.io.vs1_out,
         (0.U) -> 0.U)
     )
-
     alu_module.io.vs2 := MuxLookup(control_unit_module.io.vec_operand_b,0.U,Array(
         (1.U) -> vector_file_module.io.vs2_out,
         (0.U) -> 0.U)
     )
     
+    
 
-    alu_module.io.alu := alu_control_module.io.out
+    
 
     s_memory_module.io.vec_addr := alu_module.io.vec_out
     s_memory_module.io.addr := alu_module.io.out.asUInt
@@ -104,32 +136,21 @@ class top_file extends Module {
     s_memory_module.io.stall := control_unit_module.io.stall_true
 
 
-    alu_module.io.sew := vec_csr_module.io.vsew
-    alu_module.io.vec := control_unit_module.io.vector
+    
 
     // register_file_module.io. reg_enable := control_unit_module.io.reg_write
     //val a = Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)).asSInt
     //dontTouch(a)
     //register 
-    register_file_module.io.rd := instr_module.io.r_data(11,7)
-    register_file_module.io. reg_enable := control_unit_module.io.reg_write
+    
     //vector
-    vector_file_module.io.vd := instr_module.io.r_data(11,7)
-    vector_file_module.io. vec_enable := control_unit_module.io.vec_write
-    vector_file_module.io. vec_store := control_unit_module.io.vec_store
+    
 
 
-    register_file_module.io.reg_data := MuxLookup(control_unit_module.io.mem_data_sel,0.S,Array(
-        (0.U) -> alu_module.io.out,
-        (1.U) -> s_memory_module.io.dataout)
-        // (2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt)
-    )
+    
 
-    vector_file_module.io.vec_data := MuxLookup(control_unit_module.io.mem_data_sel,0.U,Array(
-        (3.U) -> alu_module.io.vec_out,
-        (2.U) -> s_memory_module.io.vec_dataout)
-    )
+    
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout(0),alu_module.io.out)).asSInt
 
     // vector_file_module.io.vec_data := (Mux(control_unit_module.io.vec_write,Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt,alu_module.io.out)).asSInt
@@ -142,7 +163,7 @@ class top_file extends Module {
     // vec_ls_count_module.io.count := immediate_module.io.stall
 
 
-    immediate_module.io.stall_in := control_unit_module.io.stall_true
+    
 
     // control_unit_module.io.stall := vec_ls_count_module.io.stall_count
 
@@ -158,7 +179,9 @@ class top_file extends Module {
         (3.U) -> plus.asUInt,
         (4.U) -> (pc_module.io.out))
     )
+    //pc module input
     pc_module.io.pc := nextPC
+
     // register_file_module.io.rd := instr_module.io.r_data(11,7)
     // register_file_module.io. reg_enable := control_unit_module.io.reg_write
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)).asSInt

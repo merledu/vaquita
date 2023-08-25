@@ -12,16 +12,25 @@ class vector_file extends Module {
         val vec_data = Input(UInt(128.W))
         val vs1_out = Output(UInt(128.W))
         val vs2_out = Output(UInt(128.W))
+        val lmul = Input(UInt(3.W))
     })
-    val regs = RegInit(VecInit(Seq.fill(32)(0.U(128.W))))
-    when (io.vec_store===1.B){
-        io.vs1_out := Mux((io.vd.orR),regs(io.vd),0.U)
-    }.otherwise{
-        io.vs1_out := Mux((io.vs1_in.orR),regs(io.vs1_in),0.U)
-    }
+    val regs = RegInit(VecInit(Seq.fill(32)(0.U(128.W)))) //create 32 vector regisster
 
-    io.vs2_out := Mux((io.vs2_in.orR),regs(io.vs2_in),0.U)
-    when (io.vec_enable & io.vd.orR){
-        regs(io.vd):= io.vec_data
+    when(io.lmul==="b000".U){
+        when (io.vec_store===1.B){
+            io.vs1_out := Mux((io.vd.orR),regs(io.vd),0.U)
+        }.otherwise{
+            io.vs1_out := Mux((io.vs1_in.orR),regs(io.vs1_in),0.U)
+        }
+
+        io.vs2_out := Mux((io.vs2_in.orR),regs(io.vs2_in),0.U)
+
+        when (io.vec_enable & io.vd.orR){
+            regs(io.vd):= io.vec_data
+        }
+    }
+    .otherwise{
+        io.vs1_out := 0.U
+        io.vs2_out := 0.U
     }
 }

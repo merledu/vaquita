@@ -294,7 +294,6 @@ class alu_control extends Module {
 
 
 
-
         //vminuvv
         .elsewhen(io.fn7(6,1)==="b000100".U){
             io.out := 31.U

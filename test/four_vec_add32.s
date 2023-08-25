@@ -43,7 +43,7 @@ main:
     vadd.vv v6,v3,v4
     vadd.vv v7,v5,v6
     vse32.v v1, (x15)
-    vse32.v v1, (x17)
+    vse32.v v6, (x17)
     lw x20 90(x0)
     lw x21 94(x0)
     lw x22 98(x0)
