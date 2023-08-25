@@ -73,7 +73,7 @@ object alu_op {
     val vnclipu = 66.U(32.W)
     val vnclip = 67.U(32.W)
     val vwredsumu = 68.U(32.W)
-    val vwredsumu = 69.U(32.W)
+    val vwredsum = 69.U(32.W)
 }
 
 
