@@ -379,6 +379,9 @@ class alu_control extends Module {
         .elsewhen(io.fn7(6,1)==="b110001".U){
             io.out := 69.U
         }
+        .otherwise{
+            io.out :=0.U
+        }
 
 
 

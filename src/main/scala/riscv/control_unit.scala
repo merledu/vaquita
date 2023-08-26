@@ -26,6 +26,10 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
 
 
     })
+    val stall = WireInit(0.U(32.W))
+    
+
+    
     //val op_code=io.control_instruction(7,0)
     //r type
     when(io.op_code==="b0110011".U){
@@ -279,12 +283,24 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.operand_a := 0.U
         io.operand_b := 0.U
         io.extend_sel := "b00".U
-        io.next_pc_selector := 0.U
-        io.stall_true := 0.U
+        // io.next_pc_selector := 0.U
         io.vector := 1.B
         io.vec_store := 0.B
         io.vec_operand_a := 1.U
         io.vec_operand_b := 1.U
+        val reg123 = RegInit(3.U(32.W))
+        when(reg123 > 0.U && io.op_code==="b0100111".U){
+            io.next_pc_selector := 4.U
+            reg123 := reg123 -1.U
+            io.stall_true := reg123
+
+        }
+        .otherwise{
+            reg123 := 3.U
+            io.vec_write := off
+            io.next_pc_selector := 0.U
+            io.stall_true := 0.U
+        }
     }
     //vector to scalar
     .elsewhen(io.op_code==="b1010111".U && io.fn3==="b100".U){
@@ -293,7 +309,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.mem_read := off
         io.reg_write := off
         io.vec_write := on
-       io.mem_data_sel := "b11".U
+        io.mem_data_sel := "b11".U
         io.operand_a := 0.U
         io.operand_b := 0.U
         io.extend_sel := "b00".U
@@ -311,7 +327,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.mem_read := off
         io.reg_write := off
         io.vec_write := on
-       io.mem_data_sel := "b11".U
+        io.mem_data_sel := "b11".U
         io.operand_a := 0.U
         io.operand_b := "b01".U
         io.extend_sel := "b00".U
@@ -333,7 +349,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.operand_b := 0.U
         io.extend_sel := 0.U
         io.next_pc_selector :=0.U
-                io.stall_true := 0.U
+        io.stall_true := 0.U
         io.vector := 1.B
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
