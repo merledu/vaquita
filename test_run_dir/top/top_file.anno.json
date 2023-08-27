@@ -300,6 +300,14 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_sew"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vec"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_out"
   },
   {
@@ -309,14 +317,6 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_vec_out"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_sew"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|alu>io_vec"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
