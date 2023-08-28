@@ -12,11 +12,12 @@ class controldec extends Module {
         val Mem2Reg = Output(Bool())
         val opAsel = Output(UInt(2.W))
         val opBsel = Output(Bool())
-        val Ex_sel = Output(UInt(2.W))
+        val Ex_sel = Output(UInt(4.W))
         val nextPCsel = Output(UInt(2.W))
-        val aluop = Output(UInt(3.W))
+        val aluop = Output(UInt(5.W))
         val vset = Output(Bool())
-    
+        val load = Output (UInt(4.W))
+        val v_ins =Output(Bool())
     })
     io.MemWrite := 0.B
     io.Branch := 0.B
@@ -29,10 +30,14 @@ class controldec extends Module {
     io.nextPCsel := 0.U
     io.aluop := 7.U
     io.vset := 1.B
+    io.load :=0.B
+    io.v_ins := 0.B
+
+
 
             val configtype = io.Instruction(31,30)
             val opcode = io.Instruction(6, 0)
-
+            val func3 = io.Instruction(14,12)
     switch (opcode){
         is ("b0110011".U){      //r-type
             io.MemWrite := 0.B
@@ -42,8 +47,8 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b00".U
             io. opBsel := 0.B
-            io. Ex_sel :="b00".U
-            io.aluop := "b000".U
+            io. Ex_sel :=0.U
+            io.aluop := "b00000".U
             io.vset := 0.B
              
         }
@@ -55,8 +60,8 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b00".U
             io. opBsel := 1.B
-            io. Ex_sel := "b00".U
-            io.aluop := "b001".U
+            io. Ex_sel := 0.U
+            io.aluop := "b00001".U
             io.vset := 0.B
         }
         is ("b0100011".U){ //s-type
@@ -67,8 +72,8 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b00".U
             io. opBsel := 1.B
-            io. Ex_sel := "b01".U
-            io.aluop := "b101".U
+            io. Ex_sel := 1.U
+            io.aluop := "b00101".U
             io.vset := 0.B
         }
          is ("b0000011".U){  //load-type
@@ -79,8 +84,8 @@ class controldec extends Module {
             io. Mem2Reg := 1.B
             io. opAsel := "b00".U
             io. opBsel := 1.B
-            io. Ex_sel := "b00".U
-            io.aluop := "b100".U
+            io. Ex_sel := 0.U
+            io.aluop := "b00100".U
             io.vset := 0.B
 
         }
@@ -92,9 +97,9 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b00".U
             io. opBsel := 0.B
-            io. Ex_sel := "b00".U
+            io. Ex_sel := 0.U
             io.nextPCsel := "b01".U
-            io.aluop := "b010".U
+            io.aluop := "b00010".U
             io.vset := 0.B
         }
          is ("b1101111".U){        //jal-type
@@ -105,9 +110,9 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b01".U
             io. opBsel := 0.B
-            io. Ex_sel := "b00".U
+            io. Ex_sel := 0.U
             io.nextPCsel := "b10".U
-            io.aluop := "b011".U
+            io.aluop := "b00011".U
             io.vset := 0.B
         }
          is ("b1100111".U){   //jalr-type
@@ -118,9 +123,9 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b01".U
             io. opBsel := 1.B
-            io. Ex_sel := "b00".U
+            io. Ex_sel := 0.U
             io.nextPCsel := "b11".U
-            io.aluop := "b011".U
+            io.aluop := "b00011".U
             io.vset := 0.B
         }
         is ("b0110111".U){   //lui-type
@@ -131,16 +136,17 @@ class controldec extends Module {
             io. Mem2Reg := 0.B
             io. opAsel := "b10".U
             io. opBsel := 1.B
-            io. Ex_sel := "b10".U
+            io. Ex_sel := 2.U
             io.nextPCsel := "b00".U
-            io.aluop := "b110".U
+            io.aluop := "b00110".U
             io.vset := 0.B
         }
-        is ("b1010111".U){
+        is ("b1010111".U){ //vector operations
             io.vset := 1.B
+            io.v_ins := 1.B
             when (configtype ==="b00".U || configtype ==="b01".U ){ // vsetvli
                 io.RegWrite:=1.B
-                io.aluop:="b001".U
+                io.aluop:=0.U
                 io.opBsel:=1.B
                 io.MemWrite:=0.B
                 io.Branch:=0.B
@@ -150,11 +156,9 @@ class controldec extends Module {
                 io.Ex_sel:=3.U
                 io.nextPCsel:="b00".U
 
-
-            }
-            .elsewhen(configtype ==="b10".U){ // vsetivli
+            }.elsewhen(configtype ==="b10".U){ // vsetivli
                 io.RegWrite:=1.B
-                io.aluop:="b001".U
+                io.aluop:="b00001".U
                 io.opBsel:=1.B
                 io.MemWrite:=0.B
                 io.Branch:=0.B
@@ -163,8 +167,19 @@ class controldec extends Module {
                 io.opAsel:="b00".U
                 io.Ex_sel:=3.U
                 io.nextPCsel:="b00".U
-            }
-            .otherwise{ //vsetvl
+
+            }.elsewhen(configtype ==="b11".U){ //vsetvl
+                io.RegWrite:=1.B
+                io.MemWrite:=0.B
+                io.Branch:=0.B
+                io.MemRead :=0.B
+                io.Mem2Reg:=0.B
+                io.aluop:="b00000".U
+                io.opAsel:="b00".U
+                io.opBsel:=0.B
+                io.Ex_sel:=3.U
+                io.nextPCsel:="b00".U
+            }.elsewhen (func3 === "b000".U) {//vector-vector
                 io.RegWrite:=1.B
                 io.MemWrite:=0.B
                 io.Branch:=0.B
@@ -175,6 +190,49 @@ class controldec extends Module {
                 io.opBsel:=0.B
                 io.Ex_sel:=3.U
                 io.nextPCsel:="b00".U
+                // io.V_inst := 1.U
+
+            }.elsewhen (func3 === "b100".U) {//vector-scalar
+                io.RegWrite:=1.B
+                io.MemWrite:=0.B
+                io.Branch:=0.B
+                io.MemRead :=0.B
+                io.Mem2Reg:=0.B
+                io.aluop:="b00000".U
+                io.opAsel:="b00".U
+                io.opBsel:=0.B
+                io.Ex_sel:=3.U
+                io.nextPCsel:="b00".U
+                // io.V_inst := 1.U
+            }.elsewhen (func3 === "b011".U) {//vector-immediate
+                io.RegWrite:=1.B
+                io.MemWrite:=0.B
+                io.Branch:=0.B
+                io.MemRead :=0.B
+                io.Mem2Reg:=0.B
+                io.aluop:=1.U
+                io.opAsel:="b00".U
+                io.opBsel:=1.B
+                io.Ex_sel:="b11".U
+                io.nextPCsel:="b00".U
+                io.v_ins := 1.B
+
             }
-    }
+            }
+            is ("b0000111".U){//load-vector
+            when (io.Instruction(27,26) ==="b00".U && io.Instruction(24,20 )=== "b00000".U){// (mop =00) unit stride// (lumop =000000) unit stride load
+                io.RegWrite:=1.B
+                io.MemWrite:=0.B
+                io.Branch:=0.B
+                io.MemRead :=1.B
+                io.Mem2Reg:=1.B
+                io.aluop:="b00111".U
+                io.opAsel:="b00".U
+                io.opBsel:=0.B
+                io.Ex_sel:=3.U
+                io.nextPCsel:="b00".U  
+                io.load := 1.U
+            }
+        }
+        
     }}

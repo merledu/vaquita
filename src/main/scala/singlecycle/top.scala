@@ -13,7 +13,7 @@ class Top extends Module{
 // var temp = 0.U
 val PCMod = Module(new pc)
 val ALUMod = Module(new ALU_)
-val ALUcMod = Module (new alucontrol)
+val ALUcMod = Module (new Alu_Control)
 val BrcntrlMod = Module (new BranchControl_)
 val CntrlDecMod = Module (new controldec)
 val datamemMod = Module (new datamem)
@@ -22,7 +22,9 @@ val instmemMod = Module (new InstMem)
 val jalrCompMod = Module (new jalr)
 val regfileMod = Module (new regfile)
 val config= Module(new configure)
+val vreg = Module (new vregfile)
 dontTouch(config.io)
+dontTouch(vreg.io)
 PCMod.io.input := PCMod.io.pc4
 
 instmemMod.io.addr := PCMod.io.pc(11,2)
@@ -35,6 +37,11 @@ regfileMod.io.rs1:= instmemMod.io.inst(19,15)
 regfileMod.io.rs2 := instmemMod.io.inst(24,20)
 regfileMod.io.rd:=instmemMod.io.inst(11,7)
 
+//vregfile
+ vreg.io.reg_write := CntrlDecMod.io.RegWrite
+vreg.io.vs1_addr:= instmemMod.io.inst(19,15)
+vreg.io.vs2_addr := instmemMod.io.inst(24,20)
+vreg.io.vd_addr:=instmemMod.io.inst(11,7)
 
 //immegen
 ImmgenMod.io.instruction := instmemMod.io.inst
@@ -44,6 +51,8 @@ ImmgenMod.io.pc := PCMod.io.pc
 ALUcMod.io.aluOp := CntrlDecMod.io.aluop
 ALUcMod.io.func3 := instmemMod.io.inst(14,12)
 ALUcMod.io.func7 := instmemMod.io.inst(30)
+ALUcMod.io.func6 := instmemMod.io.inst(31,26)
+ALUcMod.io.V_inst := 1.B
 
 //ALU
 
@@ -63,12 +72,14 @@ when(CntrlDecMod.io.Ex_sel === "b00".U && CntrlDecMod.io.opBsel === 1.U){
 	}.elsewhen(CntrlDecMod.io.Ex_sel === "b10".U && CntrlDecMod.io.opBsel === 1.U){
 		ALUMod.io.in_B := ImmgenMod.io.u_imm
 	}.otherwise{
-		ALUMod.io.in_B := ImmgenMod.io.z_imm
+		ALUMod.io.in_B := ImmgenMod.io.addi_imm
 	}
 
-
+ALUMod.io.vs1 := vreg.io.vs1_data.asUInt
+ALUMod.io.vs2 := vreg.io.vs2_data.asUInt
 ALUMod.io.aluc := ALUcMod.io.aluc
-
+ALUMod.io.sew := "b010".U
+ALUMod.io.v_ins := CntrlDecMod.io.v_ins
 
         config.io.rs1 :=instmemMod.io.inst(19,15)
 config.io.rd := instmemMod.io.inst(11,7)
@@ -131,10 +142,13 @@ datamemMod.io.Data := regfileMod.io.rdata2
 datamemMod.io.MemWrite := CntrlDecMod.io.MemWrite
 datamemMod.io.MemRead := CntrlDecMod.io.MemRead
 
+
 regfileMod.io.WriteData := MuxCase ( 0.S , Array (
 (CntrlDecMod.io.Mem2Reg === 0.B ) -> Mux(CntrlDecMod.io.vset,config.io.vl,ALUMod.io.output),
 (CntrlDecMod.io.Mem2Reg === 1.B ) -> datamemMod.io.out)
 )
+
+vreg.io.vd_data := ALUMod.io.v_output.asSInt
 io.out := 0.U
 io.test1 := instmemMod.io.inst(19,15)
 io.test2 := instmemMod.io.inst(11,7)
