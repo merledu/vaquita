@@ -1,4 +1,0 @@
-1691494974663:testOnly singlecycle.toptest
-1691495113754:testOnly singlecycle.toptest -- -DwriteVcd=1
-1691561706722:testOnly singlecycle.configtest -- -DwriteVcd=1
-1691566584201:testOnly singlecycle.toptest -- -DwriteVcd=1
