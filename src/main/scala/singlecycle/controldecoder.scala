@@ -33,11 +33,10 @@ class controldec extends Module {
     io.load :=0.B
     io.v_ins := 0.B
 
+    val configtype = io.Instruction(31,30)
+    val opcode = io.Instruction(6, 0)
+    val func3 = io.Instruction(14,12)
 
-
-            val configtype = io.Instruction(31,30)
-            val opcode = io.Instruction(6, 0)
-            val func3 = io.Instruction(14,12)
     switch (opcode){
         is ("b0110011".U){      //r-type
             io.MemWrite := 0.B
