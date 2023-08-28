@@ -3,17 +3,17 @@ package singlecycle
 import chisel3._
 import chisel3.util._
 
-class regfile(n : Int) extends Module {
+class regfile extends Module {
   val io = IO (new Bundle {
 	val RegWrite = Input(Bool())
 	val rs1 = Input(UInt(5.W))
 	val rs2 = Input(UInt(5.W))
 	val rd = Input(UInt(5.W))
-	val WriteData = Input(SInt(n.W))
-	val rdata1 = Output(SInt(n.W))
-	val rdata2 = Output(SInt(n.W))
+	val WriteData = Input(SInt(32.W))
+	val rdata1 = Output(SInt(32.W))
+	val rdata2 = Output(SInt(32.W))
   })
-	val register = RegInit(VecInit(Seq.fill(32)(0.S(n.W))))
+	val register = RegInit(VecInit(Seq.fill(32)(0.S(32.W))))
 	register(0) := 0.S
 	io.rdata1 := register(io.rs1)
 	io.rdata2 := register(io.rs2)
