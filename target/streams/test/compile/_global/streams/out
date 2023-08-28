@@ -1,6 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m/home/maira/Arsh-SingleCycleCore/src/test/scala/singlecycle/configure_test.scala:10:60: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : chisel3.UInt[0m
-[0m[[0m[31merror[0m] [0m[0m required: chisel3.SInt[0m
-[0m[[0m[31merror[0m] [0m[0m        c.io.zimm.poke("b00000000000000000000000000000000".U)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                           ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
