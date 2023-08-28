@@ -5,7 +5,7 @@ import chisel3.util._
 
 
 object ALUOP1 {
-	    val ALU_ADD = "b00000".U
+	val ALU_ADD = "b00000".U
     val ALU_ADDI = "b00000".U
     val ALU_SUB = "b01000".U
     val ALU_AND = "b00111".U
