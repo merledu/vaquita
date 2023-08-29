@@ -12,6 +12,7 @@ class alu extends Module {
         val vs2 =Input(UInt(128.W))
         val sew = Input(UInt(3.W))
         val vec = Input(Bool())
+        val vma = Input(Bool())
         val out = Output(SInt(32.W))
         val branch = Output(Bool())
         val vec_out = Output(UInt(128.W))
@@ -196,10 +197,12 @@ class alu extends Module {
     }
   }
   .otherwise{
+    // vector to vector addition
       when (io.sew==="b010".U && io.alu===vaddvv){
-        for (i <- 0 until 4) {
-            out32(i) := sew_32_a(i) + sew_32_b(i)
-        }
+        out32(0) := sew_32_a(0) + sew_32_b(0)
+        out32(1) := sew_32_a(1) + sew_32_b(1)
+        out32(2) := sew_32_a(2) + sew_32_b(2)
+        out32(3) := sew_32_a(3) + sew_32_b(3)
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
     .elsewhen (io.sew==="b010".U && io.alu===vle32){

@@ -17,6 +17,14 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_vlmul_count"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_mask"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vec_csr>io_instr"
   },
   {
@@ -54,6 +62,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vector_file>io_lmul"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vector_file>io_group"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -220,7 +232,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|control_unit>io_lmul"
+    "target":"~top_file|control_unit>io_lmul_count"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -309,6 +321,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_vec"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vma"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

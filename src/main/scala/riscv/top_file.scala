@@ -38,7 +38,7 @@ class top_file extends Module {
     control_unit_module.io.rs1 := instr_module.io.r_data(19,15)
     control_unit_module.io.rd := instr_module.io.r_data(11,7)
     control_unit_module.io.fn3 := instr_module.io.r_data(14,12)
-    control_unit_module.io.lmul := vector_file_module.io.lmul
+    control_unit_module.io.lmul_count := vec_csr_module.io.vlmul_count
 
     //vector csr module inputs
     vec_csr_module.io.instr := instr_module.io.r_data
@@ -64,6 +64,7 @@ class top_file extends Module {
     vector_file_module.io. vec_enable := control_unit_module.io.vec_write
     vector_file_module.io. vec_store := control_unit_module.io.vec_store
     vector_file_module.io.lmul := vec_csr_module.io.vlmul
+    vector_file_module.io.group := control_unit_module.io.stall_true
     vector_file_module.io.vec_data := MuxLookup(control_unit_module.io.mem_data_sel,0.U,Array(
         (3.U) -> alu_module.io.vec_out,
         (2.U) -> s_memory_module.io.vec_dataout)
@@ -94,6 +95,7 @@ class top_file extends Module {
 
     //alu module inputs
     alu_module.io.sew := vec_csr_module.io.vsew
+    alu_module.io.vma := vec_csr_module.io.mask
     alu_module.io.vec := control_unit_module.io.vector
     alu_module.io.alu := alu_control_module.io.out
     alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(

@@ -39,7 +39,7 @@ class s_memory extends Module {
     }
     .elsewhen(io.w_enable===1.B && io.vec_en===0.B){
         memory.write(io.addr,io.mem_data.asUInt)
-    }   
+    }
     .elsewhen(io.r_enable===1.B && io.stall >= 0.U && io.vec_en===1.B) {
         for (i <- 0 until 4) {
             rdata(i) := memory.read(addr32(i))

@@ -5,6 +5,8 @@ class vec_csr extends Module {
     val io = IO(new Bundle{
         val vsew = Output(UInt(10.W))
         val vlmul = Output(UInt(10.W))
+        val vlmul_count = Output(UInt(10.W))
+        val mask = Output(Bool())
         val instr = Input(UInt(32.W))
         //val rs2 = Input(UInt(8.W))
     })
@@ -37,76 +39,35 @@ class vec_csr extends Module {
     // .elsewhen (opcode==="b1010111".U && io.rs2===1.B && io.rs2(30)===0.B){
     //     vtype := Cat(io.rs2(8),"b00000000000000000000000".U,io.rs2(7,0))  
     // }
-    io.vlmul := vtype(2,0)
+    // io.vlmul := vtype(2,0)
     io.vsew := vtype(5,3)
-    // io.mask := vtype(6)
-    // io.tail := vtype(7)
+    io.mask := vtype(7)
+    // io.tail := vtype(6)
     // io.vill := vtype(31)
+
+    // working on  only one vector 
+    when (vtype(2,0)==="b000".U){
+        io.vlmul := 0.U
+        io.vlmul_count := 0.U
+    }
+    // working on  only two vector continously
+    .elsewhen (vtype(2,0)==="b001".U){
+        io.vlmul := 1.U
+        io.vlmul_count := 2.U
+    }
+    // working on  only four vector continously
+    .elsewhen (vtype(2,0)==="b010".U){
+        io.vlmul := 2.U
+        io.vlmul_count := 4.U
+    }
+    // working on  only eight vector continously
+    .elsewhen (vtype(2,0)==="b011".U){
+        io.vlmul := 3.U
+        io.vlmul_count := 8.U
+    }
+    .otherwise{
+        io.vlmul := 0.U
+        io.vlmul_count := 0.U
+    }
     
 }
-
-
-
-
-
-
-
-
-
-// //vlsu module
-// package riscv
-// import chisel3 . _
-// import chisel3 . util . _
-// class vlsu extends Module {
-//     val io = IO(new Bundle{
-//         val vlmul = Input(UInt(3.W))
-//         val vsew = Input(UInt(3.W))
-        
-//         val vlmax = Output(UInt(32.W))
-//     })
-//     val valmax = 0.U(32.W)
-//     when (io.vlmul==="b011".U && io.vsew==="b000".U){
-//         valmax :=128.U
-//     }
-//     .elsewhen ((io.vlmul==="b010".U  && io.vsew==="b000".U) || (io.vlmul==="b011".U && io.vsew==="b001".U))
-//     {
-//         valmax := 64.U
-//     }
-//     .elsewhen ((io.vlmul==="b001".U && io.vsew==="b000".U) || (io.vlmul==="b010".U && io.vsew==="b001".U) || 
-//     (io.vlmul==="b011".U && io.vsew==="b010".U))
-//     {
-//         valmax := 32.U
-//     }
-
-//     .elsewhen ((io.vlmul==="b000".U && io.vsew==="b000".U) || (io.vlmul==="b001".U && io.vsew==="b001".U) || 
-//     (io.vlmul==="b010".U && io.vsew==="b010".U) || (io.vlmul==="b011".U && io.vsew==="b011".U))
-//     {
-//         valmax := 16.U
-//     }
-
-//     .elsewhen ((io.vlmul==="b000".U && io.vsew==="b001".U) || (io.vlmul==="b001".U && io.vsew==="b010".U) || 
-//     (io.vlmul==="b010".U && io.vsew==="b011".U) || (io.vlmul==="b111".U && io.vsew==="b000".U))
-//     {
-//         valmax := 8.U
-//     }
-
-//     .elsewhen ((io.vlmul==="b000".U && io.vsew==="b010".U)  || (io.vlmul==="b001".U && io.vsew==="b011".U)  ||  
-//     (io.vlmul==="b111".U && io.vsew==="b001".U) || (io.vlmul==="b110".U && io.vsew==="b000".U))
-//     {
-//         valmax := 4.U
-//     }
-//     .elsewhen ((io.vlmul==="b000".U && io.vsew==="b011".U) || (io.vlmul==="b111".U && io.vsew==="b010".U) || 
-//     (io.vlmul==="b110".U && io.vsew==="b001".U) || (io.vlmul==="b101".U && io.vsew==="b000".U))
-//     {
-//         valmax := 2.U
-//     }
-//     .elsewhen ((io.vlmul==="b111".U && io.vsew==="b011".U) || (io.vlmul==="b110".U && io.vsew==="b010".U) ||
-//     (io.vlmul==="b101".U && io.vsew==="b001".U))
-//     {
-//         valmax := 1.U
-//     }
-//     .otherwise{
-//         0.U
-//     }
-// io.vlmax:=valmax
-// }
