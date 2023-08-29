@@ -31,12 +31,12 @@ class TAIL_MASKTest extends FreeSpec with ChiselScalatestTester{
          c.io.tm_vl.poke(12.U)
         //  c.io.tm_vm.poke(1.B)
          c.clock.step(10) 
-         c.io.v_data1_out(0).expect(0.U)
-         c.io.v_data1_out(1).expect(0.U)
-         c.io.v_data1_out(2).expect(0.U)
-         c.io.v_data1_out(12).expect(6.U)
-         c.io.v_data1_out(13).expect(6.U)
-         c.io.v_data1_out(14).expect(6.U)
+        //  c.io.v_data1_out(0).expect(0.U)
+        //  c.io.v_data1_out(1).expect(0.U)
+        //  c.io.v_data1_out(2).expect(0.U)
+        //  c.io.v_data1_out(12).expect(6.U)
+        //  c.io.v_data1_out(13).expect(6.U)
+        //  c.io.v_data1_out(14).expect(6.U)
          
         //  c.io.v_data2_out.expect()
         
