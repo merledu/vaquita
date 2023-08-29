@@ -50,97 +50,23 @@ class ALUIO extends Bundle with Config {
 class ALU_ extends Module with Config {
     val io = IO(new ALUIO)
 
-val sew_8_a = VecInit(Seq.fill(16)(0.U(8.W)))
-    val sew_16_a = VecInit(Seq.fill(8)(0.U(16.W)))
-    val sew_32_a = VecInit(Seq.fill(4)(0.U(32.W)))
-    val sew_64_a = VecInit(Seq.fill(2)(0.U(64.W)))
+    val sew_8_a = VecInit((0 until 16).map(i => io.vs1(8*i + 7, 8*i)))
+    val sew_8_b = VecInit((0 until 16).map(i => io.vs2(8*i + 7, 8*i)))
 
-    val sew_8_b = VecInit(Seq.fill(16)(0.U(8.W)))
-    val sew_16_b = VecInit(Seq.fill(8)(0.U(16.W)))
-    val sew_32_b = VecInit(Seq.fill(4)(0.U(32.W)))
-    val sew_64_b = VecInit(Seq.fill(2)(0.U(64.W)))
+    val sew_16_a = VecInit((0 until 8).map(i => io.vs1(16*i + 15, 16*i)))
+    val sew_16_b = VecInit((0 until 8).map(i => io.vs2(16*i + 15, 16*i)))
 
+    val sew_32_a = VecInit((0 until 4).map(i => io.vs1(32*i + 31, 32*i)))
+    val sew_32_b = VecInit((0 until 4).map(i => io.vs2(32*i + 31, 32*i)))
+
+    val sew_64_a = VecInit((0 until 2).map(i => io.vs1(64*i + 63, 64*i)))
+    val sew_64_b = VecInit((0 until 2).map(i => io.vs2(64*i + 63, 64*i)))
 
     val out8 = VecInit(Seq.fill(16)(0.U(8.W)))
     val out16 = VecInit(Seq.fill(8)(0.U(16.W)))
     val out32 = VecInit(Seq.fill(4)(0.U(32.W)))
     val out64 = VecInit(Seq.fill(2)(0.U(64.W)))
 
-    // define wires input a when sew = 8
-    sew_8_a(0) := io.vs1(7,0)
-    sew_8_a(1) := io.vs1(15,8)
-    sew_8_a(2) := io.vs1(23,16)
-    sew_8_a(3) := io.vs1(31,24)
-    sew_8_a(4) := io.vs1(39,32)
-    sew_8_a(5) := io.vs1(47,40)
-    sew_8_a(6) := io.vs1(55,48)
-    sew_8_a(7) := io.vs1(63,56)
-    sew_8_a(8) := io.vs1(71,64)
-    sew_8_a(9) := io.vs1(79,72)
-    sew_8_a(10) := io.vs1(87,80)
-    sew_8_a(11) := io.vs1(95,88)
-    sew_8_a(12) := io.vs1(103,96)
-    sew_8_a(13) := io.vs1(111,104)
-    sew_8_a(14) := io.vs1(119,112)
-    sew_8_a(15) := io.vs1(127,120)
-
-    // define wires input b when sew = 8
-    sew_8_b(0) := io.vs2(7,0)
-    sew_8_b(1) := io.vs2(15,8)
-    sew_8_b(2) := io.vs2(23,16)
-    sew_8_b(3) := io.vs2(31,24)
-    sew_8_b(4) := io.vs2(39,32)
-    sew_8_b(5) := io.vs2(47,40)
-    sew_8_b(6) := io.vs2(55,48)
-    sew_8_b(7) := io.vs2(63,56)
-    sew_8_b(8) := io.vs2(71,64)
-    sew_8_b(9) := io.vs2(79,72)
-    sew_8_b(10) := io.vs2(87,80)
-    sew_8_b(11) := io.vs2(95,88)
-    sew_8_b(12) := io.vs2(103,96)
-    sew_8_b(13) := io.vs2(111,104)
-    sew_8_b(14) := io.vs2(119,112)
-    sew_8_b(15) := io.vs2(127,120)
-
-    //define wires input a when sew = 16
-    sew_16_a(0) := io.vs1(15,0)
-    sew_16_a(1) := io.vs1(31,16)
-    sew_16_a(2) := io.vs1(47,32)
-    sew_16_a(3) := io.vs1(63,48)
-    sew_16_a(4) := io.vs1(79,64)
-    sew_16_a(5) := io.vs1(95,80)
-    sew_16_a(6) := io.vs1(111,96)
-    sew_16_a(7) := io.vs1(127,112)
-
-    //define wires input b when sew = 16
-    sew_16_b(0) := io.vs2(15,0)
-    sew_16_b(1) := io.vs2(31,16)
-    sew_16_b(2) := io.vs2(47,32)
-    sew_16_b(3) := io.vs2(63,48)
-    sew_16_b(4) := io.vs2(79,64)
-    sew_16_b(5) := io.vs2(95,80)
-    sew_16_b(6) := io.vs2(111,96)
-    sew_16_b(7) := io.vs2(127,112)
-
-    //define wires input a when sew = 32
-    sew_32_a(0) := io.vs1(31,0)
-    sew_32_a(1) := io.vs1(63,32)
-    sew_32_a(2) := io.vs1(95,64)
-    sew_32_a(3) := io.vs1(127,96)
-
-    //define wires input b when sew = 32
-    sew_32_b(0) := io.vs2(31,0)
-    sew_32_b(1) := io.vs2(63,32)
-    sew_32_b(2) := io.vs2(95,64)
-    sew_32_b(3) := io.vs2(127,96)
-
-    //define wires input a when sew = 64
-    sew_64_a(0) := io.vs1(63,0)
-    sew_64_a(1) := io.vs1(127,64)
-
-    //define wires input b when sew = 64
-    sew_64_b(0) := io.vs2(63,0)
-    sew_64_b(1) := io.vs2(127,64)
 
     io.v_output := 0.U
 
@@ -170,7 +96,7 @@ val sew_8_a = VecInit(Seq.fill(16)(0.U(8.W)))
 		io.output := io.in_A ^ io.in_B
 	}.elsewhen(io.aluc === ALU_SRL || io.aluc === ALU_SRLI ){							
 			
-		val shift = io.in_A.asUInt >> (io.in_B(4,0)).asUInt
+	val shift = io.in_A.asUInt >> (io.in_B(4,0)).asUInt
 		io.output := shift.asSInt
 	}.elsewhen(io.aluc === ALU_OR || io.aluc === ALU_ORI ){							
 		io.output := io.in_A | io.in_B
