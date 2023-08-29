@@ -38,6 +38,7 @@ class top_file extends Module {
     control_unit_module.io.rs1 := instr_module.io.r_data(19,15)
     control_unit_module.io.rd := instr_module.io.r_data(11,7)
     control_unit_module.io.fn3 := instr_module.io.r_data(14,12)
+    control_unit_module.io.lmul := vector_file_module.io.lmul
 
     //vector csr module inputs
     vec_csr_module.io.instr := instr_module.io.r_data
