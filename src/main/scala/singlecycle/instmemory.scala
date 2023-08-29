@@ -12,6 +12,6 @@ class InstMem extends Module {
 
 val imemm = Mem ( 1024 , UInt ( 32 . W ) )
 
-loadMemoryFromFile (imemm,"/home/hamna/Arsh-SingleCycleCore/src/main/scala/singlecycle/abc.txt")
+loadMemoryFromFile (imemm,"/home/maira/rvv-core/src/main/scala/singlecycle/abc.txt")
 io.inst := imemm.read(io.addr)
 }

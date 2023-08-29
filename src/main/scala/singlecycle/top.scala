@@ -8,6 +8,7 @@ class Top extends Module{
          val addr = Output ( UInt ( 10 . W ) )
 		 val test1 = Output (UInt(5.W))
 		 val test2 = Output (UInt(5.W))
+		  val v_type = Output(SInt(32.W))
     //val inst = Output ( UInt ( 32 . W ) )
     })
 // var temp = 0.U
@@ -54,38 +55,49 @@ ALUcMod.io.func7 := instmemMod.io.inst(30)
 ALUcMod.io.func6 := instmemMod.io.inst(31,26)
 ALUcMod.io.V_inst := 1.B
 
-//ALU
+//config
+val vtype = RegInit((0.S(32.W)))
+when (CntrlDecMod.io.vset === 1.B){
+	vtype:= ImmgenMod.io.z_imm
+}
 
+
+config.io.rs1 :=instmemMod.io.inst(19,15)
+config.io.rd := instmemMod.io.inst(11,7)
+config.io. rs1_readdata := regfileMod.io.rdata1
+config.io.zimm := instmemMod.io.inst(30,20)
+config.io.current_vl :=2.S
+
+//ALU
 //InA
 ALUMod.io.in_A := MuxCase ( 0.S , Array (
 (CntrlDecMod.io.opAsel ==="b00".U || CntrlDecMod.io.opAsel ==="b11".U) -> regfileMod.io.rdata1 ,
 (CntrlDecMod.io.opAsel ==="b01".U) -> PCMod.io.pc4.asSInt ,
 (CntrlDecMod.io.opAsel ==="b10".U) -> PCMod.io.pc.asSInt 
-)
-)
+))
 
 //InB
-when(CntrlDecMod.io.Ex_sel === "b00".U && CntrlDecMod.io.opBsel === 1.U){
+when(CntrlDecMod.io.Ex_sel === "b0000".U && CntrlDecMod.io.opBsel === 1.U){
 		ALUMod.io.in_B := ImmgenMod.io.i_imm
-	}.elsewhen(CntrlDecMod.io.Ex_sel === "b01".U && CntrlDecMod.io.opBsel === 1.U){
+	}.elsewhen(CntrlDecMod.io.Ex_sel === "b0001".U && CntrlDecMod.io.opBsel === 1.U){
 		ALUMod.io.in_B := ImmgenMod.io.s_imm
-	}.elsewhen(CntrlDecMod.io.Ex_sel === "b10".U && CntrlDecMod.io.opBsel === 1.U){
+	}.elsewhen(CntrlDecMod.io.Ex_sel === "b0010".U && CntrlDecMod.io.opBsel === 1.U){
 		ALUMod.io.in_B := ImmgenMod.io.u_imm
-	}.otherwise{
+	}.elsewhen(CntrlDecMod.io.Ex_sel === "b0011".U && CntrlDecMod.io.opBsel === 1.U){
+		ALUMod.io.in_B := ImmgenMod.io.z_imm
+	}.elsewhen(CntrlDecMod.io.Ex_sel === "b0100".U && CntrlDecMod.io.opBsel === 1.U){
 		ALUMod.io.in_B := ImmgenMod.io.addi_imm
+	}.otherwise{
+		ALUMod.io.in_B := regfileMod.io.rdata2
 	}
-
 ALUMod.io.vs1 := vreg.io.vs1_data.asUInt
 ALUMod.io.vs2 := vreg.io.vs2_data.asUInt
 ALUMod.io.aluc := ALUcMod.io.aluc
-ALUMod.io.sew := "b010".U
+ALUMod.io.sew := vtype(5,3)
+// ALUMod.io.sew := "b010".U
 ALUMod.io.v_ins := CntrlDecMod.io.v_ins
 
-        config.io.rs1 :=instmemMod.io.inst(19,15)
-config.io.rd := instmemMod.io.inst(11,7)
-config.io. rs1_readdata := regfileMod.io.rdata1
-config.io.zimm := instmemMod.io.inst(30,20)
-config.io.current_vl :=2.S
+
 
 
 
@@ -152,5 +164,6 @@ vreg.io.vd_data := ALUMod.io.v_output.asSInt
 io.out := 0.U
 io.test1 := instmemMod.io.inst(19,15)
 io.test2 := instmemMod.io.inst(11,7)
+io.v_type := vtype
 
 }

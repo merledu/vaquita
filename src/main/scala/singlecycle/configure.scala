@@ -10,13 +10,15 @@ class configure extends Module {
     val rd= Input(UInt(5.W))
     val rs1_readdata =Input(SInt(32.W))
     val current_vl =Input(SInt(32.W))
+
     val sew = Output(UInt(3.W))
     val lmul=Output(UInt(3.W))
     val vl = Output(SInt(32.W))
     val rd_out = Output(UInt(5.W))
     val avl_o = Output(SInt(32.W))
     val valmax_o = Output(SInt(32.W))
-    // val avl = Output(UInt(32.W))
+    val zimm_o =Output(UInt(32.W))
+
     })
 
     val vlmul = io.zimm(2,0)
@@ -122,4 +124,5 @@ io.valmax_o := valmax
 io.avl_o := avl
 io.sew:=vsew
 io.lmul:=vlmul
+io.zimm_o := io.zimm
 }

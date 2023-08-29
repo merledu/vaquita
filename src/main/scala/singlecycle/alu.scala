@@ -26,6 +26,7 @@ object ALUOP1 {
     val ALU_COPY_A = "b000011111".U  //JAL
 	val V_ADDI = "b000000011".U
 	val V_ADD = "b000000000".U
+  
 	}
 
 trait Config{
@@ -231,8 +232,7 @@ val sew_8_a = VecInit(Seq.fill(16)(0.U(8.W)))
 	  .elsewhen (io.sew === "b001".U && io.aluc === V_ADDI){
 		val imm = io.in_B(15,0).asUInt
 		for (i <- 0 until 8) {
-            out16(i) := sew_16_a(i) + sew_16_b(i)
-        }
+            out16(i) := sew_16_a(i) + imm       }
 		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0))
 	  }
 	}
