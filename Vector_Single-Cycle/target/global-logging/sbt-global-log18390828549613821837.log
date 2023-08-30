@@ -1,0 +1,20 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.TASK_MASKTest, Some(76db3618-e27f-47a5-b40c-2335597463e5), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:54:21: not found: value v_data1i[0m
+[0m[[0m[31merror[0m] [0m[0m    prestartIndices(v_data1i) := io.v_data1(i)[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:57:24: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0m required: Int[0m
+[0m[[0m[31merror[0m] [0m[0mfor (i <- vstart to io.tm_vl) {[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:61:20: value to is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mfor (i <- io.tm_vl to 16) {                                     [0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed Aug 17, 2023, 1:10:22 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m

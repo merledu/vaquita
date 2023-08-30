@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.TAIL_MASKTest, Some(7d9ba7eb-a6eb-4aae-b67c-ed98db65f0a8), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:53:26: value U is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mfor (i <- 0 until vstart.U) {[0m
+[0m[[0m[31merror[0m] [0m[0m                         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:57:18: value U is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mfor (i <- vstart.U until io.tm_vl) {[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:61:20: value until is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mfor (i <- io.tm_vl until 16.U) {                                     [0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed Aug 17, 2023, 2:34:58 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

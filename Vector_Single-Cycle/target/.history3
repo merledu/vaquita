@@ -31,3 +31,46 @@
 1691509250045:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
 1691510021382:testOnly Vpractice.VLMAXTest
 1691510321080:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
+1691747206389:testOnly Vpractice.VECTOR_REGISTERTest
+1691759917736:testOnly Vpractice.CONTROLTest
+1691764444018:testOnly Vpractice.ALUCONTROLTest
+1691764526502:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
+1691772111360:testOnly Vpractice.ALUCONTROLTest
+1691774129070:testOnly Vpractice.ALUTest
+1692003550168:testOnly Vpractice.VECTOR_REGISTERTest
+1692114921287:testOnly Vpractice.SCALAR_REGISTERTest -- -DwriteVcd=1
+1692116131121:testOnly Vpractice.VECTOR_REGISTERTest -- -DwriteVcd=1
+1692175666152:testOnly Vpractice.TASK_MASKTest
+1692264706223:testOnly Vpractice.VECTOR_REGISTERTest -- -DwriteVcd=1
+1692264742390:testOnly Vpractice.TASK_MASKTest
+1692264844410:testOnly Vpractice.TAIL_MASKTest
+1692287087971:testOnly Vpractice.TAIL_MASKTest -- -DwriteVcd=1
+1692294070577:testOnly Vpractice.TAIL_MASKTest
+1692337458933:testOnly Vpractice.TAIL_MASKTest -- -DwriteVcd=1
+1692650269379:testOnly Vpractice.TAIL_MASKTest
+1692650358866:testOnly Vpractice.VECTOR_REGISTERTest
+1692650620959:testOnly Vpractice.TAIL_MASKTest
+1692652105559:testOnly Vpractice.IMMEDIATETest
+1692721366569:testOnly Vpractice.ALUTest
+1692726873029:testOnly Vpractice.TAIL_MASKTest
+1692777181163:testOnly Vpractice.ALUTest
+1692786602316:testOnly Vpractice.ALUTest -- -DwriteVcd=1
+1692856789197:testOnly Vpractice.VECTOR_REGISTERTest
+1692856896145:testOnly Vpractice.VECTOR_REGISTERTest -- -DwriteVcd=1
+1692859545541:testOnly Vpractice.ALUTest
+1692874907554:testOnly Vpractice.ALUTest -- -DwriteVcd=1
+1692886145462:testOnly Vpractice.ALUTest
+1692891699250:testOnly Vpractice.ALUTest -- -DwriteVced=1
+1692891708622:testOnly Vpractice.ALUTest -- -DwriteVcd=1
+1692952320868:\\
+1692952326325:testOnly Vpractice.ALUTest -- -DwriteVcd=1
+1692985217676:testOnly Vpractice.CONTROLTest
+1692986195869:testOnly Vpractice.V_CSRTest
+1692988307887:testOnly Vpractice.RISC5Test
+1692989070012:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
+1692992785251:testOnly Vpractice.V_CSRTest
+1692993170256:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
+1693158153352:testOnly Vpractice.ALUTest -- -DwriteVcd=1
+1693166754411:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
+1693330247140:testOnly Vpractice.ALUTest -- -DwriteVcd=1
+1693330469993:testOnly Vpractice.RISC5Test -- -DwriteVcd=1

@@ -9,14 +9,11 @@ class V_CSRTest extends FreeSpec with ChiselScalatestTester{
        test(new V_Csr ()){c =>
          c.io.Vtype_inst.poke("b00001010111".U)
          c.io.vl_writeback.poke(0.U)
-         // c.io.vl.poke(2.U)
+         c.io.csr_regWrite.poke(1.B)
          c.clock.step(5) 
          c.io.vl_out.expect(0.U)
+         // c.io.vtype_out.expect
 
    }
 }      
 }
-
-
-// 0003f357
-// c100ffd7

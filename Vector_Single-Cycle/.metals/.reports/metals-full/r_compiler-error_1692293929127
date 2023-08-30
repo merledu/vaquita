@@ -1,0 +1,75 @@
+java.lang.IndexOutOfBoundsException: 0
+occurred in the presentation compiler.
+
+action parameters:
+offset: 1033
+uri: file://<WORKSPACE>/src/test/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASKTest.scala
+text:
+package Vpractice
+
+import chisel3._
+import org.scalatest.FreeSpec
+import chiseltest._
+import chiseltest.experimental.TestOptionBuilder._
+import chiseltest.internal.VerilatorBackendAnnotation
+import scala.util.Random
+
+class TAIL_MASKTest extends FreeSpec with ChiselScalatestTester{
+   "TAIL_MASKTest test" in{
+       test(new Tail_Mask()){c =>
+         c.io.v_data1(0).poke(5.U)
+         c.io.v_data1(1).poke(5.U)
+         c.io.v_data1(2).poke(5.U)
+         c.io.v_data1(3).poke(5.U)
+         c.io.v_data1(4).poke(5.U)
+         c.io.v_data1(5).poke(5.U)
+         c.io.v_data1(6).poke(5.U)
+         c.io.v_data1(7).poke(5.U)
+         c.io.v_data1(8).poke(5.U)
+         c.io.v_data1(9).poke(5.U)
+         c.io.v_data1(10).poke(5.U)
+         c.io.v_data1(11).poke(5.U)
+         c.io.v_data1(12).poke(5.U)
+         c.io.v_data1(13).poke(5.U)
+         c.io.v_data1(14).poke(5.U)
+         c.io.v_data1(15).poke(5.U)
+        //  c.io.v_data2.poke()
+         c.io.tm_vl.poke(10.U)
+         c.io.tm_vlmax.poke(16.U)
+         c.io.tm_vta.poke(@@)
+        //  c.io.tm_vm.poke(1.B)
+         c.clock.step(10) 
+        //  c.io.v_data1_out(0).expect(0.U)
+        //  c.io.v_data1_out(1).expect(0.U)
+        //  c.io.v_data1_out(2).expect(0.U)
+        //  c.io.v_data1_out(3).expect(0.U)
+         c.io.v_data1_out(4).expect(5.U)
+         c.io.v_data1_out(5).expect(5.U)
+         c.io.v_data1_out(6).expect(5.U)
+         c.io.v_data1_out(7).expect(5.U)
+         c.io.v_data1_out(8).expect(5.U)
+         c.io.v_data1_out(9).expect(5.U)
+        //  c.io.v_data1_out(10).expect(0.U)
+        //  c.io.v_data1_out(11).expect(0.U)
+        //  c.io.v_data1_out(12).expect(0.U)
+        //  c.io.v_data1_out(13).expect(0.U)
+        //  c.io.v_data1_out(14).expect(0.U)
+        //  c.io.v_data1_out(15).expect(0.U)
+        //  c.io.v_data2_out.expect()
+        
+       }
+    }
+}       
+
+
+error stacktrace:
+scala.collection.LinearSeqOps.apply(LinearSeq.scala:131)
+	scala.collection.LinearSeqOps.apply$(LinearSeq.scala:128)
+	scala.collection.immutable.List.apply(List.scala:79)
+	dotty.tools.dotc.util.Signatures$.countParams(Signatures.scala:501)
+	dotty.tools.dotc.util.Signatures$.applyCallInfo(Signatures.scala:186)
+	dotty.tools.dotc.util.Signatures$.computeSignatureHelp(Signatures.scala:94)
+	dotty.tools.dotc.util.Signatures$.signatureHelp(Signatures.scala:63)
+	scala.meta.internal.pc.MetalsSignatures$.signatures(MetalsSignatures.scala:17)
+	scala.meta.internal.pc.SignatureHelpProvider$.signatureHelp(SignatureHelpProvider.scala:51)
+	scala.meta.internal.pc.ScalaPresentationCompiler.signatureHelp$$anonfun$1(ScalaPresentationCompiler.scala:371)

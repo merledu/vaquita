@@ -11,7 +11,8 @@
       "~Alu_Control|Alu_Control>io_aluOp",
       "~Alu_Control|Alu_Control>io_func3",
       "~Alu_Control|Alu_Control>io_V_inst",
-      "~Alu_Control|Alu_Control>io_func7"
+      "~Alu_Control|Alu_Control>io_func7",
+      "~Alu_Control|Alu_Control>io_func6"
     ]
   },
   {

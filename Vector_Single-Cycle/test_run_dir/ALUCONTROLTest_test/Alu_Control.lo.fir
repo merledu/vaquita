@@ -7,7 +7,8 @@ circuit Alu_Control :
     input io_aluOp : UInt<3>
     input io_I_inst : UInt<1>
     input io_V_inst : UInt<1>
-    output io_out : UInt<5>
+    input io_func6 : UInt<6>
+    output io_out : UInt<9>
     output io_out_V : UInt<1>
 
     node _T = eq(io_I_inst, UInt<1>("h1")) @[ALUCONTROL.scala 18:17]
@@ -17,8 +18,9 @@ circuit Alu_Control :
     node _T_2 = eq(io_aluOp, UInt<1>("h1")) @[ALUCONTROL.scala 25:26]
     node _io_out_T_1 = cat(UInt<1>("h0"), io_func3) @[Cat.scala 30:58]
     node _T_3 = eq(io_aluOp, UInt<2>("h2")) @[ALUCONTROL.scala 30:26]
-    node io_out_hi_1 = cat(UInt<1>("h1"), UInt<1>("h0")) @[Cat.scala 30:58]
-    node _io_out_T_2 = cat(io_out_hi_1, io_func3) @[Cat.scala 30:58]
+    node io_out_lo = cat(UInt<1>("h0"), io_func3) @[Cat.scala 30:58]
+    node io_out_hi_1 = cat(UInt<1>("h0"), UInt<1>("h1")) @[Cat.scala 30:58]
+    node _io_out_T_2 = cat(io_out_hi_1, io_out_lo) @[Cat.scala 30:58]
     node _T_4 = eq(io_aluOp, UInt<2>("h3")) @[ALUCONTROL.scala 35:26]
     node _T_5 = eq(io_aluOp, UInt<3>("h4")) @[ALUCONTROL.scala 40:26]
     node _T_6 = eq(io_aluOp, UInt<3>("h5")) @[ALUCONTROL.scala 45:26]
@@ -39,11 +41,15 @@ circuit Alu_Control :
     node _T_9 = eq(io_V_inst, UInt<1>("h1")) @[ALUCONTROL.scala 64:23]
     node _T_10 = eq(io_aluOp, UInt<1>("h0")) @[ALUCONTROL.scala 66:20]
     node _io_out_T_3 = cat(UInt<1>("h0"), io_func3) @[Cat.scala 30:58]
-    node _GEN_12 = mux(_T_10, _io_out_T_3, UInt<1>("h0")) @[ALUCONTROL.scala 66:29 ALUCONTROL.scala 67:16 ALUCONTROL.scala 70:16]
-    node _GEN_13 = mux(_T_10, UInt<1>("h1"), UInt<1>("h0")) @[ALUCONTROL.scala 66:29 ALUCONTROL.scala 68:18 ALUCONTROL.scala 71:18]
-    node _GEN_14 = mux(_T_9, _GEN_12, UInt<1>("h0")) @[ALUCONTROL.scala 64:32 ALUCONTROL.scala 75:12]
-    node _GEN_15 = mux(_T_9, _GEN_13, UInt<1>("h0")) @[ALUCONTROL.scala 64:32 ALUCONTROL.scala 76:14]
-    node _GEN_16 = mux(_T, _GEN_10, _GEN_14) @[ALUCONTROL.scala 18:26]
-    node _GEN_17 = mux(_T, _GEN_11, _GEN_15) @[ALUCONTROL.scala 18:26]
-    io_out <= _GEN_16
-    io_out_V <= _GEN_17
+    node _T_11 = eq(io_aluOp, UInt<1>("h1")) @[ALUCONTROL.scala 71:26]
+    node _io_out_T_4 = cat(io_func6, io_func3) @[Cat.scala 30:58]
+    node _GEN_12 = mux(_T_11, _io_out_T_4, UInt<1>("h0")) @[ALUCONTROL.scala 71:35 ALUCONTROL.scala 72:16 ALUCONTROL.scala 76:16]
+    node _GEN_13 = mux(_T_11, UInt<1>("h1"), UInt<1>("h0")) @[ALUCONTROL.scala 71:35 ALUCONTROL.scala 73:18 ALUCONTROL.scala 77:18]
+    node _GEN_14 = mux(_T_10, _io_out_T_3, _GEN_12) @[ALUCONTROL.scala 66:29 ALUCONTROL.scala 67:16]
+    node _GEN_15 = mux(_T_10, UInt<1>("h1"), _GEN_13) @[ALUCONTROL.scala 66:29 ALUCONTROL.scala 68:18]
+    node _GEN_16 = mux(_T_9, _GEN_14, UInt<1>("h0")) @[ALUCONTROL.scala 64:32 ALUCONTROL.scala 81:12]
+    node _GEN_17 = mux(_T_9, _GEN_15, UInt<1>("h0")) @[ALUCONTROL.scala 64:32 ALUCONTROL.scala 82:14]
+    node _GEN_18 = mux(_T, _GEN_10, _GEN_16) @[ALUCONTROL.scala 18:26]
+    node _GEN_19 = mux(_T, _GEN_11, _GEN_17) @[ALUCONTROL.scala 18:26]
+    io_out <= _GEN_18
+    io_out_V <= _GEN_19

@@ -8,6 +8,8 @@ class Control extends Module{
         val opcode = Input( UInt(7.W) )
         val rs1_no = Input( UInt (5.W ) )             //vsetvli
         val rd_no = Input ( UInt (5.W ) )             //vsetvli
+        val fun3 = Input ( UInt (3.W ) )
+        val fun6 = Input ( UInt (6.W ) )
 
         val mem_write = Output( Bool() ) 
         val branch = Output( Bool() ) 
@@ -20,8 +22,13 @@ class Control extends Module{
         val extend = Output( UInt(2.W) ) 
         val next_pc_sel = Output( UInt(2.W) ) 
         val avl_ope = Output( UInt(2.W) )              //vsetvli
-        val is_I = Output ( Bool () )                   //vsetvli
-        val is_V = Output ( Bool() )                    //vsetvli
+        val is_I = Output ( Bool () )                  //vsetvli
+        val is_V = Output ( Bool() )                   //vsetvli
+        val csr_reg_write = Output ( Bool() )
+        val V_opeA = Output( UInt(2.W) )               //opivi
+        val V_opeB = Output( UInt(2.W) )               //opivi
+        val V_imm = Output( UInt(2.W) )                //opivi
+        val V_men_to_reg = Output( Bool())             //opivi
  
 })
 
@@ -41,6 +48,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U                             //vsetvli
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // I type
 }.elsewhen ( io.opcode === 19.U ) {
     io.mem_write := 0.B
@@ -56,6 +69,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // S type
 }.elsewhen ( io.opcode === 35.U ) {
     io.mem_write := 1.B
@@ -71,6 +90,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // Load
 }.elsewhen ( io.opcode === 3.U ) {
     io.mem_write := 0.B
@@ -86,6 +111,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // SB type
 }.elsewhen ( io.opcode === 99.U ) {
     io.mem_write := 0.B
@@ -101,6 +132,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // UJ type
 }.elsewhen ( io.opcode === 111.U ) {
     io.mem_write := 0.B
@@ -116,6 +153,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // Jalr 
 }.elsewhen ( io.opcode === 103.U ) {
     io.mem_write := 0.B
@@ -131,6 +174,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // U type (lui)   
 }.elsewhen ( io.opcode === 55.U ) {
     io.mem_write := 0.B
@@ -146,6 +195,12 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 // U type (auipc)   
 }.elsewhen ( io.opcode === 23.U ) {
     io.mem_write := 0.B
@@ -161,20 +216,31 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 //vsetvli
-}.elsewhen ( io.opcode === 87.U ) {
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 7.U) {
     io.mem_write := 0.B
     io.branch := 0.B
     io.mem_read := 0.B
     io.reg_write := 1.B
     io.men_to_reg := 0.B
-    io.alu_operation := 8.U
+    io.alu_operation := 0.U
     io.operand_A := 4.U                   
     io.operand_B := 2.U                   
     io.extend := 0.U
     io.next_pc_sel := 0.U
     io.is_I := 0.B                                //vsetvli
     io.is_V := 1.B                                //vsetvli
+    io.csr_reg_write := 1.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
     
     when (io.rs1_no =/= 0.U) {
         io.avl_ope := 0.U
@@ -185,7 +251,68 @@ when ( io.opcode === 51.U ) {
     }.otherwise {
         io.avl_ope := 0.U
     }
+//Opivi
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 3.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 1.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 1.U
+    io.V_men_to_reg := 0.B
 
+//Opivv
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 2.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.V_opeA := 1.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivx (move instruction(vmv.v.x))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 23.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 3.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
 
 }.otherwise {
     io.mem_write := 0.B
@@ -201,5 +328,10 @@ when ( io.opcode === 51.U ) {
     io.avl_ope := 0.U
     io.is_I := 0.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
+    io.csr_reg_write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
 }
 }

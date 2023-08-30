@@ -11,7 +11,23 @@
       "~ALU_1|ALU_1>io_in_V",
       "~ALU_1|ALU_1>io_alu_Op",
       "~ALU_1|ALU_1>io_in_A",
-      "~ALU_1|ALU_1>io_in_B"
+      "~ALU_1|ALU_1>io_in_B",
+      "~ALU_1|ALU_1>io_alu_lmul"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~ALU_1|ALU_1>io_V_out",
+    "sources":[
+      "~ALU_1|ALU_1>io_in_I",
+      "~ALU_1|ALU_1>io_in_V",
+      "~ALU_1|ALU_1>io_alu_Op",
+      "~ALU_1|ALU_1>io_alu_lmul",
+      "~ALU_1|ALU_1>io_alu_sew",
+      "~ALU_1|ALU_1>io_in_A",
+      "~ALU_1|ALU_1>io_V_in_B",
+      "~ALU_1|ALU_1>io_V_in_A",
+      "~ALU_1|ALU_1>io_alu_imm"
     ]
   },
   {

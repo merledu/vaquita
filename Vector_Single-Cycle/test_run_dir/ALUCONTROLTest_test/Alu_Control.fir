@@ -3,7 +3,7 @@ circuit Alu_Control :
   module Alu_Control : 
     input clock : Clock
     input reset : UInt<1>
-    output io : {flip func3 : UInt<3>, flip func7 : UInt<1>, flip aluOp : UInt<3>, flip I_inst : UInt<1>, flip V_inst : UInt<1>, out : UInt<5>, out_V : UInt<1>}
+    output io : {flip func3 : UInt<3>, flip func7 : UInt<1>, flip aluOp : UInt<3>, flip I_inst : UInt<1>, flip V_inst : UInt<1>, flip func6 : UInt<6>, out : UInt<9>, out_V : UInt<1>}
     
     node _T = eq(io.I_inst, UInt<1>("h01")) @[ALUCONTROL.scala 18:17]
     when _T : @[ALUCONTROL.scala 18:26]
@@ -24,8 +24,9 @@ circuit Alu_Control :
         else : @[ALUCONTROL.scala 30:35]
           node _T_3 = eq(io.aluOp, UInt<2>("h02")) @[ALUCONTROL.scala 30:26]
           when _T_3 : @[ALUCONTROL.scala 30:35]
-            node io_out_hi_1 = cat(UInt<1>("h01"), UInt<1>("h00")) @[Cat.scala 30:58]
-            node _io_out_T_2 = cat(io_out_hi_1, io.func3) @[Cat.scala 30:58]
+            node io_out_lo = cat(UInt<1>("h00"), io.func3) @[Cat.scala 30:58]
+            node io_out_hi_1 = cat(UInt<1>("h00"), UInt<1>("h01")) @[Cat.scala 30:58]
+            node _io_out_T_2 = cat(io_out_hi_1, io_out_lo) @[Cat.scala 30:58]
             io.out <= _io_out_T_2 @[ALUCONTROL.scala 31:16]
             io.out_V <= UInt<1>("h00") @[ALUCONTROL.scala 32:18]
             skip @[ALUCONTROL.scala 30:35]
@@ -73,13 +74,20 @@ circuit Alu_Control :
           io.out <= _io_out_T_3 @[ALUCONTROL.scala 67:16]
           io.out_V <= UInt<1>("h01") @[ALUCONTROL.scala 68:18]
           skip @[ALUCONTROL.scala 66:29]
-        else : @[ALUCONTROL.scala 69:17]
-          io.out <= UInt<1>("h00") @[ALUCONTROL.scala 70:16]
-          io.out_V <= UInt<1>("h00") @[ALUCONTROL.scala 71:18]
-          skip @[ALUCONTROL.scala 69:17]
+        else : @[ALUCONTROL.scala 71:35]
+          node _T_11 = eq(io.aluOp, UInt<1>("h01")) @[ALUCONTROL.scala 71:26]
+          when _T_11 : @[ALUCONTROL.scala 71:35]
+            node _io_out_T_4 = cat(io.func6, io.func3) @[Cat.scala 30:58]
+            io.out <= _io_out_T_4 @[ALUCONTROL.scala 72:16]
+            io.out_V <= UInt<1>("h01") @[ALUCONTROL.scala 73:18]
+            skip @[ALUCONTROL.scala 71:35]
+          else : @[ALUCONTROL.scala 75:17]
+            io.out <= UInt<1>("h00") @[ALUCONTROL.scala 76:16]
+            io.out_V <= UInt<1>("h00") @[ALUCONTROL.scala 77:18]
+            skip @[ALUCONTROL.scala 75:17]
         skip @[ALUCONTROL.scala 64:32]
-      else : @[ALUCONTROL.scala 74:13]
-        io.out <= UInt<1>("h00") @[ALUCONTROL.scala 75:12]
-        io.out_V <= UInt<1>("h00") @[ALUCONTROL.scala 76:14]
-        skip @[ALUCONTROL.scala 74:13]
+      else : @[ALUCONTROL.scala 80:13]
+        io.out <= UInt<1>("h00") @[ALUCONTROL.scala 81:12]
+        io.out_V <= UInt<1>("h00") @[ALUCONTROL.scala 82:14]
+        skip @[ALUCONTROL.scala 80:13]
     

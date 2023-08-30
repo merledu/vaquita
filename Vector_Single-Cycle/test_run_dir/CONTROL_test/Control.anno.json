@@ -5,16 +5,114 @@
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_mem_write",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_operand_B",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_V_opeA",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_alu_operation",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_is_V",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_V_imm",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
     "sink":"~Control|Control>io_mem_read",
     "sources":[
-      "~Control|Control>io_opcode"
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_men_to_reg",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_V_opeB",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_V_men_to_reg",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_branch",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_reg_write",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
     "sink":"~Control|Control>io_is_I",
     "sources":[
-      "~Control|Control>io_opcode"
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
+    ]
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~Control|Control>io_next_pc_sel",
+    "sources":[
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
     ]
   },
   {
@@ -22,78 +120,25 @@
     "sink":"~Control|Control>io_avl_ope",
     "sources":[
       "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3",
       "~Control|Control>io_rs1_no",
       "~Control|Control>io_rd_no"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_reg_write",
-    "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_operand_B",
-    "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
     "sink":"~Control|Control>io_operand_A",
     "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_alu_operation",
-    "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_men_to_reg",
-    "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_branch",
-    "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_is_V",
-    "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_mem_write",
-    "sources":[
-      "~Control|Control>io_opcode"
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
     ]
   },
   {
     "class":"firrtl.transforms.CombinationalPath",
     "sink":"~Control|Control>io_extend",
     "sources":[
-      "~Control|Control>io_opcode"
-    ]
-  },
-  {
-    "class":"firrtl.transforms.CombinationalPath",
-    "sink":"~Control|Control>io_next_pc_sel",
-    "sources":[
-      "~Control|Control>io_opcode"
+      "~Control|Control>io_opcode",
+      "~Control|Control>io_fun3"
     ]
   },
   {

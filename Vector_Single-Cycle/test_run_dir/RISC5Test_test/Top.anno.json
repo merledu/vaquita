@@ -8,6 +8,34 @@
     "emitter":"firrtl.LowFirrtlEmitter"
   },
   {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_vs1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_vs2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_V_reg_write"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_vd"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_V_w_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_vdata1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|V_RegFile>io_vdata2"
+  },
+  {
     "class":"firrtl.annotations.LoadMemoryAnnotation",
     "target":"Top.InstMem1.imem",
     "fileName":"/home/hafsa/Scala-Chisel-Learning-Journey/vector_input.txt",
