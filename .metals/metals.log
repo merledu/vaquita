@@ -1803,3 +1803,5 @@ WARNING: Unmatched cancel notification for request id 5052
 2023.08.30 16:31:23 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
 2023.08.30 16:31:32 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
 2023.08.30 16:31:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+2023.08.30 16:44:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+2023.08.30 16:44:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
