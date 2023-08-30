@@ -239,6 +239,23 @@ class control extends Module{
         io.is_I := 0.B
         io.avl_sel := "b00".U
         io.csr_write := 0.U
+    }.elsewhen(io.op_code === "b1010111".U && io.func3 === "b100".U){//vadd scalar
+        io.memWrite := "b0".U
+        io.branch := "b0".U
+        io.memRead := "b0".U
+        io.regWrite := "b1".U
+        io.memToReg := "b0".U
+        io.alu_Operation := "b001".U
+        io.operand_A := DontCare  
+        io.v_operand_A := "b00".U                  
+        io.operand_B := "b00".U 
+        io.v_operand_B := DontCare           
+        io.extend_Sel := "b00".U
+        io.nextPc_Sel := "b00".U 
+        io.is_V := 1.B
+        io.is_I := 0.B
+        io.avl_sel := "b00".U
+        io.csr_write := 0.U
     }.otherwise{
         io.memWrite := DontCare
         io.branch := DontCare

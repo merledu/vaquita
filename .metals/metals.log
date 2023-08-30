@@ -1805,3 +1805,42 @@ WARNING: Unmatched cancel notification for request id 5052
 2023.08.30 16:31:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
 2023.08.30 16:44:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
 2023.08.30 16:44:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+2023.08.30 16:45:51 INFO  Shutting down server
+2023.08.30 16:45:51 INFO  shutting down Metals
+2023.08.30 16:45:51 INFO  Exiting server
+2023.08.30 22:26:19 INFO  Started: Metals version 1.0.1 in folders '/home/hassan/rvv-core' for client Visual Studio Code 1.81.1.
+Aug 30, 2023 10:26:19 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Aug 30, 2023 10:26:19 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Aug 30, 2023 10:26:19 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Aug 30, 2023 10:26:20 PM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hassan/rvv-core/.metals/metals (H2 2.1)
+Aug 30, 2023 10:26:20 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.062s)
+Aug 30, 2023 10:26:20 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Aug 30, 2023 10:26:20 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.08.30 22:26:21 INFO  time: initialize in 2.65s
+2023.08.30 22:26:26 WARN  Build server is not auto-connectable.
+2023.08.30 22:26:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+2023.08.30 22:26:26 INFO  skipping build import with status 'Cancelled'
+2023.08.30 22:26:33 INFO  no build target found for /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala. Using presentation compiler with project's scala-library version: 3.3.0
+2023.08.30 22:26:36 INFO  time: code lens generation in 8.67s
+2023.08.30 22:29:56 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vlmax_cal.scala
+Aug 30, 2023 10:29:57 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 15
+2023.08.30 22:30:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:30:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:30:29 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:30:31 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:30:34 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:31:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.08.30 22:31:21 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:31:31 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:32:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.08.30 22:32:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:34:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 22:35:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala

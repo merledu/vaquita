@@ -222,7 +222,7 @@ class ALU extends Module with Config {
 	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VADDI){
 		    val imm = io.in_B(15,0).asSInt
 		    for (i <- 0 until 8) {
-                out16(i) := sew_16_b(i) + imm       }
+                out16(i) := sew_16_b(i) + imm}
 		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
 	    }
     }

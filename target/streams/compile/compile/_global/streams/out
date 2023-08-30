@@ -1,16 +1,8 @@
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:208:43: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : chisel3.UInt[0m
-[0m[[0m[31merror[0m] [0m[0m required: chisel3.SInt[0m
-[0m[[0m[31merror[0m] [0m[0m                out64(i) := sew_64_b(i) + imm[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala:242:43: overloaded method value apply with alternatives:[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: chisel3.UInt)chisel3.Bool <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: Int)chisel3.Bool <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (x: BigInt)chisel3.Bool[0m
+[0m[[0m[31merror[0m] [0m[0m cannot be applied to (Unit)[0m
+[0m[[0m[31merror[0m] [0m[0m    }elsewhen(io.op_code === "b1010111".U && io.func3 === "b100".U){//vadd scalar[0m
 [0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:219:41: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : chisel3.UInt[0m
-[0m[[0m[31merror[0m] [0m[0m required: chisel3.SInt[0m
-[0m[[0m[31merror[0m] [0m[0m                out8(i) := sew_8_b(i) + imm[0m
-[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:225:43: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : chisel3.UInt[0m
-[0m[[0m[31merror[0m] [0m[0m required: chisel3.SInt[0m
-[0m[[0m[31merror[0m] [0m[0m                out16(i) := sew_16_a(i) + imm       }[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
