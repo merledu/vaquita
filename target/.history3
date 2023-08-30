@@ -13,3 +13,8 @@
 1691650777087:git add .
 1692113948537:testOnly rvv.Topfile_Test -- -DwriteVcd=1
 1692609874226:git add .
+1692864287409:testOnly rvv.Topfile_Test -- -DwriteVcd=1
+1693293646011:clear
+1693293669137:testOnly rvv.Topfile_Test -- -DwriteVcd=1
+1693298817652:[A[B
+1693298822152:testOnly rvv.Topfile_Test -- -DwriteVcd=1

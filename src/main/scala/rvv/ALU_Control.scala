@@ -8,6 +8,7 @@ class aluControl extends Module{
         val alu_Operation = Input(UInt(3.W))
         val func3 = Input(UInt(3.W))
         val func7 = Input(UInt(7.W))
+        val func6 = Input(UInt(6.W))
         val is_I = Input(Bool())
         val is_V = Input(Bool())
         val out_V = Output(Bool())
@@ -54,7 +55,11 @@ class aluControl extends Module{
         }
     }.elsewhen(io.is_I === 0.B & io.is_V === 1.B){
         when(io.alu_Operation === "b000".U){//VSETVLI
-            io.out := Cat("b0".U, "b0000000".U, io.func3)
+            io.out := Cat("b00".U, "b0000000".U, io.func3)
+            io.out_V := 1.B
+            io.out_I := 0.B
+        }.elsewhen(io.alu_Operation === "b001".U){//Vaddi
+            io.out := Cat("b00".U, io.func6, io.func3)
             io.out_V := 1.B
             io.out_I := 0.B
         }.otherwise{

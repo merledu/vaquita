@@ -16,11 +16,47 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|vregfile>io_vs1_addr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|vregfile>io_vs2_addr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|vregfile>io_vd_addr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|vregfile>io_write_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|vregfile>io_vs1_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|vregfile>io_vs2_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top|v_csr>io_zimm"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|v_csr>io_vl_writeback"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|v_csr>io_csr_Write"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top|v_csr>io_vl_out"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|v_csr>io_v_settings"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -53,6 +89,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top|aluControl>io_func7"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|aluControl>io_func6"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -101,6 +141,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top|immdValGen>io_i_imm"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|immdValGen>io_vaddi_imm"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -169,6 +213,18 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top|control>io_avl_sel"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|control>io_csr_write"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|control>io_v_operand_A"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top|control>io_v_operand_B"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

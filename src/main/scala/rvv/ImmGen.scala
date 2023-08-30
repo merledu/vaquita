@@ -12,6 +12,7 @@ class immdValGen extends Module {
         val u_imm = Output(SInt(32.W))
         val uj_imm = Output(SInt(32.W))
         val i_imm = Output(SInt(32.W))
+        val vaddi_imm = Output(SInt(32.W))
     })
 
     val s1 = io.instr(11,7)
@@ -44,4 +45,6 @@ class immdValGen extends Module {
     val i1 = io.instr(31, 20)
     val i2 = Cat(Fill(20, i1(11)), i1)
     io.i_imm := i2.asSInt
+
+    io.vaddi_imm := Cat(Fill(27, 0.U), io.instr(19,15)).asSInt
 }
