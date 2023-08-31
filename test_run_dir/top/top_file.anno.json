@@ -190,7 +190,7 @@
   {
     "class":"firrtl.annotations.LoadMemoryAnnotation",
     "target":"top_file.instr_memory.memory",
-    "fileName":"/home/mohammad/rvv-core/src/main/scala/riscv/file.txt",
+    "fileName":"./src/main/scala/riscv/file.txt",
     "hexOrBinary":"h",
     "originalMemoryNameOpt":"memory"
   },
