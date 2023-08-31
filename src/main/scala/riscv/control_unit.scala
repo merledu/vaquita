@@ -8,6 +8,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         val rs1 = Input(UInt(5.W))
         val fn3 = Input(UInt(3.W))
         val lmul_count = Input(UInt(5.W))
+        val n_fields = Input(UInt(3.W))
 
         val mem_write =  Output(Bool())
         val branch =  Output(Bool())
@@ -226,16 +227,16 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
         
-        val reg123 = RegInit(3.U(32.W))
-        when(reg123 > 0.U && io.op_code==="b0000111".U){
+        val reg123 = RegInit(0.U(32.W))
+        when((reg123*io.n_fields) =/= reg123 && io.op_code==="b0000111".U){
             io.next_pc_selector := 4.U
-            reg123 := reg123 -1.U
+            reg123 := reg123 +1.U
             io.vec_write := off
             io.stall_true := reg123
 
         }
         .otherwise{
-            reg123 := 3.U
+            reg123 := 0.U
             io.vec_write := on
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
@@ -373,7 +374,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.operand_a := 0.U
         io.operand_b := 0.U
         io.extend_sel := 0.U
-        io.next_pc_selector :=0.U
+        io.next_pc_selector := 0.U
         io.stall_true := 0.U
         io.vector := 1.B
         io.vec_store := 0.B

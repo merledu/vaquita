@@ -13,6 +13,8 @@ class alu extends Module {
         val sew = Input(UInt(3.W))
         val vec = Input(Bool())
         val vma = Input(Bool())
+        val vec_0 = Input(UInt(32.W))
+
         val out = Output(SInt(32.W))
         val branch = Output(Bool())
         val vec_out = Output(UInt(128.W))
@@ -218,6 +220,7 @@ class alu extends Module {
         out32(1) := io.a.asUInt+4.U
         out32(2) := io.a.asUInt+8.U
         out32(3) := io.a.asUInt+12.U
+        
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
       // //vector to scalar addition

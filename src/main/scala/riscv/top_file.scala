@@ -38,6 +38,7 @@ class top_file extends Module {
     control_unit_module.io.rs1 := instr_module.io.r_data(19,15)
     control_unit_module.io.rd := instr_module.io.r_data(11,7)
     control_unit_module.io.fn3 := instr_module.io.r_data(14,12)
+    control_unit_module.io.n_fields := instr_module.io.r_data(31,29)
     control_unit_module.io.lmul_count := vec_csr_module.io.vlmul_count
 
     //vector csr module inputs
@@ -98,6 +99,7 @@ class top_file extends Module {
     alu_module.io.vma := vec_csr_module.io.mask
     alu_module.io.vec := control_unit_module.io.vector
     alu_module.io.alu := alu_control_module.io.out
+    alu_module.io.vec_0 := vector_file_module.io.vec_0
     alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,
         (1.U) -> pc_module.io.out4.asSInt,
