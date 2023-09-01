@@ -1844,3 +1844,529 @@ WARNING: Unmatched cancel notification for request id 15
 2023.08.30 22:32:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
 2023.08.30 22:34:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
 2023.08.30 22:35:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.30 23:17:43 INFO  Shutting down server
+2023.08.30 23:17:43 INFO  shutting down Metals
+2023.08.30 23:17:43 INFO  Exiting server
+2023.08.31 10:52:34 INFO  Started: Metals version 1.0.1 in folders '/home/hassan/rvv-core' for client Visual Studio Code 1.81.1.
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hassan/rvv-core/.metals/metals (H2 2.1)
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.026s)
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Aug 31, 2023 10:52:34 AM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.08.31 10:52:35 INFO  time: initialize in 1.01s
+2023.08.31 10:52:39 WARN  Build server is not auto-connectable.
+2023.08.31 10:52:39 INFO  skipping build import with status 'Cancelled'
+2023.08.31 10:52:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.08.31 10:52:44 INFO  no build target found for /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala. Using presentation compiler with project's scala-library version: 3.3.0
+2023.08.31 10:52:47 INFO  time: code lens generation in 7.86s
+2023.08.31 10:58:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ImmGen.scala
+2023.08.31 10:58:57 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+Aug 31, 2023 11:33:48 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Aug 31, 2023 11:33:58 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Aug 31, 2023 11:33:59 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Aug 31, 2023 11:34:01 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Aug 31, 2023 11:34:01 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2023.08.31 11:36:12 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:12 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:12 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:15 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:16 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:16 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:17 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:17 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:19 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:20 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:19 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:21 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:22 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:23 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:23 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:24 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:25 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:25 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:26 WARN  Could not find semantic tokens for: file:///home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:35 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:47 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:52 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:36:54 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:07 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:09 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:23 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:25 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:29 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:45 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:48 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:54 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:37:59 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:18 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:29 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:31 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 11:38:32 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:23 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:30 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:37 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:42 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:05:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:11 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:32 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:38 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:42 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:06:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:02 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:12 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 12:07:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint fallbackResponseError
+SEVERE: Internal error: java.lang.UnsupportedOperationException: tail of empty list
+java.util.concurrent.CompletionException: java.lang.UnsupportedOperationException: tail of empty list
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:332)
+	at java.base/java.util.concurrent.CompletableFuture.uniAcceptNow(CompletableFuture.java:747)
+	at java.base/java.util.concurrent.CompletableFuture.uniAcceptStage(CompletableFuture.java:735)
+	at java.base/java.util.concurrent.CompletableFuture.thenAccept(CompletableFuture.java:2182)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:279)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:190)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.UnsupportedOperationException: tail of empty list
+	at scala.collection.immutable.Nil$.tail(List.scala:664)
+	at scala.collection.immutable.Nil$.tail(List.scala:661)
+	at scala.meta.internal.metals.codeactions.CreateCompanionObjectCodeAction.$anonfun$endPosOfTree$1(CreateCompanionObjectCodeAction.scala:77)
+	at scala.Option.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.codeactions.CreateCompanionObjectCodeAction.endPosOfTree(CreateCompanionObjectCodeAction.scala:75)
+	at scala.meta.internal.metals.codeactions.CreateCompanionObjectCodeAction.$anonfun$contribute$5(CreateCompanionObjectCodeAction.scala:61)
+	at scala.Option.map(Option.scala:242)
+	at scala.meta.internal.metals.codeactions.CreateCompanionObjectCodeAction.$anonfun$contribute$4(CreateCompanionObjectCodeAction.scala:58)
+	at scala.Option$WithFilter.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.codeactions.CreateCompanionObjectCodeAction.$anonfun$contribute$2(CreateCompanionObjectCodeAction.scala:56)
+	at scala.Option.flatMap(Option.scala:283)
+	at scala.meta.internal.metals.codeactions.CreateCompanionObjectCodeAction.$anonfun$contribute$1(CreateCompanionObjectCodeAction.scala:55)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	... 3 more
+
+2023.08.31 12:07:40 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:41 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:07:46 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:08:02 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:08:08 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:08:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:08 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:12 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:25 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU_Control.scala
+2023.08.31 12:15:48 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:50 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:52 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:15:57 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:16:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:16:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:16:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:16:10 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:20:57 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:21:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:54:56 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:54:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:55:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:55:07 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:55:59 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:02 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:10 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:45 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:56:59 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:05 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:20 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:21 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:25 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:37 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:40 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:43 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:57:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:58:05 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 12:58:10 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2184
+2023.08.31 12:58:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:58:16 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:58:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:58:23 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:58:28 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vlmax_cal.scala
+2023.08.31 12:58:41 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:59:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:59:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 12:59:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2357
+2023.08.31 12:59:31 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:59:38 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vlmax_cal.scala
+2023.08.31 12:59:42 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vlmax_cal.scala
+2023.08.31 12:59:47 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 12:59:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:20 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:29 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 1:06:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2518
+2023.08.31 13:06:43 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:46 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:48 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:49 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:56 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:06:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:07:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:07:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:07:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:07:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:07:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:30 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:35 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:48 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:53 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:08:54 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:09:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:09:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:09:05 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:09:07 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:09:56 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:09:59 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:15:54 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:15:56 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:10 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:25 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:31 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 1:16:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3170
+Aug 31, 2023 1:16:35 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3171
+2023.08.31 13:16:47 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:50 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:53 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:16:56 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 1:16:56 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3271
+2023.08.31 13:16:59 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:08 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:11 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:23 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:29 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:40 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:17:41 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+Aug 31, 2023 1:17:59 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3438
+2023.08.31 13:18:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:10 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:15 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:18 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:21 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:23 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:28 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:32 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:35 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:37 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:40 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:43 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:45 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:47 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:50 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:52 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:18:57 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:08 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:16 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:21 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:42 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:19:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 13:32:03 INFO  Shutting down server
+2023.08.31 13:32:03 INFO  shutting down Metals
+2023.08.31 13:32:03 INFO  Exiting server
+2023.08.31 23:42:47 INFO  Started: Metals version 1.0.1 in folders '/home/hassan/rvv-core' for client Visual Studio Code 1.81.1.
+Aug 31, 2023 11:42:47 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Aug 31, 2023 11:42:47 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Aug 31, 2023 11:42:47 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Aug 31, 2023 11:42:47 PM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hassan/rvv-core/.metals/metals (H2 2.1)
+Aug 31, 2023 11:42:48 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.046s)
+Aug 31, 2023 11:42:48 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Aug 31, 2023 11:42:48 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.08.31 23:42:48 INFO  time: initialize in 1.4s
+2023.08.31 23:42:52 WARN  Build server is not auto-connectable.
+2023.08.31 23:42:52 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 23:42:53 INFO  skipping build import with status 'Cancelled'
+2023.08.31 23:42:59 INFO  no build target found for /home/hassan/rvv-core/src/main/scala/rvv/masking.scala. Using presentation compiler with project's scala-library version: 3.3.0
+Aug 31, 2023 11:42:59 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Aug 31, 2023 11:42:59 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Aug 31, 2023 11:42:59 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+Aug 31, 2023 11:42:59 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2023.08.31 23:43:02 INFO  time: code lens generation in 9.52s
+2023.08.31 23:47:16 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.08.31 23:47:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 01:48:45 INFO  Shutting down server
+2023.09.01 01:48:45 INFO  shutting down Metals
+2023.09.01 01:48:45 INFO  Exiting server
+2023.09.01 12:59:41 INFO  Started: Metals version 1.0.1 in folders '/home/hassan/rvv-core' for client Visual Studio Code 1.81.1.
+Sep 01, 2023 12:59:41 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Sep 01, 2023 12:59:41 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Sep 01, 2023 12:59:41 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Sep 01, 2023 12:59:42 PM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hassan/rvv-core/.metals/metals (H2 2.1)
+Sep 01, 2023 12:59:42 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.065s)
+Sep 01, 2023 12:59:42 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Sep 01, 2023 12:59:42 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.09.01 12:59:43 INFO  time: initialize in 1.52s
+2023.09.01 12:59:45 WARN  Build server is not auto-connectable.
+2023.09.01 12:59:45 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 12:59:46 INFO  skipping build import with status 'Cancelled'
+2023.09.01 12:59:54 INFO  no build target found for /home/hassan/rvv-core/src/main/scala/rvv/masking.scala. Using presentation compiler with project's scala-library version: 3.3.0
+Sep 01, 2023 12:59:54 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 20
+Sep 01, 2023 12:59:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 22
+2023.09.01 12:59:57 INFO  time: code lens generation in 2.92s
+2023.09.01 13:00:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:00:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:09 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:11 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:34 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:37 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+Sep 01, 2023 1:01:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 271
+Sep 01, 2023 1:01:41 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 282
+2023.09.01 13:01:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:47 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:01:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+Sep 01, 2023 1:02:02 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 369
+2023.09.01 13:02:11 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:20 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:25 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+Sep 01, 2023 1:02:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 452
+2023.09.01 13:02:28 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:30 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:31 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:32 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:34 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:35 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:38 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:44 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:02:45 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+Sep 01, 2023 1:02:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 562
+2023.09.01 13:02:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:03:18 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+2023.09.01 13:04:41 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:04:43 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:04:46 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:04:48 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:04:50 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:04:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:05:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/masking.scala
+2023.09.01 13:05:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vlmax_cal.scala
+2023.09.01 13:05:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:05:26 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:05:40 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:05:43 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:20:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:20:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:20:49 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:20:52 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:21:01 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:21:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:21:12 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+Sep 01, 2023 1:21:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1084
+2023.09.01 13:21:30 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:21:52 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:10 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:18 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:27 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:33 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:36 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:22:37 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:23:03 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:23:17 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:23:43 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:23:45 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:23:47 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:24:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:24:05 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU_Control.scala
+2023.09.01 13:24:14 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/csr.scala
+2023.09.01 13:25:20 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:30 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:50 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:25:57 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:00 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:04 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:07 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:12 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:18 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:26:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:27:11 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:27:13 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:27:19 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:27:34 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:27:39 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:27:41 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:28:22 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:28:48 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:28:51 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:29:05 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:29:08 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:29:12 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+Sep 01, 2023 1:29:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2261
+2023.09.01 13:29:55 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/Top_File.scala
+2023.09.01 13:30:30 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:31:24 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 13:31:57 INFO  Shutting down server
+2023.09.01 13:31:57 INFO  shutting down Metals
+2023.09.01 13:31:57 INFO  Exiting server
+2023.09.01 16:59:52 INFO  Started: Metals version 1.0.1 in folders '/home/hassan/rvv-core' for client Visual Studio Code 1.81.1.
+Sep 01, 2023 4:59:52 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Sep 01, 2023 4:59:52 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Sep 01, 2023 4:59:52 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Sep 01, 2023 4:59:53 PM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hassan/rvv-core/.metals/metals (H2 2.1)
+Sep 01, 2023 4:59:53 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.065s)
+Sep 01, 2023 4:59:53 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Sep 01, 2023 4:59:53 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.09.01 16:59:54 INFO  time: initialize in 1.78s
+2023.09.01 16:59:58 WARN  Build server is not auto-connectable.
+2023.09.01 16:59:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/vectorreg.scala
+2023.09.01 16:59:58 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU_Control.scala
+2023.09.01 16:59:58 INFO  skipping build import with status 'Cancelled'
+2023.09.01 17:00:06 INFO  no build target found for /home/hassan/rvv-core/src/main/scala/rvv/ALU_Control.scala. Using presentation compiler with project's scala-library version: 3.3.0
+Sep 01, 2023 5:00:06 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3
+Sep 01, 2023 5:00:06 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+2023.09.01 17:00:06 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ALU.scala
+2023.09.01 17:00:10 INFO  time: code lens generation in 11s
+2023.09.01 17:00:10 INFO  time: code lens generation in 3.28s
+2023.09.01 17:00:11 WARN  no build target for: /home/hassan/rvv-core/src/main/scala/rvv/ControlUnit.scala
+2023.09.01 17:00:32 INFO  Shutting down server
+2023.09.01 17:00:32 INFO  shutting down Metals
+2023.09.01 17:00:32 INFO  Exiting server

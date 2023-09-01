@@ -1,0 +1,11 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly rvv.Topfile_Test -- -DwriteVcd=1, Some(0fcc7516-0c92-49ca-8b0f-c8b767f8d76e), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hassan/rvv-core/target/scala-2.12/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/masking.scala:4:8: not found: object chisel[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel.util._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 1 s, completed Aug 31, 2023, 12:15:14 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

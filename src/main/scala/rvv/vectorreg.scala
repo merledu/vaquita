@@ -12,13 +12,18 @@ class vregfile extends Module {
     val vs2_addr = Input(UInt(5.W))
     val vd_addr = Input(UInt(5.W))
     val write_data = Input(SInt(128.W))
+    val vs0 = Output(SInt(128.W))
     val vs1_data = Output(SInt(128.W))
     val vs2_data = Output(SInt(128.W))
+    val vd_data_previous = Output(SInt(128.W))
   })
   val register = RegInit(VecInit(Seq.fill(32)(0.S(128.W))))
     register(0) := 0.S
     io.vs1_data := register(io.vs1_addr)
     io.vs2_data := register(io.vs2_addr)
+    io.vs0 := register(0.U)
+    io.vd_data_previous := register(io.vd_addr)
+
     when(io.vd_addr === "b00000".U) {
         register(io.vd_addr) := 0.S    
     }.otherwise{

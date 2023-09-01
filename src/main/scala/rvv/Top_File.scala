@@ -35,7 +35,10 @@ class top extends Module{
     dontTouch(csr_mod.io)
     val vec_regFile_mod = Module(new vregfile)
     dontTouch(vec_regFile_mod.io)
-    
+    val mask_mod = Module(new Tail_Mask)
+    dontTouch(mask_mod.io)
+
+
     // PC AND INSTR MEMORY
     instrMem_mod.io.addr := pC_mod.io.out(21, 2).asUInt()
     io.instruction := instrMem_mod.io.instr
@@ -86,7 +89,7 @@ class top extends Module{
     vec_regFile_mod.io.vs2_addr := io.instruction(24, 20)
     vec_regFile_mod.io.vd_addr := io.instruction(11, 7)
     // vec_regFile_mod.io.reg_write := control_mod.io.regWrite
-    vec_regFile_mod.io.write_data := alu_mod.io.v_out
+    vec_regFile_mod.io.write_data := mask_mod.io.Vector_Out
 
     // AVL Mux
     val avl_mux = MuxLookup(control_mod.io.avl_sel, 0.U, Array(
@@ -132,6 +135,16 @@ class top extends Module{
     alu_mod.io.in_vA := v_readData1Mux
     alu_mod.io.in_vB := v_readData2Mux
     alu_mod.io.sew := csr_mod.io.v_settings(5, 3)
+    
+    // masking
+    mask_mod.io.V_out_alu := alu_mod.io.v_out
+    mask_mod.io.v0 := vec_regFile_mod.io.vs0
+    mask_mod.io.alu_vd_data_pre := vec_regFile_mod.io.vd_data_previous
+    mask_mod.io.tm_sew := csr_mod.io.v_settings(5, 3) 
+    mask_mod.io.tm_vl := csr_mod.io.vl_out
+    mask_mod.io.tm_vm := io.instruction(25) 
+    mask_mod.io.tm_vta := csr_mod.io.v_settings(6) 
+    mask_mod.io.tm_vma := csr_mod.io.v_settings(7)          
     
     // DATA MEMORY           
     dataMem_mod.io.rdAddr := alu_mod.io.out(11, 2)
