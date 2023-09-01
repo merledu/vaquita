@@ -19,6 +19,7 @@ class regfile extends Module {
 	io.rdata2 := register(io.rs2)
 	when(io.RegWrite === 1.B){
 		when(io.rd =/= "b00000".U){register(io.rd) := io.WriteData}
+		
 		.otherwise {register(io.rd) := 0.S}
 	}
 }

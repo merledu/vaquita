@@ -198,7 +198,7 @@ class controldec extends Module {
                 io.Branch:=0.B
                 io.MemRead :=0.B
                 io.Mem2Reg:=0.B
-                io.aluop:="b00000".U
+                io.aluop:=3.U
                 io.opAsel:="b00".U
                 io.opBsel:=0.B
                 io.Ex_sel:=4.U

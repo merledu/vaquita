@@ -76,6 +76,10 @@ when (io.V_inst === 0.B) {
         io.aluc := Cat(io.func6, io.func3)
         io.out_V := 1.B 
 
+    }.elsewhen (io.aluOp === 3.U) {
+        io.aluc := Cat(io.func6, io.func3)
+        io.out_V := 1.B 
+
     }.otherwise {
         io.aluc := 0.U
         io.out_V := 0.U

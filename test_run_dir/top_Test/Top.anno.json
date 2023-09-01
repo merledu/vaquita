@@ -21,11 +21,19 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|vregfile>io_vs0_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|vregfile>io_vs1_data"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|vregfile>io_vs2_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|vregfile>io_vddata"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

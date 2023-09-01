@@ -27,7 +27,7 @@ class ImmdValGen1 extends Module {
 	val uj_imm_ = Cat (io.instruction(31),io.instruction(19,12),io.instruction(20),io.instruction(30,21),"b0".U)
 	io.uj_imm := ((Cat(Fill(12,uj_imm_(20)),uj_imm_)) + io.pc).asSInt
 	//U-type
-	io.u_imm := (((Cat(Fill(12,io.instruction(31)),io.instruction(31,12))) << 12)+io.pc).asSInt
+	io.u_imm := (Cat(io.instruction(31,12),Fill(12,"b0".U))).asSInt
 	//I-type
 	io.i_imm := (Cat(Fill(20,io.instruction(31)),io.instruction(31,20))).asSInt
 
