@@ -23,7 +23,7 @@ val V_Csr_module = Module(new V_Csr)                                       //vse
 val Vlmax_module = Module(new Vlmax)                                       //vsetvli
 val V_RegFile_module = Module(new V_RegFile)                               //opivi
 dontTouch(V_RegFile_module.io)
-// val Tail_Mask = Module(new Tail_Mask)                                   //opivi
+val Tail_Mask = Module(new Tail_Mask)                                      //opivi
 
 
 Program_Counter_module.io.pc := PC_module.io.out.asUInt 
@@ -55,6 +55,7 @@ Alu_Control_module.io.aluOp := Control_module.io.alu_operation
 
 V_Csr_module.io.Vtype_inst := Mux(Control_module.io.opcode === 87.U && Control_module.io.fun3 === 7.U, InstMem1_module.io.data(30, 20), 0.U)             //vsetvli
 V_Csr_module.io.csr_regWrite := Control_module.io.csr_reg_write
+V_Csr_module.io.vlcsr_regWrite := Control_module.io.vlcsr_reg_Write 
 
 val a = MuxLookup (Control_module.io.extend, 0.S, Array (
     (0.U) -> Immde_module.io.I_type,
@@ -71,10 +72,14 @@ V_RegFile_module.io.vd := InstMem1_module.io.data(11, 7)
 V_RegFile_module.io.V_reg_write := Control_module.io.reg_write 
 
 
-// Tail_Mask.io.v_data2 := V_RegFile_module.io.vdata2
-// Tail_Mask.io.tm_vl := V_Csr_module.io.vl_out
-// Tail_Mask.io.tm_vm := InstMem1_module.io.data(25) 
-// // Tail_Mask.io.tm_vta :=                              
+Tail_Mask.io.V_out_alu := ALU_1_module.io.V_out
+Tail_Mask.io.v0 := V_RegFile_module.io.vs0
+Tail_Mask.io.alu_vd_data_pre := V_RegFile_module.io.vd_data_previous
+Tail_Mask.io.tm_sew := V_Csr_module.io.vtype_out(5, 3) 
+Tail_Mask.io.tm_vl := V_Csr_module.io.vl_out
+Tail_Mask.io.tm_vm := InstMem1_module.io.data(25) 
+Tail_Mask.io.tm_vta := V_Csr_module.io.vtype_out(6) 
+Tail_Mask.io.tm_vma := V_Csr_module.io.vtype_out(7)                         
 
 
 val d = MuxLookup (Control_module.io.avl_ope, 0.S, Array (                //vsetvli (avl mux)
@@ -117,7 +122,6 @@ ALU_1_module.io.in_V := Control_module.io.is_V
 ALU_1_module.io.alu_Op := Alu_Control_module.io.out
 ALU_1_module.io.alu_sew := V_Csr_module.io.vtype_out(5, 3)                 //opivi         
 ALU_1_module.io.alu_lmul := V_Csr_module.io.vtype_out(2, 0)                //opivi 
-// ALU_1_module.io.alu_vd := InstMem1_module.io.data(11, 7)
                                    
 
 DataMem_module.io.addr := ALU_1_module.io.out.asUInt
@@ -157,7 +161,7 @@ RegFile_module.io.w_data := MuxLookup (Control_module.io.men_to_reg, 0.S, Array 
 
 
 V_RegFile_module.io.V_w_data := MuxLookup (Control_module.io.V_men_to_reg, 0.S, Array (
-    (0.U) -> ALU_1_module.io.V_out,
+    (0.U) -> Tail_Mask.io.Vector_Out,
     (1.U) -> 0.S))                 
 
 

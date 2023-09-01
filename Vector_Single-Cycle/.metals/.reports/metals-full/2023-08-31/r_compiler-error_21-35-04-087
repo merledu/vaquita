@@ -1,0 +1,48 @@
+java.lang.IndexOutOfBoundsException: 0
+occurred in the presentation compiler.
+
+action parameters:
+offset: 451
+uri: file://<WORKSPACE>/src/test/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASKTest.scala
+text:
+package Vpractice
+
+import chisel3._
+import org.scalatest.FreeSpec
+import chiseltest._
+
+class TAIL_MASKTest extends FreeSpec with ChiselScalatestTester{
+   "TAIL_MASKTest test" in{
+       test(new Tail_Mask()){c =>
+        //  c.io.V_out_alu.poke("h5000000050000000500000005L".S)
+        //  c.io.V_out_alu.poke(BigInt("5000000050000000500000005", 16).S)
+         c.io.V_out_alu.poke(BigInt("5000000050000000500000005").S)
+         c.io.V_out_alu.poke(@@)
+        //  c.io.v0.poke("h6".S)
+         c.io.v0.poke(BigInt("6").S)
+         c.io.alu_vd_data_pre.poke(0.S)
+         c.io.tm_sew.poke("b010".U)
+         c.io.tm_vl.poke(4.U)
+         c.io.tm_vta.poke(0.B)
+         c.io.tm_vma.poke(0.B)
+         c.io.tm_vm.poke(1.B)
+         c.clock.step(10) 
+        //  c.io.Vector_Out.expect("h5000000050000000500000005".S)
+        //  c.io.Vector_Out.expect(BigInt("5000000050000000500000005").S)
+        
+       }
+    }
+}       
+
+
+error stacktrace:
+scala.collection.LinearSeqOps.apply(LinearSeq.scala:131)
+	scala.collection.LinearSeqOps.apply$(LinearSeq.scala:128)
+	scala.collection.immutable.List.apply(List.scala:79)
+	dotty.tools.dotc.util.Signatures$.countParams(Signatures.scala:501)
+	dotty.tools.dotc.util.Signatures$.applyCallInfo(Signatures.scala:186)
+	dotty.tools.dotc.util.Signatures$.computeSignatureHelp(Signatures.scala:94)
+	dotty.tools.dotc.util.Signatures$.signatureHelp(Signatures.scala:63)
+	scala.meta.internal.pc.MetalsSignatures$.signatures(MetalsSignatures.scala:17)
+	scala.meta.internal.pc.SignatureHelpProvider$.signatureHelp(SignatureHelpProvider.scala:51)
+	scala.meta.internal.pc.ScalaPresentationCompiler.signatureHelp$$anonfun$1(ScalaPresentationCompiler.scala:371)

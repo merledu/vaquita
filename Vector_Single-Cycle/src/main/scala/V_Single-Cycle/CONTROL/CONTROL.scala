@@ -25,6 +25,7 @@ class Control extends Module{
         val is_I = Output ( Bool () )                  //vsetvli
         val is_V = Output ( Bool() )                   //vsetvli
         val csr_reg_write = Output ( Bool() )
+        val vlcsr_reg_Write = Output ( Bool() )
         val V_opeA = Output( UInt(2.W) )               //opivi
         val V_opeB = Output( UInt(2.W) )               //opivi
         val V_imm = Output( UInt(2.W) )                //opivi
@@ -49,6 +50,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -70,6 +72,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -91,6 +94,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -112,6 +116,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -133,6 +138,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -154,6 +160,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -175,6 +182,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -196,6 +204,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -217,6 +226,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 1.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -237,6 +247,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 0.B                                //vsetvli
     io.is_V := 1.B                                //vsetvli
     io.csr_reg_write := 1.B
+    io.vlcsr_reg_Write := 1.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U
@@ -267,6 +278,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 0.B                                //vsetvli
     io.is_V := 1.B       
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
     io.V_imm := 1.U
@@ -288,6 +300,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 0.B                                //vsetvli
     io.is_V := 1.B       
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
     io.V_imm := 0.U
@@ -309,6 +322,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 0.B                                //vsetvli
     io.is_V := 1.B       
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
     io.V_imm := 0.U
@@ -329,6 +343,7 @@ when ( io.opcode === 51.U ) {
     io.is_I := 0.B                                //vsetvli
     io.is_V := 0.B                                //vsetvli
     io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
     io.V_imm := 0.U

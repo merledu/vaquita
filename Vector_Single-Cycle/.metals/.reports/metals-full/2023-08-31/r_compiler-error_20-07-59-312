@@ -1,0 +1,257 @@
+java.lang.AssertionError: assertion failed: denotation class Object invalid in run 3. ValidFor: Period(1..2, run = 4)
+occurred in the presentation compiler.
+
+action parameters:
+uri: file://<WORKSPACE>/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala
+text:
+package Vpractice
+
+import chisel3._
+import chisel3.util._
+import chisel3.stage.ChiselStage
+ 
+class Tail_Mask ( ) extends Module {
+    val io = IO (new Bundle {
+        val V_out_alu = Input ( SInt (128.W) ) 
+        val v0 = Input (SInt (128.W) )              
+        val alu_vd_data_pre = Input (SInt (128.W) )
+        val tm_sew = Input (UInt (3.W))
+        val tm_vl = Input ( UInt(32.W) )
+        val tm_vm = Input ( UInt (1.W) ) 
+        val tm_vta = Input ( UInt (1.W) )
+        val tm_vma = Input ( UInt (1.W) )
+
+        val Vector_Out = Output ( SInt (128.W) )
+})
+
+val tm_out8 = VecInit(Seq.fill(16)(0.S(8.W)))
+val tm_out16 = VecInit(Seq.fill(8)(0.S(16.W)))
+val tm_out32 = VecInit(Seq.fill(4)(0.S(32.W)))
+val tm_out64 = VecInit(Seq.fill(2)(0.S(64.W)))
+
+val vd8 = VecInit(Seq.fill(16)(0.S(8.W)))
+val vd16 = VecInit(Seq.fill(8)(0.S(16.W)))
+val vd32 = VecInit(Seq.fill(4)(0.S(32.W)))
+val vd64 = VecInit(Seq.fill(2)(0.S(64.W)))
+
+
+when (io.tm_sew === "b011".U) {                                //64
+    tm_out64(0) := io.V_out_alu(63,0) 
+    tm_out64(1) := io.V_out_alu(127,64)
+
+    vd64(0) := io.alu_vd_data_pre(63,0)
+    vd64(1) := io.alu_vd_data_pre(127,64)
+
+}.elsewhen (io.tm_sew === "b010".U) {                          //32
+    tm_out32(0) := io.V_out_alu(31,0) 
+    tm_out32(1) := io.V_out_alu(63,32) 
+    tm_out32(2) := io.V_out_alu(95,64) 
+    tm_out32(3) := io.V_out_alu(127,96) 
+
+    vd32(0) := io.alu_vd_data_pre(31,0)
+    vd32(1) := io.alu_vd_data_pre(63,32) 
+    vd32(2) := io.alu_vd_data_pre(95,64) 
+    vd32(3) := io.alu_vd_data_pre(127,96) 
+
+}.elsewhen (io.tm_sew === "b001".U) {                          //16
+    tm_out16(0) := io.V_out_alu(15,0) 
+    tm_out16(1) := io.V_out_alu(31,16) 
+    tm_out16(2) := io.V_out_alu(47,32) 
+    tm_out16(3) := io.V_out_alu(63,48) 
+    tm_out16(4) := io.V_out_alu(79,64) 
+    tm_out16(5) := io.V_out_alu(95,80) 
+    tm_out16(6) := io.V_out_alu(111,96) 
+    tm_out16(7) := io.V_out_alu(127,112) 
+    
+    vd16(0) := io.alu_vd_data_pre(15,0) 
+    vd16(1) := io.alu_vd_data_pre(31,16) 
+    vd16(2) := io.alu_vd_data_pre(47,32) 
+    vd16(3) := io.alu_vd_data_pre(63,48) 
+    vd16(4) := io.alu_vd_data_pre(79,64) 
+    vd16(5) := io.alu_vd_data_pre(95,80) 
+    vd16(6) := io.alu_vd_data_pre(111,96) 
+    vd16(7) := io.alu_vd_data_pre(127,112) 
+
+}.elsewhen (io.tm_sew === "b000".U) {                          //8
+    tm_out8(0) := io.V_out_alu(7,0) 
+    tm_out8(1) := io.V_out_alu(15,8) 
+    tm_out8(2) := io.V_out_alu(23,16) 
+    tm_out8(3) := io.V_out_alu(31,24) 
+    tm_out8(4) := io.V_out_alu(39,32) 
+    tm_out8(5) := io.V_out_alu(47,40) 
+    tm_out8(6) := io.V_out_alu(55,48) 
+    tm_out8(7) := io.V_out_alu(63,56) 
+    tm_out8(8) := io.V_out_alu(71,64) 
+    tm_out8(9) := io.V_out_alu(79,72) 
+    tm_out8(10) := io.V_out_alu(87,80) 
+    tm_out8(11) := io.V_out_alu(95,88) 
+    tm_out8(12) := io.V_out_alu(103,96) 
+    tm_out8(13) := io.V_out_alu(111,104) 
+    tm_out8(14) := io.V_out_alu(119,112) 
+    tm_out8(15) := io.V_out_alu(127,120) 
+
+    vd8(0) := io.alu_vd_data_pre(7,0) 
+    vd8(1) := io.alu_vd_data_pre(15,8) 
+    vd8(2) := io.alu_vd_data_pre(23,16) 
+    vd8(3) := io.alu_vd_data_pre(31,24) 
+    vd8(4) := io.alu_vd_data_pre(39,32) 
+    vd8(5) := io.alu_vd_data_pre(47,40) 
+    vd8(6) := io.alu_vd_data_pre(55,48) 
+    vd8(7) := io.alu_vd_data_pre(63,56) 
+    vd8(8) := io.alu_vd_data_pre(71,64) 
+    vd8(9) := io.alu_vd_data_pre(79,72) 
+    vd8(10) := io.alu_vd_data_pre(87,80) 
+    vd8(11) := io.alu_vd_data_pre(95,88) 
+    vd8(12) := io.alu_vd_data_pre(103,96) 
+    vd8(13) := io.alu_vd_data_pre(111,104) 
+    vd8(14) := io.alu_vd_data_pre(119,112) 
+    vd8(15) := io.alu_vd_data_pre(127,120) 
+}
+// }.otherwise {
+//     // io.V_out := 0.S
+// }
+
+
+val vstart = 0.U
+
+when (io.tm_sew === "b011".U) {                                //64
+    for (i <- 0 until 2) {
+        val prestartIndices = Mux(i.U < vstart, tm_out64(i), 0.S)
+
+        // val bodyIndices = Mux(i.U >= vstart && i.U < io.tm_vl, Mux(io.tm_vm, elem, 0.U), 0.U)
+        
+        when (i.U >= vstart && i.U < io.tm_vl) {
+            when (io.tm_vm === 0.U) {
+                when (io.v0(i) === 0.S) {
+                    when (io.tm_vma === 0.U) {
+                        tm_out64(i) := vd32(i)
+                    }.otherwise {
+                        tm_out64(i) := 1.S
+                    }
+                }.otherwise {
+
+                }
+            }.otherwise {
+
+            }
+        }.otherwise {
+            val bodyIndices = 0.S
+        }
+
+        val tailIndices = Mux(i.U >= io.tm_vl && i.U < 2.U, Mux(io.tm_vta, 1.S, vd64(i)), 0.S)
+    }
+
+}.elsewhen (io.tm_sew === "b010".U) {                          //32
+    for (i <- 0 until 4) {
+        val prestartIndices = Mux(i.U < vstart, tm_out32(i), 0.S)
+
+        val tailIndices = Mux(i.U >= io.tm_vl && i.U < 4.U, Mux(io.tm_vta, 1.S, vd32(i)), 0.S)
+    }
+
+}.elsewhen (io.tm_sew === "b001".U) {                          //16
+    for (i <- 0 until 8) {
+        val prestartIndices = Mux(i.U < vstart, tm_out16(i), 0.S)
+
+        val tailIndices = Mux(i.U >= io.tm_vl && i.U < 8.U, Mux(io.tm_vta, 1.S, vd16(i)), 0.S)
+    }
+
+}.elsewhen (io.tm_sew === "b000".U) {                          //8
+    for (i <- 0 until 16) {
+        val prestartIndices = Mux(i.U < vstart, tm_out8(i), 0.S)
+
+        val tailIndices = Mux(i.U >= io.tm_vl && i.U < 16.U, Mux(io.tm_vta, 1.S, vd8(i)), 0.S)
+    }
+
+}.otherwise {
+    val prestartIndices = 0.S
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// val prestartIndices = tm_out64.zipWithIndex.map { case (elem, i) =>
+    //     Mux(i.U < vstart, elem, 0.S)}
+
+// val bodyIndices = io.v_data2.zipWithIndex.map { case (elem, i) =>
+//     Mux(i.U >= vstart && i.U < io.tm_vl, Mux(io.tm_vm, elem, 0.U), 0.U)
+
+//     // Mux(i.U >= vstart && i.U < io.tm_vl, elem, 0.U)
+//     // val isActive = i.U >= vstart && i.U < io.tm_vl
+//     // val newValue = Mux(io.tm_vm, elem, Mux(io.tm_vma, 1.U, elem))
+//     // Mux(isActive, newValue, 0.U)
+// }
+
+// // val activeBodyIndices = bodyIndices.map { elem =>
+// //     Mux(io.tm_vm, elem, 0.U)
+// // }
+
+// val tailIndices = io.v_data2.zipWithIndex.map { case (elem, i) =>
+//     Mux(i.U >= io.tm_vl && i.U < 16.U, Mux(io.tm_vta, 1.U, elem), 0.U)
+// }
+
+// io.v_data2_out := bodyIndices
+
+
+
+
+
+
+error stacktrace:
+scala.runtime.Scala3RunTime$.assertFailed(Scala3RunTime.scala:8)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.updateValidity(Denotations.scala:718)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.bringForward(Denotations.scala:743)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.toNewRun$1(Denotations.scala:800)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.current(Denotations.scala:871)
+	dotty.tools.dotc.core.Symbols$Symbol.recomputeDenot(Symbols.scala:120)
+	dotty.tools.dotc.core.Symbols$Symbol.computeDenot(Symbols.scala:114)
+	dotty.tools.dotc.core.Symbols$Symbol.denot(Symbols.scala:107)
+	dotty.tools.dotc.core.Symbols$.toDenot(Symbols.scala:494)
+	dotty.tools.dotc.typer.Typer.ensureConstrCall(Typer.scala:2630)
+	dotty.tools.dotc.typer.Typer.parentTrees$1(Typer.scala:2522)
+	dotty.tools.dotc.typer.Typer.typedClassDef(Typer.scala:2550)
+	dotty.tools.dotc.typer.Typer.typedTypeOrClassDef$1(Typer.scala:2916)
+	dotty.tools.dotc.typer.Typer.typedNamed$1(Typer.scala:2920)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2990)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.traverse$1(Typer.scala:3084)
+	dotty.tools.dotc.typer.Typer.typedStats(Typer.scala:3130)
+	dotty.tools.dotc.typer.Typer.typedPackageDef(Typer.scala:2692)
+	dotty.tools.dotc.typer.Typer.typedUnnamed$1(Typer.scala:2961)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2991)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.typedExpr(Typer.scala:3174)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck$$anonfun$1(TyperPhase.scala:44)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck$$anonfun$adapted$1(TyperPhase.scala:54)
+	scala.Function0.apply$mcV$sp(Function0.scala:42)
+	dotty.tools.dotc.core.Phases$Phase.monitor(Phases.scala:437)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck(TyperPhase.scala:54)
+	dotty.tools.dotc.typer.TyperPhase.runOn$$anonfun$3(TyperPhase.scala:88)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.immutable.List.foreach(List.scala:333)
+	dotty.tools.dotc.typer.TyperPhase.runOn(TyperPhase.scala:88)
+	dotty.tools.dotc.Run.runPhases$1$$anonfun$1(Run.scala:247)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1321)
+	dotty.tools.dotc.Run.runPhases$1(Run.scala:263)
+	dotty.tools.dotc.Run.compileUnits$$anonfun$1(Run.scala:271)
+	dotty.tools.dotc.Run.compileUnits$$anonfun$adapted$1(Run.scala:280)
+	dotty.tools.dotc.util.Stats$.maybeMonitored(Stats.scala:67)
+	dotty.tools.dotc.Run.compileUnits(Run.scala:280)
+	dotty.tools.dotc.Run.compileSources(Run.scala:195)
+	dotty.tools.dotc.interactive.InteractiveDriver.run(InteractiveDriver.scala:165)
+	scala.meta.internal.pc.MetalsDriver.run(MetalsDriver.scala:45)
+	scala.meta.internal.pc.SemanticdbTextDocumentProvider.textDocument(SemanticdbTextDocumentProvider.scala:33)
+	scala.meta.internal.pc.ScalaPresentationCompiler.semanticdbTextDocument$$anonfun$1(ScalaPresentationCompiler.scala:174)

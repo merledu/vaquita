@@ -87,3 +87,4 @@
 [0m[[0m[0mdebug[0m] [0m[0mWriting bsp connection file[0m
 [0m[[0m[0minfo[0m] [0m[0mstarted sbt server[0m
 [0m[[0m[0mdebug[0m] [0m[0mForcing garbage collection...[0m
+[0m[[0m[0minfo[0m] [0m[0mshutting down sbt server[0m

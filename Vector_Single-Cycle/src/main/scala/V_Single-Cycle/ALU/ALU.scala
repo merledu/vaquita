@@ -53,8 +53,7 @@ class ALU_1 extends Module with Config_ {
         val V_in_B = Input(SInt(128.W))
         val alu_sew = Input (UInt (3.W))                 //opivi
         val alu_lmul = Input(UInt(3.W)) 
-        val alu_imm = Input (SInt (64.W))
-        // val alu_vd = Input ( UInt (5.W ) )     
+        val alu_imm = Input (SInt (64.W))    
         
         val out = Output( SInt(WLEN.W) )
         val V_out = Output(SInt (128.W))  
