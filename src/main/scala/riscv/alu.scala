@@ -218,7 +218,7 @@ class alu extends Module {
       // vector to vector addition with masking but not tailing
       .elsewhen (io.alu===vaddvv && io.vma===1.B && io.vta===0.B){
         out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
-        out32(1) := (sew_32_a(1) + sew+_32_b(1)) & Fill(32,io.vec_0(1))
+        out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(1))
         out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(2))
         out32(3) := (sew_32_a(3) + sew_32_b(3)) & Fill(32,io.vec_0(3))
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))

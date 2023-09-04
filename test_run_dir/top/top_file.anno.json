@@ -1,7 +1,7 @@
 [
   {
     "class":"firrtl.stage.FirrtlFileAnnotation",
-    "file":"test_run_dir/top/top_file.lo.fir"
+    "file":"test_run_dir\\top\\top_file.lo.fir"
   },
   {
     "class":"firrtl.EmitCircuitAnnotation",
@@ -400,6 +400,6 @@
   },
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
-    "targetDir":"test_run_dir/top"
+    "targetDir":"test_run_dir\\top"
   }
 ]
