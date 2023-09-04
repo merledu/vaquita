@@ -139,7 +139,7 @@ when (io.tm_sew === "b011".U) {                                //64
         }
 
     }
-    io.Vector_Out := (Cat(v_out64(1), v_out64(0))).asSInt 
+    io.Vector_Out := (Cat(v_out64(1), v_out64(0))).asSInt
 
 }.elsewhen (io.tm_sew === "b010".U) {                          //32
     for (i <- 0 until 4) {

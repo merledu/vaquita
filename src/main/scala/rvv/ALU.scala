@@ -18,6 +18,7 @@ object ALUOP {
     val ALU_VSET = "b00000000111".U(11.W)
     val ALU_VADDI = "b00000000011".U(11.W)
     val ALU_VADD = "b00000000000".U(11.W)
+    // val ALU_VSUB = "b00000010000".U(11.W)
 }
 
 trait Config {
