@@ -97,9 +97,11 @@ class top_file extends Module {
     //alu module inputs
     alu_module.io.sew := vec_csr_module.io.vsew
     alu_module.io.vma := vec_csr_module.io.mask
+    alu_module.io.vta := vec_csr_module.io.tail
     alu_module.io.vec := control_unit_module.io.vector
     alu_module.io.alu := alu_control_module.io.out
     alu_module.io.vec_0 := vector_file_module.io.vec_0
+    alu_module.io.vl := vec_csr_module.io.vl_out
     alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,
         (1.U) -> pc_module.io.out4.asSInt,

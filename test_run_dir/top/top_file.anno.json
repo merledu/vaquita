@@ -9,6 +9,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_instr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vec_csr>io_vsew"
   },
   {
@@ -25,7 +29,11 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|vec_csr>io_instr"
+    "target":"~top_file|vec_csr>io_tail"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_vl_out"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -336,7 +344,15 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vta"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_vec_0"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_vl"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

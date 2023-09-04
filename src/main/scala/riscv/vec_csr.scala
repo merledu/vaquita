@@ -3,11 +3,13 @@ import chisel3 . _
 import chisel3 . util . _
 class vec_csr extends Module {
     val io = IO(new Bundle{
+        val instr = Input(UInt(32.W))
         val vsew = Output(UInt(10.W))
         val vlmul = Output(UInt(10.W))
         val vlmul_count = Output(UInt(10.W))
         val mask = Output(Bool())
-        val instr = Input(UInt(32.W))
+        val tail = Output(Bool())
+        val vl_out = Output(UInt(10.W))
         //val rs2 = Input(UInt(8.W))
     })
     val opcode = io.instr(6,0)
@@ -30,6 +32,7 @@ class vec_csr extends Module {
     //update vtype csr through vsetvli instruction
     when (opcode==="b1010111".U && io.instr(31)===0.B && io.instr(14,12)==="b111".U){
         vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
+        vl := 
     }
     //update vtype csr through vsetivli instruction
     // .elsewhen (opcode==="b1010111".U && io.instr(31)===1.B && io.instr(30)===1.B){
@@ -42,7 +45,8 @@ class vec_csr extends Module {
     // io.vlmul := vtype(2,0)
     io.vsew := vtype(5,3)
     io.mask := vtype(7)
-    // io.tail := vtype(6)
+    io.tail := vtype(6)
+    io.vl_out := vl
     // io.vill := vtype(31)
 
     // working on  only one vector 

@@ -227,16 +227,16 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
         
-        val reg123 = RegInit(0.U(32.W))
-        when((reg123*io.n_fields) =/= reg123 && io.op_code==="b0000111".U){
+        val reg123 = RegInit(3.U(32.W))
+        when((reg123 > 0.U) && io.op_code==="b0000111".U){
             io.next_pc_selector := 4.U
-            reg123 := reg123 +1.U
+            reg123 := reg123 -1.U
             io.vec_write := off
             io.stall_true := reg123
 
         }
         .otherwise{
-            reg123 := 0.U
+            reg123 := 3.U
             io.vec_write := on
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
@@ -257,16 +257,16 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
         
-        val reg123 = RegInit(3.U(32.W))
-        when(reg123 > 0.U && io.op_code==="b0100111".U){
+        val reg1234 = RegInit(3.U(32.W))
+        when(reg1234 > 0.U && io.op_code==="b0100111".U){
             io.next_pc_selector := 4.U
-            reg123 := reg123 -1.U
+            reg1234 := reg1234 -1.U
             io.vec_write := off
-            io.stall_true := reg123
+            io.stall_true := reg1234
 
         }
         .otherwise{
-            reg123 := 3.U
+            reg1234 := 3.U
             io.vec_write := off
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
@@ -319,15 +319,15 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 1.U
-        val reg123 = RegInit(3.U(32.W))
-        when(reg123 > 0.U && io.op_code==="b0100111".U){
+        val reg12 = RegInit(3.U(32.W))
+        when(reg12 > 0.U && io.op_code==="b0100111".U){
             io.next_pc_selector := 4.U
-            reg123 := reg123 -1.U
-            io.stall_true := reg123
+            reg12 := reg12 -1.U
+            io.stall_true := reg12
 
         }
         .otherwise{
-            reg123 := 3.U
+            reg12 := 3.U
             io.vec_write := off
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
@@ -350,15 +350,15 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 1.U
-        val reg123 = RegInit(3.U(32.W))
-        when(reg123 > 0.U && io.op_code==="b0100111".U){
+        val reg1 = RegInit(3.U(32.W))
+        when(reg1 > 0.U && io.op_code==="b0100111".U){
             io.next_pc_selector := 4.U
-            reg123 := reg123 -1.U
-            io.stall_true := reg123
+            reg1 := reg1 -1.U
+            io.stall_true := reg1
 
         }
         .otherwise{
-            reg123 := 3.U
+            reg1 := 3.U
             io.vec_write := off
             io.next_pc_selector := 0.U
             io.stall_true := 0.U

@@ -3,123 +3,128 @@ import chisel3 . _
 import chisel3 . util . _
 import alu_op._
 class alu extends Module {
-    val io = IO(new Bundle{
-        //val instruction = Input(UInt(32.W))
-        val alu =Input(UInt(32.W))
-        val a =Input(SInt(32.W))
-        val b =Input(SInt(32.W))
-        val vs1 =Input(UInt(128.W))
-        val vs2 =Input(UInt(128.W))
-        val sew = Input(UInt(3.W))
-        val vec = Input(Bool())
-        val vma = Input(Bool())
-        val vec_0 = Input(UInt(32.W))
+  val io = IO(new Bundle{
+      //val instruction = Input(UInt(32.W))
+      val alu =Input(UInt(32.W))
+      val a =Input(SInt(32.W))
+      val b =Input(SInt(32.W))
+      val vs1 =Input(UInt(128.W))
+      val vs2 =Input(UInt(128.W))
+      val sew = Input(UInt(3.W))
+      val vec = Input(Bool())
+      val vma = Input(Bool())
+      val vta = Input(Bool())
+      val vec_0 = Input(UInt(32.W))
+      val vl = Input(UInt(10.W))
 
-        val out = Output(SInt(32.W))
-        val branch = Output(Bool())
-        val vec_out = Output(UInt(128.W))
-        
-    })
-    val sew_8_a = VecInit(Seq.fill(16)(0.U(8.W)))
-    val sew_16_a = VecInit(Seq.fill(8)(0.U(16.W)))
-    val sew_32_a = VecInit(Seq.fill(4)(0.U(32.W)))
-    val sew_64_a = VecInit(Seq.fill(2)(0.U(64.W)))
-
-    val sew_8_b = VecInit(Seq.fill(16)(0.U(8.W)))
-    val sew_16_b = VecInit(Seq.fill(8)(0.U(16.W)))
-    val sew_32_b = VecInit(Seq.fill(4)(0.U(32.W)))
-    val sew_64_b = VecInit(Seq.fill(2)(0.U(64.W)))
+      val out = Output(SInt(32.W))
+      val branch = Output(Bool())
+      val vec_out = Output(UInt(128.W))
+      
+  })
+  val vec_0_32 = VecInit(Seq.fill(32)(0.U(4.W)))
 
 
-    val out8 = VecInit(Seq.fill(16)(0.U(8.W)))
-    val out16 = VecInit(Seq.fill(8)(0.U(16.W)))
-    val out32 = VecInit(Seq.fill(4)(0.U(32.W)))
-    val out64 = VecInit(Seq.fill(2)(0.U(64.W)))
+  val sew_8_a  = VecInit(Seq.fill(16)(0.U(8.W)))
+  val sew_16_a = VecInit(Seq.fill(8)(0.U(16.W)))
+  val sew_32_a = VecInit(Seq.fill(4)(0.U(32.W)))
+  val sew_64_a = VecInit(Seq.fill(2)(0.U(64.W)))
 
-    // define wires input a when sew = 8
-    sew_8_a(0) := io.vs1(7,0)
-    sew_8_a(1) := io.vs1(15,8)
-    sew_8_a(2) := io.vs1(23,16)
-    sew_8_a(3) := io.vs1(31,24)
-    sew_8_a(4) := io.vs1(39,32)
-    sew_8_a(5) := io.vs1(47,40)
-    sew_8_a(6) := io.vs1(55,48)
-    sew_8_a(7) := io.vs1(63,56)
-    sew_8_a(8) := io.vs1(71,64)
-    sew_8_a(9) := io.vs1(79,72)
-    sew_8_a(10) := io.vs1(87,80)
-    sew_8_a(11) := io.vs1(95,88)
-    sew_8_a(12) := io.vs1(103,96)
-    sew_8_a(13) := io.vs1(111,104)
-    sew_8_a(14) := io.vs1(119,112)
-    sew_8_a(15) := io.vs1(127,120)
+  val sew_8_b = VecInit(Seq.fill(16)(0.U(8.W)))
+  val sew_16_b = VecInit(Seq.fill(8)(0.U(16.W)))
+  val sew_32_b = VecInit(Seq.fill(4)(0.U(32.W)))
+  val sew_64_b = VecInit(Seq.fill(2)(0.U(64.W)))
 
-    // define wires input b when sew = 8
-    sew_8_b(0) := io.vs2(7,0)
-    sew_8_b(1) := io.vs2(15,8)
-    sew_8_b(2) := io.vs2(23,16)
-    sew_8_b(3) := io.vs2(31,24)
-    sew_8_b(4) := io.vs2(39,32)
-    sew_8_b(5) := io.vs2(47,40)
-    sew_8_b(6) := io.vs2(55,48)
-    sew_8_b(7) := io.vs2(63,56)
-    sew_8_b(8) := io.vs2(71,64)
-    sew_8_b(9) := io.vs2(79,72)
-    sew_8_b(10) := io.vs2(87,80)
-    sew_8_b(11) := io.vs2(95,88)
-    sew_8_b(12) := io.vs2(103,96)
-    sew_8_b(13) := io.vs2(111,104)
-    sew_8_b(14) := io.vs2(119,112)
-    sew_8_b(15) := io.vs2(127,120)
 
-    //define wires input a when sew = 16
-    sew_16_a(0) := io.vs1(15,0)
-    sew_16_a(1) := io.vs1(31,16)
-    sew_16_a(2) := io.vs1(47,32)
-    sew_16_a(3) := io.vs1(63,48)
-    sew_16_a(4) := io.vs1(79,64)
-    sew_16_a(5) := io.vs1(95,80)
-    sew_16_a(6) := io.vs1(111,96)
-    sew_16_a(7) := io.vs1(127,112)
+  val out8 = VecInit(Seq.fill(16)(0.U(8.W)))
+  val out16 = VecInit(Seq.fill(8)(0.U(16.W)))
+  val out32 = VecInit(Seq.fill(4)(0.U(32.W)))
+  val out64 = VecInit(Seq.fill(2)(0.U(64.W)))
 
-    //define wires input b when sew = 16
-    sew_16_b(0) := io.vs2(15,0)
-    sew_16_b(1) := io.vs2(31,16)
-    sew_16_b(2) := io.vs2(47,32)
-    sew_16_b(3) := io.vs2(63,48)
-    sew_16_b(4) := io.vs2(79,64)
-    sew_16_b(5) := io.vs2(95,80)
-    sew_16_b(6) := io.vs2(111,96)
-    sew_16_b(7) := io.vs2(127,112)
+  // define wires input a when sew = 8
+  sew_8_a(0) := io.vs1(7,0)
+  sew_8_a(1) := io.vs1(15,8)
+  sew_8_a(2) := io.vs1(23,16)
+  sew_8_a(3) := io.vs1(31,24)
+  sew_8_a(4) := io.vs1(39,32)
+  sew_8_a(5) := io.vs1(47,40)
+  sew_8_a(6) := io.vs1(55,48)
+  sew_8_a(7) := io.vs1(63,56)
+  sew_8_a(8) := io.vs1(71,64)
+  sew_8_a(9) := io.vs1(79,72)
+  sew_8_a(10) := io.vs1(87,80)
+  sew_8_a(11) := io.vs1(95,88)
+  sew_8_a(12) := io.vs1(103,96)
+  sew_8_a(13) := io.vs1(111,104)
+  sew_8_a(14) := io.vs1(119,112)
+  sew_8_a(15) := io.vs1(127,120)
 
-    //define wires input a when sew = 32
-    sew_32_a(0) := io.vs1(31,0)
-    sew_32_a(1) := io.vs1(63,32)
-    sew_32_a(2) := io.vs1(95,64)
-    sew_32_a(3) := io.vs1(127,96)
+  // define wires input b when sew = 8
+  sew_8_b(0) := io.vs2(7,0)
+  sew_8_b(1) := io.vs2(15,8)
+  sew_8_b(2) := io.vs2(23,16)
+  sew_8_b(3) := io.vs2(31,24)
+  sew_8_b(4) := io.vs2(39,32)
+  sew_8_b(5) := io.vs2(47,40)
+  sew_8_b(6) := io.vs2(55,48)
+  sew_8_b(7) := io.vs2(63,56)
+  sew_8_b(8) := io.vs2(71,64)
+  sew_8_b(9) := io.vs2(79,72)
+  sew_8_b(10) := io.vs2(87,80)
+  sew_8_b(11) := io.vs2(95,88)
+  sew_8_b(12) := io.vs2(103,96)
+  sew_8_b(13) := io.vs2(111,104)
+  sew_8_b(14) := io.vs2(119,112)
+  sew_8_b(15) := io.vs2(127,120)
 
-    //define wires input b when sew = 32
-    sew_32_b(0) := io.vs2(31,0)
-    sew_32_b(1) := io.vs2(63,32)
-    sew_32_b(2) := io.vs2(95,64)
-    sew_32_b(3) := io.vs2(127,96)
+  //define wires input a when sew = 16
+  sew_16_a(0) := io.vs1(15,0)
+  sew_16_a(1) := io.vs1(31,16)
+  sew_16_a(2) := io.vs1(47,32)
+  sew_16_a(3) := io.vs1(63,48)
+  sew_16_a(4) := io.vs1(79,64)
+  sew_16_a(5) := io.vs1(95,80)
+  sew_16_a(6) := io.vs1(111,96)
+  sew_16_a(7) := io.vs1(127,112)
 
-    //define wires input a when sew = 64
-    sew_64_a(0) := io.vs1(63,0)
-    sew_64_a(1) := io.vs1(127,64)
+  //define wires input b when sew = 16
+  sew_16_b(0) := io.vs2(15,0)
+  sew_16_b(1) := io.vs2(31,16)
+  sew_16_b(2) := io.vs2(47,32)
+  sew_16_b(3) := io.vs2(63,48)
+  sew_16_b(4) := io.vs2(79,64)
+  sew_16_b(5) := io.vs2(95,80)
+  sew_16_b(6) := io.vs2(111,96)
+  sew_16_b(7) := io.vs2(127,112)
 
-    //define wires input b when sew = 64
-    sew_64_b(0) := io.vs2(63,0)
-    sew_64_b(1) := io.vs2(127,64)
+  //define wires input a when sew = 32
+  sew_32_a(0) := io.vs1(31,0)
+  sew_32_a(1) := io.vs1(63,32)
+  sew_32_a(2) := io.vs1(95,64)
+  sew_32_a(3) := io.vs1(127,96)
 
-    io.vec_out := 0.U
-    io.out := 0.S
- 
-        //val array = WireInit(VecInit(Seq.fill(4)(0.S(32.W))))
-        // array(0) := io.a
-       // dontTouch(array)
-  
-    when (io.vec===0.B){
+  //define wires input b when sew = 32
+  sew_32_b(0) := io.vs2(31,0)
+  sew_32_b(1) := io.vs2(63,32)
+  sew_32_b(2) := io.vs2(95,64)
+  sew_32_b(3) := io.vs2(127,96)
+
+  //define wires input a when sew = 64
+  sew_64_a(0) := io.vs1(63,0)
+  sew_64_a(1) := io.vs1(127,64)
+
+  //define wires input b when sew = 64
+  sew_64_b(0) := io.vs2(63,0)
+  sew_64_b(1) := io.vs2(127,64)
+
+  io.vec_out := 0.U
+  io.out := 0.S
+
+      //val array = WireInit(VecInit(Seq.fill(4)(0.S(32.W))))
+      // array(0) := io.a
+      // dontTouch(array)
+
+  when (io.vec===0.B){
     when (io.alu === add || io.alu === addi){
       io.out := io.a + io.b
       
@@ -198,22 +203,46 @@ class alu extends Module {
       io.out := 0.S
     }
   }
+  //computing of vector instruction
   .otherwise{
-    // vector to vector addition
-      when (io.sew==="b010".U && io.alu===vaddvv){
+    // element width = 32
+    when (io.sew==="b010".U){
+      // vector to vector addition not masking and not tailing
+      when(io.alu===vaddvv && io.vma===0.B && io.vta===0.B){
+        out32(0) := sew_32_a(0) + sew_32_b(0)
+        out32(1) := sew_32_a(1) + sew_32_b(1)
+        out32(2) := sew_32_a(2) + sew_32_b(2)
+        out32(3) := sew_32_a(3) + sew_32_b(3)
+        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      }
+      // vector to vector addition with masking but not tailing
+      .elsewhen (io.alu===vaddvv && io.vma===1.B && io.vta===0.B){
         out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
         out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(1))
         out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(2))
         out32(3) := (sew_32_a(3) + sew_32_b(3)) & Fill(32,io.vec_0(3))
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
-      .elsewhen (io.sew==="b010".U && io.alu===vaddvv && io.vma===1.B){
+      // vector to vector addition with tailing but not masking
+      .elsewhen (io.alu===vaddvv && io.vma===0.B && io.vta===1.B){
         out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
         out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(1))
         out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(2))
         out32(3) := (sew_32_a(3) + sew_32_b(3)) & Fill(32,io.vec_0(3))
         io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       }
+       // vector to vector addition with tailing but not masking
+      .elsewhen (io.alu===vaddvv && io.vma===1.B && io.vta===1.B){
+        out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
+        out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(1))
+        out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(2))
+        out32(3) := (sew_32_a(3) + sew_32_b(3)) & Fill(32,io.vec_0(3))
+        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      }
+      .otherwise{
+        io.vec_out := 0.U
+      }
+    }
     .elsewhen (io.sew==="b010".U && io.alu===vle32){
         out32(0) := io.a.asUInt
         out32(1) := io.a.asUInt+4.U
@@ -247,16 +276,21 @@ class alu extends Module {
       //   io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
       // }
       //vector to vector subtraction
-      .elsewhen (io.sew==="b010".U && io.alu===vaddvv){
-        for (i <- 0 until 4) {
-            out32(i) := sew_32_a(i) - sew_32_b(i)
-        }
-        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-      }
+      // .elsewhen (io.sew==="b010".U && io.alu===vaddvv){
+      //   for (i <- 0 until 4) {
+      //       out32(i) := sew_32_a(i) - sew_32_b(i)
+      //   }
+      //   io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      // }
     .otherwise{
         io.vec_out := 0.U
       }
     }
+
+
+
+
+
 
     io.branch := Mux(io.alu === beq,io.a  ===  io.b,
     Mux(io.alu === bne,io.a =/= io.b,
