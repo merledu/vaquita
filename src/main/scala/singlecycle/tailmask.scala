@@ -7,15 +7,15 @@ class Tail_Mask extends Module {
   val io = IO(new Bundle {
     // val v_data1 = Input(UInt(128.W))
     val vl = Input(UInt(32.W))
-    val vlmax = Input(UInt(32.W))
+    // val vlmax = Input(UInt(32.W))
     
     val sew = Input(UInt(3.W))
     val vma =Input(UInt(1.W)) //vtype
     val vta =Input(UInt(1.W)) //vtype
     val vm =Input(UInt(1.W)) //umasked=0  , masked = 1
-    val vs0 = Input(UInt(128.W)) // io.vs0 data
-    val vd = Input(UInt(128.W))
-    val vdata =Input(UInt(128.W))
+    val vs0 = Input(SInt(128.W)) // io.vs0 data
+    val vd = Input(SInt(128.W)) //previous destination register data
+    val vdata =Input(SInt(128.W)) // aluoutput 
     val v_data_out = Output(UInt(128.W))
   })
 
@@ -119,38 +119,38 @@ class Tail_Mask extends Module {
 
   when (io.sew === "b011".U){
     for (i <- 0 until 2) {
-              when (i.U <= vstart){//prestart 
+      
+        when (i.U <  vstart){//prestart 
           sew_64_v_data_out(i) := sew_64_vd(i)
-
-        }.elsewhen(i.U > vstart && i.U <= io.vl  ){ //bodyelements
-      when (io.vm === 0.U){
-
+        }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){ //bodyelements
+        when (io.vm === 0.U){
           when(io.vs0(i) === 0.U && io.vma === 0.U ){
               sew_64_v_data_out(i) := sew_64_vd(i)
-
           }.elsewhen( io.vs0(i) === 0.U && io.vma === 1.U){
             sew_64_v_data_out(i) := "b1111111111111111111111111111111111111111111111111111111111111111".U
-
           }.otherwise { //io.vs0[i] == 1 so vector alu result 
             sew_64_v_data_out(i) := sew_64_vdata(i)
           }
-        }.otherwise{
+              }.otherwise{
         sew_64_v_data_out(i) := sew_64_vdata(i)
-    } 
-    
-    }.elsewhen(i.U > io.vl ){//tail elements
+        }    
+
+      }.elsewhen(i.U > io.vl ){//tail elements
           when (io.vta ===0.U){
             sew_64_v_data_out(i) := sew_64_vd(i)
           }.elsewhen (io.vta === 1.U ){
             sew_64_v_data_out(i) := "b1111111111111111111111111111111111111111111111111111111111111111".U
-        }}}
+        }}
+
+        }
       io.v_data_out := Cat(sew_64_v_data_out(1),sew_64_v_data_out(0))
       
   }.elsewhen(io.sew === "b010".U){
     for (i <- 0 until 4) {
-      when (i.U <= vstart){//pre start elements
+      
+        when (i.U <  vstart){//pre start elements
           sew_32_v_data_out(i) := sew_32_vd(i)
-        }.elsewhen(i.U > vstart && i.U <= io.vl  ){//body elements
+        }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){//body elements
             when (io.vm === 0.U){
               when(io.vs0(i) === 0.U && io.vma === 0.U ){
                 sew_32_v_data_out(i) := sew_32_vd(i)
@@ -161,22 +161,25 @@ class Tail_Mask extends Module {
               }.otherwise { //io.vs0[i] == 1 so vector alu result 
                 sew_32_v_data_out(i) := sew_32_vdata(i)
               }
-        
-            }.otherwise{
-              sew_32_v_data_out(i) := sew_32_vdata(i)
-            }
-        }.elsewhen(i.U > io.vl){//tail elements
+                
+      }.otherwise{
+        sew_32_v_data_out(i) := sew_32_vdata(i)
+      }
+      }
+        .elsewhen(i.U > io.vl){//tail elements
             when (io.vta ===0.U){
               sew_32_v_data_out(i) := sew_32_vd(i)
             }.elsewhen (io.vta === 1.U ){
               sew_32_v_data_out(i) := "b11111111111111111111111111111111".U}
-        }}
+
+    }}
       io.v_data_out := Cat(sew_32_v_data_out(3),sew_32_v_data_out(2),sew_32_v_data_out(1),sew_32_v_data_out(0))
   }.elsewhen(io.sew === "b001".U){
     for (i <- 0 until 8) {
-      when (i.U <= vstart){//prestart elems
+      
+      when (i.U < vstart){//prestart elems
         sew_16_v_data_out(i) := sew_16_vd(i)
-      }.elsewhen(i.U > vstart && i.U <= io.vl  ){ //body elems 
+      }.elsewhen(i.U >= vstart && i.U <= io.vl  ){ //body elems 
         when (io.vm === 0.U){
           when(io.vs0(i) === 0.U && io.vma === 0.U ){
             sew_16_v_data_out(i) := sew_16_vd(i)
@@ -185,39 +188,51 @@ class Tail_Mask extends Module {
           }.otherwise { //io.vs0[i] == 1 so vector alu result 
             sew_16_v_data_out(i) := sew_16_vdata(i)
           }
-        
         }.otherwise{
           sew_16_v_data_out(i) := sew_16_vdata(i)
         }
+        
       }.elsewhen(i.U > io.vl ){//tail elements
         when (io.vta ===0.U){
           sew_16_v_data_out(i) := sew_16_vd(i)
         }.elsewhen (io.vta === 1.U ){
           sew_16_v_data_out(i) := "b1111111111111111".U}
       }
+
       }
     io.v_data_out := Cat(sew_16_v_data_out(7),sew_16_v_data_out(6),sew_16_v_data_out(5),sew_16_v_data_out(4),sew_16_v_data_out(3),sew_16_v_data_out(2),sew_16_v_data_out(1),sew_16_v_data_out(0))
   }.elsewhen(io.sew === "b0".U){
-        for (i <- 0 until 8) {
+    for (i <- 0 until 16 ) {
+      
+       when (i.U <  vstart){//prestart elems
+        sew_8_v_data_out(i) := sew_8_vd(i)
+      }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){ //body elems 
       when (io.vm === 0.U){
         
           when(io.vs0(i) === 0.U && io.vma === 0.U ){
               sew_8_v_data_out(i) := sew_8_vd(i)
 
           }.elsewhen( io.vs0(i) === 0.U && io.vma === 1.U){
-            sew_8_v_data_out(i) := 1.U
+            sew_8_v_data_out(i) := "b11111111".U
 
           }.otherwise { //io.vs0[i] == 1 so vector alu result 
             sew_8_v_data_out(i) := sew_8_vdata(i)
           }
         
-      }.otherwise{
+          }.otherwise{
         sew_8_v_data_out(i) := sew_8_vdata(i)
+         }
+      }.elsewhen(i.U > io.vl ){//tail elements
+        when (io.vta ===0.U){
+          sew_8_v_data_out(i) := sew_8_vd(i)
+        }.elsewhen (io.vta === 1.U ){
+          sew_8_v_data_out(i) := "b11111111".U}
       }
-      }
+
+   }
       io.v_data_out := Cat(sew_8_v_data_out(15),sew_8_v_data_out(14),sew_8_v_data_out(13),sew_8_v_data_out(12),sew_8_v_data_out(11),sew_8_v_data_out(10),sew_8_v_data_out(9),sew_8_v_data_out(8),sew_8_v_data_out(7),sew_8_v_data_out(6),sew_8_v_data_out(5),sew_8_v_data_out(4),sew_8_v_data_out(3),sew_8_v_data_out(2),sew_8_v_data_out(1),sew_8_v_data_out(0))
   }.otherwise{
-    io.v_data_out := io.vdata
+    io.v_data_out := io.vdata.asUInt
   }
 
 

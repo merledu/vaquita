@@ -24,6 +24,8 @@ val jalrCompMod = Module (new jalr)
 val regfileMod = Module (new regfile)
 val config= Module(new configure)
 val vreg = Module (new vregfile)
+val tail_mask = Module(new Tail_Mask) 
+dontTouch(tail_mask.io)
 dontTouch(config.io)
 dontTouch(vreg.io)
 PCMod.io.input := PCMod.io.pc4
@@ -55,10 +57,14 @@ ALUcMod.io.func7 := instmemMod.io.inst(30)
 ALUcMod.io.func6 := instmemMod.io.inst(31,26)
 ALUcMod.io.V_inst := 1.B
 
-//config
+//csrs 
 val vtype = RegInit((0.S(32.W)))
+val vl = RegInit(0.S(32.W))
+
+//config
 when (CntrlDecMod.io.vset === 1.B){
 	vtype:= ImmgenMod.io.z_imm
+	vl := config.io.vl
 }
 
 
@@ -97,8 +103,16 @@ ALUMod.io.sew := vtype(5,3)
 // ALUMod.io.sew := "b010".U
 ALUMod.io.v_ins := CntrlDecMod.io.v_ins
 
-
-
+//tailing masking
+// tail_mask.io.vl := vl.asUInt
+tail_mask.io.vl := 6.U
+tail_mask.io.vta := vtype(6).asUInt
+tail_mask.io.vma := vtype(7).asUInt
+tail_mask.io.sew := vtype(5,3).asUInt
+tail_mask.io.vm := instmemMod.io.inst(25)
+tail_mask.io.vs0 := vreg.io.vs0_data
+tail_mask.io.vd := vreg.io.vddata_o
+tail_mask.io.vdata := ALUMod.io.v_output.asSInt
 
 
 //Branch
@@ -160,7 +174,7 @@ regfileMod.io.WriteData := MuxCase ( 0.S , Array (
 (CntrlDecMod.io.Mem2Reg === 1.B ) -> datamemMod.io.out)
 )
 
-vreg.io.vd_data := ALUMod.io.v_output.asSInt
+vreg.io.vd_data := tail_mask.io.v_data_out.asSInt
 io.out := 0.U
 io.test1 := instmemMod.io.inst(19,15)
 io.test2 := instmemMod.io.inst(11,7)
