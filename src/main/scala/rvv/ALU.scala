@@ -16,9 +16,21 @@ object ALUOP {
     val ALU_SRA = "b10100000101".U(11.W)
     val ALU_JALR = "b10100000111".U(11.W)
     val ALU_VSET = "b00000000111".U(11.W)
+    val ALU_VADDS = "b00000000100".U(11.W)
+    val ALU_VSUBS = "b00000010100".U(11.W)
+    val ALU_VANDS = "b00001001100".U(11.W)
+    val ALU_VORS = "b00001010100".U(11.W)
+    val ALU_VXORS = "b00001011100".U(11.W)
     val ALU_VADDI = "b00000000011".U(11.W)
+    val ALU_VSUBI = "b00000010011".U(11.W)
+    val ALU_VANDI = "b00001001011".U(11.W)
+    val ALU_VORI = "b00001010011".U(11.W)
+    val ALU_VXORI = "b00001011011".U(11.W)
     val ALU_VADD = "b00000000000".U(11.W)
-    // val ALU_VSUB = "b00000010000".U(11.W)
+    val ALU_VSUB = "b00000010000".U(11.W)
+    val ALU_VAND = "b00001001000".U(11.W)
+    val ALU_VOR = "b00001010000".U(11.W)
+    val ALU_VXOR = "b00001011000".U(11.W)
 }
 
 trait Config {
@@ -203,28 +215,232 @@ class ALU extends Module with Config {
                 out8(i) := sew_8_a(i) + sew_8_b(i)
             }
 		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	    }.elsewhen(io.sew === "b011".U && io.alu_op === ALU_VADDI){
+	    }.elsewhen (io.sew === "b011".U && io.alu_op === ALU_VSUB){  //sew = 64
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_a(i) - sew_64_b(i)
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+	    }.elsewhen (io.sew === "b010".U && io.alu_op === ALU_VSUB){ // sew = 32
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_a(i) - sew_32_b(i)
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+        }.elsewhen(io.sew === "b001".U && io.alu_op === ALU_VSUB){ //sew = 16
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_a(i) - sew_16_b(i)
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VSUB){ //sew = 8
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_a(i) - sew_8_b(i)
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b011".U && io.alu_op === ALU_VAND){  //sew = 64
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_a(i) & sew_64_b(i)
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+	    }.elsewhen (io.sew === "b010".U && io.alu_op === ALU_VAND){ // sew = 32
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_a(i) & sew_32_b(i)
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+        }.elsewhen(io.sew === "b001".U && io.alu_op === ALU_VAND){ //sew = 16
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_a(i) & sew_16_b(i)
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VAND){ //sew = 8
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_a(i) & sew_8_b(i)
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b011".U && io.alu_op === ALU_VOR){  //sew = 64
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_a(i) | sew_64_b(i)
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+	    }.elsewhen (io.sew === "b010".U && io.alu_op === ALU_VOR){ // sew = 32
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_a(i) | sew_32_b(i)
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+        }.elsewhen(io.sew === "b001".U && io.alu_op === ALU_VOR){ //sew = 16
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_a(i) | sew_16_b(i)
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VOR){ //sew = 8
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_a(i) | sew_8_b(i)
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b011".U && io.alu_op === ALU_VXOR){  //sew = 64
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_a(i) ^ sew_64_b(i)
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+	    }.elsewhen (io.sew === "b010".U && io.alu_op === ALU_VXOR){ // sew = 32
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_a(i) ^ sew_32_b(i)
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+        }.elsewhen(io.sew === "b001".U && io.alu_op === ALU_VXOR){ //sew = 16
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_a(i) ^ sew_16_b(i)
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VXOR){ //sew = 8
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_a(i) ^ sew_8_b(i)
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen(io.sew === "b011".U && io.alu_op === ALU_VADDI){ //sew = 64
 		    val imm = Cat(0.S(32.W), io.in_B).asSInt
 		    for (i <- 0 until 2) {
                 out64(i) := sew_64_b(i) + imm
             }
 		    io.v_out := Cat(out64(1),out64(0)).asSInt
-        }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VADDI){
-		    for (i <- 0 until 4) {
-                out32(i) := sew_32_b(i) + io.in_B
+        }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VADDI){ //sew = 32
+		    val imm = io.in_B.asSInt
+            for (i <- 0 until 4) {
+                val imm = io.in_B.asSInt
+                out32(i) := sew_32_b(i) + imm
             }
             io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VADDI){
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VADDI){ //sew = 8
 		    val imm = io.in_B(7,0).asSInt
 		    for (i <- 0 until 16) {
                 out8(i) := sew_8_b(i) + imm
             }
 		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VADDI){
+	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VADDI){ //sew = 16
 		    val imm = io.in_B(15,0).asSInt
 		    for (i <- 0 until 8) {
-                out16(i) := sew_16_b(i) + imm}
+                out16(i) := sew_16_b(i) + imm
+            }
 		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b011".U && io.alu_op === ALU_VSUBI){ //sew = 64
+		    val imm = Cat(0.S(32.W), io.in_B).asSInt
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_b(i) - imm
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+        }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VSUBI){ //sew = 32
+		    val imm = io.in_B.asSInt
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) - imm
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VSUBI){ //sew = 8
+		    val imm = io.in_B(7,0).asSInt
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_b(i) - imm
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VSUBI){ //sew = 16
+		    val imm = io.in_B(15,0).asSInt
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_b(i) - imm
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b011".U && io.alu_op === ALU_VANDI){ //sew = 64
+		    val imm = Cat(0.S(32.W), io.in_B).asSInt
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_b(i) & imm
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+        }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VANDI){ //sew = 32
+            val imm = io.in_B.asSInt
+		    for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) & imm
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VANDI){ //sew = 8
+		    val imm = io.in_B(7,0).asSInt
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_b(i) & imm
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VANDI){ //sew = 16
+		    val imm = io.in_B(15,0).asSInt
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_b(i) & imm
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b011".U && io.alu_op === ALU_VORI){ //sew = 64
+		    val imm = Cat(0.S(32.W), io.in_B).asSInt
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_b(i) | imm
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+        }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VORI){ //sew = 32
+		    val imm = io.in_B.asSInt
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) | imm
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VORI){ //sew = 8
+		    val imm = io.in_B(7,0).asSInt
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_b(i) | imm
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VORI){ //sew = 16
+		    val imm = io.in_B(15,0).asSInt
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_b(i) | imm
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b011".U && io.alu_op === ALU_VXORI){ //sew = 64
+		    val imm = Cat(0.S(32.W), io.in_B).asSInt
+		    for (i <- 0 until 2) {
+                out64(i) := sew_64_b(i) ^ imm
+            }
+		    io.v_out := Cat(out64(1),out64(0)).asSInt
+        }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VXORI){ //sew = 32
+		    val imm = io.in_B.asSInt
+            for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) ^ imm
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b000".U && io.alu_op === ALU_VXORI){ //sew = 8
+		    val imm = io.in_B(7,0).asSInt
+		    for (i <- 0 until 16) {
+                out8(i) := sew_8_b(i) ^ imm
+            }
+		    io.v_out := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
+	    }.elsewhen (io.sew === "b001".U && io.alu_op === ALU_VXORI){ //sew = 16
+		    val imm = io.in_B(15,0).asSInt
+		    for (i <- 0 until 8) {
+                out16(i) := sew_16_b(i) ^ imm
+            }
+		    io.v_out := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+	    }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VADDS){
+		    for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) + io.in_B
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VSUBS){
+		    for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) - io.in_B
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VANDS){
+		    for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) & io.in_B
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VORS){
+		    for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) | io.in_B
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+	    }.elsewhen(io.sew === "b010".U && io.alu_op === ALU_VXORS){
+		    for (i <- 0 until 4) {
+                out32(i) := sew_32_b(i) ^ io.in_B
+            }
+            io.v_out := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
 	    }
     }
 }
