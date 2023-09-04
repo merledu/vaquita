@@ -8956,3 +8956,1101 @@ org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Request window/showMessageRequ
 	at java.lang.Thread.run(Thread.java:829)
 
 2023.09.01 01:43:25 INFO  Exiting server
+2023.09.03 12:22:42 INFO  Started: Metals version 1.0.1 in folders '/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle' for client Visual Studio Code 1.81.0.
+Sep 03, 2023 12:22:43 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Sep 03, 2023 12:22:43 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Sep 03, 2023 12:22:43 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Sep 03, 2023 12:22:46 PM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/metals (H2 2.1)
+Sep 03, 2023 12:22:46 PM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.083s)
+Sep 03, 2023 12:22:46 PM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Sep 03, 2023 12:22:46 PM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.09.03 12:22:48 INFO  time: initialize in 5.21s
+2023.09.03 12:23:07 WARN  Build server is not auto-connectable.
+2023.09.03 12:23:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/RISC5/RISC5.scala
+2023.09.03 12:23:25 INFO  no build target found for /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/RISC5/RISC5.scala. Using presentation compiler with project's scala-library version: 3.3.0
+2023.09.03 12:23:36 INFO  time: code lens generation in 28s
+2023.09.03 12:27:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:28:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Exception in thread "pool-3-thread-1" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:229)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Exception in thread "pool-3-thread-2" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:229)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.09.03 12:29:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:29:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:30:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:32:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:32:48 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 507
+2023.09.03 12:32:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:33:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:33:52 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 635
+2023.09.03 12:34:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:34:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:34:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:34:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:35:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:36:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 969
+2023.09.03 12:36:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:36:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:37:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:38:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1176
+2023.09.03 12:38:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:38:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:39:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:39:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:39:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:39:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:39:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:39:42 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1424
+2023.09.03 12:39:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:39:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:40:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:40:54 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1606
+2023.09.03 12:40:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:04 WARN  Using indexes to guess the definition of out32
+2023.09.03 12:41:04 WARN  Using indexes to guess the definition of h
+2023.09.03 12:41:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:41:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:42:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1808
+2023.09.03 12:42:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:42:48 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1871
+2023.09.03 12:42:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:42:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:43:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:43:06 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1917
+2023.09.03 12:43:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:43:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:45:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:45:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:45:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:45:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:46:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Exception in thread "pool-3-thread-3" java.lang.InterruptedException
+	at scala.meta.internal.metals.FutureCancelToken.checkCanceled(FutureCancelToken.scala:29)
+	at scala.meta.internal.pc.CompilerAccess.onCompilerJobQueue$$anonfun$1(CompilerAccess.scala:229)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:152)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2023.09.03 12:47:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:47:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:47:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:47:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:47:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:47:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:47:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:48:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:49:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:49:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:50:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:50:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:50:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:50:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:50:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:51:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:52:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:53:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:54:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3103
+2023.09.03 12:54:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:54:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:55:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3395
+2023.09.03 12:55:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:56:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 12:57:20 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3583
+2023.09.03 12:57:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:32 WARN  Using indexes to guess the definition of WLEN
+2023.09.03 12:57:32 WARN  Using indexes to guess the definition of WLEN
+2023.09.03 12:57:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:57:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:58:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:58:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:59:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:59:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:59:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 12:59:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 13:00:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 13:00:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 13:00:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 13:00:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 13:01:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 13:01:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 14:20:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/INST_MEM/INST_MEM.scala
+Sep 03, 2023 2:20:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3884
+Sep 03, 2023 2:20:33 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3885
+2023.09.03 14:20:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/INST_MEM/INST_MEMTest.scala
+2023.09.03 14:20:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 2:21:02 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3904
+2023.09.03 15:22:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:22:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:22:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:23:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:23:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:23:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:24:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 15:24:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/CONTROL/CONTROLTest.scala
+2023.09.03 15:25:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 15:25:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 15:25:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 15:25:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 15:26:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:26:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:30:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:31:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:32:29 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4633
+2023.09.03 15:32:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:32:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:33:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4781
+2023.09.03 15:33:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:33:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:34:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:34:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:34:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:34:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:34:59 WARN  Using indexes to guess the definition of io
+2023.09.03 15:35:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:35:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:35:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:36:00 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5077
+2023.09.03 15:36:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:36:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5095
+2023.09.03 15:36:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:36:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:37:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:37:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:37:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:37:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:37:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:37:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:38:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5354
+Sep 03, 2023 3:38:05 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5358
+2023.09.03 15:38:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:42 WARN  Using indexes to guess the definition of io
+2023.09.03 15:38:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:38:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:39:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:41:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5689
+2023.09.03 15:41:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:41:38 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5746
+2023.09.03 15:41:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:41:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:43:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:43:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:43:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:43:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:43:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:43:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:44:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:44:18 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5945
+2023.09.03 15:44:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:44:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:44:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:44:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 3:44:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6000
+2023.09.03 15:45:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:45:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 15:45:34 WARN  Using indexes to guess the definition of inA_extend
+2023.09.03 15:57:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/V_CSR/V_CSRTest.scala
+2023.09.03 16:39:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:39:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:39:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:40:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:40:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:40:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 4:47:38 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/.reports/metals-full/2023-09-03/r_compiler-error_16-47-38-058
+2023.09.03 16:47:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 4:47:43 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/.reports/metals-full/2023-09-03/r_compiler-error_16-47-43-188
+2023.09.03 16:47:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:47:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 4:47:50 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/.reports/metals-full/2023-09-03/r_compiler-error_16-47-50-615
+2023.09.03 16:47:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:48:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:48:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:48:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:49:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:49:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:49:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:50:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:50:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:50:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:50:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:50:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:50:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 4:51:46 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/.reports/metals-full/2023-09-03/r_compiler-error_16-51-46-045
+2023.09.03 16:51:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:51:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:51:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 4:51:57 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/.reports/metals-full/2023-09-03/r_compiler-error_16-51-57-354
+2023.09.03 16:52:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 4:52:03 PM scala.meta.internal.pc.CompilerAccess handleError
+SEVERE: A severe compiler error occurred, full details of the error can be found in the error report /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/.reports/metals-full/2023-09-03/r_compiler-error_16-52-03-883
+2023.09.03 16:52:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 16:52:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:52:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 4:53:03 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6714
+2023.09.03 16:53:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:53:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:53:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 4:53:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6764
+2023.09.03 16:53:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 16:53:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/IMMEDIATE/IMMEDIATE.scala
+2023.09.03 16:53:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/IMMEDIATE/IMMEDIATETest.scala
+2023.09.03 16:53:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:53:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:54:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:54:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:54:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:54:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:54:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:54:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:55:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:55:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:56:11 WARN  Using indexes to guess the definition of V_inB_64
+2023.09.03 16:56:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:56:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:56:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:56:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 16:56:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:28 WARN  Using indexes to guess the definition of V_inB_32
+2023.09.03 17:21:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:21:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 5:21:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7193
+2023.09.03 17:22:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:22:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:28:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:28:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:28:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:29:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:29:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:29:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:29:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:29:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:29:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:34:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 5:35:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7476
+Sep 03, 2023 5:35:57 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7488
+2023.09.03 17:35:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:36:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:36:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:37:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:37:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:37:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:37:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:37:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:42:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 17:42:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:10:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:10:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:10:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:10:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:10:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:10:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:10:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:11:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:11:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:12:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:12:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:13:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:14:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:14:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:14:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:14:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:14:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:15:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:15:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:15:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 18:18:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:18:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:18:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:18:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:18:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:18:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:19:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:24 WARN  Using indexes to guess the definition of io
+2023.09.03 18:20:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 6:20:51 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8326
+2023.09.03 18:20:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:20:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:25 WARN  Using indexes to guess the definition of io
+2023.09.03 18:21:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:21:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:22:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:22:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:22:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:22:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:24:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:24:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:24:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:24:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:25:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:26:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:27:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:27:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:27:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:27:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 6:27:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 8798
+2023.09.03 18:28:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:28:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:28:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:28:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:28:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 18:29:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 18:38:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASKTest.scala
+2023.09.03 19:03:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 19:05:16 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:05:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:05:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:06:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:06:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:06:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:06:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 7:06:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9053
+2023.09.03 19:07:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:07:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:07:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:07:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:08:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 7:08:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9263
+Sep 03, 2023 7:11:19 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9267
+2023.09.03 19:16:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:17:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:18:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:18:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:18:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:25:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:25:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:25:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:25:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:26:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:26:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:26:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:26:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 7:26:30 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9559
+2023.09.03 19:27:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:27:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:45:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:45:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 7:45:55 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9833
+2023.09.03 19:45:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:45:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:48:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:48:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:48:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:48:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 7:48:56 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 9951
+2023.09.03 19:48:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:49:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:49:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:55:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 19:56:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:10:50 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:10:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:11:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:11:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:11:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 8:11:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10225
+Sep 03, 2023 8:11:16 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10231
+2023.09.03 20:11:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:11:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:11:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 8:12:00 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10289
+2023.09.03 20:12:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:12:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:12:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:12:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:12:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:12:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:13:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:14:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:14:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:14:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:15:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:16:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 8:17:04 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10652
+2023.09.03 20:17:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:17:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:17:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:17:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:17:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:17:57 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:18:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:18:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:18:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:18:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:18:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:18:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 8:18:39 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10840
+2023.09.03 20:18:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:19:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:19:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:19:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:19:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+Sep 03, 2023 8:19:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10960
+2023.09.03 20:19:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:19:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:19:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:20:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:20:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:20:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:20:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:20:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:20:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/CONTROL/CONTROL.scala
+2023.09.03 20:21:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 8:22:09 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11114
+2023.09.03 20:22:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:22:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:08 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:13 WARN  Using indexes to guess the definition of io
+2023.09.03 20:23:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:23:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 8:24:13 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11406
+2023.09.03 20:24:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:43 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:24:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:48 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 8:25:50 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11720
+2023.09.03 20:25:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:25:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:10 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+Sep 03, 2023 8:26:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 11878
+2023.09.03 20:26:29 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:26:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:13 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:19 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:27:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALUCONTROL/ALUCONTROL.scala
+2023.09.03 20:29:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:20 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:46 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 8:29:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12255
+2023.09.03 20:29:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:29:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 8:30:43 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 12469
+2023.09.03 20:30:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:30:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:33:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:33:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:33:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:35:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:36:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:36:33 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:36:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:36:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:37:59 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:38:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:38:24 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:38:40 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:38:49 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:38:51 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:38:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 20:39:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:40:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:40:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:40:58 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:01 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:17 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 9:41:21 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13021
+2023.09.03 21:41:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:28 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:34 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:36 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:41 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:44 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:47 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:53 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:41:55 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:02 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:05 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:09 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:11 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:14 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+Sep 03, 2023 9:43:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 13210
+2023.09.03 21:43:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:22 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:25 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:27 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:32 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:37 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:39 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:45 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:54 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:43:56 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:00 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:03 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:06 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:07 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:12 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:15 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:18 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:21 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:23 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:26 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:31 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:35 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:38 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 21:44:42 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala
+2023.09.03 23:21:30 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/VLMAX/VLMAX.scala
+2023.09.04 10:53:49 INFO  Started: Metals version 1.0.1 in folders '/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle' for client Visual Studio Code 1.81.0.
+Sep 04, 2023 10:53:50 AM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Sep 04, 2023 10:53:50 AM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Sep 04, 2023 10:53:50 AM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
+Sep 04, 2023 10:53:57 AM org.flywaydb.core.FlywayExecutor execute
+INFO: Database: jdbc:h2:file:/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/.metals/metals (H2 2.1)
+Sep 04, 2023 10:53:58 AM org.flywaydb.core.internal.command.DbValidate validate
+INFO: Successfully validated 4 migrations (execution time 00:00.147s)
+Sep 04, 2023 10:53:58 AM org.flywaydb.core.internal.command.DbMigrate migrateGroup
+INFO: Current version of schema "PUBLIC": 4
+Sep 04, 2023 10:53:58 AM org.flywaydb.core.internal.command.DbMigrate logSummary
+INFO: Schema "PUBLIC" is up to date. No migration necessary.
+2023.09.04 10:53:59 INFO  time: initialize in 8.93s
+2023.09.04 10:54:03 WARN  Build server is not auto-connectable.
+2023.09.04 10:54:04 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/VLMAX/VLMAX.scala
+2023.09.04 10:54:12 INFO  no build target found for /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/VLMAX/VLMAX.scala. Using presentation compiler with project's scala-library version: 3.3.0
+2023.09.04 10:54:22 INFO  time: code lens generation in 7.81s
+2023.09.04 10:54:22 INFO  time: code lens generation in 13s
+2023.09.04 10:55:52 WARN  no build target for: /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala

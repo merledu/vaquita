@@ -232,6 +232,7 @@ when ( io.opcode === 51.U ) {
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
+//Configurations Instructions:    
 //vsetvli
 }.elsewhen ( io.opcode === 87.U && io.fun3 === 7.U) {
     io.mem_write := 0.B
@@ -262,7 +263,9 @@ when ( io.opcode === 51.U ) {
     }.otherwise {
         io.avl_ope := 0.U
     }
-//Opivi
+
+//Arithmetic Instructions:       
+//Opivi (vaddi)
 }.elsewhen ( io.opcode === 87.U && io.fun3 === 3.U) {
     io.mem_write := 0.B
     io.branch := 0.B
@@ -284,7 +287,7 @@ when ( io.opcode === 51.U ) {
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
-//Opivv
+//Opivv (vadd.vv)
 }.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U) {
     io.mem_write := 0.B
     io.branch := 0.B
@@ -306,8 +309,8 @@ when ( io.opcode === 51.U ) {
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
-//Opivx (move instruction(vmv.v.x))
-}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 23.U) {
+//Opivx (vadd.vx)
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U) {
     io.mem_write := 0.B
     io.branch := 0.B
     io.mem_read := 0.B
@@ -327,6 +330,315 @@ when ( io.opcode === 51.U ) {
     io.V_opeB := 1.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
+
+//Opivx (vsub.vx)
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 2.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 4.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivv (vsub.vv)
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U && io.fun6 === 2.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 5.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 1.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B   
+
+//Opivx (move instruction(vmv.v.x))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 23.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 6.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivi (move instruction(vmv.v.i))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 3.U && io.fun6 === 23.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 7.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_imm := 1.U
+    io.V_men_to_reg := 0.B
+
+//Opivv (move instruction(vmv.v.v))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U && io.fun6 === 23.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 8.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 1.U
+    io.V_opeB := 0.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivi (bitwise instruction(vand.vi))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 3.U && io.fun6 === 9.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 9.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 1.U
+    io.V_men_to_reg := 0.B
+
+//Opivx (bitwise instruction(vand.vx))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 9.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 10.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivv (bitwise instruction(vand.vv))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U && io.fun6 === 9.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 11.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 1.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivi (bitwise instruction(vor.vi))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 3.U && io.fun6 === 10.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 12.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 1.U
+    io.V_men_to_reg := 0.B
+
+//Opivx (bitwise instruction(vor.vx))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 10.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 13.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivv (bitwise instruction(vor.vv))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U && io.fun6 === 10.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 14.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 1.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivi (bitwise instruction(vxor.vi))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 3.U && io.fun6 === 11.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 15.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 1.U
+    io.V_men_to_reg := 0.B
+
+//Opivx (bitwise instruction(vxor.vx))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 4.U && io.fun6 === 11.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 16.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
+//Opivv (bitwise instruction(vxor.vv))
+}.elsewhen ( io.opcode === 87.U && io.fun3 === 0.U && io.fun6 === 11.U) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 1.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 17.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlcsr_reg_Write := 0.B
+    io.V_opeA := 1.U
+    io.V_opeB := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+
 
 }.otherwise {
     io.mem_write := 0.B

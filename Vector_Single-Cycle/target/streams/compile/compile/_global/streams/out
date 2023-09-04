@@ -1,22 +1,10 @@
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:134:99: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                v_out64(i) := "b1111111111111111111111111111111111111111111111111111111111111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:154:71: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                    v_out32(i) := "b11111111111111111111111111111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:166:67: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                v_out32(i) := "b11111111111111111111111111111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:187:55: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                    v_out16(i) := "b1111111111111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:199:51: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                v_out16(i) := "b1111111111111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:219:46: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                    v_out8(i) := "b11111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                             ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:231:42: value S is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0m                v_out8(i) := "b11111111".S[0m
-[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
-[0m[[0m[31merror[0m] [0m[0m7 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:432:36: value asSInt is not a member of chisel3.Vec[chisel3.SInt][0m
+[0m[[0m[31merror[0m] [0m[0m                out32(i) := inA_32.asSInt[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:437:36: value asSInt is not a member of chisel3.Vec[chisel3.SInt][0m
+[0m[[0m[31merror[0m] [0m[0m                out16(i) := inA_16.asSInt[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:442:34: value asSInt is not a member of chisel3.Vec[chisel3.SInt][0m
+[0m[[0m[31merror[0m] [0m[0m                out8(i) := inA_8.asSInt[0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
