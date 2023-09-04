@@ -25,12 +25,32 @@ object ALUOP1 {
     val ALU_SRA = "b000001101".U
     val ALU_SRAI = "b000000101".U
     val ALU_COPY_A = "b000011111".U  //JAL
-	  val V_ADDI = "b000000011".U
-	  val V_ADD = "b000000000".U
+    val V_ADDI = "b000000011".U
+    val V_ADDv = "b000000000".U
+    val V_ADDx = "b000000100".U
     val VMVx = "b010111100".U
-    
-  
-	}
+    val Vsubvv  = "b000010000".U 
+    val Vsubvx = "b000010100".U 
+    val Vrsubvv = "b000011100".U
+    val Vrsubvi = "b000011011".U
+    val Vminuvv = "b000100000".U
+    val Vminuvx = "b000100100".U
+    val Vminvv = "b000101000".U
+    val Vminvx =  "b000101100".U
+    val Vmaxuvv = "b000110000".U
+    val Vmaxuvx = "b000110100".U
+    val Vmaxvv  = "b000111000".U
+    val Vmaxvx = "b000111100".U
+    val Vandvv = "b001001000".U
+    val Vandvx = "b001001100".U
+    val Vandvi = "b001001011".U
+    val Vorvv = "b001010000".U
+    val Vorvx = "b001010100".U
+    val Vorvi = "b00101011".U
+    val Vxorvv = "b001011000".U
+    val Vxorvx = "b001011100".U
+    val Vxorvi = "b001011011".U
+}
 
 trait Config{
     val WLEN = 32
@@ -172,40 +192,40 @@ class ALU_ extends Module with Config {
     ))
 
    }.otherwise{
-	when (io.sew === "b011".U && io.aluc === V_ADD){  //sew = 64
+	when (io.sew === "b011".U && io.aluc === V_ADDv){  //sew = 64
 		for (i <- 0 until 2) { out64(i) := sew_64_a(i) + sew_64_b(i)}
     io.v_output := Cat(out64(1),out64(0))
 	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === V_ADD){ // sew = 32
+	 .elsewhen (io.sew === "b010".U && io.aluc === V_ADDv){ // sew = 32
         for (i <- 0 until 4) {out32(i) := sew_32_a(i) + sew_32_b(i)}
         io.v_output := Cat(out32(3),out32(2),out32(1),out32(0))
       }
-	  .elsewhen(io.sew === "b001".U && io.aluc === V_ADD){ //sew = 16
+	  .elsewhen(io.sew === "b001".U && io.aluc === V_ADDv){ //sew = 16
 		for (i <- 0 until 8) { out16(i) := sew_16_a(i) + sew_16_b(i) }
 		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0))
 	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === V_ADD){ //sew = 8
+	  .elsewhen(io.sew === "b000".U && io.aluc === V_ADDv){ //sew = 8
 		for (i <- 0 until 16) { out8(i) := sew_8_a(i) + sew_8_b(i) }
 		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0))
 	 
-    }.elsewhen(io.sew === "b011".U && io.aluc === V_ADDI){
+    }.elsewhen(io.sew === "b011".U && io.aluc === V_ADDI ){
 		val imm = Cat(0.U(32.W), io.in_B.asUInt)
 		for (i <- 0 until 2) { out64(i) := sew_64_b(i) + imm}
 		io.v_output := Cat(out64(1),out64(0))
     
-    }.elsewhen(io.sew === "b010".U && io.aluc === V_ADDI){
+    }.elsewhen(io.sew === "b010".U && io.aluc === V_ADDI ){
        val imm = io.in_B(31,0).asUInt
 		  for (i <- 0 until 4) {out32(i) := sew_32_b(i) + imm}
         io.v_output := Cat(out32(3),out32(2),out32(1),out32(0))
 	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === V_ADDI){
+    }.elsewhen(io.sew === "b000".U && io.aluc === V_ADDI ){
 		val imm = io.in_B(7,0).asUInt
 		for (i <- 0 until 16) {
             out8(i) := sew_8_b(i) + imm
         }
 		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0))
 	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === V_ADDI){
+	  .elsewhen (io.sew === "b001".U && io.aluc === V_ADDI  ){
 		val imm = io.in_B(15,0).asUInt
 		for (i <- 0 until 8) {
         out16(i) := sew_16_b(i) + imm  
@@ -213,7 +233,56 @@ class ALU_ extends Module with Config {
                  
 		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0))
 	  }  
+        .elsewhen(io.sew === "b011".U && io.aluc === V_ADDx){
+		val rs1_data = Cat(0.U(32.W), io.in_A.asUInt)
+		for (i <- 0 until 2) { out64(i) := sew_64_b(i) + rs1_data }
+		io.v_output := Cat(out64(1),out64(0))
     
+    }.elsewhen(io.sew === "b010".U && io.aluc === V_ADDx){
+       val rs1_data = io.in_A(31,0).asUInt
+		  for (i <- 0 until 4) {out32(i) := sew_32_b(i) + rs1_data }
+        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0))
+	  
+    }.elsewhen(io.sew === "b000".U && io.aluc === V_ADDx){
+		val rs1_data = io.in_A(7,0).asUInt
+		for (i <- 0 until 16) {
+            out8(i) := sew_8_b(i) + rs1_data
+        }
+		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0))
+	  }
+	  .elsewhen (io.sew === "b001".U && io.aluc ===V_ADDx){
+		val rs1_data = io.in_A(15,0).asUInt
+		for (i <- 0 until 8) {
+        out16(i) := sew_16_b(i) + rs1_data  
+        }
+                 
+		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0))
+	  }
+    .elsewhen(io.sew === "b011".U && io.aluc === Vsubvx){
+		val imm = Cat(0.U(32.W), io.in_A.asUInt)
+		for (i <- 0 until 2) { out64(i) := sew_64_b(i) - imm}
+		io.v_output := Cat(out64(1),out64(0))
+    
+    }.elsewhen(io.sew === "b010".U && io.aluc === Vsubvx){
+       val imm = io.in_A(31,0).asUInt
+		  for (i <- 0 until 4) {out32(i) := sew_32_b(i) - imm}
+        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0))
+	  
+    }.elsewhen(io.sew === "b000".U && io.aluc === Vsubvx){
+		val imm = io.in_A(7,0).asUInt
+		for (i <- 0 until 16) {
+            out8(i) := sew_8_b(i) - imm
+        }
+		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0))
+	  }
+	  .elsewhen (io.sew === "b001".U && io.aluc === Vsubvx){
+		val imm = io.in_A(15,0).asUInt
+		for (i <- 0 until 8) {
+        out16(i) := sew_16_b(i) - imm  
+        }
+                 
+		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0))
+	  }
     .elsewhen (io.aluc === VMVx){
       
     io.v_output := Cat((0.U(96.W)),io.in_A)
