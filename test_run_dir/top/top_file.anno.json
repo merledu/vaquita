@@ -37,6 +37,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_vl_in"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vector_file>io_vs1_in"
   },
   {

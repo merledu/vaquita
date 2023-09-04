@@ -41,21 +41,22 @@ class top_file extends Module {
     control_unit_module.io.n_fields := instr_module.io.r_data(31,29)
     control_unit_module.io.lmul_count := vec_csr_module.io.vlmul_count
 
-    //vector csr module inputs
-    vec_csr_module.io.instr := instr_module.io.r_data
-
-
     //register file input
     register_file_module.io.rs1_in := instr_module.io.r_data(19,15)
     register_file_module.io.rs2_in := instr_module.io.r_data(24,20)
     register_file_module.io.rd := instr_module.io.r_data(11,7)
     register_file_module.io. reg_enable := control_unit_module.io.reg_write
 
-    register_file_module.io.reg_data := MuxLookup(control_unit_module.io.mem_data_sel,0.S,Array(
+    val wb_mux = MuxLookup(control_unit_module.io.mem_data_sel,0.S,Array(
         (0.U) -> alu_module.io.out,
         (1.U) -> s_memory_module.io.dataout)
         // (2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt)
     )
+    register_file_module.io.reg_data := wb_mux
+
+    //vector csr module inputs
+    vec_csr_module.io.instr := instr_module.io.r_data
+    vec_csr_module.io.vl_in := wb_mux(10,0).asUInt
 
 
     //vector file input

@@ -10,6 +10,7 @@ class vec_csr extends Module {
         val mask = Output(Bool())
         val tail = Output(Bool())
         val vl_out = Output(UInt(10.W))
+        val vl_in = Input(UInt(10.W))
         //val rs2 = Input(UInt(8.W))
     })
     val opcode = io.instr(6,0)
@@ -32,7 +33,7 @@ class vec_csr extends Module {
     //update vtype csr through vsetvli instruction
     when (opcode==="b1010111".U && io.instr(31)===0.B && io.instr(14,12)==="b111".U){
         vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
-        vl := 
+        vl := io.vl_in
     }
     //update vtype csr through vsetivli instruction
     // .elsewhen (opcode==="b1010111".U && io.instr(31)===1.B && io.instr(30)===1.B){
@@ -56,18 +57,50 @@ class vec_csr extends Module {
     }
     // working on  only two vector continously
     .elsewhen (vtype(2,0)==="b001".U){
-        io.vlmul := 1.U
-        io.vlmul_count := 2.U
+        when((vtype(6)===1.B) && (vl < 4.U && vtype(5,3)==="b010".U) ){
+            io.vlmul := 1.U
+            io.vlmul_count := 0.U
+        }
+        .otherwise{
+            io.vlmul := 1.U
+            io.vlmul_count := 2.U
+        }
+        
     }
     // working on  only four vector continously
     .elsewhen (vtype(2,0)==="b010".U){
-        io.vlmul := 2.U
-        io.vlmul_count := 4.U
+        when(vtype(6)===1.B && (vl < 4.U && vtype(5,3)==="b010".U) ){
+            io.vlmul := 2.U
+            io.vlmul_count := 0.U
+        }
+        .elsewhen(vtype(6)===1.B && (vl < 8.U && vtype(5,3)==="b010".U)){
+            io.vlmul := 2.U
+            io.vlmul_count := 2.U
+        }
+        .otherwise{
+            io.vlmul := 2.U
+            io.vlmul_count := 4.U
+        }
+        
     }
     // working on  only eight vector continously
     .elsewhen (vtype(2,0)==="b011".U){
-        io.vlmul := 3.U
-        io.vlmul_count := 8.U
+        when(vtype(6)===1.B && (vl < 4.U && vtype(5,3)==="b010".U) ){
+            io.vlmul := 3.U
+            io.vlmul_count := 0.U
+        }
+        .elsewhen(vtype(6)===1.B && (vl < 8.U && vtype(5,3)==="b010".U)){
+            io.vlmul := 3.U
+            io.vlmul_count := 2.U
+        }
+        .elsewhen(vtype(6)===1.B && (vl < 16.U && vtype(5,3)==="b010".U)){
+            io.vlmul := 3.U
+            io.vlmul_count := 4.U
+        }
+        .otherwise{
+            io.vlmul := 3.U
+            io.vlmul_count := 8.U
+        }
     }
     .otherwise{
         io.vlmul := 0.U
