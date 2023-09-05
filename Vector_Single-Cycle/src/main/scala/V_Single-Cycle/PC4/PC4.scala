@@ -9,5 +9,6 @@ class Program_Counter ( ) extends Module {
         val out = Output ( UInt ( 32.W ) )
 })
 io.out := 0.U
-io.out := io.pc + 4.U(32.W)
+io.out := io.pc + 4.U(32.W)    // Calculate the new program counter value by adding
+                               // 4 to the input program counter
 }

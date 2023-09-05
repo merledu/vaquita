@@ -67,22 +67,32 @@ when (io.I_inst === 1.B) {
         io.out := Cat("b000000".U, io.func3)
         io.out_V := 1.B 
     
-    //opivi (vaddi)                 //opivv (vadd.vv)   //opivx (vadd.vx)    //opivx (vsub.vx)
+                //vaddi             //vadd.vv           //vadd.vx            //vsub.vx
     }.elsewhen (io.aluOp === 1.U || io.aluOp === 2.U || io.aluOp === 3.U  || io.aluOp === 4.U || 
-                //opivx (vsub.vv)   //opivx (move instruction(vmv.v.x)) 
-                io.aluOp === 5.U || io.aluOp === 6.U || 
-                //opivx (move instruction(vmv.v.i))     //opivx (move instruction(vmv.v.v))
+                //vsub.vv           // move instruction(vmv.v.x) 
+                io.aluOp === 5.U                     || io.aluOp === 6.U || 
+                //move instruction(vmv.v.i)             //move instruction(vmv.v.v)
                 io.aluOp === 7.U                     || io.aluOp === 8.U  || 
-                //Opivi (bitwise instruction(vand.vi))  //Opivx (bitwise instruction(vand.vx))
+                //bitwise instruction(vand.vi)          //bitwise instruction(vand.vx)
                 io.aluOp === 9.U                     || io.aluOp === 10.U ||
-                //Opivv (bitwise instruction(vand.vv))  //Opivi (bitwise instruction(vor.vi))
+                //bitwise instruction(vand.vv)          //bitwise instruction(vor.vi)
                 io.aluOp === 11.U                    || io.aluOp === 12.U ||
-                //Opivx (bitwise instruction(vor.vx))   //Opivv (bitwise instruction(vor.vv))
+                //bitwise instruction(vor.vx)           //bitwise instruction(vor.vv)
                 io.aluOp === 13.U                    || io.aluOp === 14.U ||
-                //Opivi (bitwise instruction(vxor.vi))  //Opivx (bitwise instruction(vxor.vx))
-                io.aluOp === 15.U                     || io.aluOp === 16.U ||
-                //Opivv (bitwise instruction(vxor.vv))  
-                io.aluOp === 17.U) {
+                //bitwise instruction(vxor.vi)          //bitwise instruction(vxor.vx)
+                io.aluOp === 15.U                    || io.aluOp === 16.U ||
+                //bitwise instruction(vxor.vv)          //vrsub.vi
+                io.aluOp === 17.U                    || io.aluOp === 18.U ||
+                //vrsub.vx                              //U_min instruction(vminu.vx)
+                io.aluOp === 19.U                    || io.aluOp === 20.U ||
+                //U_min instruction(vminu.vv)           //S_min instruction(vmin.vx)
+                io.aluOp === 21.U                    || io.aluOp === 22.U ||
+                //S_min instruction(vmin.vv)            //U_max instruction(vmaxu.vx)
+                io.aluOp === 23.U                    || io.aluOp === 24.U ||
+                //U_max instruction(vmaxu.vv)           //S_max instruction(vmax.vx)
+                io.aluOp === 25.U                    || io.aluOp === 26.U ||
+                //S_max instruction(vmax.vv)
+                io.aluOp === 27.U) {
                 
         io.out := Cat(io.func6, io.func3)
         io.out_V := 1.B 

@@ -15,20 +15,20 @@ class V_RegFile extends Module {
 
     val vdata1 = Output (SInt(128.W))
     val vdata2 = Output (SInt(128.W))  
-    val vs0 = Output (SInt(128.W))                                   //for t&m
-    val vd_data_previous = Output (SInt(128.W))          
+    val vs0 = Output (SInt(128.W))                           //for tailing and masking
+    val vd_data_previous = Output (SInt(128.W))              //for tailing and masking
   })
+ 
+val register = RegInit(VecInit(Seq.fill(32)(0.S(128.W))))    // Initialize an array of vector registers with zeros.
 
-val register = RegInit(VecInit(Seq.fill(32)(0.S(128.W))))
-
-io.vdata1 := register(io.vs1)
+io.vdata1 := register(io.vs1)                                // Read data from the vector register file based on vs1 and vs2 inputs.
 io.vdata2 := register(io.vs2)
 
-io.vs0 := register(0.U)                                             //for t&m
-io.vd_data_previous := register(io.vd)
+io.vs0 := register(0.U)                                      //for tailing and masking
+io.vd_data_previous := register(io.vd)                       //for tailing and masking
 
-when ( io.V_reg_write ) {
-    register ( io.vd ) := io.V_w_data
+when ( io.V_reg_write ) {                                    // Conditionally write data into the vector register file when 
+    register ( io.vd ) := io.V_w_data                        //V_reg_write is asserted.
     }
 }
 

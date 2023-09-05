@@ -15,6 +15,7 @@ val lmul = Wire(UInt(4.W))
 val sew = Wire(UInt(7.W))
 
 
+// Decode v_lmul input to determine lmul value.
 when (io.v_lmul === "b000".U) {
     lmul := 1.U
 }.elsewhen (io.v_lmul === "b001".U) {
@@ -28,6 +29,7 @@ when (io.v_lmul === "b000".U) {
 }
 
 
+// Decode v_sew input to determine sew value.
 when (io.v_sew === "b000".U) {
     sew := 8.U
 }.elsewhen (io.v_sew === "b001".U) {
@@ -41,7 +43,7 @@ when (io.v_sew === "b000".U) {
 }
 
 
-
+// Compute vlmax based on lmul and sew values.
 when (lmul === 1.U && sew === 8.U) {                //lmul = 1, sew = 8
     io.vlmax := 16.U
 }.elsewhen (lmul === 2.U && sew === 8.U) {          //lmul = 2, sew = 8

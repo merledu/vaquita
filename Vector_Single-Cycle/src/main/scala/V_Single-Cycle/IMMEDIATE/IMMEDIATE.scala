@@ -18,7 +18,7 @@ class Immde extends Module {
         val V_I_type = Output ( SInt (64.W ) )
 })   
 
-when (io.I_instruction === 1.B) {
+when (io.I_instruction === 1.B) {        // Extract immediate values for various scalar instructions.
     io.I_type := Cat(Fill(20, io.instr(31)), io.instr(31,20)).asSInt
 
     io.S_type := Cat(Fill(20, io.instr(31)), io.instr(31,25), io.instr(11,7)).asSInt
@@ -33,7 +33,7 @@ when (io.I_instruction === 1.B) {
 
     io.V_I_type := 0.S
     
-}.elsewhen (io.V_instruction === 1.B) {
+}.elsewhen (io.V_instruction === 1.B) {  // If it's a Vector instruction, extract the corresponding immediate value.
     io.I_type := 0.S 
     io.S_type := 0.S 
     io.SB_type := 0.S 

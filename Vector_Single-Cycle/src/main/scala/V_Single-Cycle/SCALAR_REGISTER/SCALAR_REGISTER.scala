@@ -13,13 +13,13 @@ class RegFile extends Module {
         val rdata1 = Output ( SInt ( 32.W ) )
         val rdata2 = Output ( SInt ( 32.W ) )
 })
-val regs = RegInit( VecInit( Seq.fill(32) (0.S (32.W))))
+val regs = RegInit( VecInit( Seq.fill(32) (0.S (32.W))))     // Initialize an array of registers with zeros.
 
-io.rdata1 := Mux (( io.rs1 .orR ) , regs ( io.rs1 ) , 0.S )
+io.rdata1 := Mux (( io.rs1 .orR ) , regs ( io.rs1 ) , 0.S )  // Read data from the register file based on the rs1 and rs2 inputs.
 io.rdata2 := Mux (( io.rs2 .orR) , regs ( io.rs2 ) , 0.S )
 
-when ( io.reg_write & io.w_reg .orR ) {
-    regs ( io.w_reg ) := io.w_data
+when ( io.reg_write & io.w_reg .orR ) {                      // Conditionally write data into the register file when reg_write 
+    regs ( io.w_reg ) := io.w_data                           //is asserted and w_reg is not zero.
     }
 }
 

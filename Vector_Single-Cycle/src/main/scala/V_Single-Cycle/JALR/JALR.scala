@@ -9,8 +9,8 @@ class Jalr ( ) extends Module {
         val rdata1 = Input ( UInt (32.W ) )
         val out = Output ( UInt ( 32.W ) )
 })
-val a = io.imme + io.rdata1
-val b = "hFFFFFFFE".U & a
+val a = io.imme + io.rdata1 
+val b = "hFFFFFFFE".U & a       // Apply a bitwise AND operation with 0xFFFFFFFE to 'a' and assign it to 'b'.
 io.out := b
 }
 

@@ -35,7 +35,7 @@ Control_module.io.opcode := InstMem1_module.io.data(6, 0)
 Control_module.io.rs1_no := InstMem1_module.io.data(19, 15)                //vsetvli
 Control_module.io.rd_no := InstMem1_module.io.data(11, 7)                  //vsetvli
 Control_module.io.fun3 := InstMem1_module.io.data(14, 12)                  //opivi
-Control_module.io.fun6 := InstMem1_module.io.data(31, 26)                  //opivx(vmv.v.x)
+Control_module.io.fun6 := InstMem1_module.io.data(31, 26)                  //opivx
 
 RegFile_module.io.rs1 := Mux(Control_module.io.opcode === 51.U || Control_module.io.opcode === 19.U || Control_module.io.opcode === 35.U || Control_module.io.opcode === 3.U || Control_module.io.opcode === 99.U || Control_module.io.opcode === 103.U || Control_module.io.opcode === 87.U && Control_module.io.fun3 === 7.U || Control_module.io.opcode === 87.U && Control_module.io.fun3 === 4.U, InstMem1_module.io.data(19, 15), 0.U )      //87 is vsetvli opcode
 RegFile_module.io.rs2 := Mux(Control_module.io.opcode === 51.U || Control_module.io.opcode === 35.U || Control_module.io.opcode === 99.U, InstMem1_module.io.data(24, 20), 0.U)
@@ -57,7 +57,7 @@ V_Csr_module.io.Vtype_inst := Mux(Control_module.io.opcode === 87.U && Control_m
 V_Csr_module.io.csr_regWrite := Control_module.io.csr_reg_write
 V_Csr_module.io.vlcsr_regWrite := Control_module.io.vlcsr_reg_Write 
 
-val a = MuxLookup (Control_module.io.extend, 0.S, Array (
+val a = MuxLookup (Control_module.io.extend, 0.S, Array (                  //Immediate mux
     (0.U) -> Immde_module.io.I_type,
     (1.U) -> Immde_module.io.S_type,
     (2.U) -> Immde_module.io.U_type))                                      //opivi
@@ -88,31 +88,31 @@ val d = MuxLookup (Control_module.io.avl_ope, 0.S, Array (                //vset
     (2.U) -> V_Csr_module.io.vl_out.asSInt))
 
 
-ALU_1_module.io.in_A := MuxLookup (Control_module.io.operand_A, 0.S, Array (
+ALU_1_module.io.in_A := MuxLookup (Control_module.io.operand_A, 0.S, Array (  //alu scalar opreand A mux
     (0.U) -> RegFile_module.io.rdata1,
     (1.U) -> Program_Counter_module.io.out.asSInt,
     (2.U) -> PC_module.io.out.asSInt,
     (3.U) -> RegFile_module.io.rdata1,
     (4.U) -> d))
 
-
-ALU_1_module.io.in_B := MuxLookup (Control_module.io.operand_B, 0.S, Array (  
+ 
+ALU_1_module.io.in_B := MuxLookup (Control_module.io.operand_B, 0.S, Array (  //alu scalar opreand B mux
     (0.U) -> RegFile_module.io.rdata2,
     (1.U) -> a,
     (2.U) -> Vlmax_module.io.vlmax.asSInt))
 
     
-ALU_1_module.io.V_in_A := MuxLookup (Control_module.io.V_opeA, 0.S, Array (
+ALU_1_module.io.V_in_A := MuxLookup (Control_module.io.V_opeA, 0.S, Array (   //alu vector opreand A mux
     (0.U) -> 0.S,
     (1.U) -> V_RegFile_module.io.vdata1))
 
 
-ALU_1_module.io.V_in_B := MuxLookup (Control_module.io.V_opeB, 0.S, Array (
+ALU_1_module.io.V_in_B := MuxLookup (Control_module.io.V_opeB, 0.S, Array (   //alu vector opreand B mux
     (0.U) -> 0.S,
     (1.U) -> V_RegFile_module.io.vdata2))
 
 
-ALU_1_module.io.alu_imm := MuxLookup (Control_module.io.V_imm, 0.S, Array (
+ALU_1_module.io.alu_imm := MuxLookup (Control_module.io.V_imm, 0.S, Array (   //alu vector immediate mux
     (0.U) -> 0.S,
     (1.U) -> Immde_module.io.V_I_type))
 
@@ -155,12 +155,12 @@ Branch_module.io.arg_x := RegFile_module.io.rdata1
 Branch_module.io.arg_y := RegFile_module.io.rdata2
 
 
-RegFile_module.io.w_data := MuxLookup (Control_module.io.men_to_reg, 0.S, Array (
+RegFile_module.io.w_data := MuxLookup (Control_module.io.men_to_reg, 0.S, Array (       //scalar write back mux
     (0.U) -> ALU_1_module.io.out,
     (1.U) -> DataMem_module.io.dataOut))
 
 
-V_RegFile_module.io.V_w_data := MuxLookup (Control_module.io.V_men_to_reg, 0.S, Array (
+V_RegFile_module.io.V_w_data := MuxLookup (Control_module.io.V_men_to_reg, 0.S, Array ( //vector write back mux
     (0.U) -> Tail_Mask.io.Vector_Out,
     (1.U) -> 0.S))                 
 

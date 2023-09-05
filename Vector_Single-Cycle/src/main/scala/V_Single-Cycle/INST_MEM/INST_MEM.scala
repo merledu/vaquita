@@ -14,8 +14,8 @@ class InstMem1 ( initFile : String ) extends Module with Config {
         val addr = Input ( UInt ( WLEN.W ) )
         val data = Output ( UInt ( WLEN.W ) )
 })
-val imem = Mem ( INST_MEM_LEN , UInt ( WLEN.W ) )
+val imem = Mem ( INST_MEM_LEN , UInt ( WLEN.W ) )    // Create a memory array for instructions
 
-loadMemoryFromFile ( imem , initFile )
-io.data := imem ( io.addr )
+loadMemoryFromFile ( imem , initFile )               // Load memory contents from a file
+io.data := imem ( io.addr )                          // Output data from memory based on the input address
 }
