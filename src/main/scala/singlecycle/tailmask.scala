@@ -120,7 +120,7 @@ class Tail_Mask extends Module {
   when (io.sew === "b011".U){
     for (i <- 0 until 2) {
       
-        when (i.U <  vstart){//prestart 
+        when (i.U <  vstart){                         //prestart 
           sew_64_v_data_out(i) := sew_64_vd(i)
         }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){ //bodyelements
         when (io.vm === 0.U){
@@ -135,7 +135,7 @@ class Tail_Mask extends Module {
         sew_64_v_data_out(i) := sew_64_vdata(i)
         }    
 
-      }.elsewhen(i.U > io.vl ){//tail elements
+      }.elsewhen(i.U > io.vl && i.U < 2.U){                         //tail elements
           when (io.vta ===0.U){
             sew_64_v_data_out(i) := sew_64_vd(i)
           }.elsewhen (io.vta === 1.U ){
@@ -148,8 +148,9 @@ class Tail_Mask extends Module {
   }.elsewhen(io.sew === "b010".U){
     for (i <- 0 until 4) {
       
-        when (i.U <  vstart){//pre start elements
+        when (i.U <  vstart){                         //pre start elements
           sew_32_v_data_out(i) := sew_32_vd(i)
+
         }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){//body elements
             when (io.vm === 0.U){
               when(io.vs0(i) === 0.U && io.vma === 0.U ){
@@ -166,7 +167,7 @@ class Tail_Mask extends Module {
         sew_32_v_data_out(i) := sew_32_vdata(i)
       }
       }
-        .elsewhen(i.U > io.vl){//tail elements
+        .elsewhen(i.U > io.vl &&  i.U < 4.U){                              //tail elements
             when (io.vta ===0.U){
               sew_32_v_data_out(i) := sew_32_vd(i)
             }.elsewhen (io.vta === 1.U ){
@@ -177,9 +178,9 @@ class Tail_Mask extends Module {
   }.elsewhen(io.sew === "b001".U){
     for (i <- 0 until 8) {
       
-      when (i.U < vstart){//prestart elems
+      when (i.U < vstart){                                  //prestart elems
         sew_16_v_data_out(i) := sew_16_vd(i)
-      }.elsewhen(i.U >= vstart && i.U <= io.vl  ){ //body elems 
+      }.elsewhen(i.U >= vstart && i.U <= io.vl  ){         //body elems 
         when (io.vm === 0.U){
           when(io.vs0(i) === 0.U && io.vma === 0.U ){
             sew_16_v_data_out(i) := sew_16_vd(i)
@@ -192,7 +193,7 @@ class Tail_Mask extends Module {
           sew_16_v_data_out(i) := sew_16_vdata(i)
         }
         
-      }.elsewhen(i.U > io.vl ){//tail elements
+      }.elsewhen(i.U > io.vl && i.U < 8.U ){                 //tail elements
         when (io.vta ===0.U){
           sew_16_v_data_out(i) := sew_16_vd(i)
         }.elsewhen (io.vta === 1.U ){
@@ -204,9 +205,9 @@ class Tail_Mask extends Module {
   }.elsewhen(io.sew === "b0".U){
     for (i <- 0 until 16 ) {
       
-       when (i.U <  vstart){//prestart elems
+       when (i.U <  vstart){                              //prestart elems
         sew_8_v_data_out(i) := sew_8_vd(i)
-      }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){ //body elems 
+      }.elsewhen(i.U >=  vstart && i.U <= io.vl  ){        //body elems 
       when (io.vm === 0.U){
         
           when(io.vs0(i) === 0.U && io.vma === 0.U ){
@@ -222,7 +223,7 @@ class Tail_Mask extends Module {
           }.otherwise{
         sew_8_v_data_out(i) := sew_8_vdata(i)
          }
-      }.elsewhen(i.U > io.vl ){//tail elements
+      }.elsewhen(i.U > io.vl&& i.U < 16.U ){              //tail elements
         when (io.vta ===0.U){
           sew_8_v_data_out(i) := sew_8_vd(i)
         }.elsewhen (io.vta === 1.U ){
