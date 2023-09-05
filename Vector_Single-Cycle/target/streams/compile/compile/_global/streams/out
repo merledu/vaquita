@@ -1,13 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:395:44: not found: value inA_64[0m
-[0m[[0m[31merror[0m] [0m[0m                out64(i) := (V_inB_64(i) - inA_64(i)).asSInt[0m
-[0m[[0m[31merror[0m] [0m[0m                                           ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:400:44: not found: value inA_32[0m
-[0m[[0m[31merror[0m] [0m[0m                out32(i) := (V_inB_32(i) - inA_32(i)).asSInt[0m
-[0m[[0m[31merror[0m] [0m[0m                                           ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:405:44: not found: value inA_16[0m
-[0m[[0m[31merror[0m] [0m[0m                out16(i) := (V_inB_16(i) - inA_16(i)).asSInt[0m
-[0m[[0m[31merror[0m] [0m[0m                                           ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/ALU/ALU.scala:410:42: not found: value inA_8[0m
-[0m[[0m[31merror[0m] [0m[0m                out8(i) := (V_inB_8(i) - inA_8(i)).asSInt[0m
-[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
-[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:19:1: Missing closing brace `}' assumed here[0m
+[0m[[0m[31merror[0m] [0m[0m})[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:19:2: ';' expected but ')' found.[0m
+[0m[[0m[31merror[0m] [0m[0m})[0m
+[0m[[0m[31merror[0m] [0m[0m ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

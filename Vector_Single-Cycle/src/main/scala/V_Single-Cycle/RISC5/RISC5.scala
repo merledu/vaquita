@@ -62,8 +62,9 @@ val a = MuxLookup (Control_module.io.extend, 0.S, Array (                  //Imm
     (1.U) -> Immde_module.io.S_type,
     (2.U) -> Immde_module.io.U_type))                                      //opivi
 
-Vlmax_module.io.v_lmul := V_Csr_module.io.Vtype_inst(2, 0)
-Vlmax_module.io.v_sew := V_Csr_module.io.Vtype_inst(5, 3)
+Vlmax_module.io.v_lmul := Mux(Control_module.io.opcode === 87.U && Control_module.io.fun3 === 7.U, V_Csr_module.io.Vtype_inst(2, 0), 0.U)
+Vlmax_module.io.v_sew := Mux(Control_module.io.opcode === 87.U && Control_module.io.fun3 === 7.U, V_Csr_module.io.Vtype_inst(5, 3), 0.U)
+Vlmax_module.io.vlmax_pin := Control_module.io.vlamx_writepin
 
 
 V_RegFile_module.io.vs1 := Mux(Control_module.io.opcode === 87.U && Control_module.io.fun3 === 0.U, InstMem1_module.io.data(19, 15), 0.U)                                   
@@ -122,7 +123,8 @@ ALU_1_module.io.in_V := Control_module.io.is_V
 ALU_1_module.io.alu_Op := Alu_Control_module.io.out
 ALU_1_module.io.alu_sew := V_Csr_module.io.vtype_out(5, 3)                 //opivi         
 ALU_1_module.io.alu_lmul := V_Csr_module.io.vtype_out(2, 0)                //opivi 
-                                   
+ALU_1_module.io.vd := InstMem1_module.io.data(11, 7).asSInt                               
+
 
 DataMem_module.io.addr := ALU_1_module.io.out.asUInt
 DataMem_module.io.dataIn := RegFile_module.io.rdata2
