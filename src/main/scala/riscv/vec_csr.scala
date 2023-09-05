@@ -33,7 +33,11 @@ class vec_csr extends Module {
     //update vtype csr through vsetvli instruction
     when (opcode==="b1010111".U && io.instr(31)===0.B && io.instr(14,12)==="b111".U){
         vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
+<<<<<<< HEAD
         vl := io.vl_in
+=======
+        // vl := 
+>>>>>>> 8b866837bcf80a9ab84cfa2ce3d926b4c1031875
     }
     //update vtype csr through vsetivli instruction
     // .elsewhen (opcode==="b1010111".U && io.instr(31)===1.B && io.instr(30)===1.B){
