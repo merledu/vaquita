@@ -116,7 +116,7 @@ when (io.tm_sew === "b011".U) {                                //64
         when (i.U < vstart) {                                                 //prestart
             v_out64(i) := tm_out64(i)
 
-        }.elsewhen (i.U >= vstart && i.U <= io.tm_vl) {                        //body
+        }.elsewhen (i.U >= vstart && i.U < io.tm_vl) {                        //body
             when (io.tm_vm === 0.U) {
                 when (io.v0(i) === 0.U && io.tm_vma === 0.U) {
                     v_out64(i) := vd64(i)
@@ -129,7 +129,7 @@ when (io.tm_sew === "b011".U) {                                //64
                 v_out64(i) := tm_out64(i)
             }
         
-        }.elsewhen (i.U > io.tm_vl && i.U < 2.U) {                           //tail
+        }.elsewhen (i.U >= io.tm_vl && i.U < 2.U) {                           //tail
             when (io.tm_vta === 0.U) {
                 v_out64(i) := vd64(i)
             }.otherwise {
@@ -147,7 +147,7 @@ when (io.tm_sew === "b011".U) {                                //64
         when (i.U < vstart) {                                                 //prestart
             v_out32(i) := tm_out32(i)
 
-        }.elsewhen (i.U >= vstart && i.U <= io.tm_vl) {                        //body
+        }.elsewhen (i.U >= vstart && i.U < io.tm_vl) {                        //body
             when (io.tm_vm === 0.U) {
                 when (io.v0(i) === 0.U && io.tm_vma === 0.U) {
                     v_out32(i) := vd32(i)
@@ -160,7 +160,7 @@ when (io.tm_sew === "b011".U) {                                //64
                 v_out32(i) := tm_out32(i)
             }
         
-        }.elsewhen (i.U > io.tm_vl && i.U < 4.U) {                           //tail
+        }.elsewhen (i.U >= io.tm_vl && i.U < 4.U) {                           //tail
             when (io.tm_vta === 0.U) {
                 v_out32(i) := vd32(i)
             }.otherwise {
@@ -180,7 +180,7 @@ when (io.tm_sew === "b011".U) {                                //64
         when (i.U < vstart) {                                                 //prestart
             v_out16(i) := tm_out16(i)
 
-        }.elsewhen (i.U >= vstart && i.U <= io.tm_vl) {                        //body
+        }.elsewhen (i.U >= vstart && i.U < io.tm_vl) {                        //body
             when (io.tm_vm === 0.U) {
                 when (io.v0(i) === 0.U && io.tm_vma === 0.U) {
                     v_out16(i) := vd16(i)
@@ -193,7 +193,7 @@ when (io.tm_sew === "b011".U) {                                //64
                 v_out16(i) := tm_out16(i)
             }
         
-        }.elsewhen (i.U > io.tm_vl && i.U < 8.U) {                           //tail
+        }.elsewhen (i.U >= io.tm_vl && i.U < 8.U) {                           //tail
             when (io.tm_vta === 0.U) {
                 v_out16(i) := vd16(i)
             }.otherwise {
@@ -212,7 +212,7 @@ when (io.tm_sew === "b011".U) {                                //64
         when (i.U < vstart) {                                                 //prestart
             v_out8(i) := tm_out8(i)
 
-        }.elsewhen (i.U >= vstart && i.U <= io.tm_vl) {                        //body
+        }.elsewhen (i.U >= vstart && i.U < io.tm_vl) {                        //body
             when (io.tm_vm === 0.U) {
                 when (io.v0(i) === 0.U && io.tm_vma === 0.U) {
                     v_out8(i) := vd8(i)
@@ -225,7 +225,7 @@ when (io.tm_sew === "b011".U) {                                //64
                 v_out8(i) := tm_out8(i)
             }
         
-        }.elsewhen (i.U > io.tm_vl && i.U < 16.U) {                           //tail
+        }.elsewhen (i.U >= io.tm_vl && i.U < 16.U) {                           //tail
             when (io.tm_vta === 0.U) {
                 v_out8(i) := vd8(i)
             }.otherwise {
