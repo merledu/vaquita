@@ -29,7 +29,7 @@ class controldec extends Module {
     io.Ex_sel := 0.U
     io.nextPCsel := 0.U
     io.aluop := 7.U
-    io.vset := 1.B
+    io.vset := 0.B
     io.load :=0.B
     io.v_ins := 0.B
 

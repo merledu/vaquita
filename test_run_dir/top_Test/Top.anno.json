@@ -33,7 +33,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|vregfile>io_vddata"
+    "target":"~Top|vregfile>io_vddata_o"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -92,9 +92,45 @@
     "target":"~Top|configure>io_zimm_o"
   },
   {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vl"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_sew"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vma"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vta"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vm"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vs0"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vd"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_vdata"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Tail_Mask>io_v_data_out"
+  },
+  {
     "class":"firrtl.annotations.LoadMemoryAnnotation",
     "target":"Top.InstMem.imemm",
-    "fileName":"/home/maira/rvv-core/src/main/scala/singlecycle/abc.txt",
+    "fileName":"/home/hamna/rvv-core/src/main/scala/singlecycle/abc.txt",
     "hexOrBinary":"h",
     "originalMemoryNameOpt":"imemm"
   },
