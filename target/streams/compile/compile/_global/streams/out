@@ -1,16 +1,31 @@
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:306:43: not found: value imm[0m
-[0m[[0m[31merror[0m] [0m[0m                out32(i) := sew_32_b(i) + imm[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:329:43: not found: value imm[0m
-[0m[[0m[31merror[0m] [0m[0m                out32(i) := sew_32_b(i) - imm[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:352:43: not found: value imm[0m
-[0m[[0m[31merror[0m] [0m[0m                out32(i) := sew_32_b(i) & imm[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:375:43: not found: value imm[0m
-[0m[[0m[31merror[0m] [0m[0m                out32(i) := sew_32_b(i) | imm[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:398:43: not found: value imm[0m
-[0m[[0m[31merror[0m] [0m[0m                out32(i) := sew_32_b(i) ^ imm[0m
-[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
-[0m[[0m[31merror[0m] [0m[0m5 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:51:5: Missing closing brace `}' assumed here[0m
+[0m[[0m[31merror[0m] [0m[0m    val in_A = Input(SInt(WLEN.W))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:52:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    val in_B = Input(SInt(WLEN.W))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:53:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	val in_vA = Input(SInt(128.W))[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:54:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	val in_vB = Input(SInt(128.W))[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:55:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    val alu_op = Input(UInt(ALUOP_SIG_LEN.W))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:56:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	val sew = Input(UInt(3.W))[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:57:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	val in_V = Input(Bool())[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:58:5: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m    val out = Output(SInt(WLEN.W))[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:59:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	val v_out = Output(SInt(128.W))[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hassan/rvv-core/src/main/scala/rvv/ALU.scala:60:1: eof expected but '}' found.[0m
+[0m[[0m[31merror[0m] [0m[0m}[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m10 errors found[0m

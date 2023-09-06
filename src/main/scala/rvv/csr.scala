@@ -15,13 +15,15 @@ class v_csr extends Module {
 
     val vtype_encod = Cat(Fill(21, 0.U), io.zimm)
     val vtypeReg = RegInit(0.U(32.W))
+    val vlReg = RegInit(0.U(32.W))
 
     when (io.csr_Write === 1.B) {
         vtypeReg := vtype_encod
+        vlReg := io.vl_writeback
     }
 
-    val vlReg = RegInit(0.U(32.W))
-    vlReg := io.vl_writeback
+    // val vlReg = RegInit(0.U(32.W))
+    // vlReg := io.vl_writeback
 
     io.vl_out := vlReg
     io.v_settings := vtypeReg
