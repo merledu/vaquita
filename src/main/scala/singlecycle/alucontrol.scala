@@ -8,12 +8,10 @@ class Alu_Control ( ) extends Module {
         val func3 = Input ( UInt (3.W ) )
         val func7 = Input ( Bool () )
         val aluOp = Input ( UInt (3.W ) )
-        // val I_inst = Input ( Bool() )                    //vsetvli
         val V_inst = Input ( Bool() )
-        val func6 = Input ( UInt (6.W) )                 //opivi
-
+        val func6 = Input ( UInt (6.W) )                
         val aluc = Output ( UInt ( 9.W ) )
-        val out_V = Output ( Bool() )                    //vsetvli
+        val out_V = Output ( Bool() )                    
 })
 when (io.V_inst === 0.B) {
     // R type

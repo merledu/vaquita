@@ -28,10 +28,10 @@ object ALUOP1 {
     val V_ADDI = "b000000011".U
     val V_ADD = "b000000000".U
     val Vaddvx = "b000000100".U
-    val VMVx = "b010111100".U
-    val VMVvv = "b010111100".U
+    val VMVx = 188.U
+    val VMVvv = 184.U
     val VMVvi = 187.U
-    val Vsubvv  = 184.U 
+    val Vsubvv  ="b000010000".U 
     val Vsubvx = "b000010100".U 
     val Vrsubvx = "b000011100".U
     val Vrsubvi = "b000011011".U
@@ -48,7 +48,7 @@ object ALUOP1 {
     val Vandvi = "b001001011".U
     val Vorvv = "b001010000".U
     val Vorvx = "b001010100".U
-    val Vorvi = "b00101011".U
+    val Vorvi = 83.U
     val Vxorvv = "b001011000".U
     val Vxorvx = "b001011100".U
     val Vxorvi = "b001011011".U
@@ -68,9 +68,6 @@ class ALUIO extends Bundle with Config {
     val in_B = Input(SInt(WLEN.W))
 	val vs1 = Input(SInt(128.W))
 	val vs2 = Input(SInt(128.W))
-  // val vma =Input(UInt(1.W)) //vtype
-  // val vm =Input(UInt(1.W)) //umasked=0  , masked = 1
-  // val vs0 = Input(UInt(128.U))
   val vd_addr = Input(UInt(5.W))
     val aluc = Input(UInt(ALUOP_SIG_LEN.W))
 	val sew = Input(UInt(3.W))
