@@ -13,40 +13,11 @@
 [debug] compilation cycle 1
 [info] compiling 16 Scala sources to /home/hafsa/Vector/rvv-core/target/scala-2.12/classes ...
 [debug] Getting org.scala-sbt:compiler-bridge_2.12:1.7.1:compile for Scala 2.12.16
-[info] Non-compiled module 'compiler-bridge_2.12' for Scala 2.12.16. Compiling...
-[debug] Creating plain compiler interface for 2.12.16.
-[debug]   > Arguments: 
-[debug] 	-d
-[debug] 	/tmp/sbt_dfe69833
-[debug] 	-nowarn
+[debug] [zinc] Running cached compiler 1931e22b for Scala compiler version 2.12.16
+[debug] [zinc] The Scala compiler is invoked with:
 [debug] 	-bootclasspath
 [debug] 	/home/hafsa/.sbt/boot/scala-2.12.16/lib/scala-library.jar
 [debug] 	-classpath
-[debug] 	/home/hafsa/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-interface/1.7.1/compiler-interface-1.7.1.jar:/home/hafsa/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/util-interface/1.7.0/util-interface-1.7.0.jar:/home/hafsa/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/compiler-bridge_2.12/1.7.1/compiler-bridge_2.12-1.7.1-sources.jar:/home/hafsa/.sbt/boot/scala-2.12.16/lib/scala-xml_2.12-1.0.6.jar:/home/hafsa/.sbt/boot/scala-2.12.16/lib/scala-reflect.jar:/home/hafsa/.sbt/boot/scala-2.12.16/lib/scala-compiler.jar
-[debug] 	/tmp/sbt_98312c29/scala/ZincCompat.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/API.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/AbstractZincFile.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/Analyzer.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/CallbackGlobal.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/ClassName.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/Compat.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/CompilerBridge.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/ConsoleBridge.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/DelegatingReporter.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/Dependency.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/ExtractAPI.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/ExtractUsedNames.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/GlobalHelpers.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/InteractiveConsoleBridge.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/InteractiveConsoleFactoryBridge.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/InteractiveConsoleHelper.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/InteractiveConsoleResponse.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/JarUtils.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/JavaUtils.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/LocalToNonLocalClass.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/LocateClassFile.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/Log.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/Message.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/PlainNioFile.scala
-[debug] 	/tmp/sbt_98312c29/xsbt/ScaladocBridge.scala
-[debug]       
+[debug] 	/home/hafsa/Vector/rvv-core/target/scala-2.12/classes
+[debug] Compilation failed (CompilerInterface)
+[error] (Compile / compileIncremental) Compilation failed
