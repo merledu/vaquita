@@ -1,0 +1,1 @@
+["rvv.MEMORY2Test","rvv.CONTROLTest","rvv.MEMORY1Test","rvv.ALUTest","rvv.IMMEDIATETest","rvv.TAIL_MASKTest","rvv.BRANCHTest","rvv.SCALAR_REGISTERTest","rvv.V_CSRTest","rvv.PC4Test","rvv.PCTest","rvv.VLMAXTest","rvv.VECTOR_REGISTERTest","rvv.JALRTest","rvv.ALUCONTROLTest","rvv.RISC5Test"]

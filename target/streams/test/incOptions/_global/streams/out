@@ -1,0 +1,53 @@
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /home/hafsa/Vector/rvv-core/target/scala-2.12/test-classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	RISC5Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SCALAR_REGISTERTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CONTROLTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MEMORY1Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PCTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	IMMEDIATETest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MEMORY2Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	V_CSRTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VLMAXTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	JALRTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PC4Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TAIL_MASKTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VECTOR_REGISTERTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUCONTROLTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BRANCHTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	RISC5Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SCALAR_REGISTERTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CONTROLTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MEMORY1Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PCTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	IMMEDIATETest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MEMORY2Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	V_CSRTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VLMAXTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	JALRTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PC4Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TAIL_MASKTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VECTOR_REGISTERTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUCONTROLTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BRANCHTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VLMAXTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ALUCONTROLTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PCTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	CONTROLTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MEMORY2Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	V_CSRTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VECTOR_REGISTERTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	TAIL_MASKTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BRANCHTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MEMORY1Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	RISC5Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	JALRTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	IMMEDIATETest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	PC4Test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SCALAR_REGISTERTest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /home/hafsa/Vector/rvv-core/target/scala-2.12/test-classes.bak[0m

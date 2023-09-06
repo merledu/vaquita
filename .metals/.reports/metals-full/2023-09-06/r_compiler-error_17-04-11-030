@@ -1,0 +1,137 @@
+java.lang.AssertionError: assertion failed: denotation module class language$ invalid in run 3. ValidFor: Period(1..2, run = 4)
+occurred in the presentation compiler.
+
+action parameters:
+offset: 12
+uri: file://<WORKSPACE>/Vector_Single-Cycle/src/main/scala/rvv/SCALAR_REGISTER.scala
+text:
+package Vpra@@ctice
+
+import chisel3._
+import chisel3.util._
+
+class RegFile extends Module {
+    val io = IO (new Bundle{
+        val rs1 = Input ( UInt (5.W ) )
+        val rs2 = Input ( UInt (5.W ) )
+        val reg_write = Input ( Bool () )
+        val w_reg = Input ( UInt (5.W ) )
+        val w_data = Input ( SInt ( 32.W ) )
+        val rdata1 = Output ( SInt ( 32.W ) )
+        val rdata2 = Output ( SInt ( 32.W ) )
+})
+val regs = RegInit( VecInit( Seq.fill(32) (0.S (32.W))))     // Initialize an array of registers with zeros.
+
+io.rdata1 := Mux (( io.rs1 .orR ) , regs ( io.rs1 ) , 0.S )  // Read data from the register file based on the rs1 and rs2 inputs.
+io.rdata2 := Mux (( io.rs2 .orR) , regs ( io.rs2 ) , 0.S )
+
+when ( io.reg_write & io.w_reg .orR ) {                      // Conditionally write data into the register file when reg_write 
+    regs ( io.w_reg ) := io.w_data                           //is asserted and w_reg is not zero.
+    }
+}
+
+
+
+
+error stacktrace:
+scala.runtime.Scala3RunTime$.assertFailed(Scala3RunTime.scala:8)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.updateValidity(Denotations.scala:718)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.bringForward(Denotations.scala:743)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.toNewRun$1(Denotations.scala:800)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.current(Denotations.scala:871)
+	dotty.tools.dotc.core.Symbols$Symbol.recomputeDenot(Symbols.scala:120)
+	dotty.tools.dotc.core.Symbols$Symbol.computeDenot(Symbols.scala:114)
+	dotty.tools.dotc.core.Symbols$Symbol.denot(Symbols.scala:107)
+	dotty.tools.dotc.core.SymDenotations$.stillValidInOwner(SymDenotations.scala:2637)
+	dotty.tools.dotc.core.SymDenotations$.stillValid(SymDenotations.scala:2631)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.bringForward(Denotations.scala:743)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.toNewRun$1(Denotations.scala:800)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.current(Denotations.scala:871)
+	dotty.tools.dotc.core.Symbols$Symbol.recomputeDenot(Symbols.scala:120)
+	dotty.tools.dotc.core.Symbols$Symbol.computeDenot(Symbols.scala:114)
+	dotty.tools.dotc.core.Symbols$Symbol.denot(Symbols.scala:107)
+	dotty.tools.dotc.core.Symbols$ClassSymbol.classDenot(Symbols.scala:481)
+	dotty.tools.dotc.core.Symbols$.toClassDenot(Symbols.scala:497)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$.setClassInfo(Scala2Unpickler.scala:115)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$LocalUnpickler.parseToCompletion$1(Scala2Unpickler.scala:616)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$LocalUnpickler.complete$$anonfun$1(Scala2Unpickler.scala:646)
+	scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler.atReadPos(Scala2Unpickler.scala:319)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$LocalUnpickler.complete(Scala2Unpickler.scala:648)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.completeFrom(SymDenotations.scala:174)
+	dotty.tools.dotc.core.Denotations$Denotation.completeInfo$1(Denotations.scala:187)
+	dotty.tools.dotc.core.Denotations$Denotation.info(Denotations.scala:189)
+	dotty.tools.dotc.core.Definitions.patch2$1(Definitions.scala:1295)
+	dotty.tools.dotc.core.Definitions.patch2$1$$anonfun$3(Definitions.scala:1356)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.immutable.List.foreach(List.scala:333)
+	dotty.tools.dotc.core.Definitions.patch2$1(Definitions.scala:1356)
+	dotty.tools.dotc.core.Definitions.patchWith$1(Definitions.scala:1360)
+	dotty.tools.dotc.core.Definitions.patchStdLibClass(Definitions.scala:1365)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$.setClassInfo(Scala2Unpickler.scala:129)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$LocalUnpickler.parseToCompletion$1(Scala2Unpickler.scala:616)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$LocalUnpickler.complete$$anonfun$1(Scala2Unpickler.scala:646)
+	scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler.atReadPos(Scala2Unpickler.scala:319)
+	dotty.tools.dotc.core.unpickleScala2.Scala2Unpickler$LocalUnpickler.complete(Scala2Unpickler.scala:648)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.completeFrom(SymDenotations.scala:174)
+	dotty.tools.dotc.core.Denotations$Denotation.completeInfo$1(Denotations.scala:187)
+	dotty.tools.dotc.core.Denotations$Denotation.info(Denotations.scala:189)
+	dotty.tools.dotc.core.Denotations$Denotation.completeInfo$1(Denotations.scala:187)
+	dotty.tools.dotc.core.Denotations$Denotation.info(Denotations.scala:189)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.ensureCompleted(SymDenotations.scala:390)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.flags(SymDenotations.scala:66)
+	dotty.tools.dotc.core.SymDenotations$ModuleCompleter.complete(SymDenotations.scala:2771)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.completeFrom(SymDenotations.scala:174)
+	dotty.tools.dotc.core.Denotations$Denotation.completeInfo$1(Denotations.scala:187)
+	dotty.tools.dotc.core.Denotations$Denotation.info(Denotations.scala:189)
+	dotty.tools.dotc.core.Denotations$.select$1(Denotations.scala:1307)
+	dotty.tools.dotc.core.Denotations$.recurSimple$1(Denotations.scala:1337)
+	dotty.tools.dotc.core.Denotations$.recur$1(Denotations.scala:1339)
+	dotty.tools.dotc.core.Denotations$.staticRef$$anonfun$1(Denotations.scala:1344)
+	dotty.tools.dotc.util.GenericHashMap.getOrElseUpdate(GenericHashMap.scala:134)
+	dotty.tools.dotc.core.Denotations$.staticRef(Denotations.scala:1344)
+	dotty.tools.dotc.core.Symbols$.requiredModule(Symbols.scala:928)
+	dotty.tools.dotc.core.Definitions.LanguageExperimentalModule(Definitions.scala:800)
+	dotty.tools.dotc.typer.Checking.checkLegalImportPath(Checking.scala:931)
+	dotty.tools.dotc.typer.Checking.checkLegalImportPath$(Checking.scala:801)
+	dotty.tools.dotc.typer.Typer.checkLegalImportPath(Typer.scala:115)
+	dotty.tools.dotc.typer.Typer.typedImport(Typer.scala:2669)
+	dotty.tools.dotc.typer.Typer.typedUnnamed$1(Typer.scala:2940)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2991)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.traverse$1(Typer.scala:3074)
+	dotty.tools.dotc.typer.Typer.typedStats(Typer.scala:3130)
+	dotty.tools.dotc.typer.Typer.typedPackageDef(Typer.scala:2692)
+	dotty.tools.dotc.typer.Typer.typedUnnamed$1(Typer.scala:2961)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2991)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.typedExpr(Typer.scala:3174)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck$$anonfun$1(TyperPhase.scala:44)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck$$anonfun$adapted$1(TyperPhase.scala:54)
+	scala.Function0.apply$mcV$sp(Function0.scala:42)
+	dotty.tools.dotc.core.Phases$Phase.monitor(Phases.scala:437)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck(TyperPhase.scala:54)
+	dotty.tools.dotc.typer.TyperPhase.runOn$$anonfun$3(TyperPhase.scala:88)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.immutable.List.foreach(List.scala:333)
+	dotty.tools.dotc.typer.TyperPhase.runOn(TyperPhase.scala:88)
+	dotty.tools.dotc.Run.runPhases$1$$anonfun$1(Run.scala:247)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1321)
+	dotty.tools.dotc.Run.runPhases$1(Run.scala:263)
+	dotty.tools.dotc.Run.compileUnits$$anonfun$1(Run.scala:271)
+	dotty.tools.dotc.Run.compileUnits$$anonfun$adapted$1(Run.scala:280)
+	dotty.tools.dotc.util.Stats$.maybeMonitored(Stats.scala:67)
+	dotty.tools.dotc.Run.compileUnits(Run.scala:280)
+	dotty.tools.dotc.Run.compileSources(Run.scala:195)
+	dotty.tools.dotc.interactive.InteractiveDriver.run(InteractiveDriver.scala:165)
+	scala.meta.internal.pc.MetalsDriver.run(MetalsDriver.scala:45)
+	scala.meta.internal.pc.PcCollector.<init>(PcCollector.scala:42)
+	scala.meta.internal.pc.PcDocumentHighlightProvider.<init>(PcDocumentHighlightProvider.scala:16)
+	scala.meta.internal.pc.ScalaPresentationCompiler.documentHighlight$$anonfun$1(ScalaPresentationCompiler.scala:151)

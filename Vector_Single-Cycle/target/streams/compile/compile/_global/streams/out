@@ -1,7 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:19:1: Missing closing brace `}' assumed here[0m
-[0m[[0m[31merror[0m] [0m[0m})[0m
-[0m[[0m[31merror[0m] [0m[0m^[0m
-[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/TAIL_MASK/TAIL_MASK.scala:19:2: ';' expected but ')' found.[0m
-[0m[[0m[31merror[0m] [0m[0m})[0m
-[0m[[0m[31merror[0m] [0m[0m ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
