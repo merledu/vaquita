@@ -35,6 +35,7 @@ class top_file extends Module {
 
     //control unit module inputs
     control_unit_module.io.op_code := instr_module.io.r_data(7,0)
+    control_unit_module.io.last2bits_config := instr_module.io.r_data(31,30)
     control_unit_module.io.rs1 := instr_module.io.r_data(19,15)
     control_unit_module.io.rd := instr_module.io.r_data(11,7)
     control_unit_module.io.fn3 := instr_module.io.r_data(14,12)
@@ -56,7 +57,8 @@ class top_file extends Module {
 
     //vector csr module inputs
     vec_csr_module.io.instr := instr_module.io.r_data
-    vec_csr_module.io.vl_in := wb_mux(10,0).asUInt
+    vec_csr_module.io.vl_in := alu_module.io.out.asUInt
+    vec_csr_module.io.rs2 := register_file_module.io.rs2_out
 
 
     //vector file input
@@ -103,11 +105,19 @@ class top_file extends Module {
     alu_module.io.alu := alu_control_module.io.out
     alu_module.io.vec_0 := vector_file_module.io.vec_0
     alu_module.io.vl := vec_csr_module.io.vl_out
-    alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
+
+    val config = MuxLookup(control_unit_module.io.config,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,
+        (1.U) -> vec_csr_module.io.vl_out.asSInt,
+        (2.U) -> Fill(32,1.U).asSInt)
+    )
+
+    alu_module.io.a := MuxLookup(control_unit_module.io.operand_a,0.S,Array(
+        (0.U) -> config,
         (1.U) -> pc_module.io.out4.asSInt,
         (2.U) -> pc_module.io.out.asSInt,
-        (3.U) -> register_file_module.io.rs1_out.asSInt
+        (3.U) -> register_file_module.io.rs1_out.asSInt,
+        (4.U) -> immediate_module.io.out
         // (4.U) -> vector_file_module.io.vs1_out.asSInt
         )
     )

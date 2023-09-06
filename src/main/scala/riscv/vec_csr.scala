@@ -11,7 +11,7 @@ class vec_csr extends Module {
         val tail = Output(Bool())
         val vl_out = Output(UInt(10.W))
         val vl_in = Input(UInt(10.W))
-        //val rs2 = Input(UInt(8.W))
+        val rs2 = Input(SInt(32.W))
     })
     val opcode = io.instr(6,0)
     // val lmul = io.instr(22,20)
@@ -33,20 +33,18 @@ class vec_csr extends Module {
     //update vtype csr through vsetvli instruction
     when (opcode==="b1010111".U && io.instr(31)===0.B && io.instr(14,12)==="b111".U){
         vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
-<<<<<<< HEAD
         vl := io.vl_in
-=======
-        // vl := 
->>>>>>> 8b866837bcf80a9ab84cfa2ce3d926b4c1031875
     }
     //update vtype csr through vsetivli instruction
-    // .elsewhen (opcode==="b1010111".U && io.instr(31)===1.B && io.instr(30)===1.B){
-    //     vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
-    // }
-    // //update vtype csr through vsetvl instruction
-    // .elsewhen (opcode==="b1010111".U && io.rs2===1.B && io.rs2(30)===0.B){
-    //     vtype := Cat(io.rs2(8),"b00000000000000000000000".U,io.rs2(7,0))  
-    // }
+    .elsewhen (opcode==="b1010111".U && io.instr(31,30)==="b11".U && io.instr(14,12)==="b111".U){
+        vtype := Cat(io.instr(8),"b00000000000000000000000".U,io.instr(27,20))  
+        vl := io.vl_in
+    }
+    // update vtype csr through vsetvl instruction
+    .elsewhen (opcode==="b1010111".U && io.rs2(31,30)==="b10".U && io.instr(14,12)==="b111".U){
+        vtype := Cat(io.rs2(8),"b00000000000000000000000".U,io.rs2(7,0))  
+        vl := io.vl_in
+    }
     // io.vlmul := vtype(2,0)
     io.vsew := vtype(5,3)
     io.mask := vtype(7)

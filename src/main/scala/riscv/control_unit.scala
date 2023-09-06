@@ -9,6 +9,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         val fn3 = Input(UInt(3.W))
         val lmul_count = Input(UInt(5.W))
         val n_fields = Input(UInt(3.W))
+        val last2bits_config = Input(UInt(2.W))
 
         val mem_write =  Output(Bool())
         val branch =  Output(Bool())
@@ -17,6 +18,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         val vec_write =  Output(Bool())
         val mem_data_sel =  Output(UInt(4.W))
         val operand_a =  Output(UInt(4.W))
+        val config =  Output(UInt(4.W))
         val operand_b =  Output(UInt(4.W))
         val vec_operand_a =  Output(UInt(4.W))
         val vec_operand_b =  Output(UInt(4.W))
@@ -49,6 +51,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
 
     //i_type
@@ -68,6 +71,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
 
     }
     
@@ -88,6 +92,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
 
     //b type
@@ -107,6 +112,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
 
     //u type
@@ -126,6 +132,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
     //j type
     .elsewhen(io.op_code==="b1101111".U){
@@ -144,6 +151,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
 
     //jalr
@@ -163,6 +171,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
 
     //load
@@ -182,6 +191,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
 
     }
     //vector configure
@@ -200,12 +210,19 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.operand_a := 0.U
 
         when (io.rs1 === 0.U && io.rd===0.U){
-            io.operand_a := 0.U
+            io.config := 1.U
         }
         .elsewhen(io.rs1 === 0.U & io.rd =/= 0.U){
-            io.operand_a := 0.U
+            io.config := 2.U
+        }
+        .otherwise{
+            io.config := 0.U
+        }
+        when(io.last2bits_config==="b11".U){
+            io.operand_a := 4.U
         }
         .otherwise{
             io.operand_a := 0.U
@@ -226,6 +243,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
         
         val reg123 = RegInit(3.U(32.W))
         when((reg123 > 0.U) && io.op_code==="b0000111".U){
@@ -256,6 +274,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 1.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
         
         val reg1234 = RegInit(3.U(32.W))
         when(reg1234 > 0.U && io.op_code==="b0100111".U){
@@ -289,6 +308,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 1.U
         io.vec_operand_b := 1.U
+        io.config := 0.U
         val lmul_reg = RegInit(0.U(32.W))
         when(lmul_reg =/= io.lmul_count && io.op_code==="b1010111".U){
             io.next_pc_selector := 4.U
@@ -319,16 +339,16 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 1.U
-        val reg12 = RegInit(3.U(32.W))
-        when(reg12 > 0.U && io.op_code==="b0100111".U){
+        io.config := 0.U
+        val lmul_reg = RegInit(0.U(32.W))
+        when(lmul_reg =/= io.lmul_count && io.op_code==="b1010111".U){
             io.next_pc_selector := 4.U
-            reg12 := reg12 -1.U
-            io.stall_true := reg12
+            lmul_reg := lmul_reg +1.U
+            io.stall_true := lmul_reg
 
         }
         .otherwise{
-            reg12 := 3.U
-            io.vec_write := off
+            lmul_reg := 0.U
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
         }
@@ -350,16 +370,16 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 1.U
-        val reg1 = RegInit(3.U(32.W))
-        when(reg1 > 0.U && io.op_code==="b0100111".U){
+        io.config := 0.U
+        val lmul_reg = RegInit(0.U(32.W))
+        when(lmul_reg =/= io.lmul_count && io.op_code==="b1010111".U){
             io.next_pc_selector := 4.U
-            reg1 := reg1 -1.U
-            io.stall_true := reg1
+            lmul_reg := lmul_reg +1.U
+            io.stall_true := lmul_reg
 
         }
         .otherwise{
-            reg1 := 3.U
-            io.vec_write := off
+            lmul_reg := 0.U
             io.next_pc_selector := 0.U
             io.stall_true := 0.U
         }
@@ -380,6 +400,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         io.vec_store := 0.B
         io.vec_operand_a := 0.U
         io.vec_operand_b := 0.U
+        io.config := 0.U
     }
 
 }

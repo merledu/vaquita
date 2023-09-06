@@ -50,7 +50,7 @@ class immediate_instruction extends Module {
     }
     //vector to immediate
     .elsewhen(op_code==="b1010111".U){
-        io.out := io.i_instruction(19,15).asSInt
+        io.out := Cat(Fill(27,0.U),io.i_instruction(19,15)).asSInt
         io.out_j_b := 0.S
         io.stall := 0.U
     }

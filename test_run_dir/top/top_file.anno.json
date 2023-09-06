@@ -1,7 +1,7 @@
 [
   {
     "class":"firrtl.stage.FirrtlFileAnnotation",
-    "file":"test_run_dir\\top\\top_file.lo.fir"
+    "file":"test_run_dir/top/top_file.lo.fir"
   },
   {
     "class":"firrtl.EmitCircuitAnnotation",
@@ -38,6 +38,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vec_csr>io_vl_in"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>io_rs2"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -256,6 +260,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|control_unit>io_last2bits_config"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|control_unit>io_mem_write"
   },
   {
@@ -281,6 +289,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|control_unit>io_operand_a"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|control_unit>io_config"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -404,6 +416,6 @@
   },
   {
     "class":"firrtl.transforms.BlackBoxTargetDirAnno",
-    "targetDir":"test_run_dir\\top"
+    "targetDir":"test_run_dir/top"
   }
 ]

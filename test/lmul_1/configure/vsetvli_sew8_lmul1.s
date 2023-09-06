@@ -4,7 +4,7 @@ main:
     addi x4 ,x0,1
     vsetvli x5,x4 , e8,m1,tu,mu
     addi x4 ,x0,2
-    vsetvli x5,x2 , e8,m1,tu,mu
+    vsetvli x5,x4 , e8,m1,tu,mu
     addi x4 ,x0,3
     vsetvli x5,x4 , e8,m1,tu,mu
     addi x4 ,x0,4
