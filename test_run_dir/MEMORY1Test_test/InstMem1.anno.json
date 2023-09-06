@@ -1,0 +1,28 @@
+[
+  {
+    "class":"firrtl.stage.FirrtlFileAnnotation",
+    "file":"test_run_dir/MEMORY1Test_test/InstMem1.lo.fir"
+  },
+  {
+    "class":"firrtl.transforms.CombinationalPath",
+    "sink":"~InstMem1|InstMem1>io_data",
+    "sources":[
+      "~InstMem1|InstMem1>io_addr"
+    ]
+  },
+  {
+    "class":"firrtl.EmitCircuitAnnotation",
+    "emitter":"firrtl.LowFirrtlEmitter"
+  },
+  {
+    "class":"firrtl.annotations.LoadMemoryAnnotation",
+    "target":"InstMem1.InstMem1.imem",
+    "fileName":"/home/hafsa/Scala-Chisel-Learning-Journey/vector_input.txt",
+    "hexOrBinary":"h",
+    "originalMemoryNameOpt":"imem"
+  },
+  {
+    "class":"firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir":"test_run_dir/MEMORY1Test_test"
+  }
+]

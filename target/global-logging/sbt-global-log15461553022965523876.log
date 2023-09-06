@@ -1,0 +1,28 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.CONTROLTest, Some(7482b9b2-ce84-4001-ba39-4cc69b54f0ac), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/test-classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mCONTROLTest:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m- CONTROL test *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  chisel3.internal.ChiselException: Cannot convert 2 to Bool, must be 0 or 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.internal.throwException$.apply(Error.scala:155)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.internal.Builder$.error(Builder.scala:616)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chisel3.package$fromBigIntToLiteral.B(package.scala:36)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Vpractice.CONTROLTest.$anonfun$new$3(CONTROLTest.scala:21)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at Vpractice.CONTROLTest.$anonfun$new$3$adapted(CONTROLTest.scala:9)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.backends.treadle.TreadleBackend.$anonfun$run$1(TreadleBackend.scala:152)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.internal.ThreadedBackend$TesterThread$$anon$1.$anonfun$run$1(ThreadedBackend.scala:507)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.backends.treadle.TreadleBackend.doTimescope(TreadleBackend.scala:109)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at chiseltest.internal.ThreadedBackend$TesterThread$$anon$1.run(ThreadedBackend.scala:507)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  at java.base/java.lang.Thread.run(Thread.java:829)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  ...[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mRun completed in 3 seconds, 96 milliseconds.[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTotal number of tests run: 1[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mSuites: completed 1, aborted 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[36mTests: succeeded 0, failed 1, canceled 0, ignored 0, pending 0[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m*** 1 TEST FAILED ***[0m[0m
+[0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
+[0m[[0m[31merror[0m] [0m[0m	Vpractice.CONTROLTest[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mtestOnly[0m) sbt.TestsFailedException: Tests unsuccessful[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 4 s, completed Aug 7, 2023, 1:17:14 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

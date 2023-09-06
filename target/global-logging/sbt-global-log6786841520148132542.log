@@ -1,0 +1,17 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.VECTOR_REGISTERTest, Some(9f427077-be28-47f8-86d2-33affe16e8a3), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/VECTOR_REGISTER/VECTOR_REGISTER.scala:34:65: value toInt is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mval registers = RegInit(VecInit(Seq.fill(32)(VecInit(Seq.fill(a.toInt)(0.S(io.reg_sew.getWidth.W))))))       //In that one register, fill 4 elements of 32 bits.[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/VECTOR_REGISTER/VECTOR_REGISTER.scala:36:68: value toInt is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mio.vdata1 := Mux(io.vs1.orR, registers(io.vs1), VecInit(Seq.fill(a.toInt)(0.S(io.reg_sew.getWidth.W)))) [0m
+[0m[[0m[31merror[0m] [0m[0m                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/main/scala/V_Single-Cycle/VECTOR_REGISTER/VECTOR_REGISTER.scala:37:68: value toInt is not a member of chisel3.UInt[0m
+[0m[[0m[31merror[0m] [0m[0mio.vdata2 := Mux(io.vs2.orR, registers(io.vs2), VecInit(Seq.fill(a.toInt)(0.S(io.reg_sew.getWidth.W))))[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 2 s, completed Aug 14, 2023, 6:30:22 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m
