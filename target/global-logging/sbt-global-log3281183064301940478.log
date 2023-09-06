@@ -1,0 +1,12 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(testOnly Vpractice.VECTOR_REGISTERTest, Some(30a6e11a-e90f-43c6-a3d4-c6273385b2d3), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Test / testOnly[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/target/scala-2.12/test-classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/home/hafsa/Scala-Chisel-Learning-Journey/Vector_Single-Cycle/src/test/scala/V_Single-Cycle/VECTOR_REGISTER/VECTOR_REGISTERTest.scala:10:15: value reg_write is not a member of chisel3.Bundle{val vs1: chisel3.UInt; val vs2: chisel3.UInt; val V_reg_write: chisel3.Bool; val vd: chisel3.UInt; val V_w_data: chisel3.Vec[chisel3.UInt]; val reg_lmul: chisel3.UInt; val reg_sew: chisel3.UInt; val vdata1: chisel3.Vec[chisel3.UInt]; val vdata2: chisel3.Vec[chisel3.UInt]}[0m
+[0m[[0m[31merror[0m] [0m[0m         c.io.reg_write.poke(1.B)[0m
+[0m[[0m[31merror[0m] [0m[0m              ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 4 s, completed Aug 15, 2023, 3:51:32 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(shell, None, None)[0m

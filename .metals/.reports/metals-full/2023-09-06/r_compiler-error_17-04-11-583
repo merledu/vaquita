@@ -1,0 +1,126 @@
+java.lang.AssertionError: assertion failed: denotation class Boolean invalid in run 1. ValidFor: Period(1..2, run = 3)
+occurred in the presentation compiler.
+
+action parameters:
+uri: file://<WORKSPACE>/Vector_Single-Cycle/src/main/scala/rvv/INST_MEM.scala
+text:
+package rvv
+
+import chisel3._
+import chisel3.util._
+import chisel3.util.experimental.loadMemoryFromFile
+import scala.io.Source
+
+trait Config{
+    val WLEN = 32
+    val INST_MEM_LEN = 1024
+}
+class InstMem1 ( initFile : String ) extends Module with Config {
+    val io = IO (new Bundle {
+        val addr = Input ( UInt ( WLEN.W ) )
+        val data = Output ( UInt ( WLEN.W ) )
+})
+val imem = Mem ( INST_MEM_LEN , UInt ( WLEN.W ) )    // Create a memory array for instructions
+
+loadMemoryFromFile ( imem , initFile )               // Load memory contents from a file
+io.data := imem ( io.addr )                          // Output data from memory based on the input address
+}
+
+
+
+error stacktrace:
+scala.runtime.Scala3RunTime$.assertFailed(Scala3RunTime.scala:8)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.updateValidity(Denotations.scala:718)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.bringForward(Denotations.scala:743)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.toNewRun$1(Denotations.scala:800)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.current(Denotations.scala:871)
+	dotty.tools.dotc.core.Symbols$Symbol.recomputeDenot(Symbols.scala:120)
+	dotty.tools.dotc.core.Symbols$Symbol.computeDenot(Symbols.scala:114)
+	dotty.tools.dotc.core.Symbols$Symbol.denot(Symbols.scala:107)
+	dotty.tools.dotc.core.Symbols$ClassSymbol.classDenot(Symbols.scala:481)
+	dotty.tools.dotc.core.Symbols$.toClassDenot(Symbols.scala:497)
+	dotty.tools.dotc.core.Definitions.Boolean_$bar$bar(Definitions.scala:582)
+	dotty.tools.dotc.typer.Nullables$.nullableInArgContext(Nullables.scala:327)
+	dotty.tools.dotc.typer.Applications.ApplyTo(Applications.scala:1119)
+	dotty.tools.dotc.typer.Applications.ApplyTo$(Applications.scala:352)
+	dotty.tools.dotc.typer.Typer.ApplyTo(Typer.scala:115)
+	dotty.tools.dotc.typer.Applications.simpleApply$1(Applications.scala:962)
+	dotty.tools.dotc.typer.Applications.realApply$1$$anonfun$2(Applications.scala:1045)
+	dotty.tools.dotc.typer.Typer.tryEither(Typer.scala:3198)
+	dotty.tools.dotc.typer.Applications.realApply$1(Applications.scala:1056)
+	dotty.tools.dotc.typer.Applications.typedApply(Applications.scala:1094)
+	dotty.tools.dotc.typer.Applications.typedApply$(Applications.scala:352)
+	dotty.tools.dotc.typer.Typer.typedApply(Typer.scala:115)
+	dotty.tools.dotc.typer.Typer.typedUnnamed$1(Typer.scala:2928)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2991)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.typedExpr(Typer.scala:3174)
+	dotty.tools.dotc.typer.Namer.typedAheadExpr$$anonfun$1(Namer.scala:1619)
+	dotty.tools.dotc.typer.Namer.typedAhead(Namer.scala:1609)
+	dotty.tools.dotc.typer.Namer.typedAheadExpr(Namer.scala:1619)
+	dotty.tools.dotc.typer.Namer.typedAheadRhs$1$$anonfun$1(Namer.scala:1872)
+	dotty.tools.dotc.inlines.PrepareInlineable$.dropInlineIfError(PrepareInlineable.scala:249)
+	dotty.tools.dotc.typer.Namer.typedAheadRhs$1(Namer.scala:1872)
+	dotty.tools.dotc.typer.Namer.rhsType$1(Namer.scala:1880)
+	dotty.tools.dotc.typer.Namer.cookedRhsType$1(Namer.scala:1898)
+	dotty.tools.dotc.typer.Namer.lhsType$1(Namer.scala:1899)
+	dotty.tools.dotc.typer.Namer.inferredResultType(Namer.scala:1910)
+	dotty.tools.dotc.typer.Namer.inferredType$1(Namer.scala:1657)
+	dotty.tools.dotc.typer.Namer.valOrDefDefSig(Namer.scala:1664)
+	dotty.tools.dotc.typer.Namer$Completer.typeSig(Namer.scala:783)
+	dotty.tools.dotc.typer.Namer$Completer.completeInCreationContext(Namer.scala:922)
+	dotty.tools.dotc.typer.Namer$Completer.complete(Namer.scala:810)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.completeFrom(SymDenotations.scala:174)
+	dotty.tools.dotc.core.Denotations$Denotation.completeInfo$1(Denotations.scala:187)
+	dotty.tools.dotc.core.Denotations$Denotation.info(Denotations.scala:189)
+	dotty.tools.dotc.core.SymDenotations$SymDenotation.ensureCompleted(SymDenotations.scala:390)
+	dotty.tools.dotc.typer.Typer.retrieveSym(Typer.scala:2869)
+	dotty.tools.dotc.typer.Typer.typedNamed$1(Typer.scala:2894)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2990)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.traverse$1(Typer.scala:3084)
+	dotty.tools.dotc.typer.Typer.typedStats(Typer.scala:3130)
+	dotty.tools.dotc.typer.Typer.typedClassDef(Typer.scala:2562)
+	dotty.tools.dotc.typer.Typer.typedTypeOrClassDef$1(Typer.scala:2916)
+	dotty.tools.dotc.typer.Typer.typedNamed$1(Typer.scala:2920)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2990)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.traverse$1(Typer.scala:3084)
+	dotty.tools.dotc.typer.Typer.typedStats(Typer.scala:3130)
+	dotty.tools.dotc.typer.Typer.typedPackageDef(Typer.scala:2692)
+	dotty.tools.dotc.typer.Typer.typedUnnamed$1(Typer.scala:2961)
+	dotty.tools.dotc.typer.Typer.typedUnadapted(Typer.scala:2991)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3058)
+	dotty.tools.dotc.typer.Typer.typed(Typer.scala:3062)
+	dotty.tools.dotc.typer.Typer.typedExpr(Typer.scala:3174)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck$$anonfun$1(TyperPhase.scala:44)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck$$anonfun$adapted$1(TyperPhase.scala:54)
+	scala.Function0.apply$mcV$sp(Function0.scala:42)
+	dotty.tools.dotc.core.Phases$Phase.monitor(Phases.scala:437)
+	dotty.tools.dotc.typer.TyperPhase.typeCheck(TyperPhase.scala:54)
+	dotty.tools.dotc.typer.TyperPhase.runOn$$anonfun$3(TyperPhase.scala:88)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.immutable.List.foreach(List.scala:333)
+	dotty.tools.dotc.typer.TyperPhase.runOn(TyperPhase.scala:88)
+	dotty.tools.dotc.Run.runPhases$1$$anonfun$1(Run.scala:247)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)
+	scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)
+	scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1321)
+	dotty.tools.dotc.Run.runPhases$1(Run.scala:263)
+	dotty.tools.dotc.Run.compileUnits$$anonfun$1(Run.scala:271)
+	dotty.tools.dotc.Run.compileUnits$$anonfun$adapted$1(Run.scala:280)
+	dotty.tools.dotc.util.Stats$.maybeMonitored(Stats.scala:67)
+	dotty.tools.dotc.Run.compileUnits(Run.scala:280)
+	dotty.tools.dotc.Run.compileSources(Run.scala:195)
+	dotty.tools.dotc.interactive.InteractiveDriver.run(InteractiveDriver.scala:165)
+	scala.meta.internal.pc.MetalsDriver.run(MetalsDriver.scala:45)
+	scala.meta.internal.pc.PcCollector.<init>(PcCollector.scala:42)
+	scala.meta.internal.pc.PcSemanticTokensProvider$Collector$.<init>(PcSemanticTokensProvider.scala:60)
+	scala.meta.internal.pc.PcSemanticTokensProvider.Collector$lzyINIT1(PcSemanticTokensProvider.scala:60)
+	scala.meta.internal.pc.PcSemanticTokensProvider.Collector(PcSemanticTokensProvider.scala:60)
+	scala.meta.internal.pc.PcSemanticTokensProvider.provide(PcSemanticTokensProvider.scala:81)
+	scala.meta.internal.pc.ScalaPresentationCompiler.semanticTokens$$anonfun$1(ScalaPresentationCompiler.scala:95)

@@ -1,0 +1,60 @@
+java.lang.AssertionError: assertion failed: denotation class Object invalid in run 3. ValidFor: Period(1..2, run = 5)
+occurred in the presentation compiler.
+
+action parameters:
+offset: 46
+uri: file://<WORKSPACE>/Vector_Single-Cycle/src/main/scala/rvv/SCALAR_REGISTER.scala
+text:
+package Vpractice
+
+import chisel3._
+import @@chisel3.util._
+
+class RegFile extends Module {
+    val io = IO (new Bundle{
+        val rs1 = Input ( UInt (5.W ) )
+        val rs2 = Input ( UInt (5.W ) )
+        val reg_write = Input ( Bool () )
+        val w_reg = Input ( UInt (5.W ) )
+        val w_data = Input ( SInt ( 32.W ) )
+        val rdata1 = Output ( SInt ( 32.W ) )
+        val rdata2 = Output ( SInt ( 32.W ) )
+})
+val regs = RegInit( VecInit( Seq.fill(32) (0.S (32.W))))     // Initialize an array of registers with zeros.
+
+io.rdata1 := Mux (( io.rs1 .orR ) , regs ( io.rs1 ) , 0.S )  // Read data from the register file based on the rs1 and rs2 inputs.
+io.rdata2 := Mux (( io.rs2 .orR) , regs ( io.rs2 ) , 0.S )
+
+when ( io.reg_write & io.w_reg .orR ) {                      // Conditionally write data into the register file when reg_write 
+    regs ( io.w_reg ) := io.w_data                           //is asserted and w_reg is not zero.
+    }
+}
+
+
+
+
+error stacktrace:
+scala.runtime.Scala3RunTime$.assertFailed(Scala3RunTime.scala:8)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.updateValidity(Denotations.scala:718)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.bringForward(Denotations.scala:743)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.toNewRun$1(Denotations.scala:800)
+	dotty.tools.dotc.core.Denotations$SingleDenotation.current(Denotations.scala:871)
+	dotty.tools.dotc.core.Symbols$Symbol.recomputeDenot(Symbols.scala:120)
+	dotty.tools.dotc.core.Symbols$Symbol.computeDenot(Symbols.scala:114)
+	dotty.tools.dotc.core.Symbols$Symbol.denot(Symbols.scala:107)
+	dotty.tools.dotc.core.Symbols$Symbol.name(Symbols.scala:260)
+	scala.meta.internal.pc.IndexedContext$.fromImportInfo$1$$anonfun$1(IndexedContext.scala:187)
+	scala.collection.immutable.List.filter(List.scala:529)
+	scala.meta.internal.pc.IndexedContext$.allAccessibleSymbols$1(IndexedContext.scala:167)
+	scala.meta.internal.pc.IndexedContext$.fromImportInfo$1(IndexedContext.scala:188)
+	scala.meta.internal.pc.IndexedContext$.scala$meta$internal$pc$IndexedContext$$$extractNames(IndexedContext.scala:205)
+	scala.meta.internal.pc.IndexedContext$LazyWrapper.<init>(IndexedContext.scala:99)
+	scala.meta.internal.pc.IndexedContext$.apply(IndexedContext.scala:87)
+	scala.meta.internal.pc.IndexedContext$LazyWrapper.<init>(IndexedContext.scala:98)
+	scala.meta.internal.pc.IndexedContext$.apply(IndexedContext.scala:87)
+	scala.meta.internal.pc.IndexedContext$LazyWrapper.<init>(IndexedContext.scala:98)
+	scala.meta.internal.pc.IndexedContext$.apply(IndexedContext.scala:87)
+	scala.meta.internal.pc.IndexedContext$LazyWrapper.<init>(IndexedContext.scala:98)
+	scala.meta.internal.pc.IndexedContext$.apply(IndexedContext.scala:87)
+	scala.meta.internal.pc.HoverProvider$.hover(HoverProvider.scala:39)
+	scala.meta.internal.pc.ScalaPresentationCompiler.hover$$anonfun$1(ScalaPresentationCompiler.scala:325)

@@ -1,0 +1,14 @@
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(sbtMapExec 16 __bd59e700-3991-4dad-8a8b-c8c566c7b091, None, None)
+[debug] > Exec(bspWorkspaceBuildTargets, Some(__bd59e700-3991-4dad-8a8b-c8c566c7b091), Some(CommandSource(network-1)))
+[debug] jsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":4,"message":"Processing workspace/buildTargets"})
+[debug] Evaluating tasks: bspWorkspaceBuildTargets
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[success] Total time: 0 s, completed Sep 6, 2023, 10:38:32 PM
+[debug] > Exec(sbtCompleteExec 16, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(sbtReportResult 16, Some(16), Some(CommandSource(network-1)))
+[debug] unmatched Processing event for requestId Some(16): None
+[debug] unmatched json response for requestId Some(16): {"status":"Done","channelName":"network-1","execId":"16","commandQueue":["shell"],"exitCode":0}
+[debug] > Exec(shell, None, None)
