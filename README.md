@@ -2,6 +2,7 @@
 
 # Repository Setup and Branch Management Guide
 
+
 This guide provides step-by-step instructions for creating and managing branches in the **rvv-core** GitHub Repository. It also includes information on how to clone the repository for initial setup.
 
 ## Table of Contents
@@ -45,7 +46,7 @@ When working on new features or fixing issues, creating a separate branch is a g
    ```
 
 2. Create a new branch using the following command, replacing `branch_name` with your desired branch name (e.g., `SS`):
-   
+
    ```bash
    git checkout -b branch_name
    ```
@@ -71,10 +72,11 @@ Replace `branch_name` with the branch name you want to switch to.
 Use the table below to keep track of team members and their corresponding branch names:
 
 | Team Member | Branch Name |
-|-------------|-------------|
+
 | Hamna, Maira | HMS       |
 | Abdul Samad, Saad Ali   | SS   |
 | Hafsa, Hassan  | HH        |
+
 
 
 Feel free to update this table as your team members create and work on different branches.
