@@ -1,0 +1,14 @@
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(sbtMapExec 6 __eb272df1-c68f-486d-b5d6-c9cf09d7455d, None, None)
+[debug] > Exec(bspBuildTargetSources file:/home/hafsa/VECTOR/rvv-core/#rvv-core/Test file:/home/hafsa/VECTOR/rvv-core/#rvv-core/Compile file:/home/hafsa/VECTOR/rvv-core/#rvv-core-build, Some(__eb272df1-c68f-486d-b5d6-c9cf09d7455d), Some(CommandSource(network-3)))
+[debug] jsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":4,"message":"Processing buildTarget/sources"})
+[debug] Evaluating tasks: bspBuildTargetSources
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[success] Total time: 0 s, completed Sep 8, 2023, 5:31:57 PM
+[debug] > Exec(sbtCompleteExec 6, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(sbtReportResult 6, Some(6), Some(CommandSource(network-3)))
+[debug] unmatched Processing event for requestId Some(6): None
+[debug] unmatched json response for requestId Some(6): {"status":"Done","channelName":"network-3","execId":"6","commandQueue":["shell"],"exitCode":0}
+[debug] > Exec(shell, None, None)
