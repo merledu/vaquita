@@ -14,3 +14,75 @@
 [debug]                 Load.loadUnit: defsScala took 0.751629ms
 [debug] [Loading] Scanning directory /home/hafsa/Vector/rvv-core/project/project
 [debug]                   Load.loadUnit: mkEval took 30.922961ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /home/hafsa/Vector/rvv-core/project/project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 60.633483 ms
+[info] loading settings for project rvv-core-build-build from metals.sbt ...
+[debug]                     Load.resolveProject(rvv-core-build-build) took 195.021053ms
+[debug]                   Load.loadTransitive: finalizeProject(Project(id rvv-core-build-build, base: /home/hafsa/Vector/rvv-core/project/project, plugins: List(<none>))) took 290.897219ms
+[debug] [Loading] Done in /home/hafsa/Vector/rvv-core/project/project, returning: (rvv-core-build-build)
+[debug]                 Load.loadUnit: loadedProjectsRaw took 13232.910018ms
+[debug]                 Load.loadUnit: cleanEvalClasses took 39.618202ms
+[debug]               Load.loadUnit(file:/home/hafsa/Vector/rvv-core/project/project/, ...) took 13784.09443ms
+[debug]             Load.apply: load took 14463.297984ms
+[debug]             Load.apply: resolveProjects took 14.725844ms
+[debug]             Load.apply: finalTransforms took 300.729934ms
+[debug]             Load.apply: config.delegates took 22.077109ms
+[debug]             Load.apply: Def.make(settings)... took 1978.32771ms
+[debug]             Load.apply: structureIndex took 422.996362ms
+[debug]             Load.apply: mkStreams took 6.471578ms
+[info] loading project definition from /home/hafsa/Vector/rvv-core/project/project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]           Load.loadUnit: plugins took 25012.625187ms
+[debug]           Load.loadUnit: defsScala took 0.009003ms
+[debug] [Loading] Scanning directory /home/hafsa/Vector/rvv-core/project
+[debug]             Load.loadUnit: mkEval took 0.388358ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /home/hafsa/Vector/rvv-core/project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(metals.MetalsPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(org.scaladebugger.SbtJdiTools),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(metals.MetalsPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.scaladebugger.SbtJdiTools))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,org.scaladebugger.SbtJdiTools,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin,metals.MetalsPlugin)
+[debug] Plugins.deducer#function took 5.730508 ms
+[info] loading settings for project rvv-core-build from metals.sbt ...
+[debug]               Load.resolveProject(rvv-core-build) took 27.678776ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id rvv-core-build, base: /home/hafsa/Vector/rvv-core/project, plugins: List(<none>))) took 35.029496ms
+[debug] [Loading] Done in /home/hafsa/Vector/rvv-core/project, returning: (rvv-core-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 3799.111025ms
+[debug]           Load.loadUnit: cleanEvalClasses took 1.44876ms
+[debug]         Load.loadUnit(file:/home/hafsa/Vector/rvv-core/project/, ...) took 28814.653433ms
+[debug]       Load.apply: load took 28830.971727ms
+[debug]       Load.apply: resolveProjects took 0.241503ms
+[debug]       Load.apply: finalTransforms took 59.613632ms
+[debug]       Load.apply: config.delegates took 0.876406ms
+[debug]       Load.apply: Def.make(settings)... took 526.183115ms
+[debug]       Load.apply: structureIndex took 83.853541ms
+[debug]       Load.apply: mkStreams took 0.00414ms
+[info] loading project definition from /home/hafsa/Vector/rvv-core/project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
