@@ -613,3 +613,10 @@ java.nio.file.NoSuchFileException: /home/hafsa/Vector/rvv-core/Vector_Single-Cyc
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.lang.Thread.run(Thread.java:829)
 
+2023.09.08 12:02:41 INFO  Started: Metals version 1.0.1 in folders '/home/hafsa/VECTOR/rvv-core' for client Visual Studio Code 1.81.0.
+Sep 08, 2023 12:02:41 PM org.flywaydb.core.internal.license.VersionPrinter printVersionOnly
+INFO: Flyway Community Edition 9.21.2 by Redgate
+Sep 08, 2023 12:02:42 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: See release notes here: https://rd.gt/416ObMi
+Sep 08, 2023 12:02:42 PM org.flywaydb.core.internal.license.VersionPrinter printVersion
+INFO: 
