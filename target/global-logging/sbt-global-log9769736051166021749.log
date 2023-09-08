@@ -1,6 +1,0 @@
-[debug] > Exec(sbtStashOnFailure, None, None)
-[debug] > Exec(sbtMapExec 7 __65a839b1-945a-4ac1-a8d4-6a7d87cc6e8f, None, None)
-[debug] > Exec(bspBuildTargetDependencySources file:/home/hafsa/VECTOR/rvv-core/#rvv-core/Test file:/home/hafsa/VECTOR/rvv-core/#rvv-core/Compile file:/home/hafsa/VECTOR/rvv-core/#rvv-core-build, Some(__65a839b1-945a-4ac1-a8d4-6a7d87cc6e8f), Some(CommandSource(network-1)))
-[debug] jsonRpcNotify: JsonRpcNotificationMessage(2.0, build/logMessage, {"type":4,"message":"Processing buildTarget/dependencySources"})
-[debug] Evaluating tasks: bspBuildTargetDependencySources
-[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
