@@ -1,0 +1,16 @@
+[debug] > Exec(early(addDefaultCommands), None, None)
+[debug] > Exec(addDefaultCommands, None, None)
+[debug] > Exec(early(initialize), None, None)
+[debug] > Exec(initialize, None, None)
+[debug] > Exec(boot, None, None)
+[debug] > Exec(writeSbtVersion, None, None)
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.7.1 (Ubuntu Java 11.0.20.1)
+[debug] Load.defaultLoad until apply took 518.34052ms
+[debug]                 Load.loadUnit: plugins took 498.806312ms
+[debug]                 Load.loadUnit: defsScala took 0.751629ms
+[debug] [Loading] Scanning directory /home/hafsa/Vector/rvv-core/project/project
+[debug]                   Load.loadUnit: mkEval took 30.922961ms
