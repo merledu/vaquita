@@ -84,3 +84,4 @@
 1693988793592:testOnly Vpractice.TAIL_MASKTest -- -DwriteVcd=1
 1693988802641:testOnly Vpractice.RISC5Test -- -DwriteVcd=1
 1694016253978:testOnly rvv.RISC5Test -- -DwriteVcd=1
+1694157028991:testOnly rvv.RISC5Test
