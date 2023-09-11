@@ -27,6 +27,8 @@ class top_file extends Module {
     dontTouch(vector_file_module.io)
     val vec_csr_module = Module(new vec_csr)
     dontTouch(vec_csr_module.io)
+    val vec_tail_module = Module(new tail)
+    dontTouch(vec_tail_module.io)
 
     
 
@@ -96,6 +98,12 @@ class top_file extends Module {
     alu_control_module.io.fn7 := instr_module.io.r_data(30)
     alu_control_module.io.lumop := instr_module.io.r_data(24,20)
 
+    //vector tail module inputs
+    vec_tail_module.io.sew := vec_csr_module.io.vsew
+    vec_tail_module.io.vec_tail := vec_csr_module.io.tail
+    vec_tail_module.io.vl := vec_csr_module.io.vl_out
+    vec_tail_module.io.vd_in := vector_file_module.io.vd_out
+
 
     //alu module inputs
     alu_module.io.sew := vec_csr_module.io.vsew
@@ -105,6 +113,9 @@ class top_file extends Module {
     alu_module.io.alu := alu_control_module.io.out
     alu_module.io.vec_0 := vector_file_module.io.vec_0
     alu_module.io.vl := vec_csr_module.io.vl_out
+    alu_module.io.vd := vec_tail_module.io.vd_out
+    alu_module.io.comp := vec_tail_module.io.comp
+    alu_module.io.arith_mask := instr_module.io.r_data(25)
 
     val config = MuxLookup(control_unit_module.io.config,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,

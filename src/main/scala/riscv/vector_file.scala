@@ -13,11 +13,12 @@ class vector_file extends Module {
         val vs1_out = Output(UInt(128.W))
         val vs2_out = Output(UInt(128.W))
         val vec_0 = Output(UInt(128.W))
+        val vd_out = Output(UInt(128.W))
         val lmul = Input(UInt(3.W))
         val group = Input(UInt(5.W))
     })
     val regs = RegInit(VecInit(Seq.fill(32)(0.U(128.W)))) //create 32 vector regisster
-    regs(0) := 5.U
+    regs(0) := 9.U
     io.vec_0 := regs(0)
     // val check = Wire(UInt(32.W))
     when(io.lmul >= 0.U){
@@ -28,6 +29,7 @@ class vector_file extends Module {
         }
 
         io.vs2_out := Mux((io.vs2_in.orR),regs(io.vs2_in+io.group),0.U)
+        io.vd_out := Mux((io.vd.orR),regs(io.vd+io.group),0.U)
 
         when (io.vec_enable & io.vd.orR){
             regs(io.vd+io.group):= io.vec_data
@@ -37,6 +39,7 @@ class vector_file extends Module {
     .otherwise{
         io.vs1_out := 0.U
         io.vs2_out := 0.U
+        io.vd_out := 0.U
     }
 }
 

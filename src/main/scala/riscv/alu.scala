@@ -10,36 +10,35 @@ class alu extends Module {
       val b =Input(SInt(32.W))
       val vs1 =Input(UInt(128.W))
       val vs2 =Input(UInt(128.W))
+      val vd =Input(UInt(128.W))
       val sew = Input(UInt(3.W))
       val vec = Input(Bool())
       val vma = Input(Bool())
       val vta = Input(Bool())
+      val arith_mask = Input(Bool())
       val vec_0 = Input(UInt(32.W))
-      val vl = Input(UInt(10.W))
+      val vl = Input(UInt(2.W))
+      val comp = Input(UInt(32.W))
 
       val out = Output(SInt(32.W))
       val branch = Output(Bool())
       val vec_out = Output(UInt(128.W))
       
   })
-  val vec_0_32 = VecInit(Seq.fill(32)(0.U(4.W)))
-
+  val vec_m0_32 = VecInit(Seq.fill(32)(0.U(4.W)))
+      val vd = Input(UInt(128.W))
 
   val sew_8_a  = VecInit(Seq.fill(16)(0.U(8.W)))
   val sew_16_a = VecInit(Seq.fill(8)(0.U(16.W)))
   val sew_32_a = VecInit(Seq.fill(4)(0.U(32.W)))
-  val sew_64_a = VecInit(Seq.fill(2)(0.U(64.W)))
 
   val sew_8_b = VecInit(Seq.fill(16)(0.U(8.W)))
   val sew_16_b = VecInit(Seq.fill(8)(0.U(16.W)))
   val sew_32_b = VecInit(Seq.fill(4)(0.U(32.W)))
-  val sew_64_b = VecInit(Seq.fill(2)(0.U(64.W)))
-
 
   val out8 = VecInit(Seq.fill(16)(0.U(8.W)))
   val out16 = VecInit(Seq.fill(8)(0.U(16.W)))
   val out32 = VecInit(Seq.fill(4)(0.U(32.W)))
-  val out64 = VecInit(Seq.fill(2)(0.U(64.W)))
 
   // define wires input a when sew = 8
   sew_8_a(0) := io.vs1(7,0)
@@ -109,13 +108,6 @@ class alu extends Module {
   sew_32_b(2) := io.vs2(95,64)
   sew_32_b(3) := io.vs2(127,96)
 
-  //define wires input a when sew = 64
-  sew_64_a(0) := io.vs1(63,0)
-  sew_64_a(1) := io.vs1(127,64)
-
-  //define wires input b when sew = 64
-  sew_64_b(0) := io.vs2(63,0)
-  sew_64_b(1) := io.vs2(127,64)
 
   io.vec_out := 0.U
   io.out := 0.S
@@ -215,55 +207,43 @@ class alu extends Module {
   //computing of vector instruction
   .otherwise{
     // element width = 32
-    when (io.sew==="b010".U){
-      // vector to vector addition
-      when(io.alu===vaddvv){
-        // vector to vector addition not masking and not tailing
-        when (io.vma===0.B && io.vta===0.B){
-          out32(0) := sew_32_a(0) + sew_32_b(0)
-          out32(1) := sew_32_a(1) + sew_32_b(1)
-          out32(2) := sew_32_a(2) + sew_32_b(2)
-          out32(3) := sew_32_a(3) + sew_32_b(3)
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-        // vector to vector addition with masking but not tailing
-        .elsewhen (io.vma===1.B && io.vta===0.B){
-          out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
-          out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(1))
-          out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(2))
-          out32(3) := (sew_32_a(3) + sew_32_b(3)) & Fill(32,io.vec_0(3))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-        // vector to vector addition with tailing but not masking
-        .elsewhen (io.vma===0.B && io.vta===1.B){
+    when (io.sew==="b010".U){ 
+      // vector to vector additio
+      when ((io.vma===0.B && io.arith_mask===1.B)){
+        //case2
+        // vector to vector addition with masking but not tailing (tail undisturb)
+        when(io.alu===vaddvv){
           when(io.vl===1.U){
-            out32(0) := (sew_32_a(0) + sew_32_b(0))
-            io.vec_out := Cat(Fill(95,1.U),out32(0))
+            out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
+            io.vec_out := Cat(io.vd(127,32),Mux(io.vma===1.B && io.arith_mask ===1.B,))
           }
           .elsewhen(io.vl===2.U){
-            out32(0) := (sew_32_a(0) + sew_32_b(0))
-            out32(1) := (sew_32_a(1) + sew_32_b(1))
-            io.vec_out := Cat(Fill(64,1.U),out32(1),out32(0))
+            out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
+            out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(0))
+            io.vec_out := Cat(io.vd(127,64),out32(1),out32(0))
           }
           .elsewhen(io.vl===3.U){
-            out32(0) := (sew_32_a(0) + sew_32_b(0))
-            out32(1) := (sew_32_a(1) + sew_32_b(1))
-            out32(2) := (sew_32_a(2) + sew_32_b(2))
-            io.vec_out := Cat(Fill(32,1.U),out32(2),out32(1),out32(0))
+            out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
+            out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(0))
+            out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(0)) 
+            io.vec_out := Cat(io.vd(127,96),out32(2),out32(1),out32(0))
           }
           .elsewhen(io.vl===4.U){
-            out32(0) := (sew_32_a(0) + sew_32_b(0))
-            out32(1) := (sew_32_a(1) + sew_32_b(1))
-            out32(2) := (sew_32_a(2) + sew_32_b(2))
-            out32(3) := (sew_32_a(3) + sew_32_b(3))
+            out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
+            out32(1) := (sew_32_a(1) + sew_32_b(1)) & Fill(32,io.vec_0(0))
+            out32(2) := (sew_32_a(2) + sew_32_b(2)) & Fill(32,io.vec_0(0))
+            out32(3) := (sew_32_a(3) + sew_32_b(3)) & Fill(32,io.vec_0(0))
             io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
           }
           .otherwise{
             io.vec_out := 0.U
           }
         }
+        //case3
+        // vector to vector addition with tailing but not masking
+        //case4
         // vector to vector addition with tailing and masking both
-        .elsewhen (io.vma===1.B && io.vta===1.B){
+        .elsewhen (io.vma===1.B && io.arith_mask===1.B){
           when(io.vl===1.U){
             out32(0) := (sew_32_a(0) + sew_32_b(0)) & Fill(32,io.vec_0(0))
             io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
@@ -294,39 +274,39 @@ class alu extends Module {
           io.vec_out := 0.U
         }
       }
-      .elsewhen (io.sew==="b010".U && io.alu===vle32){
-          out32(0) := io.a.asUInt
-          out32(1) := io.a.asUInt+4.U
-          out32(2) := io.a.asUInt+8.U
-          out32(3) := io.a.asUInt+12.U
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      //vector store 32 bits
-      .elsewhen(io.sew==="b010".U && io.alu===vse32){
-          out32(0) := io.a.asUInt
-          out32(1) := io.a.asUInt+4.U
-          out32(2) := io.a.asUInt+8.U
-          out32(3) := io.a.asUInt+12.U
+      // .elsewhen (io.sew==="b010".U && io.alu===vle32){
+      //     out32(0) := io.a.asUInt
+      //     out32(1) := io.a.asUInt+4.U
+      //     out32(2) := io.a.asUInt+8.U
+      //     out32(3) := io.a.asUInt+12.U
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // //vector store 32 bits
+      // .elsewhen(io.sew==="b010".U && io.alu===vse32){
+      //     out32(0) := io.a.asUInt
+      //     out32(1) := io.a.asUInt+4.U
+      //     out32(2) := io.a.asUInt+8.U
+      //     out32(3) := io.a.asUInt+12.U
           
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
 
-      //vector to scalar addition
-      .elsewhen(io.sew==="b010".U && io.alu===vaddvx){
-        out32(0) := io.vs2(31,0) + io.a.asUInt
-        out32(1) := io.vs2(63,32) + io.a.asUInt
-        out32(2) := io.vs2(95,64) + io.a.asUInt
-        out32(3) := io.vs2(127,96) + io.a.asUInt
-        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-      }
-      //vector to immediate addition
-      .elsewhen(io.alu===vaddvi){
-        out32(0) := io.vs2(31,0) + io.b.asUInt
-        out32(1) := io.vs2(63,32) + io.b.asUInt
-        out32(2) := io.vs2(95,64) + io.b.asUInt
-        out32(3) := io.vs2(127,96) + io.b.asUInt
-        io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-      }
+      // //vector to scalar addition
+      // .elsewhen(io.sew==="b010".U && io.alu===vaddvx){
+      //   out32(0) := io.vs2(31,0) + io.a.asUInt
+      //   out32(1) := io.vs2(63,32) + io.a.asUInt
+      //   out32(2) := io.vs2(95,64) + io.a.asUInt
+      //   out32(3) := io.vs2(127,96) + io.a.asUInt
+      //   io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      // }
+      // //vector to immediate addition
+      // .elsewhen(io.alu===vaddvi){
+      //   out32(0) := io.vs2(31,0) + io.b.asUInt
+      //   out32(1) := io.vs2(63,32) + io.b.asUInt
+      //   out32(2) := io.vs2(95,64) + io.b.asUInt
+      //   out32(3) := io.vs2(127,96) + io.b.asUInt
+      //   io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      // }
       // // vector to vector subtraction
       // .elsewhen (io.sew==="b010".U && io.alu===vaddvv){
       //   for (i <- 0 until 4) {
