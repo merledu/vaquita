@@ -55,7 +55,7 @@ To begin working with Vaquita and exploring the RISC-V vector extension, follow 
 8. The expected output on register `v3` will be
  ![Result](https://github.com/merledu/vaquita/blob/main/result.png)
    
-9. This output represents the result of the `vadd.vi` operation where each element of vector `v3` is incremented by 3.
+  This output represents the result of the `vadd.vi` operation where each element of vector `v3` is incremented by 3.
 
 ## Contributing:
 
