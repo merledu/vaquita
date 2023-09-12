@@ -104,6 +104,12 @@ ALUMod.io.sew := vtype(5,3)
 // ALUMod.io.sew := "b010".U
 ALUMod.io.v_ins := CntrlDecMod.io.v_ins
 
+ALUMod.io.vl:=vl.asUInt
+ALUMod.io.vta := vtype(6).asUInt
+ALUMod.io.vma := vtype(7).asUInt
+ALUMod.io.vm:= instmemMod.io.inst(25)
+ALUMod.io.vd := vreg.io.vddata_o
+ALUMod.io.vs0 := vreg.io.vs0_data
 //tailing masking
 tail_mask.io.vl := vl.asUInt
 tail_mask.io.vta := vtype(6).asUInt
@@ -174,7 +180,7 @@ regfileMod.io.WriteData := MuxCase ( 0.S , Array (
 (CntrlDecMod.io.Mem2Reg === 1.B ) -> datamemMod.io.out)
 )
 
-vreg.io.vd_data := tail_mask.io.v_data_out.asSInt
+vreg.io.vd_data := ALUMod.io.v_output.asSInt
 io.out := 0.U
 io.test1 := instmemMod.io.inst(19,15)
 io.test2 := instmemMod.io.inst(11,7)

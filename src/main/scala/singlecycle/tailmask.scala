@@ -123,18 +123,16 @@ class Tail_Mask extends Module {
         when (i.U <  vstart){                         //prestart 
           sew_64_v_data_out(i) := sew_64_vd(i)
         }.elsewhen(i.U >=  vstart && i.U < io.vl  ){ //bodyelements
-        when (io.vm === 0.U){
-          when(io.vs0(i) === 0.U && io.vma === 0.U ){
+        
+          when(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U ){
               sew_64_v_data_out(i) := sew_64_vd(i)
-          }.elsewhen( io.vs0(i) === 0.U && io.vma === 1.U){
+          }.elsewhen(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U){
             sew_64_v_data_out(i) := "b1111111111111111111111111111111111111111111111111111111111111111".U
           }.otherwise { //io.vs0[i] == 1 so vector alu result 
             sew_64_v_data_out(i) := sew_64_vdata(i)
           }
-              }.otherwise{
-        sew_64_v_data_out(i) := sew_64_vdata(i)
-        }    
-
+        
+    
       }.elsewhen(i.U >= io.vl && i.U < 2.U){                         //tail elements
           when (io.vta ===0.U){
             sew_64_v_data_out(i) := sew_64_vd(i)
