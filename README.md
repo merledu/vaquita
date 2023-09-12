@@ -1,62 +1,67 @@
-# rvv-core
+<div align="center">
+  <img src="https://github.com/merledu/vaquita/blob/main/V%20(2)%20(1).png" alt="Vaquita" width="250"> <h1> VAQUITA - RISC-V Vector Core</h1>
+</div>
 
-# Repository Setup and Branch Management Guide
 
-This guide provides step-by-step instructions for creating and managing branches in the **rvv-core** GitHub repository. It also includes information on how to clone the repository for initial setup.
+# Introduction:
 
-## Table of Contents
+"Vaquita" 🐬, named after the critically endangered Vaquita porpoise, represents a groundbreaking project at the intersection of technology, education, and environmental consciousness. It introduces the RISC-V vector extension, an enhancement to the RISC-V instruction set architecture that introduces powerful support for vector operations. This extension includes vector registers and a comprehensive suite of vector instructions, enabling efficient parallel processing of large datasets.
 
-- [rvv-core](#rvv-core)
-- [Repository Setup and Branch Management Guide](#repository-setup-and-branch-management-guide)
-  - [Table of Contents](#table-of-contents)
-  - [Cloning the Repository](#cloning-the-repository)
-  - [Creating a New Branch](#creating-a-new-branch)
-  - [Switching to a Different Branch](#switching-to-a-different-branch)
-  - [Branch Management Table](#branch-management-table)
+1. [Cloning the Repository](#cloning-the-repository)
+2. [Creating a New Branch](#creating-a-new-branch)
+3. [Switching to a Different Branch](#switching-to-a-different-branch)
+4. [Branch Management Table](#branch-management-table)
 
----
 
-## Cloning the Repository
 
-To get started, follow these steps to clone the **rvv-core** repository to your local machine:
+# Getting Started
 
-1. Open your terminal or command prompt.
+To begin working with Vaquita and exploring the RISC-V vector extension, follow these steps:
 
-2. Navigate to the directory where you want to clone the repository using the `cd` command.
+1. Clone this repository to your local machine:
 
-3. Run the following command to clone the repository:
    
-   ```bash
-   git clone https://github.com/merledu/rvv-core.git
-   ```
+    ``` bash
+   git clone https://github.com/your-username/vaquita.git
+  
+3. Navigate to the project directory:
 
-4. The repository will be cloned to your current directory. You can now navigate into the repository using `cd rvv-core`.
+    ``` bash
+   cd vaquita
 
----
+4. Edit the path to the input text file in the test configuration. Open src/main/scala/rvv/RISC5.scala and replace `/home/yourname/vaquita/vector_input.txt` with the path to your local machine's input text file.
 
-## Creating a New Branch
+5. Build the project using SBT (Scala Build Tool):
 
-When working on new features or fixing issues, creating a separate branch is a good practice. Follow these steps to create a new branch:
-
-1. Make sure you are in the main branch using the command:
    
-   ```bash
-   git checkout main
-   ```
+   ``` bash
+   sbt
 
-2. Create a new branch using the following command, replacing `branch_name` with your desired branch name (e.g., `HMS`):
+6. Once you're in the SBT interactive shell, you can run the test suite with VCD (Value Change Dump) output enabled. To run the tests for the RISC-V vector processor with VCD output, use the following command:
+
    
-   ```bash
-   git checkout -b branch_name
+   ``` bash
+   testOnly rvv.RISC5Test -- -DwriteVcd=1 
+  This command will execute the test suite for the RISC-V vector processor and generate VCD files for debugging and analysis.
+
+7. The test case being run is as follows:
+
+   
+   ```addi x2, x0, 12
+   vsetvli x1, x2, e16, m1, vma
+   lui x1, 0xa
+   srli x2, x1, 12
+   vmv.v.v v0, v1, x2
+   vadd.vi v3, v7, 3, vm=0
    ```
+   
 
-3. You are now switched to the new branch and can start making changes.
+8. The expected output on register `v3` will be
+ ![Result](https://github.com/merledu/vaquita/blob/main/result.png)
+   
+9. This output represents the result of the `vadd.vi` operation where each element of vector `v3` is incremented by 3.
 
----
-
-## Switching to a Different Branch
-
-If you need to switch to a different branch, use the following command:
+## Contributing:
 
 ```bash
 git switch branch_name
@@ -73,11 +78,8 @@ Use the table below to keep track of team members and their corresponding branch
 | Team Member | Branch Name |
 |-------------|-------------|
 | Hamna, Maira , Abdul Samad   | HMS       |
-| Hafsa Shoaib, Hassan         | HH        |
+| Hafsa Shoaib                 | pandora   |
 
 
-Feel free to update this table as your team members create and work on different branches.
+Happy coding! 🚀
 
----
-
-With this guide, you should be able to clone the repository easily, create new branches, switch between branches, and keep track of your team's branch management. Happy coding! 🚀
