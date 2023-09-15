@@ -29,7 +29,27 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|tail>io_vec_0_in"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|tail>io_vec_0_out"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|tail>io_lmul_count"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|tail>io_opcode"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|tail>io_comp"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|tail>tail_count"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -66,6 +86,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|vec_csr>io_rs2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|vec_csr>llll"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
