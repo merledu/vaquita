@@ -319,7 +319,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         .otherwise{
             lmul_reg := 0.U
             io.next_pc_selector := 0.U
-            io.stall_true := 0.U
+            io.stall_true := lmul_reg
         }
     }
     //vector to scalar
@@ -350,7 +350,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         .otherwise{
             lmul_reg := 0.U
             io.next_pc_selector := 0.U
-            io.stall_true := 0.U
+            io.stall_true := lmul_reg
         }
     }
     //vector to immediate
@@ -381,7 +381,7 @@ class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
         .otherwise{
             lmul_reg := 0.U
             io.next_pc_selector := 0.U
-            io.stall_true := 0.U
+            io.stall_true := lmul_reg
         }
     }
     .otherwise{

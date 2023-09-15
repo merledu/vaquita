@@ -18,7 +18,7 @@ class vector_file extends Module {
         val group = Input(UInt(5.W))
     })
     val regs = RegInit(VecInit(Seq.fill(32)(0.U(128.W)))) //create 32 vector regisster
-    regs(0) := 9.U
+    regs(0) := 21845.U //0101010101010101
     io.vec_0 := regs(0)
     // val check = Wire(UInt(32.W))
     when(io.lmul >= 0.U){

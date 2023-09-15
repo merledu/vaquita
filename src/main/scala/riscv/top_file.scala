@@ -80,8 +80,8 @@ class top_file extends Module {
 
 
     //vlsu module inputs
-    vlsu_module.io.vlmul := vec_csr_module.io.vlmul
-    vlsu_module.io.vsew := vec_csr_module.io.vsew
+    vlsu_module.io.vlmul := instr_module.io.r_data(22,20)
+    vlsu_module.io.vsew := instr_module.io.r_data(25,23)
     vlsu_module.io.opcode := instr_module.io.r_data(7,0)
     vlsu_module.io.mew := instr_module.io.r_data(28)
     vlsu_module.io.width_lw := instr_module.io.r_data(14,12)
@@ -100,9 +100,13 @@ class top_file extends Module {
 
     //vector tail module inputs
     vec_tail_module.io.sew := vec_csr_module.io.vsew
+    vec_tail_module.io.opcode := instr_module.io.r_data(6,0)
     vec_tail_module.io.vec_tail := vec_csr_module.io.tail
     vec_tail_module.io.vl := vec_csr_module.io.vl_out
     vec_tail_module.io.vd_in := vector_file_module.io.vd_out
+    vec_tail_module.io.vec_0_in := vector_file_module.io.vec_0
+    vec_tail_module.io.lmul_count := control_unit_module.io.stall_true
+
 
 
     //alu module inputs
@@ -111,7 +115,7 @@ class top_file extends Module {
     alu_module.io.vta := vec_csr_module.io.tail
     alu_module.io.vec := control_unit_module.io.vector
     alu_module.io.alu := alu_control_module.io.out
-    alu_module.io.vec_0 := vector_file_module.io.vec_0
+    alu_module.io.vec_0 := vec_tail_module.io.vec_0_out
     alu_module.io.vl := vec_csr_module.io.vl_out
     alu_module.io.vd := vec_tail_module.io.vd_out
     alu_module.io.comp := vec_tail_module.io.comp

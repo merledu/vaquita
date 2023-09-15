@@ -52,3 +52,20 @@ class s_memory extends Module {
     io.dataout := (memory.read(io.addr)).asSInt
     io.vec_dataout := Cat(rdata(3),rdata(2),rdata(1),rdata(0))
 }
+
+
+
+//     val mem = SyncReadMem (1024,Vec(4,SInt(8.W)))
+//     // Data you want to write (a Vec of 4 UInt values)
+
+//     val data = VecInit(Seq(
+//     io.mem_data(7, 0).asSInt,
+//     io.mem_data(7, 0).asSInt,
+//     io.mem_data(7, 0).asSInt,
+//     io.mem_data(7, 0).asSInt
+// ))
+//     val mask = VecInit(Seq(1.B,0.B,0.B,1.B))
+
+//     mem.write(io.addr,data,mask)
+//     io.dataout := mem.read(io.addr,io.r_enable)
+//     io.vec_dataout := 0.U 
