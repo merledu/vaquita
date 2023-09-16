@@ -55,94 +55,44 @@ class vec_csr extends Module {
     io.vl_out := vl
     // io.vill := vtype(31)
 
-    // working on  only one vector 
-    when (vtype(2,0)==="b000".U){
-        io.vlmul := 0.U
-        io.vlmul_count := 0.U
-    }
-    // working on  only two vector continously
-    .elsewhen (vtype(2,0)==="b001".U){
-        when((vtype(6)===1.B) && (vl < 4.U && vtype(5,3)==="b010".U) ){
-            io.vlmul := 1.U
-            io.vlmul_count := 0.U
-        }
-        .otherwise{
-            io.vlmul := 1.U
-            io.vlmul_count := 2.U
-        }
-        
-    }
-    // working on  only four vector continously
-    .elsewhen (vtype(2,0)==="b010".U){
-        when(vtype(6)===1.B && (vl < 4.U && vl > 0.U) ){
-            io.vlmul := 2.U
-            io.vlmul_count := 1.U
-        }
-        .elsewhen(vtype(6)===1.B && (vl < 8.U && vl > 4.U)){
-            io.vlmul := 2.U
-            io.vlmul_count := 3.U
-        }
-        .otherwise{
-            io.vlmul := 2.U
-            io.vlmul_count := 3.U
-        }
-        
-    }
-    // working on  only eight vector continously
-    .elsewhen (vtype(2,0)==="b011".U){
+    when(vtype(5,3)==="b000".U){ //when sew = 8
         io.vlmul := 3.U
-        when(vl < 4.U && vl > 0.U ){
-            io.vlmul_count := 0.U
-        }
-        .elsewhen((vl < 8.U && vl > 4.U)){
-            io.vlmul_count := 1.U
-        }
-        .elsewhen((vl < 12.U && vl > 8.U)){
-            io.vlmul_count := 2.U
-        }
-        .elsewhen((vl < 16.U && vl > 12.U)){
-            io.vlmul_count := 3.U
-        }
-        .elsewhen((vl < 20.U && vl > 16.U)){
-            io.vlmul_count := 4.U
-        }
-        .elsewhen((vl < 24.U && vl > 20.U)){
-            io.vlmul_count := 5.U
-        }
-        .elsewhen((vl < 28.U && vl > 24.U)){
-            io.vlmul_count := 6.U
-        }
-        .elsewhen((vl < 32.U && vl > 28.U)){
-            io.vlmul_count := 7.U
-        }
-        .elsewhen((vl < 36.U && vl > 32.U)){
-            io.vlmul_count := 8.U
-        }
-        .elsewhen((vl < 40.U && vl > 36.U)){
-            io.vlmul_count := 9.U
-        }
-        .elsewhen((vl < 44.U && vl > 40.U)){
-            io.vlmul_count := 10.U
-        }
-        .elsewhen((vl < 48.U && vl > 44.U)){
-            io.vlmul_count := 11.U
-        }
-        .elsewhen((vl < 52.U && vl > 48.U)){
-            io.vlmul_count := 12.U
-        }
-        .elsewhen((vl < 56.U && vl > 52.U)){
-            io.vlmul_count := 13.U
-        }
-        .elsewhen((vl < 60.U && vl > 56.U)){
-            io.vlmul_count := 14.U
-        }
-        .elsewhen((vl < 64.U && vl > 60.U)){
-            io.vlmul_count := 15.U
-        }
-
-        .otherwise{
-            io.vlmul_count := 0.U
-        }
+        io.vlmul_count := MuxCase(0.U,Array(
+        (vl< 16.U && vl> 0.U) -> 0.U,
+        (vl< 32.U && vl> 16.U) -> 1.U,
+        (vl< 48.U && vl> 32.U) -> 2.U,
+        (vl< 64.U && vl> 48.U) -> 3.U,
+        (vl< 80.U && vl> 64.U) -> 4.U,
+        (vl< 96.U && vl> 80.U) -> 5.U,
+        (vl< 112.U && vl> 96.U) -> 6.U,
+        (vl< 128.U && vl> 112.U) -> 7.U
+    ))
+    }
+    .elsewhen(vtype(5,3)==="b001".U){ //when sew = 16
+        io.vlmul := 3.U
+        io.vlmul_count := MuxCase(0.U,Array(
+        (vl< 8.U && vl> 0.U) -> 0.U,
+        (vl< 16.U && vl> 8.U) -> 1.U,
+        (vl< 24.U && vl> 16.U) -> 2.U,
+        (vl< 32.U && vl> 24.U) -> 3.U,
+        (vl< 40.U && vl> 32.U) -> 4.U,
+        (vl< 48.U && vl> 40.U) -> 5.U,
+        (vl< 56.U && vl> 48.U) -> 6.U,
+        (vl< 64.U && vl> 56.U) -> 7.U
+    ))
+    }
+    .elsewhen(vtype(5,3)==="b010".U){ //when sew = 32
+        io.vlmul := 3.U
+        io.vlmul_count := MuxCase(0.U,Array(
+        (vl< 4.U && vl> 0.U) -> 0.U,
+        (vl< 8.U && vl> 4.U) -> 1.U,
+        (vl< 12.U && vl> 8.U) -> 2.U,
+        (vl< 16.U && vl> 12.U) -> 3.U,
+        (vl< 20.U && vl> 16.U) -> 4.U,
+        (vl< 24.U && vl> 20.U) -> 5.U,
+        (vl< 28.U && vl> 24.U) -> 6.U,
+        (vl< 32.U && vl> 28.U) -> 7.U
+    ))
     }
     .otherwise{
         io.vlmul := 0.U
