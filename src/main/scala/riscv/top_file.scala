@@ -1,6 +1,7 @@
 package riscv
-import chisel3 . _
-import chisel3 . util . _
+import chisel3._
+import chisel3.util._
+import chisel3.stage.ChiselStage
 class top_file extends Module {
     val io = IO(new Bundle{
     //val out =Output(UInt(32.W))
@@ -120,6 +121,7 @@ class top_file extends Module {
     alu_module.io.vd := vec_tail_module.io.vd_out
     alu_module.io.comp := vec_tail_module.io.comp
     alu_module.io.arith_mask := instr_module.io.r_data(25)
+    alu_module.io.func3 := instr_module.io.r_data(14,12)
 
     val config = MuxLookup(control_unit_module.io.config,0.S,Array(
         (0.U) -> register_file_module.io.rs1_out.asSInt,
@@ -167,6 +169,8 @@ class top_file extends Module {
 
     s_memory_module.io.r_enable := control_unit_module.io.mem_read
     s_memory_module.io.stall := control_unit_module.io.stall_true
+
+    s_memory_module.io.f3 := instr_module.io.r_data(14,12).asUInt
 
 
     
@@ -219,3 +223,6 @@ class top_file extends Module {
     // register_file_module.io. reg_enable := control_unit_module.io.reg_write
     // register_file_module.io.reg_data := (Mux(control_unit_module.io.mem_data_sel,s_memory_module.io.dataout,alu_module.io.out)).asSInt
 }
+// object aluDriver extends App{
+//   (new ChiselStage).emitVerilog(new top_file)
+// }

@@ -1,6 +1,6 @@
 package riscv
-import chisel3 . _
-import chisel3 . util . _
+import chisel3._
+import chisel3.util._
 object alu_op {
     val add = 0.U(32.W)
     val addi = 1.U(32.W)

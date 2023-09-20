@@ -77,3 +77,23 @@ class vlsu extends Module {
     //     io.stall := 1.B
     // }
 }
+
+    // when(io.w_enable===1.B && io.stall >= 0.U && io.vec_en===1.B) {
+    //     for (i <- 0 until 4) {
+    //         memory.write(addr32(i),vector_data32(i))
+    //     }
+    // }
+    // .elsewhen(io.w_enable===1.B && io.vec_en===0.B){
+    //     memory.write(io.addr,io.mem_data.asUInt)
+    // }
+    // .elsewhen(io.r_enable===1.B && io.stall >= 0.U && io.vec_en===1.B) {
+    //     for (i <- 0 until 4) {
+    //         rdata(i) := memory.read(addr32(i))
+    //     }
+    // }
+    // .otherwise{
+    //     io.dataout := (memory.read(io.addr)).asSInt
+    // }
+     
+    // io.dataout := (memory.read(io.addr)).asSInt
+    // io.vec_dataout := Cat(rdata(3),rdata(2),rdata(1),rdata(0))

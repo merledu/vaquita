@@ -205,6 +205,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|s_memory>io_f3"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|s_memory>vector_data32_0"
   },
   {
@@ -433,6 +437,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|alu>io_comp"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~top_file|alu>io_func3"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

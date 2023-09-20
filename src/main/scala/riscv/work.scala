@@ -36,43 +36,35 @@
 //   /* Store Half Word */
 //   when(io.writeEnable && io.f3 === "b000".U){
 //     when(offsetSW === 0.U){
-//       io.dccmReq.bits.activeByteLane := "b0001".U
 //     }.elsewhen(offsetSW === 1.U){
 //       wdata(0) := io.writeData(15,8)
 //       wdata(1) := io.writeData(7,0)
 //       wdata(2) := io.writeData(23,16)
 //       wdata(3) := io.writeData(31,24)
-//       io.dccmReq.bits.activeByteLane := "b0010".U
 //     }.elsewhen(offsetSW === 2.U){
 //       wdata(0) := io.writeData(15,8)
 //       wdata(1) := io.writeData(23,16)
 //       wdata(2) := io.writeData(7,0)
 //       wdata(3) := io.writeData(31,24)
-//       io.dccmReq.bits.activeByteLane := "b0100".U
 //     }.otherwise{
 //       wdata(0) := io.writeData(15,8)
 //       wdata(1) := io.writeData(23,16)
 //       wdata(2) := io.writeData(31,24)
 //       wdata(3) := io.writeData(7,0)
-//       io.dccmReq.bits.activeByteLane := "b1000".U
 //     }
 //   }
 //     /* Store Half Word */
 //     .elsewhen(io.writeEnable && io.f3 === "b001".U){
 //     // offset will either be 0 or 2 since address will be 0x0000 or 0x0002
 //     when(offsetSW === 0.U){
-//       // data to be stored at lower 16 bits (15,0)
-//       io.dccmReq.bits.activeByteLane := "b0011".U
 //     }.elsewhen(offsetSW === 1.U){
 //       // data to be stored at lower 16 bits (15,0)
-//       io.dccmReq.bits.activeByteLane := "b0110".U
 //       wdata(0) := io.writeData(23,16)
 //       wdata(1) := io.writeData(7,0)
 //       wdata(2) := io.writeData(15,8)
 //       wdata(3) := io.writeData(31,24)
 //     }.otherwise{
 //       // data to be stored at upper 16 bits (31,16)
-//       io.dccmReq.bits.activeByteLane := "b1100".U
 //       wdata(2) := io.writeData(7,0)
 //       wdata(3) := io.writeData(15,8)
 //       wdata(0) := io.writeData(23,16)
@@ -81,17 +73,7 @@
 //   }
 //     /* Store Word */
 //     .otherwise{
-//     io.dccmReq.bits.activeByteLane := "b1111".U
 //   }
-
-//   io.dccmReq.bits.dataRequest := wdata.asUInt()
-//   io.dccmReq.bits.addrRequest := (io.aluResultIn & "h00001fff".U) >> 2
-//   io.dccmReq.bits.isWrite := io.writeEnable
-//   io.dccmReq.valid := Mux(io.writeEnable | io.readEnable, true.B, false.B)
-
-//   io.stall := (io.writeEnable || io.readEnable) && !io.dccmRsp.valid
-
-//   rdata := Mux(io.dccmRsp.valid, io.dccmRsp.bits.dataResponse, DontCare)
 
 
 //   when(io.readEnable) {

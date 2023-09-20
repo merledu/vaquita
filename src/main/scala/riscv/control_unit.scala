@@ -1,6 +1,7 @@
 package riscv
 import chisel3 . _
 import chisel3 . util . _
+import chisel3.stage.ChiselStage
 class control_unit(val on : Bool =1.B, val off : Bool =0.B) extends Module {
     val io =  IO(new Bundle{
         val op_code =  Input(UInt(7.W))

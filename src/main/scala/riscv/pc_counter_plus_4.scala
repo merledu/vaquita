@@ -8,6 +8,7 @@ class pc_counter_plus_4 extends Module {
         val out4 = Output(UInt(32.W))
     })
     val reg = RegInit(0.U(32.W))
+    print(io.pc)
     reg := io.pc
     io.out := reg
     io.out4 := reg + 4.U
