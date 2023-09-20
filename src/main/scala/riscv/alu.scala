@@ -240,279 +240,279 @@ class alu extends Module {
           io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
         }
       }
-      // subtraction of (vectot to vector) and (vector to scalar)
-      when((io.alu===vsubvv) | io.alu===vsubvx){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) - sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) - sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // reverse subtraction of (vector to scalar) and (vector immediate) 
-      when((io.alu===vrsubvi) | io.alu===vrsubvx){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_b(i) - sew_32_a(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_b(i) - sew_32_a(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // return minimum value(unsign) of (vectot to vector) and (vector to scalar) 
-      when((io.alu===vminuvv) | io.alu===vminuvx){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // addition of (vectot to vector) and (vector to scalar)
-      when((io.alu===vminvv) | io.alu===vminvx){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // addition of (vectot to vector) and (vector to scalar)
-      when((io.alu===vmaxuvv) | io.alu===vmaxuvx){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // addition of (vectot to vector) and (vector to scalar)
-      when((io.alu===vmaxvv) | io.alu===vmaxvx){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vrgather of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vrgathervv) | (io.alu===vrgathervx) | io.alu===vrgathervi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vslideup of (vector to scalar) and (vector immediate) 
-      when((io.alu===vslideupvx) | (io.alu===vslideupvi)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vrgatherei16 of (vectot to vector)
-      when((io.alu===vrgatherei16vv)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vslidedown of (vector to scalar) and (vector immediate) 
-      when((io.alu===vslidedownvx) | (io.alu===vslidedownvi)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vadc of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vadcvv) | (io.alu===vadcvx) | io.alu===vadcvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmadc of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vmadcvv) | (io.alu===vmadcvx) | io.alu===vmadcvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsbc of (vectot to vector) and (vector to scalar)
-      when((io.alu===vsbcvv) | (io.alu===vsbcvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsbc of (vectot to vector) and (vector to scalar)
-      when((io.alu===vmsbcvv) | (io.alu===vmsbcvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmerge/vmv of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vmvvv) | (io.alu===vmvvx) | io.alu===vmvvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmseq of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vmseqvv) | (io.alu===vmseqvx) | io.alu===vmseqvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsne of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vmsnevv) | (io.alu===vmsnevx) | io.alu===vmsnevi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsltu of (vectot to vector) and (vector to scalar)
-      when((io.alu===vmsltuvv) | (io.alu===vmsltuvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmslt of (vectot to vector) and (vector to scalar)
-      when((io.alu===vmsltvv) | (io.alu===vmsltvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsleu of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vmsleuvv) | (io.alu===vmsleuvx) | io.alu===vmsleuvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsle of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vmslevv) | (io.alu===vmslevx) | io.alu===vmslevi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsgtu of (vector to scalar) and (vector immediate) 
-      when((io.alu===vmsgtuvx) | (io.alu===vmsgtuvi)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vmsgt of (vector to scalar) and (vector immediate) 
-      when((io.alu===vmsgtvv) | (io.alu===vmsgtvi)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsaddu of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vsadduvv) | (io.alu===vsadduvx) | io.alu===vsadduvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsadd of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vsaddvv) | (io.alu===vsaddvx) | io.alu===vsaddvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vssubu of (vectot to vector) and (vector to scalar)
-      when((io.alu===vssubuvv) | (io.alu===vssubuvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vssub of (vectot to vector) and (vector to scalar)
-      when((io.alu===vssubvv) | (io.alu===vssubvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsll of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vsllvv) | (io.alu===vsllvx) | io.alu===vsllvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsmul of (vectot to vector) and (vector to scalar)
-      when((io.alu===vsmulvv) | (io.alu===vsmulvx)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsrl of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vsrlvv) | (io.alu===vsrlvx) | io.alu===vsrlvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vsra of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vsravv) | (io.alu===vsravx) | io.alu===vsravi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vssrl of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vssrlvv) | (io.alu===vssrlvx) | io.alu===vssrlvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vssra of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vssravv) | (io.alu===vssravx) | io.alu===vssravi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vnsrl of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vnsrlvv) | (io.alu===vnsrlvx) | io.alu===vaddvxvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vnsra of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vnsravv) | (io.alu===vnsravx) | io.alu===vnsravi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vnclipu of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vnclipuvv) | (io.alu===vnclipuvx) | io.alu===vnclipuvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vnclip of (vectot to vector) and (vector to scalar) and (vector immediate) 
-      when((io.alu===vnclipvv) | (io.alu===vnclipvx) | io.alu===vnclipvi){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vwredsumu of (vectot to vector)
-      when(io.alu===vwredsumuvv){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
-      // vwredsum of (vectot to vector)
-      when((io.alu===vwredsumvv)){
-        for (i <- 0 until 4) {
-          out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
-          io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
-        }
-      }
+      // // subtraction of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vsubvv) | io.alu===vsubvx){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) - sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) - sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // reverse subtraction of (vector to scalar) and (vector immediate) 
+      // when((io.alu===vrsubvi) | io.alu===vrsubvx){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_b(i) - sew_32_a(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_b(i) - sew_32_a(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // return minimum value(unsign) of (vectot to vector) and (vector to scalar) 
+      // when((io.alu===vminuvv) | io.alu===vminuvx){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // addition of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vminvv) | io.alu===vminvx){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // addition of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vmaxuvv) | io.alu===vmaxuvx){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // addition of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vmaxvv) | io.alu===vmaxvx){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vrgather of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vrgathervv) | (io.alu===vrgathervx) | io.alu===vrgathervi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vslideup of (vector to scalar) and (vector immediate) 
+      // when((io.alu===vslideupvx) | (io.alu===vslideupvi)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vrgatherei16 of (vectot to vector)
+      // when((io.alu===vrgatherei16vv)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vslidedown of (vector to scalar) and (vector immediate) 
+      // when((io.alu===vslidedownvx) | (io.alu===vslidedownvi)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vadc of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vadcvv) | (io.alu===vadcvx) | io.alu===vadcvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmadc of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmadcvv) | (io.alu===vmadcvx) | io.alu===vmadcvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsbc of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vsbcvv) | (io.alu===vsbcvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsbc of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vmsbcvv) | (io.alu===vmsbcvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmerge/vmv of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmvvv) | (io.alu===vmvvx) | io.alu===vmvvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmseq of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmseqvv) | (io.alu===vmseqvx) | io.alu===vmseqvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsne of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmsnevv) | (io.alu===vmsnevx) | io.alu===vmsnevi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsltu of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vmsltuvv) | (io.alu===vmsltuvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmslt of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vmsltvv) | (io.alu===vmsltvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsleu of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmsleuvv) | (io.alu===vmsleuvx) | io.alu===vmsleuvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsle of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmslevv) | (io.alu===vmslevx) | io.alu===vmslevi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsgtu of (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmsgtuvx) | (io.alu===vmsgtuvi)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vmsgt of (vector to scalar) and (vector immediate) 
+      // when((io.alu===vmsgtvv) | (io.alu===vmsgtvi)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsaddu of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vsadduvv) | (io.alu===vsadduvx) | io.alu===vsadduvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsadd of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vsaddvv) | (io.alu===vsaddvx) | io.alu===vsaddvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vssubu of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vssubuvv) | (io.alu===vssubuvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vssub of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vssubvv) | (io.alu===vssubvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsll of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vsllvv) | (io.alu===vsllvx) | io.alu===vsllvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsmul of (vectot to vector) and (vector to scalar)
+      // when((io.alu===vsmulvv) | (io.alu===vsmulvx)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsrl of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vsrlvv) | (io.alu===vsrlvx) | io.alu===vsrlvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vsra of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vsravv) | (io.alu===vsravx) | io.alu===vsravi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vssrl of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vssrlvv) | (io.alu===vssrlvx) | io.alu===vssrlvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vssra of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vssravv) | (io.alu===vssravx) | io.alu===vssravi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vnsrl of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vnsrlvv) | (io.alu===vnsrlvx) | io.alu===vaddvxvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vnsra of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vnsravv) | (io.alu===vnsravx) | io.alu===vnsravi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vnclipu of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vnclipuvv) | (io.alu===vnclipuvx) | io.alu===vnclipuvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vnclip of (vectot to vector) and (vector to scalar) and (vector immediate) 
+      // when((io.alu===vnclipvv) | (io.alu===vnclipvx) | io.alu===vnclipvi){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vwredsumu of (vectot to vector)
+      // when(io.alu===vwredsumuvv){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
+      // // vwredsum of (vectot to vector)
+      // when((io.alu===vwredsumvv)){
+      //   for (i <- 0 until 4) {
+      //     out32(i) := Mux(io.arith_mask===1.B,sew_32_a(i) + sew_32_b(i),Mux((io.arith_mask===0.B && io.vec_0(0)===1.B),(sew_32_a(i) + sew_32_b(i)),Mux((io.arith_mask===0.B && io.vma === 0.B) ,io.vd(i),Fill(32,1.U))))
+      //     io.vec_out := Cat(out32(3),out32(2),out32(1),out32(0))
+      //   }
+      // }
       
      //vector load
       .elsewhen (io.sew==="b010".U && io.alu===vle32){

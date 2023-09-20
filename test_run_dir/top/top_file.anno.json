@@ -209,22 +209,6 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>vector_data32_0"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>vector_data32_1"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>vector_data32_2"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~top_file|s_memory>vector_data32_3"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~top_file|register_file>io_rs1_in"
   },
   {
