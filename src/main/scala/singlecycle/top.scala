@@ -179,7 +179,7 @@ regfileMod.io.WriteData := MuxCase ( 0.S , Array (
 (CntrlDecMod.io.Mem2Reg === 0.B ) -> Mux(CntrlDecMod.io.vset,config.io.vl,ALUMod.io.output),
 (CntrlDecMod.io.Mem2Reg === 1.B ) -> datamemMod.io.out)
 )
-
+// vreg.io.vd_data := tail_mask.io.v_data_out.asSInt
 vreg.io.vd_data := ALUMod.io.v_output.asSInt
 io.out := 0.U
 io.test1 := instmemMod.io.inst(19,15)

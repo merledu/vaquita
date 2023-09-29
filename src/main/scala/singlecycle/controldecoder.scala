@@ -16,7 +16,7 @@ class controldec extends Module {
         val nextPCsel = Output(UInt(2.W))
         val aluop = Output(UInt(5.W))
         val vset = Output(Bool())
-        val load = Output (UInt(4.W))
+        val v_load = Output (UInt(4.W))
         val v_ins =Output(Bool())
     })
     io.MemWrite := 0.B
@@ -30,7 +30,7 @@ class controldec extends Module {
     io.nextPCsel := 0.U
     io.aluop := 7.U
     io.vset := 0.B
-    io.load :=0.B
+    io.v_load :=0.B
     io.v_ins := 0.B
 
     val configtype = io.Instruction(31,30)
@@ -220,7 +220,7 @@ class controldec extends Module {
             }
             }
             is ("b0000111".U){//load-vector
-            when (io.Instruction(27,26) ==="b00".U && io.Instruction(24,20 )=== "b00000".U){// (mop =00) unit stride// (lumop =000000) unit stride load
+            when (io.Instruction(27,26) ==="b00".U && io.Instruction(24,20 )=== "b00000".U){// (mop =00) unit stride// (lumop =000000) unit stride v_load
                 io.RegWrite:=1.B
                 io.MemWrite:=0.B
                 io.Branch:=0.B
@@ -231,8 +231,22 @@ class controldec extends Module {
                 io.opBsel:=0.B
                 io.Ex_sel:=3.U
                 io.nextPCsel:="b00".U  
-                io.load := 1.U
+                io.v_load := 1.U
             }
         }
+        is ("b0100111".U){//store-vector
+            when (io.Instruction(27,26) ==="b00".U && io.Instruction(24,20 )=== "b00000".U){// (mop =00) unit stride// (lumop =000000) unit stride v_load
+            io. MemWrite := 1.B
+            io. Branch := 0.B
+            io. MemRead := 0.B 
+            io. RegWrite := 1.B
+            io. Mem2Reg := 0.B
+            io. opAsel := "b00".U
+            io. opBsel := 1.B
+            io. Ex_sel := 1.U
+            io.aluop := "b00101".U
+            io.vset := 0.B
+        }
+
         
-    }}
+    }}}

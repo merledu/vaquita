@@ -25,6 +25,7 @@ object ALUOP1 {
     val ALU_SRA = "b000001101".U
     val ALU_SRAI = "b000000101".U
     val ALU_COPY_A = "b000011111".U  //JAL
+    
     val V_ADDI = "b000000011".U
     val V_ADD = "b000000000".U
     val Vaddvx = "b000000100".U
@@ -87,147 +88,133 @@ class ALUIO extends Bundle with Config {
 class ALU_ extends Module with Config {
     val io = IO(new ALUIO)
 
-    val sew_8_a = VecInit(Seq.fill(16)(0.S(8.W)))
-    val sew_16_a = VecInit(Seq.fill(8)(0.S(16.W)))
-    val sew_32_a = VecInit(Seq.fill(4)(0.S(32.W)))
-    val sew_64_a = VecInit(Seq.fill(2)(0.S(64.W)))
+val sew_8_a = VecInit((0 until 16).map(i => io.vs1(8*i+7, 8*i).asSInt))
+val sew_8_b = VecInit((0 until 16).map(i => io.vs2(8*i+7, 8*i).asSInt))
+val sew_16_a = VecInit((0 until 8).map(i => io.vs1(16*i+15, 16*i).asSInt))
+val sew_16_b = VecInit((0 until 8).map(i => io.vs2(16*i+15, 16*i).asSInt))
+val sew_32_a = VecInit((0 until 4).map(i => io.vs1(32*i+31, 32*i).asSInt))
+val sew_32_b = VecInit((0 until 4).map(i => io.vs2(32*i+31, 32*i).asSInt))
+val sew_64_a = VecInit((0 until 2).map(i => io.vs1(64*i+63, 64*i).asSInt))
+val sew_64_b = VecInit((0 until 2).map(i => io.vs2(64*i+63, 64*i).asSInt))
 
-    val sew_8_b = VecInit(Seq.fill(16)(0.S(8.W)))
-    val sew_16_b = VecInit(Seq.fill(8)(0.S(16.W)))
-    val sew_32_b = VecInit(Seq.fill(4)(0.S(32.W)))
-    val sew_64_b = VecInit(Seq.fill(2)(0.S(64.W)))
+val out8 = VecInit(Seq.fill(16)(0.S(8.W)))
+val out16 = VecInit(Seq.fill(8)(0.S(16.W)))
+val out32 = VecInit(Seq.fill(4)(0.S(32.W)))
+val out64 = VecInit(Seq.fill(2)(0.S(64.W)))
 
-    val out8 = VecInit(Seq.fill(16)(0.S(8.W)))
-    val out16 = VecInit(Seq.fill(8)(0.S(16.W)))
-    val out32 = VecInit(Seq.fill(4)(0.S(32.W)))
-    val out64 = VecInit(Seq.fill(2)(0.S(64.W)))
-    
-    // vd previous value of destination vector register 
-    val sew_8_vd = VecInit(Seq.fill(16)(0.S(8.W)))
-    val sew_16_vd = VecInit(Seq.fill(8)(0.S(16.W)))
-    val sew_32_vd = VecInit(Seq.fill(4)(0.S(32.W)))
-    val sew_64_vd = VecInit(Seq.fill(2)(0.S(64.W)))
-
-    // define wires input a when sew = 8
-    sew_8_a(0) := io.vs1(7,0).asSInt
-    sew_8_a(1) := io.vs1(15,8).asSInt
-    sew_8_a(2) := io.vs1(23,16).asSInt
-    sew_8_a(3) := io.vs1(31,24).asSInt
-    sew_8_a(4) := io.vs1(39,32).asSInt
-    sew_8_a(5) := io.vs1(47,40).asSInt
-    sew_8_a(6) := io.vs1(55,48).asSInt
-    sew_8_a(7) := io.vs1(63,56).asSInt
-    sew_8_a(8) := io.vs1(71,64).asSInt
-    sew_8_a(9) := io.vs1(79,72).asSInt
-    sew_8_a(10) := io.vs1(87,80).asSInt
-    sew_8_a(11) := io.vs1(95,88).asSInt
-    sew_8_a(12) := io.vs1(103,96).asSInt
-    sew_8_a(13) := io.vs1(111,104).asSInt
-    sew_8_a(14) := io.vs1(119,112).asSInt
-    sew_8_a(15) := io.vs1(127,120).asSInt
-
-    // define wires input b when sew = 8
-    sew_8_b(0) := io.vs2(7,0).asSInt
-    sew_8_b(1) := io.vs2(15,8).asSInt
-    sew_8_b(2) := io.vs2(23,16).asSInt
-    sew_8_b(3) := io.vs2(31,24).asSInt
-    sew_8_b(4) := io.vs2(39,32).asSInt
-    sew_8_b(5) := io.vs2(47,40).asSInt
-    sew_8_b(6) := io.vs2(55,48).asSInt
-    sew_8_b(7) := io.vs2(63,56).asSInt
-    sew_8_b(8) := io.vs2(71,64).asSInt
-    sew_8_b(9) := io.vs2(79,72).asSInt
-    sew_8_b(10) := io.vs2(87,80).asSInt
-    sew_8_b(11) := io.vs2(95,88).asSInt
-    sew_8_b(12) := io.vs2(103,96).asSInt
-    sew_8_b(13) := io.vs2(111,104).asSInt
-    sew_8_b(14) := io.vs2(119,112).asSInt
-    sew_8_b(15) := io.vs2(127,120).asSInt
-
+val sew_8_vd = VecInit((0 until 16).map(i => io.vd(8*i+7, 8*i).asSInt))
+val sew_16_vd = VecInit((0 until 8).map(i => io.vd(16*i+15, 16*i).asSInt))
+val sew_32_vd = VecInit((0 until 4).map(i => io.vd(32*i+31, 32*i).asSInt))
+val sew_64_vd = VecInit((0 until 2).map(i => io.vd(64*i+63, 64*i).asSInt))
   
 
-    //define wires input a when sew = 16
-    sew_16_a(0) := io.vs1(15,0).asSInt
-    sew_16_a(1) := io.vs1(31,16).asSInt
-    sew_16_a(2) := io.vs1(47,32).asSInt
-    sew_16_a(3) := io.vs1(63,48).asSInt
-    sew_16_a(4) := io.vs1(79,64).asSInt
-    sew_16_a(5) := io.vs1(95,80).asSInt
-    sew_16_a(6) := io.vs1(111,96).asSInt
-    sew_16_a(7) := io.vs1(127,112).asSInt
-
-    //define wires input b when sew = 16
-    sew_16_b(0) := io.vs2(15,0).asSInt
-    sew_16_b(1) := io.vs2(31,16).asSInt
-    sew_16_b(2) := io.vs2(47,32).asSInt
-    sew_16_b(3) := io.vs2(63,48).asSInt
-    sew_16_b(4) := io.vs2(79,64).asSInt
-    sew_16_b(5) := io.vs2(95,80).asSInt
-    sew_16_b(6) := io.vs2(111,96).asSInt
-    sew_16_b(7) := io.vs2(127,112).asSInt
-
+def VectorOp_vv( in_A: Vec[SInt], in_B: Vec[SInt], vlmax:UInt, vd:Vec[SInt]) :SInt = {
   
-    //define wires input a when sew = 32
-    sew_32_a(0) := io.vs1(31,0).asSInt
-    sew_32_a(1) := io.vs1(63,32).asSInt
-    sew_32_a(2) := io.vs1(95,64).asSInt
-    sew_32_a(3) := io.vs1(127,96).asSInt
+    val out = vd.zipWithIndex.map{ case(elem,i) => 
+       Mux(i.U < vstart,elem,
+       Mux(i.U >= vstart && i.U < io.vl,
+                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem,
+                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, (-1).S,MuxLookup(
+            io.aluc,
+            0.S, // Default case (no operation)
+            Seq(
+                V_ADD -> (in_A(i) + in_B(i)).asSInt,
+                Vsubvv  -> (in_A(i) - in_B(i)).asSInt,
+                Vandvv -> (in_A(i) & in_B(i)).asSInt,
+                Vorvv -> (in_A(i) | in_B(i)).asSInt,
+                Vxorvv -> (in_A(i) ^ in_B(i)).asSInt,
+                Vminuvv -> Mux(in_B(i).asUInt <= in_A(i).asUInt, in_B(i).asSInt, in_A(i).asSInt),
+                Vminvv -> Mux(in_B(i) <= in_A(i), in_B(i).asSInt, in_A(i).asSInt)
+            )
+        ))
+                            ), 
+        Mux(io.vta === 0.U && i.U > io.vl && i.U < vlmax, elem, (-1).S)
+        ))
+        }
+      Cat(out.reverse).asSInt
+}
 
-    //define wires input b when sew = 32
-    sew_32_b(0) := io.vs2(31,0).asSInt
-    sew_32_b(1) := io.vs2(63,32).asSInt
-    sew_32_b(2) := io.vs2(95,64).asSInt
-    sew_32_b(3) := io.vs2(127,96).asSInt
+def VectorOp_vi( in_A: Vec[SInt], imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
+  
+    val out = vd.zipWithIndex.map{ case(elem,i) => 
+       Mux(i.U < vstart,elem,
+       Mux(i.U >= vstart && i.U < io.vl,
+                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem,
+                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, (-1).S,MuxLookup(
+            io.aluc,
+            0.S, // Default case (no operation)
+            Seq(
+                V_ADDI  -> (in_A(i) + imm).asSInt,
+                Vrsubvi -> ( imm-in_A(i)).asSInt,
+                Vandvi -> (in_A(i) & imm).asSInt,
+                Vorvi -> (in_A(i) | imm).asSInt,
+                Vxorvi -> (in_A(i) ^ imm).asSInt
+                
+            )
+        ))
+                            ), 
+        Mux(io.vta === 0.U && i.U > io.vl && i.U < vlmax, elem, (-1).S)
+        ))
+        }
+      Cat(out.reverse).asSInt
+}
+def VectorOp_vx( in_A: Vec[SInt], imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
+  
+    val out = vd.zipWithIndex.map{ case(elem,i) => 
+       Mux(i.U < vstart,elem,
+       Mux(i.U >= vstart && i.U < io.vl,
+                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem,
+                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, (-1).S,MuxLookup(
+            io.aluc,
+            0.S, // Default case (no operation)
+            Seq(
+                Vaddvx  -> (in_A(i) + imm).asSInt,
+                Vsubvx -> ( in_A(i)-imm).asSInt,
+                Vrsubvx -> ( imm-in_A(i)).asSInt,
+                Vandvx -> (in_A(i) & imm).asSInt,
+                Vorvx -> (in_A(i) | imm).asSInt,
+                Vxorvx -> (in_A(i) ^ imm).asSInt,
+                Vminuvx -> Mux(imm.asUInt <= in_A(i).asUInt, imm.asSInt, in_A(i).asSInt),
+                Vminvx -> Mux(imm <= in_A(i), imm.asSInt, in_A(i).asSInt),
+                Vmaxuvx -> Mux(imm.asUInt >= in_A(i).asUInt, imm.asSInt, in_A(i).asSInt),
+                Vmaxvx -> Mux(imm >= in_A(i), imm.asSInt, in_A(i).asSInt)
+            )
+        ))
+                            ), 
+        Mux(io.vta === 0.U && i.U > io.vl && i.U < vlmax, elem, (-1).S)
+        ))
+        }
+      Cat(out.reverse).asSInt
+}
 
-    //define wires input a when sew = 64
-    sew_64_a(0) := io.vs1(63,0).asSInt
-    sew_64_a(1) := io.vs1(127,64).asSInt
+def Vectormove_vxvi( imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
+  val out = vd.zipWithIndex.map{ case(elem,i) => 
+       Mux(i.U < vstart,elem.asUInt,
+       Mux(i.U >= vstart && i.U < io.vl,
+                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
+                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111111111111111111111111111111111111111111111111111".U,(imm).asUInt)
+                            ), 
+        Mux(io.vta === 0.U && i.U > io.vl && i.U < vlmax, elem.asUInt, "b1111111111111111111111111111111111111111111111111111111111111111".U)
+        ))
+        }
+      Cat(out.reverse).asSInt
+}
+def Vectormove_vv( in_A: Vec[SInt], vlmax:UInt, vd:Vec[SInt]) :SInt = {
+  val out = vd.zipWithIndex.map{ case(elem,i) => 
+       Mux(i.U < vstart,elem.asUInt,
+       Mux(i.U >= vstart && i.U < io.vl,
+                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
+                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111111111111111111111111111111111111111111111111111".U,(in_A(i)).asUInt)
+                            ), 
+        Mux(io.vta === 0.U && i.U > io.vl && i.U < vlmax, elem.asUInt, "b1111111111111111111111111111111111111111111111111111111111111111".U)
+        ))
+        }
+      Cat(out.reverse).asSInt
+}
 
-    //define wires input b when sew = 64
-    sew_64_b(0) := io.vs2(63,0).asSInt
-    sew_64_b(1) := io.vs2(127,64).asSInt
 
-    //define wires input vd previous when sew = 16
 
-    sew_8_vd(0) := io.vd(7,0).asSInt
-    sew_8_vd(1) := io.vd(15,8).asSInt
-    sew_8_vd(2) := io.vd(23,16).asSInt
-    sew_8_vd(3) := io.vd(31,24).asSInt
-    sew_8_vd(4) := io.vd(39,32).asSInt
-    sew_8_vd(5) := io.vd(47,40).asSInt
-    sew_8_vd(6) := io.vd(55,48).asSInt
-    sew_8_vd(7) := io.vd(63,56).asSInt
-    sew_8_vd(8) := io.vd(71,64).asSInt
-    sew_8_vd(9) := io.vd(79,72).asSInt
-    sew_8_vd(10) := io.vd(87,80).asSInt
-    sew_8_vd(11) := io.vd(95,88).asSInt
-    sew_8_vd(12) := io.vd(103,96).asSInt
-    sew_8_vd(13) := io.vd(111,104).asSInt
-    sew_8_vd(14) := io.vd(119,112).asSInt
-    sew_8_vd(15) := io.vd(127,120).asSInt
-
-   //define wires input vd previous when sew = 16
-   
-    sew_16_vd(0) := io.vd(15,0).asSInt
-    sew_16_vd(1) := io.vd(31,16).asSInt
-    sew_16_vd(2) := io.vd(47,32).asSInt
-    sew_16_vd(3) := io.vd(63,48).asSInt
-    sew_16_vd(4) := io.vd(79,64).asSInt
-    sew_16_vd(5) := io.vd(95,80).asSInt
-    sew_16_vd(6) := io.vd(111,96).asSInt
-    sew_16_vd(7) := io.vd(127,112).asSInt
-
-    //define wires input vd previous when sew = 32
-    sew_32_vd(0) := io.vd(31,0).asSInt
-    sew_32_vd(1) := io.vd(63,32).asSInt
-    sew_32_vd(2) := io.vd(95,64).asSInt
-    sew_32_vd(3) := io.vd(127,96).asSInt
-
-    //define wires input vd when sew = 64
-    sew_64_vd(0) := io.vd(63,0).asSInt
-    sew_64_vd(1) := io.vd(127,64).asSInt
-    
-    io.v_output := 0.S
+io.v_output := 0.S
 
    io.output := 0.S
   //  val imm = 0.S
@@ -249,697 +236,117 @@ class ALU_ extends Module with Config {
 
    }.otherwise{ //VectorAddvv
 	when (io.sew === "b011".U && io.aluc === V_ADD){  //sew = 64
-       val out64 = sew_64_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111111111111111111111111111111111111111111111111111".U,(sew_64_a(i) + sew_64_b(i)).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 2.U, elem.asUInt, "b1111111111111111111111111111111111111111111111111111111111111111".U)
-        ))
-        }
-     io.v_output := Cat(out64(1),out64(0)).asSInt
+     io.v_output := VectorOp_vv(sew_64_a,sew_64_b,2.U,sew_64_vd)
 	}
 	 .elsewhen (io.sew === "b010".U && io.aluc === V_ADD){ // sew = 32
-        val out32 = sew_32_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b11111111111111111111111111111111".U,(sew_32_a(i) + sew_32_b(i)).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 4.U, elem.asUInt, "b11111111111111111111111111111111".U)
-        ))
-        }
-        io.v_output := (Cat(out32(3),out32(2),out32(1),out32(0))).asSInt
+        io.v_output := VectorOp_vv(sew_32_a,sew_32_b,4.U,sew_32_vd)
       }
 	  .elsewhen(io.sew === "b001".U && io.aluc === V_ADD){ //sew = 16
-		val out16 = sew_16_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111".U,(sew_16_a(i) + sew_16_b(i)).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 8.U, elem.asUInt, "b1111111111111111".U)
-        ))
-        }
-		io.v_output := (Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0))).asSInt
+        io.v_output := VectorOp_vv(sew_16_a,sew_16_b,8.U,sew_16_vd)
 	  }
 	  .elsewhen(io.sew === "b000".U && io.aluc === V_ADD){ //sew = 8
-				val out8 = sew_8_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111".U,(sew_8_a(i) + sew_8_b(i)).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 16.U, elem.asUInt, "b1111111111111111".U)
-        ))
-        }
-		io.v_output := (Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0))).asSInt
+        io.v_output := VectorOp_vv(sew_8_a,sew_8_b,16.U,sew_8_vd)
 	 //vectoraddvv end
    //vector add vi start
-    }.elsewhen(io.sew === "b011".U && io.aluc === V_ADDI){
-		val imm = Cat(0.S(32.W), io.in_B).asSInt
-		val out64 = sew_64_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111111111111111111111111111111111111111111111111111".U,(sew_64_b(i) + imm).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 2.U, elem.asUInt, "b1111111111111111111111111111111111111111111111111111111111111111".U)
-        ))
-        }
-		io.v_output := Cat(out64(1),out64(0)).asSInt
+    }.elsewhen(io.sew === "b011".U && io.aluc(2,0) === "b011".U){
+      val imm = Cat(0.S(32.W), io.in_B).asSInt
+      io.v_output := VectorOp_vi(sew_64_b,imm,2.U,sew_64_vd)
     
-    }.elsewhen(io.sew === "b010".U && io.aluc === V_ADDI){
-       val imm = io.in_B(31,0).asSInt
-		  val out32 = sew_32_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b11111111111111111111111111111111".U,(sew_32_b(i) + imm).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 4.U, elem.asUInt, "b11111111111111111111111111111111".U)
-        ))
-        }
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+    }.elsewhen(io.sew === "b010".U && io.aluc(2,0) === "b011".U){
+       val imm = io.in_B(31,0).asSInt        
+        io.v_output := VectorOp_vi(sew_32_b,imm,4.U,sew_32_vd)
 	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === V_ADDI){
-		val imm = io.in_B(7,0).asSInt
-		val out8 = sew_8_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111".U,(sew_8_b(i) + imm).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 16.U, elem.asUInt, "b1111111111111111".U)
-        ))
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === V_ADDI){
-		val imm = io.in_B(15,0).asSInt
-		val out16 = sew_16_vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
-                            Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
-                                Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111".U,(sew_16_b(i) + imm).asUInt)
-                            ), 
-        Mux(io.vta === 0.U && i.U > io.vl && i.U < 8.U, elem.asUInt, "b1111111111111111".U)
-        ))
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }  //vector add vi end
+    }.elsewhen(io.sew === "b000".U && io.aluc(2,0) === "b011".U){
+      val imm = io.in_B(7,0).asSInt
+      io.v_output := VectorOp_vi(sew_8_b,imm,16.U,sew_8_vd)
+    }
+	  .elsewhen (io.sew === "b001".U && io.aluc(2,0) === "b011".U){
+      val imm = io.in_B(15,0).asSInt
+      io.v_output := VectorOp_vi(sew_16_b,imm,8.U,sew_16_vd)
+
+	  }  //vector vi end
+        //vector  vx
+    .elsewhen(io.sew === "b011".U && io.aluc === Vaddvx){
+		  val imm = Cat(0.S(32.W), io.in_A).asSInt
+      io.v_output := VectorOp_vx(sew_64_b,imm,2.U,sew_64_vd)
+    
+    }.elsewhen(io.sew === "b010".U && io.aluc === Vaddvx){
+       val imm = io.in_A(31,0).asSInt
+        io.v_output := VectorOp_vx(sew_32_b,imm,4.U,sew_32_vd)
+	  
+    }.elsewhen(io.sew === "b000".U && io.aluc === Vaddvx){
+		val imm = io.in_A(7,0).asSInt
+      io.v_output := VectorOp_vx(sew_8_b,imm,16.U,sew_8_vd)
+    }.elsewhen (io.sew === "b001".U && io.aluc === Vaddvx){
+		val imm = io.in_A(15,0).asSInt
+       io.v_output := VectorOp_vx(sew_16_b,imm,8.U,sew_16_vd)
+	  }  //vector  vx end
+
+
+
+
     //vector move vx instruction
     .elsewhen (io.aluc === VMVx){
       when(io.vd_addr === 0.U){
-    io.v_output := Cat((0.S(96.W)),io.in_A).asSInt
-  	}.otherwise{
+        io.v_output := Cat((0.S(96.W)),io.in_A).asSInt
+  	  }.otherwise{
       when (io.sew === "b011".U){
         val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U ){
+          io.v_output := Vectormove_vxvi(imm,2.U,sew_64_vd)
+      
+      }.elsewhen(io.sew === "b010".U ){
        val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+          io.v_output := Vectormove_vxvi(imm,4.U,sew_32_vd)
 	  
-    }.elsewhen(io.sew === "b000".U ){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (imm).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+      }.elsewhen (io.sew === "b001".U){
+		   val imm = io.in_A(15,0).asSInt
+    	    io.v_output := Vectormove_vxvi(imm,8.U,sew_16_vd)
 
-      }//vmv vx end
-    }}
+      }.elsewhen(io.sew === "b000".U ){
+        val imm = io.in_A(7,0).asSInt
+          io.v_output := Vectormove_vxvi(imm,16.U,sew_8_vd)
 
 
+     } }}//vmv vx end
+    
     //vector move vi instruction
     .elsewhen (io.aluc === VMVvi){
       when(io.vd_addr === 0.U){
-    io.v_output := Cat((0.S(96.W)),io.in_B).asSInt
-  	}.otherwise{
-      when (io.sew === "b011".U){
+        io.v_output := Cat((0.S(96.W)),io.in_B).asSInt
+  	  }.otherwise{
+        when (io.sew === "b011".U){
         val imm = Cat(0.S(32.W), io.in_B).asSInt
-		for (i <- 0 until 2) { out64(i) := (imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
+        io.v_output := Vectormove_vxvi(imm,2.U,sew_64_vd)
     
-    }.elsewhen(io.sew === "b010".U ){
-       val imm = io.in_B(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U ){
-		val imm = io.in_B(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U){
-		val imm = io.in_B(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (imm).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-
-      }//vmv vi end
-    }}
-
-
+        }.elsewhen(io.sew === "b010".U ){
+          val imm = io.in_B(31,0).asSInt
+          io.v_output := Vectormove_vxvi(imm,4.U,sew_32_vd)
+        }.elsewhen(io.sew === "b000".U ){
+		      val imm = io.in_B(7,0).asSInt
+    	    io.v_output := Vectormove_vxvi(imm,16.U,sew_8_vd)
+	      }.elsewhen (io.sew === "b001".U){
+		      val imm = io.in_B(15,0).asSInt
+          io.v_output := Vectormove_vxvi(imm,8.U,sew_16_vd)      
+        }}
+    }//vmv vi end
+    
     //vector move vv instruction
     .elsewhen (io.aluc === VMVvv){
       when(io.vd_addr === 0.U){
     io.v_output := io.vs1
-  	}.otherwise{
-      when (io.sew === "b011".U){
-		for (i <- 0 until 2) { out64(i) := sew_64_a(i).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
+  	  }.otherwise{
+        when (io.sew === "b011".U){
+        io.v_output := Vectormove_vv(sew_64_a,2.U,sew_64_vd)
     
-    }.elsewhen(io.sew === "b010".U ){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := sew_32_a(i).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
+        }.elsewhen(io.sew === "b010".U ){
+         io.v_output := Vectormove_vv(sew_32_a,4.U,sew_32_vd)
 	  
-    }.elsewhen(io.sew === "b000".U ){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := sew_8_a(i).asSInt
+        }.elsewhen(io.sew === "b000".U ){
+			    io.v_output := Vectormove_vv(sew_8_a,16.U,sew_8_vd)
+	      }.elsewhen (io.sew === "b001".U){
+          io.v_output := Vectormove_vv(sew_16_a,8.U,sew_16_vd)
         }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := sew_16_a(i).asSInt
         }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
+    }//vmv vv end
 
-      }//vmv vv end
-    }}
-
-    //vector add vx
-    .elsewhen(io.sew === "b011".U && io.aluc === Vaddvx){
-		val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) + imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vaddvx){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) + imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vaddvx){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) + imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vaddvx){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) + imm).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }  //vector add vx end
-    //vector sub vv
-    .elsewhen (io.sew === "b011".U && io.aluc === Vsubvv){
-      for (i <- 0 until 2) { out64(i) := (sew_64_b(i) - sew_64_a(i)).asSInt}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vsubvv){ // sew = 32
-        for (i <- 0 until 4) {out32(i) := (sew_32_b(i) - sew_32_a(i)).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vsubvv){ //sew = 16
-		for (i <- 0 until 8) { out16(i) := (sew_16_b(i) - sew_16_a(i)).asSInt }
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vsubvv){ //sew = 8
-		for (i <- 0 until 16) { out8(i) := (sew_8_b(i) - sew_8_a(i)).asSInt}
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vector sub vv end
-    //vector sub vx
-    .elsewhen(io.sew === "b011".U && io.aluc === Vsubvx){
-		val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) - imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vsubvx){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) - imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vsubvx){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) - imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vsubvx){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) - imm  ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }  
-    //vector sub vx end
-    //vector rsub vx
-    .elsewhen(io.sew === "b011".U && io.aluc === Vrsubvx){
-		val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (imm - sew_64_b(i)).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vrsubvx){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (imm - sew_32_b(i)).asSInt }
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vrsubvx){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (imm - sew_8_b(i) ).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vrsubvx){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (imm - sew_16_b(i) ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-    //vector rsub vx end
-    //vector rsub vi
-    .elsewhen(io.sew === "b011".U && io.aluc === Vrsubvi){
-		val imm = Cat(0.S(32.W), io.in_B).asSInt
-		for (i <- 0 until 2) { out64(i) := (imm - sew_64_b(i)).asSInt }
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vrsubvi){
-       val imm = io.in_B(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (imm - sew_32_b(i)).asSInt }
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vrsubvi){
-		val imm = io.in_B(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (imm - sew_8_b(i) ).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vrsubvi){
-		val imm = io.in_B(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (imm - sew_16_b(i) ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }//vrsub vi end
-    // vandvv start
-     .elsewhen (io.sew === "b011".U && io.aluc === Vandvv){
-      for (i <- 0 until 2) { out64(i) := (sew_64_b(i) & sew_64_a(i)).asSInt}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vandvv){ // sew = 32
-        for (i <- 0 until 4) {out32(i) := (sew_32_b(i) & sew_32_a(i)).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vandvv){ //sew = 16
-		for (i <- 0 until 8) { out16(i) := (sew_16_b(i) & sew_16_a(i)).asSInt }
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vandvv){ //sew = 8
-		for (i <- 0 until 16) { out8(i) := (sew_8_b(i) & sew_8_a(i)).asSInt }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vand vv end
-    //vand vx start
-       .elsewhen(io.sew === "b011".U && io.aluc === Vandvx){
-		val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) & imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vandvx){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) & imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vandvx){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) & imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vandvx){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) & imm  ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  } 
-    //vand vx end
-    //vand vi start
-    .elsewhen(io.sew === "b011".U && io.aluc === Vandvi){
-		val imm = Cat(0.S(32.W), io.in_B).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) & imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vandvi){
-       val imm = io.in_B(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) & imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vandvi){
-		val imm = io.in_B(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) & imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vandvi){
-		val imm = io.in_B(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) & imm ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  } 
-    //vand vi end
-    //vor vv start
-    .elsewhen (io.sew === "b011".U && io.aluc === Vorvv){
-      for (i <- 0 until 2) { out64(i) := (sew_64_b(i) | sew_64_a(i)).asSInt}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vorvv){ // sew = 32
-        for (i <- 0 until 4) {out32(i) := (sew_32_b(i) | sew_32_a(i)).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vorvv){ //sew = 16
-		for (i <- 0 until 8) { out16(i) := (sew_16_b(i) | sew_16_a(i)) .asSInt}
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vorvv){ //sew = 8
-		for (i <- 0 until 16) { out8(i) := (sew_8_b(i) | sew_8_a(i)).asSInt }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vor vv end
-    //vor vx start
-       .elsewhen(io.sew === "b011".U && io.aluc === Vorvx){
-		val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) | imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vorvx){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) | imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vorvx){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) | imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vorvx){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) | imm  ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  } 
-    //vor vx end
-    //vxor vi start
-    .elsewhen(io.sew === "b011".U && io.aluc === Vorvi){
-		val imm = Cat(0.S(32.W), io.in_B).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) | imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vorvi){
-       val imm = io.in_B(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) | imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vorvi){
-		val imm = io.in_B(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) | imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vorvi){
-		val imm = io.in_B(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) | imm  ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  } //vor vi end
-
-    //vxor vv start
-    .elsewhen (io.sew === "b011".U && io.aluc === Vxorvv){
-      for (i <- 0 until 2) { out64(i) := (sew_64_b(i) ^ sew_64_a(i)).asSInt}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vxorvv){ // sew = 32
-        for (i <- 0 until 4) {out32(i) := (sew_32_b(i) ^ sew_32_a(i)).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vxorvv){ //sew = 16
-		for (i <- 0 until 8) { out16(i) := (sew_16_b(i) ^ sew_16_a(i)).asSInt }
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vxorvv){ //sew = 8
-		for (i <- 0 until 16) { out8(i) := (sew_8_b(i) ^ sew_8_a(i)).asSInt }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vxor vv end
-    //vxor vx start
-       .elsewhen(io.sew === "b011".U && io.aluc === Vxorvx){
-		val imm = Cat(0.S(32.W), io.in_A).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) ^ imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vxorvx){
-       val imm = io.in_A(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) ^ imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vxorvx){
-		val imm = io.in_A(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) ^ imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vxorvx){
-		val imm = io.in_A(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) ^ imm  ).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  } 
-    //vxor vx end
-    //vxor vi start
-    .elsewhen(io.sew === "b011".U && io.aluc === Vxorvi){
-		val imm = Cat(0.S(32.W), io.in_B).asSInt
-		for (i <- 0 until 2) { out64(i) := (sew_64_b(i) ^ imm).asSInt}
-		io.v_output := Cat(out64(1),out64(0)).asSInt
-    
-    }.elsewhen(io.sew === "b010".U && io.aluc === Vxorvi){
-       val imm = io.in_B(31,0).asSInt
-		  for (i <- 0 until 4) {out32(i) := (sew_32_b(i) ^ imm).asSInt}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-	  
-    }.elsewhen(io.sew === "b000".U && io.aluc === Vxorvi){
-		val imm = io.in_B(7,0).asSInt
-		for (i <- 0 until 16) {
-            out8(i) := (sew_8_b(i) ^ imm).asSInt
-        }
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	  }
-	  .elsewhen (io.sew === "b001".U && io.aluc === Vxorvi){
-		val imm = io.in_B(15,0).asSInt
-		for (i <- 0 until 8) {
-        out16(i) := (sew_16_b(i) ^ imm).asSInt
-        }
-                 
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  } //vxor vi end
-
-    
-
-
-    //vminu vv start
-    .elsewhen (io.sew === "b011".U && io.aluc === Vminuvv){
-      for (i <- 0 until 2) { 
-        when(sew_64_b(i).asUInt <= sew_64_a(i).asUInt)
-        {out64(i) := sew_64_b(i) }
-        .otherwise{out64(i) := sew_64_a(i)}}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vminuvv){ // sew = 32
-        for (i <- 0 until 4) { 
-          when(sew_32_b(i).asUInt <= sew_32_a(i).asUInt){out32(i) := sew_32_b(i).asSInt}
-        .otherwise{out32(i) := sew_32_a(i).asSInt}}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vminuvv){ //sew = 16
-		for (i <- 0 until 8) { 
-      when (sew_16_b(i).asUInt <= sew_16_a(i).asUInt){out16(i) := sew_16_b(i).asSInt}
-    .otherwise{
-     out16(i) := sew_16_a(i).asSInt
-    }}
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vminuvv){ //sew = 8
-		for (i <- 0 until 16) { 
-      when (sew_8_b(i).asUInt <= sew_8_a(i).asUInt){out8(i) := sew_8_b(i).asSInt }
-    .otherwise{
-      out8(i) :=  sew_8_a(i).asSInt
-    }}
-  
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vminu vv end
-
-     //vminu vx start
-    .elsewhen (io.sew === "b011".U && io.aluc === Vminuvx){
-      val imm = Cat(0.S(32.W), io.in_A).asSInt
-      for (i <- 0 until 2) { 
-        when(sew_64_b(i).asUInt <= imm.asUInt)
-        {out64(i) := sew_64_b(i) }
-        .otherwise{out64(i) := imm}}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vminuvx){ // sew = 32
-    val imm = io.in_A(31,0).asSInt
-        for (i <- 0 until 4) { 
-          when(sew_32_b(i).asUInt <= imm.asUInt){out32(i) := sew_32_b(i).asSInt}
-        .otherwise{out32(i) := imm.asSInt}}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vminuvx){ //sew = 16
-		val imm = io.in_A(15,0).asSInt
-    for (i <- 0 until 8) { 
-      when (sew_16_b(i).asUInt <= imm.asUInt){out16(i) := sew_16_b(i).asSInt}
-    .otherwise{
-     out16(i) := imm.asSInt
-    }}
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vminuvx){ //sew = 8
-		val imm = io.in_A(7,0).asSInt
-    for (i <- 0 until 16) { 
-      when (sew_8_b(i).asUInt <= imm.asUInt){out8(i) := sew_8_b(i).asSInt }
-    .otherwise{
-      out8(i) :=  imm.asSInt
-    }}
-  
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vminu vx end
-    
-
-    //vmin vv start
-    .elsewhen (io.sew === "b011".U && io.aluc === Vminvv){
-      for (i <- 0 until 2) { 
-        when(sew_64_b(i) <= sew_64_a(i))
-        {out64(i) := sew_64_b(i) }
-        .otherwise{out64(i) := sew_64_a(i)}}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vminvv){ // sew = 32
-        for (i <- 0 until 4) { 
-          when(sew_32_b(i) <= sew_32_a(i)){out32(i) := sew_32_b(i).asSInt}
-        .otherwise{out32(i) := sew_32_a(i).asSInt}}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vminvv){ //sew = 16
-		for (i <- 0 until 8) { 
-      when (sew_16_b(i) <= sew_16_a(i)){out16(i) := sew_16_b(i).asSInt}
-    .otherwise{
-     out16(i) := sew_16_a(i).asSInt
-    }}
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vminvv){ //sew = 8
-		for (i <- 0 until 16) { 
-      when (sew_8_b(i) <= sew_8_a(i)){out8(i) := sew_8_b(i).asSInt }
-    .otherwise{
-      out8(i) :=  sew_8_a(i).asSInt
-    }}
-  
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vmin vv end
-
-     //vmin vx start
-    .elsewhen (io.sew === "b011".U && io.aluc === Vminvx){
-      val imm = Cat(0.S(32.W), io.in_A).asSInt
-      for (i <- 0 until 2) { 
-        when(sew_64_b(i) <= imm)
-        {out64(i) := sew_64_b(i) }
-        .otherwise{out64(i) := imm}}
-    io.v_output := Cat(out64(1),out64(0)).asSInt
-	}
-	 .elsewhen (io.sew === "b010".U && io.aluc === Vminvx){ // sew = 32
-    val imm = io.in_A(31,0).asSInt
-        for (i <- 0 until 4) { 
-          when(sew_32_b(i) <= imm){out32(i) := sew_32_b(i).asSInt}
-        .otherwise{out32(i) := imm.asSInt}}
-        io.v_output := Cat(out32(3),out32(2),out32(1),out32(0)).asSInt
-      }
-	  .elsewhen(io.sew === "b001".U && io.aluc === Vminvx){ //sew = 16
-		val imm = io.in_A(15,0).asSInt
-    for (i <- 0 until 8) { 
-      when (sew_16_b(i) <= imm){out16(i) := sew_16_b(i).asSInt}
-    .otherwise{
-     out16(i) := imm.asSInt
-    }}
-		io.v_output := Cat(out16(7),out16(6),out16(5),out16(4),out16(3),out16(2),out16(1),out16(0)).asSInt
-	  }
-	  .elsewhen(io.sew === "b000".U && io.aluc === Vminvx){ //sew = 8
-		val imm = io.in_A(7,0).asSInt
-    for (i <- 0 until 16) { 
-      when (sew_8_b(i) <= imm){out8(i) := sew_8_b(i).asSInt }
-    .otherwise{
-      out8(i) :=  imm.asSInt
-    }}
-  
-		io.v_output := Cat(out8(15),out8(14),out8(13),out8(12),out8(11),out8(10),out8(9),out8(8),out8(7),out8(6),out8(5),out8(4),out8(3),out8(2),out8(1),out8(0)).asSInt
-	 
-    }
-    //vmin vx end
-	}
-  }
+	}}
