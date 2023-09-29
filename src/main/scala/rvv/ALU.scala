@@ -59,6 +59,7 @@ object ALUOP1_ {
     val ALU_OPIVV_MAXU_VV = 48.U(9.W)
     val ALU_OPIVX_MAXS_VX = 60.U(9.W)
     val ALU_OPIVV_MAXS_VV = 56.U(9.W)
+    val ALU_UNITSTRIDE_STORE = 9.U(9.W)
 
 }
 
@@ -76,6 +77,7 @@ class ALU_1 extends Module with Config_ {
         val in_V = Input ( Bool() )
         val V_in_A = Input(SInt(128.W)) 
         val V_in_B = Input(SInt(128.W))
+        val V_in_C = Input(SInt(128.W))
         val alu_sew = Input (UInt (3.W))                 //opivi
         val alu_lmul = Input(UInt(3.W)) 
         val alu_imm = Input (SInt (64.W))    
@@ -167,7 +169,7 @@ V_inB_16(7) := io.V_in_B(127,112).asSInt
 //when sew = 32
 //vector's
 V_inA_32(0) := io.V_in_A(31,0).asSInt 
-V_inA_32(1) := io.V_in_A(63,32).asSInt
+V_inA_32(1) := io.V_in_A(63,32).asSInt 
 V_inA_32(2) := io.V_in_A(95,64).asSInt
 V_inA_32(3) := io.V_in_A(127,96).asSInt
 
@@ -185,7 +187,6 @@ V_inB_64(0) := io.V_in_B(63,0).asSInt
 V_inB_64(1) := io.V_in_B(127,64).asSInt
 
 
-
 when (io.in_I === 1.B ) {
     val out = 
         Mux(io.alu_Op === ALU_ADD || io.alu_Op === ALU_ADDI || io.alu_Op === ALU_SW || io.alu_Op === ALU_LW || io.alu_Op === ALU_LUI || io.alu_Op === ALU_AUIPC, (io.in_A + io.in_B),
@@ -198,11 +199,13 @@ when (io.in_I === 1.B ) {
         Mux(io.alu_Op === ALU_AND || io.alu_Op === ALU_ANDI, (io.in_A & io.in_B),
         Mux(io.alu_Op === ALU_SUB, (io.in_A - io.in_B),
         Mux(io.alu_Op === ALU_SRA || io.alu_Op === ALU_SRAI, (io.in_A.asUInt >> io.in_B(18, 0).asUInt).asSInt,
-        Mux(io.alu_Op === ALU_JAL || io.alu_Op === ALU_JALR, io.in_A, 0.S)))))))))))
+        Mux(io.alu_Op === ALU_JAL || io.alu_Op === ALU_JALR, io.in_A, 0.S
+        // Mux(io.alu_Op === ALU_UNITSTRIDE_STORE, io.in_A, 0.S
+        )))))))))))
     
     io.out := out
     
-    
+
 }.elsewhen (io.in_V === 1.B ) {
 //configuration instructions:
     //vsetvli
@@ -222,7 +225,6 @@ when (io.in_I === 1.B ) {
     //vector to immediate addition
     }.elsewhen (io.alu_Op === ALU_OPIVI && io.alu_lmul === "b000".U) {
         when (io.alu_sew === "b011".U) {                                //64
-            val h =  io.alu_imm(63,0).asSInt
             for (i <- 0 until 2) { 
                 out64(i) := (V_inB_64(i) + h).asSInt
             }
@@ -1142,6 +1144,17 @@ when (io.in_I === 1.B ) {
                 }
             }
             io.V_out := (Cat(out8(15), out8(14), out8(13), out8(12), out8(11), out8(10), out8(9), out8(8), out8(7), out8(6), out8(5), out8(4), out8(3), out8(2), out8(1), out8(0))).asSInt
+        }.otherwise {
+            io.V_out := 0.S
+        }
+
+//Store Instructions:
+  //Unit-Stride:
+    //Unit-Stride store
+    }.elsewhen (io.alu_Op === ALU_UNITSTRIDE_STORE && io.alu_lmul === "b000".U) {
+        when (io.alu_sew === "b011".U || io.alu_sew === "b010".U || io.alu_sew === "b001".U || io.alu_sew === "b000".U) {     //64, //32, //16, //8
+            io.V_out := io.V_in_C.asSInt
+
         }.otherwise {
             io.V_out := 0.S
         }

@@ -28,6 +28,7 @@ class Control extends Module{
         val vlamx_writepin = Output ( Bool() )         //vsetvli
         val V_opeA = Output( UInt(2.W) )               //opivi
         val V_opeB = Output( UInt(2.W) )               //opivi
+        val V_opeC = Output( UInt(2.W) ) 
         val V_imm = Output( UInt(2.W) )                //opivi
         val V_men_to_reg = Output( Bool())             //opivi
  
@@ -53,6 +54,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -75,6 +77,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -97,6 +100,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -119,6 +123,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -141,6 +146,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -163,6 +169,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -185,6 +192,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -207,6 +215,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -229,6 +238,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -248,10 +258,10 @@ when ( io.opcode === 51.U ) {
     io.is_I := 0.B                                //vsetvli
     io.is_V := 1.B                                //vsetvli
     io.csr_reg_write := 1.B
-    // io.vlcsr_reg_Write := 1.B
     io.vlamx_writepin := 1.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
     
@@ -286,6 +296,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
@@ -308,6 +319,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -330,6 +342,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -353,6 +366,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -375,6 +389,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B   
 
@@ -398,6 +413,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -420,6 +436,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
@@ -442,6 +459,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -466,6 +484,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
@@ -488,6 +507,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -510,6 +530,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -533,6 +554,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
@@ -555,6 +577,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -577,6 +600,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -600,6 +624,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
@@ -622,6 +647,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -644,6 +670,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -667,6 +694,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 1.U
     io.V_men_to_reg := 0.B
 
@@ -689,6 +717,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B 
 
@@ -713,6 +742,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -735,6 +765,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -757,6 +788,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -779,6 +811,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -802,6 +835,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -824,6 +858,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -846,6 +881,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 
@@ -868,8 +904,35 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 1.U
     io.V_opeB := 1.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
+
+// STORE
+// Unit-stride 
+}.elsewhen ( io.opcode === 39.U ) {
+    io.mem_write := 0.B
+    io.branch := 0.B
+    io.mem_read := 0.B
+    io.reg_write := 0.B
+    io.men_to_reg := 0.B
+    io.alu_operation := 28.U
+    io.operand_A := 0.U                   
+    io.operand_B := 0.U                   
+    io.extend := 0.U
+    io.next_pc_sel := 0.U
+    io.avl_ope := 0.U
+    io.is_I := 0.B                                //vsetvli
+    io.is_V := 1.B       
+    io.csr_reg_write := 0.B
+    io.vlamx_writepin := 0.B
+    io.V_opeA := 0.U
+    io.V_opeB := 0.U
+    io.V_opeC := 1.U
+    io.V_imm := 0.U
+    io.V_men_to_reg := 0.B
+    // io.v_mem_write := 1.B
+    // io.v_mem_read := 0.B
 
 }.otherwise {
     io.mem_write := 0.B
@@ -889,6 +952,7 @@ when ( io.opcode === 51.U ) {
     io.vlamx_writepin := 0.B
     io.V_opeA := 0.U
     io.V_opeB := 0.U
+    io.V_opeC := 0.U
     io.V_imm := 0.U
     io.V_men_to_reg := 0.B
 }

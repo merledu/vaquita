@@ -8,7 +8,6 @@ class V_Csr extends Module {
         val Vtype_inst = Input ( UInt (11.W ) )             //In vtype 9 bits used, but 2 reserved.
         val vl_writeback = Input ( UInt (32.W) )
         val csr_regWrite = Input ( Bool() )
-        // val vlcsr_regWrite = Input (Bool() )
         val vl_out = Output ( UInt(32.W) )
         val vtype_out = Output ( UInt(32.W) )
 
