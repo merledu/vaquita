@@ -15,6 +15,7 @@ class configure extends Module {
     val rd_out = Output(UInt(5.W))
     val avl_o = Output(SInt(32.W))
     val valmax_o = Output(SInt(32.W))
+    
     })
 
     val vlmul = io.zimm(2,0)
@@ -22,6 +23,7 @@ class configure extends Module {
     val valmax = WireInit(0.S)
     val avl = WireInit(0.S)
     io.lmul := 1.U
+
     
 
     when (vlmul === "b101".U){  //lmul=1/8   

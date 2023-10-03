@@ -18,6 +18,7 @@ class controldec extends Module {
         val vset = Output(Bool())
         val v_load = Output (UInt(4.W))
         val v_ins =Output(Bool())
+
     })
     io.MemWrite := 0.B
     io.Branch := 0.B

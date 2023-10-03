@@ -71,6 +71,7 @@ class ALUIO extends Bundle with Config {
   val vs2 = Input(SInt(128.W))
   
   val vl = Input(UInt(32.W))   
+  val vstart = Input(UInt(32.W))   
   val vd = Input (SInt(128.W))
   val vma =Input(UInt(1.W)) //vtype
   val vta = Input(UInt(1.W))
@@ -111,8 +112,8 @@ val sew_64_vd = VecInit((0 until 2).map(i => io.vd(64*i+63, 64*i).asSInt))
 def VectorOp_vv( in_A: Vec[SInt], in_B: Vec[SInt], vlmax:UInt, vd:Vec[SInt]) :SInt = {
   
     val out = vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem,
-       Mux(i.U >= vstart && i.U < io.vl,
+       Mux(i.U < io.vstart,elem,
+       Mux(i.U >= io.vstart && i.U < io.vl,
                             Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem,
                                 Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, (-1).S,MuxLookup(
             io.aluc,
@@ -137,8 +138,8 @@ def VectorOp_vv( in_A: Vec[SInt], in_B: Vec[SInt], vlmax:UInt, vd:Vec[SInt]) :SI
 def VectorOp_vi( in_A: Vec[SInt], imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
   
     val out = vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem,
-       Mux(i.U >= vstart && i.U < io.vl,
+       Mux(i.U < io.vstart,elem,
+       Mux(i.U >= io.vstart && i.U < io.vl,
                             Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem,
                                 Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, (-1).S,MuxLookup(
             io.aluc,
@@ -161,8 +162,8 @@ def VectorOp_vi( in_A: Vec[SInt], imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
 def VectorOp_vx( in_A: Vec[SInt], imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
   
     val out = vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem,
-       Mux(i.U >= vstart && i.U < io.vl,
+       Mux(i.U < io.vstart,elem,
+       Mux(i.U >= io.vstart && i.U < io.vl,
                             Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem,
                                 Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, (-1).S,MuxLookup(
             io.aluc,
@@ -189,8 +190,8 @@ def VectorOp_vx( in_A: Vec[SInt], imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
 
 def Vectormove_vxvi( imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
   val out = vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
+       Mux(i.U < io.vstart,elem.asUInt,
+       Mux(i.U >= io.vstart && i.U < io.vl,
                             Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
                                 Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111111111111111111111111111111111111111111111111111".U,(imm).asUInt)
                             ), 
@@ -201,8 +202,8 @@ def Vectormove_vxvi( imm: SInt, vlmax:UInt, vd:Vec[SInt]) :SInt = {
 }
 def Vectormove_vv( in_A: Vec[SInt], vlmax:UInt, vd:Vec[SInt]) :SInt = {
   val out = vd.zipWithIndex.map{ case(elem,i) => 
-       Mux(i.U < vstart,elem.asUInt,
-       Mux(i.U >= vstart && i.U < io.vl,
+       Mux(i.U < io.vstart,elem.asUInt,
+       Mux(i.U >= io.vstart && i.U < io.vl,
                             Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 0.U, elem.asUInt,
                                 Mux(io.vm === 0.U && io.vs0(i) === 0.U && io.vma === 1.U, "b1111111111111111111111111111111111111111111111111111111111111111".U,(in_A(i)).asUInt)
                             ), 
@@ -217,8 +218,7 @@ def Vectormove_vv( in_A: Vec[SInt], vlmax:UInt, vd:Vec[SInt]) :SInt = {
 io.v_output := 0.S
 
    io.output := 0.S
-  //  val imm = 0.S
-  val vstart = 0.U
+
     when (io.v_ins =/= 1.B) {
     io.output := MuxLookup(io.aluc, io.in_A, Seq(
       ALU_ADD -> (io.in_A + io.in_B),

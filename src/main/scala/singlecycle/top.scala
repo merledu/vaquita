@@ -6,9 +6,7 @@ class Top extends Module{
     val io=IO(new Bundle{ 
         val out = Output(UInt(32.W))
          val addr = Output ( UInt ( 10 . W ) )
-		 val test1 = Output (UInt(5.W))
-		 val test2 = Output (UInt(5.W))
-		  val v_type = Output(SInt(32.W))
+
     //val inst = Output ( UInt ( 32 . W ) )
     })
 // var temp = 0.U
@@ -24,6 +22,7 @@ val jalrCompMod = Module (new jalr)
 val regfileMod = Module (new regfile)
 val config= Module(new configure)
 val vreg = Module (new vregfile)
+val V_csr = Module(new v_csr)
 
 dontTouch(config.io)
 dontTouch(vreg.io)
@@ -56,17 +55,12 @@ ALUcMod.io.func7 := instmemMod.io.inst(30)
 ALUcMod.io.func6 := instmemMod.io.inst(31,26)
 ALUcMod.io.V_inst := 1.B
 
-//csrs 
-val vtype = RegInit((0.S(32.W)))
-val vl = RegInit(0.S(32.W))
+//csr
+V_csr.io.vtypei :=ImmgenMod.io.z_imm
+V_csr.io.vl  := config.io.vl
+V_csr.io.vset := CntrlDecMod.io.vset
 
 //config
-when (CntrlDecMod.io.vset === 1.B){
-	vtype:= ImmgenMod.io.z_imm
-	vl := config.io.vl
-}
-
-
 config.io.rs1 :=instmemMod.io.inst(19,15)
 config.io.rd := instmemMod.io.inst(11,7)
 config.io. rs1_readdata := regfileMod.io.rdata1
@@ -99,17 +93,17 @@ ALUMod.io.vs1 := vreg.io.vs1_data
 ALUMod.io.vs2 := vreg.io.vs2_data
 ALUMod.io.aluc := ALUcMod.io.aluc
 ALUMod.io.vd_addr := instmemMod.io.inst(11,7)
-ALUMod.io.sew := vtype(5,3)
+ALUMod.io.sew := V_csr.io.vtype_out(5,3)
 // ALUMod.io.sew := "b010".U
 ALUMod.io.v_ins := CntrlDecMod.io.v_ins
 
-ALUMod.io.vl:=6.U
-ALUMod.io.vta := vtype(6).asUInt
-ALUMod.io.vma := vtype(7).asUInt
+ALUMod.io.vl:=V_csr.io.vl_out.asUInt
+ALUMod.io.vta := V_csr.io.vtype_out(6).asUInt
+ALUMod.io.vma := V_csr.io.vtype_out(7).asUInt
 ALUMod.io.vm:= instmemMod.io.inst(25)
 ALUMod.io.vd := vreg.io.vddata_o
 ALUMod.io.vs0 := vreg.io.vs0_data
-
+ALUMod.io.vstart := V_csr.io.vstart_out.asUInt
 
 
 //Branch
@@ -167,8 +161,5 @@ regfileMod.io.WriteData := MuxCase ( 0.S , Array (
 // vreg.io.vd_data := tail_mask.io.v_data_out.asSInt
 vreg.io.vd_data := ALUMod.io.v_output.asSInt
 io.out := 0.U
-io.test1 := instmemMod.io.inst(19,15)
-io.test2 := instmemMod.io.inst(11,7)
-io.v_type := vtype
 
 }

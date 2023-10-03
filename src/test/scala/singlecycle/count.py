@@ -1,4 +1,3 @@
-c=0
-for i in "1111111111111111111111111111111111111111111111111111111111111111":
-    c+=1
-print(c)
+def generateAssembly():
+    
+    print("Generating Assembly...")
