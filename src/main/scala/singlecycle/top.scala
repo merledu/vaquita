@@ -24,8 +24,7 @@ val jalrCompMod = Module (new jalr)
 val regfileMod = Module (new regfile)
 val config= Module(new configure)
 val vreg = Module (new vregfile)
-val tail_mask = Module(new Tail_Mask) 
-dontTouch(tail_mask.io)
+
 dontTouch(config.io)
 dontTouch(vreg.io)
 PCMod.io.input := PCMod.io.pc4
@@ -104,21 +103,13 @@ ALUMod.io.sew := vtype(5,3)
 // ALUMod.io.sew := "b010".U
 ALUMod.io.v_ins := CntrlDecMod.io.v_ins
 
-ALUMod.io.vl:=vl.asUInt
+ALUMod.io.vl:=6.U
 ALUMod.io.vta := vtype(6).asUInt
 ALUMod.io.vma := vtype(7).asUInt
 ALUMod.io.vm:= instmemMod.io.inst(25)
 ALUMod.io.vd := vreg.io.vddata_o
 ALUMod.io.vs0 := vreg.io.vs0_data
-//tailing masking
-tail_mask.io.vl := vl.asUInt
-tail_mask.io.vta := vtype(6).asUInt
-tail_mask.io.vma := vtype(7).asUInt
-tail_mask.io.sew := vtype(5,3).asUInt
-tail_mask.io.vm := instmemMod.io.inst(25)
-tail_mask.io.vs0 := vreg.io.vs0_data
-tail_mask.io.vd := vreg.io.vddata_o
-tail_mask.io.vdata := ALUMod.io.v_output
+
 
 
 //Branch
@@ -154,12 +145,6 @@ BrcntrlMod.io.aluc := CntrlDecMod.io.aluop
 //jalr component
 jalrCompMod.io.rs1 := regfileMod.io.rdata1
 jalrCompMod.io.imm := ImmgenMod.io.i_imm
-//val temp = 0.U
-// when (BrcntrlMod.io.br_taken & CntrlDecMod.io.Branch){
-//     temp := ImmgenMod.io.immd_se
-// }.otherwise {
-//    temp := PCMod.io.pc4
-// }
 
 PCMod.io.input := MuxCase ( 0.U , Array (
 (CntrlDecMod.io.nextPCsel === "b00".U ) -> PCMod.io.pc4 ,
