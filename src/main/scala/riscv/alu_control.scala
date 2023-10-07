@@ -228,257 +228,130 @@ class alu_control extends Module {
 
     //vector to vector
     .elsewhen (io.op_code==="b1010111".U && io.fn3==="b000".U){
-        //vadd
-        when(io.fn7(6,1)==="b000000".U){
-            io.out := 31.U
-        }
-        //vsub
-        .elsewhen(io.fn7(6,1)==="b000010".U){
-            io.out := 33.U
-        }
-        //vminu
-        .elsewhen(io.fn7(6,1)==="b000100".U){
-            io.out := 34.U
-        }
-        //vmin
-        .elsewhen(io.fn7(6,1)==="b000101".U){
-            io.out := 35.U
-        }
-        //vmaxu
-        .elsewhen(io.fn7(6,1)==="b000110".U){
-            io.out := 36.U
-        }
-        //vmax
-        .elsewhen(io.fn7(6,1)==="b000111".U){
-            io.out := 37.U
-        }
-        //vand
-        .elsewhen(io.fn7(6,1)==="b001001".U){
-            io.out := 38.U
-        }
-        //vor
-        .elsewhen(io.fn7(6,1)==="b001010".U){
-            io.out := 39.U
-        }
-        //vxor
-        .elsewhen(io.fn7(6,1)==="b001011".U){
-            io.out := 40.U
-        }
-        //vrgather
-        .elsewhen(io.fn7(6,1)==="b001100".U){
-            io.out := 41.U
-        }
-        //vgatherei16
-        .elsewhen(io.fn7(6,1)==="b001110".U){
-            io.out := 42.U
-        }
-        //vadc
-        .elsewhen(io.fn7(6,1)==="b010000".U){
-            io.out := 43.U
-        }
-        //vmadc
-        .elsewhen(io.fn7(6,1)==="b010001".U){
-            io.out := 44.U
-        }
-        //vsbc
-        .elsewhen(io.fn7(6,1)==="b010010".U){
-            io.out := 45.U
-        }
-        //vmsbc
-        .elsewhen(io.fn7(6,1)==="b010011".U){
-            io.out := 46.U
-        }
-        //vmerge
-        .elsewhen(io.fn7(6,1)==="b010111".U){
-            io.out := 47.U
-        }
-        //vmseq
-        .elsewhen(io.fn7(6,1)==="b011000".U){
-            io.out := 48.U
-        }
-        //vmsne
-        .elsewhen(io.fn7(6,1)==="b011001".U){
-            io.out := 49.U
-        }
-        //vmsltu
-        .elsewhen(io.fn7(6,1)==="b011010".U){
-            io.out := 50.U
-        }
-        //vmslt
-        .elsewhen(io.fn7(6,1)==="b011011".U){
-            io.out := 51.U
-        }
-        //vmsleu
-        .elsewhen(io.fn7(6,1)==="b011100".U){
-            io.out := 52.U
-        }
-        //vmsle
-        .elsewhen(io.fn7(6,1)==="b011101".U){
-            io.out := 53.U
-        }
-        //vsaddu
-        .elsewhen(io.fn7(6,1)==="b100000".U){
-            io.out := 54.U
-        }
-        //vsadd
-        .elsewhen(io.fn7(6,1)==="b100001".U){
-            io.out := 55.U
-        }
-        //vssubu
-        .elsewhen(io.fn7(6,1)==="b100010".U){
-            io.out := 56.U
-        }
-        //vssub
-        .elsewhen(io.fn7(6,1)==="b100011".U){
-            io.out := 57.U
-        }
-        //vsll
-        .elsewhen(io.fn7(6,1)==="b100101".U){
-            io.out := 58.U
-        }
-        //vsmul
-        .elsewhen(io.fn7(6,1)==="b100111".U){
-            io.out := 59.U
-        }
-        //vsrl
-        .elsewhen(io.fn7(6,1)==="b101000".U){
-            io.out := 60.U
-        }
-        //vsra
-        .elsewhen(io.fn7(6,1)==="b101001".U){
-            io.out := 61.U
-        }
-        //vssrl
-        .elsewhen(io.fn7(6,1)==="b101010".U){
-            io.out := 62.U
-        }
-        //vssra
-        .elsewhen(io.fn7(6,1)==="b101011".U){
-            io.out := 63.U
-        }
-        //vnsrl
-        .elsewhen(io.fn7(6,1)==="b101100".U){
-            io.out := 64.U
-        }
-        //vnsra
-        .elsewhen(io.fn7(6,1)==="b101101".U){
-            io.out := 65.U
-        }
-        //vnclipu
-        .elsewhen(io.fn7(6,1)==="b101110".U){
-            io.out := 66.U
-        }
-        //vnclip
-        .elsewhen(io.fn7(6,1)==="b101111".U){
-            io.out := 67.U
-        }
-        //vwredsumu
-        .elsewhen(io.fn7(6,1)==="b110000".U){
-            io.out := 68.U
-        }
-        //vwredsum
-        .elsewhen(io.fn7(6,1)==="b110001".U){
-            io.out := 69.U
-        }
-        .otherwise{
-            io.out :=0.U
-        }
+      val opcodeMap = Array(
+        "b000000".U -> 31.U,    // vadd
+        "b000010".U -> 33.U,    // vsub
+        "b000100".U -> 34.U,    // vminu
+        "b000101".U -> 35.U,    // vmin
+        "b000110".U -> 36.U,    // vmaxu
+        "b000111".U -> 37.U,    // vmax
+        "b001001".U -> 38.U,    // vand
+        "b001010".U -> 39.U,    // vor
+        "b001011".U -> 40.U,    // vxor
+        "b001100".U -> 41.U,    // vrgather
+        "b001110".U -> 42.U,    // vgatherei16
+        "b010000".U -> 43.U,    // vadc
+        "b010001".U -> 44.U,    // vmadc
+        "b010010".U -> 45.U,    // vsbc
+        "b010011".U -> 46.U,    // vmsbc
+        "b010111".U -> 47.U,    // vmerge  or vmv
+        "b011000".U -> 48.U,    // vmseq
+        "b011001".U -> 49.U,    // vmsne
+        "b011010".U -> 50.U,    // vmsltu
+        "b011011".U -> 51.U,    // vmslt
+        "b011100".U -> 52.U,    // vmsleu
+        "b011101".U -> 53.U,    // vmsle
+        "b100000".U -> 54.U,    // vsaddu
+        "b100001".U -> 55.U,    // vsadd
+        "b100010".U -> 56.U,    // vssubu
+        "b100011".U -> 57.U,    // vssub
+        "b100101".U -> 58.U,    // vsll
+        "b100111".U -> 59.U,    // vsmul
+        "b101000".U -> 60.U,    // vsrl
+        "b101001".U -> 61.U,    // vsra
+        "b101010".U -> 62.U,    // vssrl
+        "b101011".U -> 63.U,    // vssra
+        "b101100".U -> 64.U,    // vnsrl
+        "b101101".U -> 65.U,    // vnsra
+        "b101110".U -> 66.U,    // vnclipu
+        "b101111".U -> 67.U,    // vnclip
+        "b110000".U -> 68.U,    // vwredsumu
+        "b110001".U -> 69.U     // vwredsum
+        )
 
-
-
-        // //vmsgtu
-        // .elsewhen(io.fn7(6,1)==="b011110".U){
-        //     io.out := 54.U
-        // }
-        //vmsgt
-        // .elsewhen(io.fn7(6,1)==="011111".U){
-        //     io.out := 55.U
-        // }
-        // //vslide up 
-        // .elsewhen(io.fn7(6,1)==="b001110".U){
-        //     io.out := 43.U
-        // }
-        // //vslidedown
-        // .elsewhen(io.fn7(6,1)==="b001111".U){
-        //     io.out := 45.U
-        // }
-        // //vrsubvv
-        // .elsewhen(io.fn7(6,1)==="b000011".U){
-        // .elsewhen(io.fn7(6,1)==="000011".U){
-        //     io.out := 34.U
-        // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+io.out := MuxLookup(io.fn7(6, 1), 0.U, opcodeMap)
     }
     //vector to scalar
     .elsewhen (io.op_code==="b1010111".U && io.fn3==="b100".U){
-        //vaddvi
-        when(io.fn7(6,1)==="b000000".U){
-            io.out := 90.U
-        }
-        // //vsubvi
-        // .elsewhen(io.fn7(6,1)==="b000010".U){
-        //     io.out := 51.U
-        // }
-        // //vminuvv
-        // .elsewhen(io.fn7(6,1)==="b000100".U){
-        //     io.out := 52.U
-        // }
-        // //vminvv
-        // .elsewhen(io.fn7(6,1)==="b000101".U){
-        //     io.out := 53.U
-        // }
-        // .elsewhen(io.fn7(6,1)==="b000000".U){
-        //     io.out := 54.U
-        // }
-        // .elsewhen(io.fn7(6,1)==="b000000".U){
-        //     io.out := 55.U
-        // }
-        .otherwise{
-            io.out:=0.U
-        }
+      val opcodeMap = Array(
+  "b000000".U -> 70.U,    // vadd
+  "b000010".U -> 71.U,    // vsub
+  "b000011".U -> 72.U,    // vrsub
+  "b000100".U -> 73.U,    // vminu
+  "b000101".U -> 74.U,    // vmin
+  "b000110".U -> 75.U,    // vmaxu
+  "b000111".U -> 76.U,    // vmax
+  "b001001".U -> 77.U,    // vand
+  "b001010".U -> 78.U,    // vor
+  "b001011".U -> 79.U,    // vxor
+  "b001100".U -> 80.U,    // vrgather
+  "b001110".U -> 81.U,    // vslideup
+  "b001111".U -> 82.U,    // vslidedown
+  "b010000".U -> 83.U,    // vadc
+  "b010001".U -> 84.U,    // vmadc
+  "b010010".U -> 85.U,    // vsbc
+  "b010011".U -> 86.U,    // vmsbc
+  "b010111".U -> 87.U,    // vmerge  or vmv
+  "b011000".U -> 88.U,    // vmseq
+  "b011001".U -> 89.U,    // vmsne
+  "b011010".U -> 90.U,    // vmsltu
+  "b011011".U -> 91.U,    // vmslt
+  "b011100".U -> 92.U,    // vmsleu
+  "b011101".U -> 93.U,    // vmsle
+  "b011110".U -> 94.U,    // vmsgtu
+  "b011111".U -> 95.U,    // vmsgt
+  "b100000".U -> 96.U,    // vsaddu
+  "b100001".U -> 97.U,    // vsadd
+  "b100010".U -> 98.U,    // vssubu
+  "b100011".U -> 99.U,    // vssub
+  "b100101".U -> 100.U,    // vsll
+  "b100111".U -> 101.U,    // vsmul
+  "b101000".U -> 102.U,    // vsrl
+  "b101001".U -> 103.U,    // vsra
+  "b101010".U -> 104.U,    // vssrl
+  "b101011".U -> 105.U,    // vssra
+  "b101100".U -> 106.U,    // vnsrl
+  "b101101".U -> 107.U,    // vnsra
+  "b101110".U -> 108.U,    // vnclipu
+  "b101111".U -> 109.U,    // vnclip
+)
+
+io.out := MuxLookup(io.fn7(6, 1), 0.U, opcodeMap)
     }
      //vector to immediater
     .elsewhen (io.op_code==="b1010111".U && io.fn3==="b011".U){
-        //vaddvi
-        when(io.fn7(6,1)==="b000000".U){
-            io.out := 91.U
-        }
-        // //vsubvi
-        // .elsewhen(io.fn7(6,1)==="b000010".U){
-        //     io.out := 51.U
-        // }
-        // //vminuvv
-        // .elsewhen(io.fn7(6,1)==="b000100".U){
-        //     io.out := 52.U
-        // }
-        // //vminvv
-        // .elsewhen(io.fn7(6,1)==="b000101".U){
-        //     io.out := 53.U
-        // }
-        // .elsewhen(io.fn7(6,1)==="b000000".U){
-        //     io.out := 54.U
-        // }
-        // .elsewhen(io.fn7(6,1)==="b000000".U){
-        //     io.out := 55.U
-        // }
-        .otherwise{
-            io.out:=0.U
-        }
+      val opcodeMap = Array(
+  "b000000".U -> 110.U,    // vadd
+  "b000011".U -> 111.U,    // vrsub
+  "b001001".U -> 112.U,    // vand
+  "b001010".U -> 113.U,    // vor
+  "b001011".U -> 114.U,    // vxor
+  "b001100".U -> 115.U,    // vrgather
+  "b001110".U -> 116.U,    // vslideup
+  "b001111".U -> 117.U,    // vslidedown
+  "b010000".U -> 118.U,    // vadc
+  "b010001".U -> 119.U,    // vmadc
+  "b010111".U -> 120.U,    // vmerge or vmv
+  "b011000".U -> 121.U,    // vmseq
+  "b011001".U -> 122.U,    // vmsne
+  "b011100".U -> 123.U,    // vmsleu
+  "b011101".U -> 124.U,    // vmsle
+  "b011110".U -> 125.U,    // vmsgtu
+  "b011111".U -> 126.U,    // vmsgt
+  "b100000".U -> 127.U,    // vsaddu
+  "b100001".U -> 128.U,    // vsadd
+  "b100101".U -> 129.U,    // vsll
+  "b101000".U -> 130.U,    // vsrl
+  "b101001".U -> 131.U,    // vsra
+  "b101010".U -> 132.U,    // vssrl
+  "b101011".U -> 133.U,    // vssra
+  "b101100".U -> 134.U,    // vnsrl
+  "b101101".U -> 135.U,    // vnsra
+  "b101110".U -> 136.U,    // vnclipu
+  "b101111".U -> 137.U,    // vnclip
+)
+
+io.out := MuxLookup(io.fn7(6, 1), 0.U, opcodeMap)
     }
     .otherwise{
         io.out := 0.U

@@ -30,7 +30,8 @@ class top_file extends Module {
     dontTouch(vec_csr_module.io)
     val vec_tail_module = Module(new tail)
     dontTouch(vec_tail_module.io)
-
+    // val vec_mask_module = Module(new vec_mask)
+    // dontTouch(vec_mask_module.io)
     
 
     //instruction module input
@@ -56,6 +57,7 @@ class top_file extends Module {
         (1.U) -> s_memory_module.io.dataout)
         // (2.U) -> Cat(s_memory_module.io.dataout(0),s_memory_module.io.dataout(1)).asSInt)
     )
+    dontTouch(wb_mux)
     register_file_module.io.reg_data := wb_mux
 
     //vector csr module inputs
@@ -72,10 +74,13 @@ class top_file extends Module {
     vector_file_module.io. vec_store := control_unit_module.io.vec_store
     vector_file_module.io.lmul := vec_csr_module.io.vlmul
     vector_file_module.io.group := control_unit_module.io.stall_true
-    vector_file_module.io.vec_data := MuxLookup(control_unit_module.io.mem_data_sel,0.U,Array(
+ 
+    val vec_wb_mux = MuxLookup(control_unit_module.io.mem_data_sel,0.U,Array(
         (3.U) -> alu_module.io.vec_out,
         (2.U) -> s_memory_module.io.vec_dataout)
     )
+    vector_file_module.io.vec_data := vec_wb_mux
+    dontTouch(vec_wb_mux)
 
     
 
@@ -96,7 +101,7 @@ class top_file extends Module {
     //alu control module inputs
     alu_control_module.io.op_code := instr_module.io.r_data(7,0)
     alu_control_module.io.fn3 := instr_module.io.r_data(14,12)
-    alu_control_module.io.fn7 := instr_module.io.r_data(30)
+    alu_control_module.io.fn7 := instr_module.io.r_data(31,25)
     alu_control_module.io.lumop := instr_module.io.r_data(24,20)
 
     //vector tail module inputs
@@ -105,8 +110,17 @@ class top_file extends Module {
     vec_tail_module.io.vec_tail := vec_csr_module.io.tail
     vec_tail_module.io.vl := vec_csr_module.io.vl_out
     vec_tail_module.io.vd_in := vector_file_module.io.vd_out
-    vec_tail_module.io.vec_0_in := vector_file_module.io.vec_0
+    vec_tail_module.io.vec_0_in :=1.U //vector_file_module.io.vec_0    //changes
     vec_tail_module.io.lmul_count := control_unit_module.io.stall_true
+
+    //vector mask module inputs
+    // vec_mask_module.io.vd_in := vector_file_module.io.vd_out
+    // for (i <- 0 until 128) {
+    // vec_mask_module.io.vec_0_in(i) := vector_file_module.io.vec_0(i)
+    // }
+    // vec_mask_module.io.vma := vec_csr_module.io.mask
+    // vec_mask_module.io.arith_mask := instr_module.io.r_data(25)
+    // vec_mask_module.io.sew := vec_csr_module.io.vsew
 
 
 

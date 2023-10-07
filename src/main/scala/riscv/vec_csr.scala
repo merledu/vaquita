@@ -55,6 +55,7 @@ class vec_csr extends Module {
     io.vl_out := vl
     // io.vill := vtype(31)
 
+//for grouping 
     when(vtype(5,3)==="b000".U){ //when sew = 8
         io.vlmul := 3.U
         io.vlmul_count := MuxCase(0.U,Array(
