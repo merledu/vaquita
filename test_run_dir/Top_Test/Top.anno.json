@@ -157,7 +157,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Execute>io_vd_data"
+    "target":"~Top|Execute>io_vs3_data"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -277,15 +277,19 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|ALU_>io_vs0"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|ALU_>io_vd"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|ALU_>io_vl"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|ALU_>io_vstart"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|ALU_>io_vd"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -298,10 +302,6 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|ALU_>io_vm"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|ALU_>io_vs0"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -581,7 +581,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|InstructionDecode>io_vd_data"
+    "target":"~Top|InstructionDecode>io_vs3_data"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -741,7 +741,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|vregfile>io_vddata_o"
+    "target":"~Top|vregfile>io_vs3_data"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -758,6 +758,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|vregfile>vsd_in"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|vregfile>vs3_in"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -797,11 +801,27 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|controldec>io_v_store"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|controldec>io_v_ins"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|controldec>io_RegRead"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|controldec>io_V_MemToReg"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|controldec>io_V_MemRead"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|controldec>io_memWrite"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

@@ -70,15 +70,13 @@ class ALUIO extends Bundle with Config {
     val in_B = Input(SInt(WLEN.W))
     val vs1 = Input(SInt(128.W))
     val vs2 = Input(SInt(128.W))
-
+    val vs0 = Input(SInt(128.W))
+    val vd = Input (SInt(128.W))
     val vl = Input(UInt(32.W))
     val vstart = Input(UInt(32.W))
-    val vd = Input (SInt(128.W))
     val vma =Input(UInt(1.W)) //vtype
     val vta = Input(UInt(1.W))
     val vm =Input(UInt(1.W)) //umasked=1  , masked = 0
-    val vs0 = Input(SInt(128.W))
-
     val vd_addr = Input(UInt(5.W))
     val aluc = Input(UInt(ALUOP_SIG_LEN.W))
     val sew = Input(UInt(3.W))

@@ -35,7 +35,7 @@ VL_INLINE_OPT void VTop::_combo__TOP__10(VTop__Syms* __restrict vlSymsp) {
                                                  | (~ (IData)(vlTOPp->Top__DOT__core__DOT__InstructionFetch_io_coreInstrReq_valid))) 
                                                 | (1U 
                                                    == (IData)(vlTOPp->Top__DOT__core__DOT__Realigner__DOT__stateReg))));
-    vlTOPp->Top__DOT__core__DOT___T_70 = ((1U & ((~ 
+    vlTOPp->Top__DOT__core__DOT___T_90 = ((1U & ((~ 
                                                   (((IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memRead) 
                                                     & (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_branch)) 
                                                    & (((0x1fU 
@@ -176,9 +176,9 @@ VL_INLINE_OPT void VTop::_combo__TOP__10(VTop__Syms* __restrict vlSymsp) {
                                                    ((IData)(4U) 
                                                     + vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg))))
                                            : vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg);
-    vlTOPp->Top__DOT__core__DOT__pc_io_in = ((IData)(vlTOPp->Top__DOT__core__DOT___T_22)
+    vlTOPp->Top__DOT__core__DOT__pc_io_in = ((IData)(vlTOPp->Top__DOT__core__DOT___T_42)
                                               ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
-                                              : vlTOPp->Top__DOT__core__DOT___T_70);
+                                              : vlTOPp->Top__DOT__core__DOT___T_90);
     vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_address_o 
         = ((((1U == (IData)(vlTOPp->Top__DOT__core__DOT__Realigner__DOT__stateReg)) 
              & (vlTOPp->Top__DOT__core__DOT__pc_io_in 
@@ -191,14 +191,14 @@ void VTop::_eval(VTop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    VTop::_eval\n"); );
     VTop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    if (((IData)(vlTOPp->clock) & (~ (IData)(vlTOPp->__Vclklast__TOP__clock)))) {
+    if (((~ (IData)(vlTOPp->clock)) & (IData)(vlTOPp->__Vclklast__TOP__clock))) {
         vlTOPp->_sequent__TOP__1(vlSymsp);
         vlTOPp->__Vm_traceActivity[1U] = 1U;
-        vlTOPp->_sequent__TOP__2(vlSymsp);
     }
-    if (((~ (IData)(vlTOPp->clock)) & (IData)(vlTOPp->__Vclklast__TOP__clock))) {
-        vlTOPp->_sequent__TOP__3(vlSymsp);
+    if (((IData)(vlTOPp->clock) & (~ (IData)(vlTOPp->__Vclklast__TOP__clock)))) {
+        vlTOPp->_sequent__TOP__2(vlSymsp);
         vlTOPp->__Vm_traceActivity[2U] = 1U;
+        vlTOPp->_sequent__TOP__3(vlSymsp);
     }
     if ((((IData)(vlTOPp->clock) & (~ (IData)(vlTOPp->__Vclklast__TOP__clock))) 
          | ((IData)(vlTOPp->reset) & (~ (IData)(vlTOPp->__Vclklast__TOP__reset))))) {

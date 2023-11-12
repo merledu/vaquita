@@ -2,6 +2,7 @@ package nucleusrv.components
 
 import chisel3._
 import chisel3.util._
+import nucleusrv.components.vu.VLSU
 
 class Core(implicit val config:Configs) extends Module{
 
@@ -72,7 +73,7 @@ class Core(implicit val config:Configs) extends Module{
   val id_reg_v0_data = RegInit(0.S(128.W))
   val id_reg_v1_data = RegInit(0.S(128.W))
   val id_reg_v2_data = RegInit(0.S(128.W))
-  val id_reg_vd_data = RegInit(0.S(128.W))
+  val id_reg_vs3_data = RegInit(0.S(128.W))
   val id_reg_vs1_addr = RegInit(0.U(5.W))
   val id_reg_vs2_addr = RegInit(0.U(5.W))
   val id_reg_vd_addr = RegInit(0.U(5.W))
@@ -166,9 +167,9 @@ class Core(implicit val config:Configs) extends Module{
 
   io.fcsr_o_data := ID.fscr_o_data
   
-  /*****************
+  /*******
    * Fetch Stage *
-   ******************/
+   ******/
 
   val pc = Module(new PC)
 
@@ -179,44 +180,50 @@ class Core(implicit val config:Configs) extends Module{
   val ral_halt_o  = WireInit(false.B)
   val is_comp     = WireInit(false.B)
 
-     /************************
+     /********
    * Vector Fetch Stage *
-   ************************/
+   ********/
 
-      // **************************grouping**********************//
+      // *********grouping*******//
       //vsetvl not implement (rs2 value)
 var lmul = RegInit(0.U(3.W)) // by default lmul==1
+var vtype = RegInit(0.U(32.W))
 when(instruction(6,0)==="b1010111".U && instruction(14,12)==="b111".U && (instruction(31)==="b0".U || instruction(31,30)==="b11".U)){
+
   lmul := instruction(22,20)
+  vtype := instruction(30,20)
 }
 .otherwise{
   lmul := lmul
+  vtype := vtype
 }
-
+val vlsu = Module (new VLSU)
+vlsu.io.instr := instruction
+vlsu.io.vtype := vtype
 var vlmul_count = WireInit(0.U(32.W))
 // val vtype = WireInit("b010".U(32.W))
 dontTouch(vlmul_count)
 // dontTouch(vtype)
 // working on  only one vector 
-    when (lmul==="b000".U){
+    when (lmul==="b000".U ||  vlsu.io.emul === 1.U || vlsu.io.nf === 1.U ){
         vlmul_count := 0.U
     }
     // working on  only two vector continously
-    .elsewhen (lmul==="b001".U){
+    .elsewhen (lmul==="b001".U ||  vlsu.io.emul === 2.U || vlsu.io.nf === 2.U) {
         vlmul_count := 1.U
     }
     // working on  only four vector continously
-    .elsewhen (lmul==="b010".U){
+    .elsewhen (lmul==="b010".U ||  vlsu.io.emul === 4.U || vlsu.io.nf === 4.U){
         vlmul_count := 3.U
     }
     // working on  only eight vector continously
-    .elsewhen (lmul==="b011".U){
+    .elsewhen (lmul==="b011".U ||  vlsu.io.emul === 8.U || vlsu.io.nf === 8.U){
         vlmul_count := 7.U
     }
 
   var next_pc_selector = WireInit(0.U(32.W))
   val lmul_reg = RegInit(0.U(32.W))
-    when(lmul_reg =/= vlmul_count && instruction(6,0)==="b1010111".U && instruction(14,12)=/="b111".U){
+    when(lmul_reg =/= vlmul_count && ((instruction(6,0)==="b1010111".U && instruction(14,12)=/="b111".U) || instruction(6,0)==="b0100111".U )){
         next_pc_selector := 1.U
         lmul_reg := lmul_reg +1.U
         if_reg_lmul_v := lmul_reg  //paasing fetch stage
@@ -229,9 +236,9 @@ dontTouch(vlmul_count)
 dontTouch(lmul_reg)
 dontTouch(next_pc_selector)
 
-  /************************
+  /********
    * Vector Decode Stage *
-   ************************/
+   ********/
 
     id_reg_vl_out := ID.vl_out
     id_reg_z_imm := ID.v_z_imm
@@ -241,7 +248,7 @@ dontTouch(next_pc_selector)
     id_reg_v0_data := ID.vs0_data
     id_reg_v1_data := ID.vs1_data
     id_reg_v2_data := ID.vs2_data
-    id_reg_vd_data := ID.vd_data
+    id_reg_vs3_data := ID.vs3_data
     id_reg_ctl_RegWrite :=ID.ctl_v_RegWrite
     id_reg_ctl_opBsel :=ID.ctl_v_opBsel
     id_reg_ctl_Ex_sel :=ID.ctl_v_Ex_sel
@@ -259,9 +266,9 @@ dontTouch(next_pc_selector)
     
 
 
-  /*************************
+  /*********
    * Vector Execute Stage *
-  **************************/
+  **********/
 
   EX.func6 := id_reg_ins(31, 26)
   EX.v_ctl_aluop := id_reg_ctl_aluop
@@ -276,7 +283,7 @@ dontTouch(next_pc_selector)
   EX.vs2_data := id_reg_v2_data
   EX.vl := Mux(ex_reg_vset, ex_reg_vl, Mux(mem_reg_vset, mem_reg_vec_vl, ID.vl_out))
   EX.vstart := id_reg_vstart_out
-  EX.vd_data := id_reg_vd_data
+  EX.vs3_data := id_reg_vs3_data
   EX.vma := Mux(ex_reg_vset, ex_reg_vtype(7), Mux(mem_reg_vset, mem_reg_vtype(7), ID.vtypei_out(7)))
   EX.vta := Mux(ex_reg_vset, ex_reg_vtype(6), Mux(mem_reg_vset, mem_reg_vtype(6), ID.vtypei_out(6)))
   EX.vm := id_reg_ins(25)
@@ -305,9 +312,9 @@ dontTouch(next_pc_selector)
   ex_reg_vd_addr := id_reg_vd_addr
   ex_reg_lmul_v := id_reg_lmul_v
 
-  /****************
+  /******
    * Memory Stage *
-   ****************/
+   ******/
 
   EX.vec_mem_res := ex_reg_vec_alu_res
   mem_reg_vec_alu_out := ex_reg_vec_alu_res
@@ -322,9 +329,9 @@ dontTouch(next_pc_selector)
   mem_reg_lmul_v := ex_reg_lmul_v
 
 
-  /****************
+  /******
    * Write Back *
-   ****************/
+   ******/
 
   EX.vec_wb_res := mem_reg_vec_alu_out
   ID.wb_RegWrite := mem_reg_vec_reg_write
@@ -339,9 +346,9 @@ dontTouch(next_pc_selector)
   // }
   if (C) {
 
-    /*****************
+    /*******
     * Realingner *
-    ******************/
+    ******/
     val RA = Module(new Realigner).io
 
     RA.ral_address_i     := pc.io.in.asUInt()
@@ -353,9 +360,9 @@ dontTouch(next_pc_selector)
 
     ral_halt_o           := RA.ral_halt_o
 
-    /*************************************************
+    /*****************
     * Compressed Decoder (Fully Combinational) *
-    *************************************************/
+    *****************/
     val CD = Module(new CompressedDecoder).io
 
     CD.instruction_i := instruction_cd
@@ -398,9 +405,9 @@ dontTouch(next_pc_selector)
   }
 
 
-  /****************
+  /******
    * Decode Stage *
-   ****************/
+   ******/
 
   id_reg_rd1 := ID.readData1
   id_reg_rd2 := ID.readData2
@@ -464,9 +471,9 @@ dontTouch(next_pc_selector)
   ID.id_ex_regWr := id_reg_ctl_regWrite
   ID.ex_mem_regWr := ex_reg_ctl_regWrite
 
-  /*****************
+  /*******
    * Execute Stage *
-  ******************/
+  ******/
 
   //ex_reg_branch := EX.branchAddress
 //  ex_reg_wd := EX.writeData
@@ -546,9 +553,9 @@ dontTouch(next_pc_selector)
     id_reg_ctl_regWrite := id_reg_ctl_regWrite
   }
 
-  /****************
+  /******
    * Memory Stage *
-   ****************/
+   ******/
 
   io.dmemReq <> MEM.io.dccmReq
   MEM.io.dccmRsp <> io.dmemRsp
@@ -598,9 +605,9 @@ dontTouch(next_pc_selector)
   ID.csr_Mem := ex_reg_is_csr
   ID.csr_Mem_data := ex_reg_csr_data
 
-  /********************
+  /********
    * Write Back Stage *
-   ********************/
+   ********/
 
   val wb_data = Wire(UInt(32.W))
   val wb_addr = Wire(UInt(5.W))
@@ -627,11 +634,11 @@ dontTouch(next_pc_selector)
   ID.csr_Wb_data := mem_reg_csr_data
   ID.dmem_data := io.dmemRsp.bits.dataResponse
   io.pin := wb_data
-  io.Vpin := ID.vd_data.asUInt
+  io.Vpin := ID.vs3_data.asUInt
 
-  /**************
-  ** RVFI PINS **
-  **************/
+  /******
+  * RVFI PINS *
+  ******/
   if (TRACE) {
     val npcDelay = Reg(Vec(4, UInt(32.W)))
     val rsAddrDelay = for (i <- 0 until 2) yield Reg(Vec(3, UInt(5.W)))

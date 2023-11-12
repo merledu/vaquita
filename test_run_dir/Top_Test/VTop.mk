@@ -44,7 +44,7 @@ VM_USER_CLASSES = \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/home/maira/Desktop/lateef/nucleusrv/test_run_dir/Top_Test \
+	/home/maira/vaquita/test_run_dir/Top_Test \
 
 
 ### Default rules...
@@ -56,7 +56,7 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-Top-harness.o: /home/maira/Desktop/lateef/nucleusrv/test_run_dir/Top_Test/Top-harness.cpp
+Top-harness.o: /home/maira/vaquita/test_run_dir/Top_Test/Top-harness.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)

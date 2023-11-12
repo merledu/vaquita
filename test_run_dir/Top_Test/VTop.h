@@ -87,7 +87,7 @@ VL_MODULE(VTop) {
         CData/*0:0*/ Top__DOT__core__DOT__mem_reg_vset;
         CData/*0:0*/ Top__DOT__core__DOT__mem_reg_vec_reg_write;
         CData/*2:0*/ Top__DOT__core__DOT__lmul;
-        CData/*0:0*/ Top__DOT__core__DOT___T_22;
+        CData/*0:0*/ Top__DOT__core__DOT___T_42;
         CData/*0:0*/ Top__DOT__core__DOT__IF_stall;
         CData/*4:0*/ Top__DOT__core__DOT__REG_1_0;
         CData/*4:0*/ Top__DOT__core__DOT__REG_1_1;
@@ -140,9 +140,11 @@ VL_MODULE(VTop) {
         CData/*0:0*/ Top__DOT__core__DOT__IDecode__DOT__csrController__DOT__csrHazard_DecMem;
         CData/*0:0*/ Top__DOT__core__DOT__IDecode__DOT__hdu__DOT___T_14;
         CData/*0:0*/ Top__DOT__core__DOT__IDecode__DOT__control__DOT___T_28;
-        CData/*0:0*/ Top__DOT__core__DOT__IDecode__DOT__Vcontrol__DOT___GEN_8;
+        CData/*0:0*/ Top__DOT__core__DOT__IDecode__DOT__Vcontrol__DOT___GEN_7;
+        CData/*0:0*/ Top__DOT__core__DOT__IDecode__DOT__Vcontrol__DOT___GEN_14;
         CData/*4:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__vs1_in;
         CData/*4:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__vs2_in;
+        CData/*4:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__vs3_in;
         CData/*4:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__vsd_in;
         CData/*3:0*/ Top__DOT__core__DOT__Execute__DOT__aluCtl_io_out;
         CData/*1:0*/ Top__DOT__core__DOT__Execute__DOT__ForwardingUnit_io_forwardA;
@@ -162,10 +164,10 @@ VL_MODULE(VTop) {
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT___GEN_31;
         CData/*2:0*/ Top__DOT__core__DOT__Execute__DOT___GEN_35;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_186;
-        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_190;
-        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_192;
     };
     struct {
+        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_190;
+        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_192;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_198;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_244;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_248;
@@ -228,10 +230,10 @@ VL_MODULE(VTop) {
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1599;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1605;
         CData/*7:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1637;
-        CData/*7:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1645;
-        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1651;
     };
     struct {
+        CData/*7:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1645;
+        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1651;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1655;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1657;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu__DOT___T_1663;
@@ -294,10 +296,10 @@ VL_MODULE(VTop) {
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT__r_ready;
         CData/*5:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT__r_counter;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT__is_div_rem_u;
-        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT__is_div_rem_s;
-        CData/*5:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT___T_39;
     };
     struct {
+        CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT__is_div_rem_s;
+        CData/*5:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT___T_39;
         CData/*0:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT___GEN_13;
         CData/*1:0*/ Top__DOT__core__DOT__MEM__DOT__offset;
         CData/*2:0*/ Top__DOT__core__DOT__MEM__DOT__funct3;
@@ -360,10 +362,10 @@ VL_MODULE(VTop) {
         SData/*15:0*/ Top__DOT__core__DOT__MEM__DOT__hi;
         SData/*15:0*/ Top__DOT__core__DOT__Realigner__DOT__lhw_reg;
         SData/*11:0*/ Top__DOT__dmem__DOT__sram__DOT__addr_o;
-        SData/*12:0*/ Top__DOT__dmem__DOT__sram__DOT__memory__DOT__addr0_reg;
-        SData/*12:0*/ Top__DOT__dmem__DOT__sram__DOT__memory__DOT__addr1_reg;
     };
     struct {
+        SData/*12:0*/ Top__DOT__dmem__DOT__sram__DOT__memory__DOT__addr0_reg;
+        SData/*12:0*/ Top__DOT__dmem__DOT__sram__DOT__memory__DOT__addr1_reg;
         SData/*11:0*/ Top__DOT__imem__DOT__sram__DOT__addr_o;
         SData/*12:0*/ Top__DOT__imem__DOT__sram__DOT__memory__DOT__addr0_reg;
         SData/*12:0*/ Top__DOT__imem__DOT__sram__DOT__memory__DOT__addr1_reg;
@@ -393,7 +395,7 @@ VL_MODULE(VTop) {
         WData/*127:0*/ Top__DOT__core__DOT__id_reg_v0_data[4];
         WData/*127:0*/ Top__DOT__core__DOT__id_reg_v1_data[4];
         WData/*127:0*/ Top__DOT__core__DOT__id_reg_v2_data[4];
-        WData/*127:0*/ Top__DOT__core__DOT__id_reg_vd_data[4];
+        WData/*127:0*/ Top__DOT__core__DOT__id_reg_vs3_data[4];
         IData/*31:0*/ Top__DOT__core__DOT__ex_reg_result;
         IData/*31:0*/ Top__DOT__core__DOT__ex_reg_wd;
         IData/*31:0*/ Top__DOT__core__DOT__ex_reg_ins;
@@ -409,9 +411,9 @@ VL_MODULE(VTop) {
         IData/*31:0*/ Top__DOT__core__DOT__mem_reg_vec_vl;
         IData/*31:0*/ Top__DOT__core__DOT__lmul_reg;
         IData/*31:0*/ Top__DOT__core__DOT__vlmul_count;
-        IData/*31:0*/ Top__DOT__core__DOT___T_24;
-        IData/*31:0*/ Top__DOT__core__DOT___T_70;
-        IData/*31:0*/ Top__DOT__core__DOT___GEN_14;
+        IData/*31:0*/ Top__DOT__core__DOT___T_44;
+        IData/*31:0*/ Top__DOT__core__DOT___T_90;
+        IData/*31:0*/ Top__DOT__core__DOT___GEN_15;
         IData/*31:0*/ Top__DOT__core__DOT__REG___05F0;
         IData/*31:0*/ Top__DOT__core__DOT__REG___05F1;
         IData/*31:0*/ Top__DOT__core__DOT__REG___05F2;
@@ -424,12 +426,12 @@ VL_MODULE(VTop) {
         IData/*31:0*/ Top__DOT__core__DOT__REG_6;
         IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__registers_io_writeData;
         IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__registers_io_readData_1;
-        WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers_io_vddata_o[4];
+        WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers_io_vs3_data[4];
         IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__immediate_io_out;
-        IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__bu_io_rd1;
-        IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__bu_io_rd2;
     };
     struct {
+        IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__bu_io_rd1;
+        IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__bu_io_rd2;
         IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__csr__DOT__csrRegFile_io_CSR_i_data;
         IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__csr__DOT__csrRegFile__DOT__MHARTID_REG;
         IData/*31:0*/ Top__DOT__core__DOT__IDecode__DOT__csr__DOT__csrRegFile__DOT__MCAUSE_REG;
@@ -492,10 +494,10 @@ VL_MODULE(VTop) {
         WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_10[4];
         WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_11[4];
         WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_12[4];
-        WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_13[4];
-        WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_14[4];
     };
     struct {
+        WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_13[4];
+        WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_14[4];
         WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_15[4];
         WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_16[4];
         WData/*127:0*/ Top__DOT__core__DOT__IDecode__DOT__v_registers__DOT__register_17[4];
@@ -558,10 +560,10 @@ VL_MODULE(VTop) {
         IData/*31:0*/ Top__DOT__core__DOT__Execute__DOT__alu_io_input2;
         IData/*31:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu_io_in_A;
         IData/*31:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu_io_in_B;
-        WData/*127:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu_io_vs1[4];
-        WData/*127:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu_io_vs2[4];
     };
     struct {
+        WData/*127:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu_io_vs1[4];
+        WData/*127:0*/ Top__DOT__core__DOT__Execute__DOT__vec_alu_io_vs2[4];
         IData/*31:0*/ Top__DOT__core__DOT__Execute__DOT__vec_config_io_rs1_readdata;
         IData/*31:0*/ Top__DOT__core__DOT__Execute__DOT__MDU_io_src_a;
         IData/*31:0*/ Top__DOT__core__DOT__Execute__DOT__MDU_io_src_b;
@@ -624,10 +626,10 @@ VL_MODULE(VTop) {
         WData/*94:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT___GEN_15[3];
         IData/*31:0*/ Top__DOT__core__DOT__MEM__DOT__rdata;
         IData/*31:0*/ Top__DOT__core__DOT__MEM__DOT___GEN_53;
-        IData/*31:0*/ Top__DOT__core__DOT__pc__DOT__pc_reg;
-        IData/*31:0*/ Top__DOT__core__DOT__CompressedDecoder__DOT___GEN_7;
     };
     struct {
+        IData/*31:0*/ Top__DOT__core__DOT__pc__DOT__pc_reg;
+        IData/*31:0*/ Top__DOT__core__DOT__CompressedDecoder__DOT___GEN_7;
         IData/*31:0*/ Top__DOT__core__DOT__CompressedDecoder__DOT___T_20;
         IData/*31:0*/ Top__DOT__core__DOT__CompressedDecoder__DOT___T_42;
         IData/*31:0*/ Top__DOT__core__DOT__CompressedDecoder__DOT___GEN_16;
@@ -690,10 +692,10 @@ VL_MODULE(VTop) {
         QData/*35:0*/ Top__DOT__core__DOT__Execute__DOT__vec_config__DOT__valmax;
         QData/*35:0*/ Top__DOT__core__DOT__Execute__DOT__vec_config__DOT__avl;
         QData/*63:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT__result;
-        QData/*63:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT___GEN_16;
-        IData/*31:0*/ Top__DOT__dmem__DOT__sram__DOT__memory__DOT__mem[8192];
     };
     struct {
+        QData/*63:0*/ Top__DOT__core__DOT__Execute__DOT__MDU__DOT___GEN_16;
+        IData/*31:0*/ Top__DOT__dmem__DOT__sram__DOT__memory__DOT__mem[8192];
         IData/*31:0*/ Top__DOT__imem__DOT__sram__DOT__memory__DOT__mem[8192];
     };
     

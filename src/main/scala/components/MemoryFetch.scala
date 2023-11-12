@@ -71,7 +71,7 @@ class MemoryFetch extends Module {
       // data to be stored at lower 16 bits (15,0)
       io.dccmReq.bits.activeByteLane := "b0011".U
     }.elsewhen(offsetSW === 1.U){
-      // data to be stored at lower 16 bits (15,0)
+      // data to be stored at lower 16 bits (15,0)  
       io.dccmReq.bits.activeByteLane := "b0110".U
       wdata(0) := io.writeData(23,16)
       wdata(1) := io.writeData(7,0)

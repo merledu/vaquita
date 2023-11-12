@@ -1,4 +1,3 @@
-
 package nucleusrv.components
 import chisel3._
 import chisel3.util.MuxCase
@@ -36,7 +35,7 @@ class Execute(M:Boolean = false) extends Module {
     val vs2_data = Input(SInt(128.W))
     val vl = Input(SInt(32.W))
     val vstart = Input(SInt(32.W))
-    val vd_data = Input(SInt(128.W))
+    val vs3_data = Input(SInt(128.W))
     val vma = Input(UInt(1.W))
     val vta = Input(UInt(1.W))
     val vm = Input(UInt(1.W))
@@ -178,7 +177,7 @@ class Execute(M:Boolean = false) extends Module {
   vec_alu.io.vta := io.vta
   vec_alu.io.vma := io.vma
   vec_alu.io.vm := io.vm
-  vec_alu.io.vd := io.vd_data
+  vec_alu.io.vd := io.vs3_data
   vec_alu.io.vs0 := io.vs0
   vec_alu.io.vstart := io.vstart.asUInt
   io.vec_alu_res := vec_alu.io.v_output
