@@ -10,14 +10,14 @@ VL_INLINE_OPT void VTop::_sequent__TOP__9(VTop__Syms* __restrict vlSymsp) {
     VTop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
     vlTOPp->Top__DOT__dmem__DOT__sram_we_i = ((IData)(vlTOPp->Top__DOT__core__DOT__MEM_io_dccmReq_valid) 
-                                              & (~ (IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memWrite)));
+                                              & (~ (IData)(vlTOPp->Top__DOT__core__DOT__MEM_io_writeEnable)));
     vlTOPp->Top__DOT__dmem__DOT__sram_csb_i = (1U & 
                                                ((~ 
                                                  ((IData)(vlTOPp->Top__DOT__core__DOT__MEM_io_dccmReq_valid) 
-                                                  & (~ (IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memWrite)))) 
+                                                  & (~ (IData)(vlTOPp->Top__DOT__core__DOT__MEM_io_writeEnable)))) 
                                                 & (~ 
                                                    ((IData)(vlTOPp->Top__DOT__core__DOT__MEM_io_dccmReq_valid) 
-                                                    & (IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memWrite)))));
+                                                    & (IData)(vlTOPp->Top__DOT__core__DOT__MEM_io_writeEnable)))));
 }
 
 VL_INLINE_OPT void VTop::_combo__TOP__10(VTop__Syms* __restrict vlSymsp) {
@@ -35,150 +35,151 @@ VL_INLINE_OPT void VTop::_combo__TOP__10(VTop__Syms* __restrict vlSymsp) {
                                                  | (~ (IData)(vlTOPp->Top__DOT__core__DOT__InstructionFetch_io_coreInstrReq_valid))) 
                                                 | (1U 
                                                    == (IData)(vlTOPp->Top__DOT__core__DOT__Realigner__DOT__stateReg))));
-    vlTOPp->Top__DOT__core__DOT___T_90 = ((1U & ((~ 
-                                                  (((IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memRead) 
-                                                    & (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_branch)) 
-                                                   & (((0x1fU 
-                                                        & (vlTOPp->Top__DOT__core__DOT__ex_reg_ins 
-                                                           >> 7U)) 
-                                                       == 
-                                                       (0x1fU 
-                                                        & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
-                                                           >> 0xfU))) 
-                                                      | ((0x1fU 
-                                                          & (vlTOPp->Top__DOT__core__DOT__ex_reg_ins 
-                                                             >> 7U)) 
-                                                         == 
-                                                         (0x1fU 
-                                                          & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
-                                                             >> 0x14U)))))) 
-                                                 & (~ (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__hdu__DOT___T_14))))
-                                           ? ((IData)(vlTOPp->Top__DOT__core__DOT__IDecode_io_pcSrc)
-                                               ? ((1U 
-                                                   == (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_jump))
-                                                   ? 
-                                                  (vlTOPp->Top__DOT__core__DOT__if_reg_pc 
-                                                   + vlTOPp->Top__DOT__core__DOT__IDecode__DOT__immediate_io_out)
-                                                   : 
-                                                  ((2U 
+    vlTOPp->Top__DOT__core__DOT___T_164 = ((1U & ((~ 
+                                                   (((IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memRead) 
+                                                     & (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_branch)) 
+                                                    & (((0x1fU 
+                                                         & (vlTOPp->Top__DOT__core__DOT__ex_reg_ins 
+                                                            >> 7U)) 
+                                                        == 
+                                                        (0x1fU 
+                                                         & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
+                                                            >> 0xfU))) 
+                                                       | ((0x1fU 
+                                                           & (vlTOPp->Top__DOT__core__DOT__ex_reg_ins 
+                                                              >> 7U)) 
+                                                          == 
+                                                          (0x1fU 
+                                                           & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
+                                                              >> 0x14U)))))) 
+                                                  & (~ (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__hdu__DOT___T_14))))
+                                            ? ((IData)(vlTOPp->Top__DOT__core__DOT__IDecode_io_pcSrc)
+                                                ? (
+                                                   (1U 
                                                     == (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_jump))
                                                     ? 
-                                                   ((((0x1fU 
-                                                       & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
-                                                          >> 0xfU)) 
-                                                      == 
-                                                      (0x1fU 
-                                                       & (vlTOPp->Top__DOT__core__DOT__id_reg_ins 
-                                                          >> 7U)))
-                                                      ? vlTOPp->Top__DOT__core__DOT__Execute_io_ALUresult
-                                                      : 
-                                                     (((0x1fU 
+                                                   (vlTOPp->Top__DOT__core__DOT__if_reg_pc 
+                                                    + vlTOPp->Top__DOT__core__DOT__IDecode__DOT__immediate_io_out)
+                                                    : 
+                                                   ((2U 
+                                                     == (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_jump))
+                                                     ? 
+                                                    ((((0x1fU 
                                                         & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
                                                            >> 0xfU)) 
                                                        == 
                                                        (0x1fU 
-                                                        & (vlTOPp->Top__DOT__core__DOT__ex_reg_ins 
+                                                        & (vlTOPp->Top__DOT__core__DOT__id_reg_ins 
                                                            >> 7U)))
-                                                       ? vlTOPp->Top__DOT__core__DOT__ex_reg_result
+                                                       ? vlTOPp->Top__DOT__core__DOT__Execute_io_ALUresult
                                                        : 
                                                       (((0x1fU 
                                                          & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
                                                             >> 0xfU)) 
                                                         == 
                                                         (0x1fU 
-                                                         & (vlTOPp->Top__DOT__core__DOT__mem_reg_ins 
+                                                         & (vlTOPp->Top__DOT__core__DOT__ex_reg_ins 
                                                             >> 7U)))
-                                                        ? vlTOPp->Top__DOT__core__DOT__IDecode_io_writeData
+                                                        ? vlTOPp->Top__DOT__core__DOT__ex_reg_result
                                                         : 
                                                        (((0x1fU 
                                                           & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
                                                              >> 0xfU)) 
                                                          == 
                                                          (0x1fU 
-                                                          & (vlTOPp->Top__DOT__core__DOT__id_reg_ins 
+                                                          & (vlTOPp->Top__DOT__core__DOT__mem_reg_ins 
                                                              >> 7U)))
-                                                         ? vlTOPp->Top__DOT__core__DOT__Execute_io_ALUresult
-                                                         : vlTOPp->Top__DOT__core__DOT__IDecode_io_readData1)))) 
-                                                    + vlTOPp->Top__DOT__core__DOT__IDecode__DOT__immediate_io_out)
-                                                    : 
-                                                   (vlTOPp->Top__DOT__core__DOT__if_reg_pc 
-                                                    + vlTOPp->Top__DOT__core__DOT__IDecode__DOT__immediate_io_out)))
-                                               : ((
-                                                   (0U 
-                                                    != vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o) 
-                                                   & ((0U 
-                                                       == 
-                                                       (3U 
-                                                        & vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o))
-                                                       ? 
-                                                      ((0U 
-                                                        == 
-                                                        (3U 
-                                                         & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                            >> 0xeU))) 
-                                                       | ((1U 
-                                                           == 
-                                                           (3U 
-                                                            & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                               >> 0xeU))) 
-                                                          | (3U 
-                                                             == 
-                                                             (3U 
-                                                              & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                                 >> 0xeU)))))
-                                                       : 
-                                                      ((1U 
+                                                         ? vlTOPp->Top__DOT__core__DOT__IDecode_io_writeData
+                                                         : 
+                                                        (((0x1fU 
+                                                           & (vlTOPp->Top__DOT__core__DOT__if_reg_ins 
+                                                              >> 0xfU)) 
+                                                          == 
+                                                          (0x1fU 
+                                                           & (vlTOPp->Top__DOT__core__DOT__id_reg_ins 
+                                                              >> 7U)))
+                                                          ? vlTOPp->Top__DOT__core__DOT__Execute_io_ALUresult
+                                                          : vlTOPp->Top__DOT__core__DOT__IDecode_io_readData1)))) 
+                                                     + vlTOPp->Top__DOT__core__DOT__IDecode__DOT__immediate_io_out)
+                                                     : 
+                                                    (vlTOPp->Top__DOT__core__DOT__if_reg_pc 
+                                                     + vlTOPp->Top__DOT__core__DOT__IDecode__DOT__immediate_io_out)))
+                                                : (
+                                                   ((0U 
+                                                     != vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o) 
+                                                    & ((0U 
                                                         == 
                                                         (3U 
                                                          & vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o))
                                                         ? 
                                                        ((0U 
                                                          == 
-                                                         (7U 
-                                                          & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                             >> 0xdU))) 
-                                                        | (IData)(vlTOPp->Top__DOT__core__DOT__CompressedDecoder__DOT___GEN_37))
-                                                        : 
-                                                       ((2U 
-                                                         == 
                                                          (3U 
-                                                          & vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o)) 
-                                                        & ((0U 
+                                                          & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                             >> 0xeU))) 
+                                                        | ((1U 
                                                             == 
                                                             (3U 
                                                              & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
                                                                 >> 0xeU))) 
-                                                           | ((1U 
-                                                               == 
-                                                               (3U 
-                                                                & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                                   >> 0xeU))) 
-                                                              | ((2U 
-                                                                  == 
-                                                                  (3U 
-                                                                   & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                                      >> 0xeU))) 
-                                                                 | (3U 
-                                                                    == 
-                                                                    (3U 
-                                                                     & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
-                                                                        >> 0xeU))))))))))
-                                                   ? 
-                                                  ((IData)(vlTOPp->Top__DOT__core__DOT__pc_io_halt)
-                                                    ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
+                                                           | (3U 
+                                                              == 
+                                                              (3U 
+                                                               & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                                  >> 0xeU)))))
+                                                        : 
+                                                       ((1U 
+                                                         == 
+                                                         (3U 
+                                                          & vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o))
+                                                         ? 
+                                                        ((0U 
+                                                          == 
+                                                          (7U 
+                                                           & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                              >> 0xdU))) 
+                                                         | (IData)(vlTOPp->Top__DOT__core__DOT__CompressedDecoder__DOT___GEN_37))
+                                                         : 
+                                                        ((2U 
+                                                          == 
+                                                          (3U 
+                                                           & vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o)) 
+                                                         & ((0U 
+                                                             == 
+                                                             (3U 
+                                                              & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                                 >> 0xeU))) 
+                                                            | ((1U 
+                                                                == 
+                                                                (3U 
+                                                                 & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                                    >> 0xeU))) 
+                                                               | ((2U 
+                                                                   == 
+                                                                   (3U 
+                                                                    & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                                       >> 0xeU))) 
+                                                                  | (3U 
+                                                                     == 
+                                                                     (3U 
+                                                                      & (vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_instruction_o 
+                                                                         >> 0xeU))))))))))
+                                                    ? 
+                                                   ((IData)(vlTOPp->Top__DOT__core__DOT__pc_io_halt)
+                                                     ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
+                                                     : 
+                                                    ((IData)(2U) 
+                                                     + vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg))
                                                     : 
-                                                   ((IData)(2U) 
-                                                    + vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg))
-                                                   : 
-                                                  ((IData)(vlTOPp->Top__DOT__core__DOT__pc_io_halt)
-                                                    ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
-                                                    : 
-                                                   ((IData)(4U) 
-                                                    + vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg))))
-                                           : vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg);
-    vlTOPp->Top__DOT__core__DOT__pc_io_in = ((IData)(vlTOPp->Top__DOT__core__DOT___T_42)
+                                                   ((IData)(vlTOPp->Top__DOT__core__DOT__pc_io_halt)
+                                                     ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
+                                                     : 
+                                                    ((IData)(4U) 
+                                                     + vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg))))
+                                            : vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg);
+    vlTOPp->Top__DOT__core__DOT__pc_io_in = ((IData)(vlTOPp->Top__DOT__core__DOT___T_64)
                                               ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
-                                              : vlTOPp->Top__DOT__core__DOT___T_90);
+                                              : vlTOPp->Top__DOT__core__DOT___T_164);
     vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_address_o 
         = ((((1U == (IData)(vlTOPp->Top__DOT__core__DOT__Realigner__DOT__stateReg)) 
              & (vlTOPp->Top__DOT__core__DOT__pc_io_in 
@@ -191,14 +192,14 @@ void VTop::_eval(VTop__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    VTop::_eval\n"); );
     VTop* const __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    if (((~ (IData)(vlTOPp->clock)) & (IData)(vlTOPp->__Vclklast__TOP__clock))) {
+    if (((IData)(vlTOPp->clock) & (~ (IData)(vlTOPp->__Vclklast__TOP__clock)))) {
         vlTOPp->_sequent__TOP__1(vlSymsp);
         vlTOPp->__Vm_traceActivity[1U] = 1U;
-    }
-    if (((IData)(vlTOPp->clock) & (~ (IData)(vlTOPp->__Vclklast__TOP__clock)))) {
         vlTOPp->_sequent__TOP__2(vlSymsp);
-        vlTOPp->__Vm_traceActivity[2U] = 1U;
+    }
+    if (((~ (IData)(vlTOPp->clock)) & (IData)(vlTOPp->__Vclklast__TOP__clock))) {
         vlTOPp->_sequent__TOP__3(vlSymsp);
+        vlTOPp->__Vm_traceActivity[2U] = 1U;
     }
     if ((((IData)(vlTOPp->clock) & (~ (IData)(vlTOPp->__Vclklast__TOP__clock))) 
          | ((IData)(vlTOPp->reset) & (~ (IData)(vlTOPp->__Vclklast__TOP__reset))))) {

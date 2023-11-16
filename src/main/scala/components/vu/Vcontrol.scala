@@ -84,6 +84,7 @@ class controldec extends Module {
             io.vset := 0.B
             io.v_store := 1.B
             io.v_ins := 1.B
+            io.memWrite := 1.B
             io.RegRead := 1.B
         }
         

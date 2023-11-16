@@ -21,8 +21,9 @@ class vregfile extends Module {
     val vd_data = Input(SInt(128.W))
     val reg_write = Input(Bool())
     val reg_read = Input(Bool())
+    val vd_dataout =Output(SInt(128.W))
   })
-
+  io.vd_dataout := io.vd_data
   val register = RegInit(VecInit(Seq.fill(32)(0.S(128.W))))
   var vs1_in = io.vs1_addr+io.lmul_vs1in_vs2in
   var vs2_in = io.vs2_addr+io.lmul_vs1in_vs2in

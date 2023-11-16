@@ -35,6 +35,7 @@ VM_CLASSES_SLOW += \
 # Generated support classes, fast-path, compile with highest optimization
 VM_SUPPORT_FAST += \
 	VTop__Trace \
+	VTop__Trace__1 \
 
 # Generated support classes, non-fast-path, compile with low/medium optimization
 VM_SUPPORT_SLOW += \

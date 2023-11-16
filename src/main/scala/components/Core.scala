@@ -3,6 +3,7 @@ package nucleusrv.components
 import chisel3._
 import chisel3.util._
 import nucleusrv.components.vu.VLSU
+// import nucleusrv.components.vu.VmemAddr
 
 class Core(implicit val config:Configs) extends Module{
 
@@ -39,6 +40,11 @@ class Core(implicit val config:Configs) extends Module{
 
   //vector IF-ID Registers
   val if_reg_lmul_v = RegInit(0.U(4.W))
+  val if_reg_evl = RegInit(0.U(8.W))
+  val if_reg_emul = RegInit(0.U(4.W))
+  val if_reg_eew = RegInit(0.U(10.W))
+  val if_reg_lsuType = RegInit(0.U(4.W))
+  val if_reg_delay =RegInit(0.U(4.W))
 
   // ID-EX Registers
   val id_reg_pc = RegInit(0.U(32.W))
@@ -78,10 +84,14 @@ class Core(implicit val config:Configs) extends Module{
   val id_reg_vs2_addr = RegInit(0.U(5.W))
   val id_reg_vd_addr = RegInit(0.U(5.W))
   val id_reg_lmul_v = RegInit(0.U(4.W))
+
+  val id_reg_evl = RegInit(0.U(8.W))
+  val id_reg_emul = RegInit(0.U(4.W))
+  val id_reg_eew = RegInit(0.U(10.W))
+  val id_reg_lsuType = RegInit(0.U(4.W))
+
+
   dontTouch(id_reg_vd_addr)
-  // val id_reg_ctl_memWrite = RegInit(false.B)
-  // val id_reg_ctl_Branch = RegInit(false.B)
-  // val id_reg_ctl_MemRead = RegInit(false.B)
   val id_reg_ctl_RegWrite = RegInit(false.B)
   // val id_reg_ctl_Mem2Reg = RegInit(false.B)
   // val id_reg_ctl_opAsel = RegInit(0.U(2.W))
@@ -92,6 +102,8 @@ class Core(implicit val config:Configs) extends Module{
   val id_reg_ctl_vset = RegInit(false.B)
   val id_reg_ctl_v_load = RegInit(false.B)
   val id_reg_ctl_v_ins = RegInit(false.B)
+  val id_reg_ctl_v_memRead = RegInit(false.B)
+  val id_reg_ctl_v_MemWrite = RegInit(false.B)
   // val id_reg_RegWrite = RegInit(false.B)
   // val id_reg_vs1_addr = RegInit(0.U(5.W))
   // val id_reg_vs2_addr = RegInit(0.U(5.W))
@@ -127,8 +139,17 @@ class Core(implicit val config:Configs) extends Module{
   val ex_reg_lmul_v = RegInit(0.U(4.W))
   dontTouch(ex_reg_vd_addr)
   val ex_reg_vset = RegInit(false.B)
+  val ex_reg_ctl_v_memRead = RegInit(false.B)
+  val ex_reg_ctl_v_MemWrite = RegInit(false.B)
   val ex_reg_reg_write = RegInit(false.B)
   val ex_reg_vtype = RegInit(0.S(11.W))
+  val ex_reg_evl = RegInit(0.U(8.W))
+  val ex_reg_emul = RegInit(0.U(4.W))
+  val ex_reg_eew = RegInit(0.U(10.W))
+  val ex_reg_lsuType = RegInit(0.U(4.W))
+  val ex_reg_read_data1 = RegInit(0.U(32.W))
+  val ex_reg_vs3 = RegInit(0.S(128.W))
+  val ex_reg_v_ins = RegInit(0.B)
 
   // MEM-WB Registers
   val mem_reg_rd = RegInit(0.U(32.W))
@@ -154,6 +175,12 @@ class Core(implicit val config:Configs) extends Module{
   val mem_reg_lmul_v = RegInit(0.U(4.W))
   val mem_reg_vset = RegInit(false.B)
   val mem_reg_vec_reg_write = RegInit(false.B)
+  val mem_reg_v_ins = RegInit(0.B)
+
+  // val mem_reg_evl = RegInit(0.U(8.W))
+  // val mem_reg_emul = RegInit(0.U(4.W))
+  // val mem_reg_eew = RegInit(0.U(4.W))
+  // val mem_reg_lsuType = RegInit(0.U(4.W))
 
   //Pipeline Units
   val IF = Module(new InstructionFetch).io
@@ -167,9 +194,9 @@ class Core(implicit val config:Configs) extends Module{
 
   io.fcsr_o_data := ID.fscr_o_data
   
-  /*******
+  /*
    * Fetch Stage *
-   ******/
+   **/
 
   val pc = Module(new PC)
 
@@ -180,11 +207,11 @@ class Core(implicit val config:Configs) extends Module{
   val ral_halt_o  = WireInit(false.B)
   val is_comp     = WireInit(false.B)
 
-     /********
+     /**
    * Vector Fetch Stage *
-   ********/
+   **/
 
-      // *********grouping*******//
+      // grouping//
       //vsetvl not implement (rs2 value)
 var lmul = RegInit(0.U(3.W)) // by default lmul==1
 var vtype = RegInit(0.U(32.W))
@@ -198,6 +225,7 @@ when(instruction(6,0)==="b1010111".U && instruction(14,12)==="b111".U && (instru
   vtype := vtype
 }
 val vlsu = Module (new VLSU)
+dontTouch(vlsu.io)
 vlsu.io.instr := instruction
 vlsu.io.vtype := vtype
 var vlmul_count = WireInit(0.U(32.W))
@@ -221,6 +249,17 @@ dontTouch(vlmul_count)
         vlmul_count := 7.U
     }
 
+    val vlcount1 = WireInit(0.U(32.W))
+  when (vlsu.io.emul === 1.U && instruction(6,0)==="b0100111".U){
+    vlcount1 := 4.U
+  }.elsewhen(vlsu.io.emul === 2.U && instruction(6,0)==="b0100111".U){
+    vlcount1 := 8.U
+  }.elsewhen(vlsu.io.emul === 4.U && instruction(6,0)==="b0100111".U){
+    vlcount1 := 16.U
+  }.elsewhen(vlsu.io.emul === 8.U && instruction(6,0)==="b0100111".U){
+    vlcount1 := 32.U
+  }
+
   var next_pc_selector = WireInit(0.U(32.W))
   val lmul_reg = RegInit(0.U(32.W))
     when(lmul_reg =/= vlmul_count && ((instruction(6,0)==="b1010111".U && instruction(14,12)=/="b111".U) || instruction(6,0)==="b0100111".U )){
@@ -233,12 +272,34 @@ dontTouch(vlmul_count)
         next_pc_selector := 0.U
         if_reg_lmul_v := lmul_reg //paasing fetch stage
     }
+
+
+
+
+
+
+    val delays = RegInit(0.U(32.W))
+    when( delays =/= vlcount1 && instruction(6,0)==="b0100111".U){
+      next_pc_selector := 1.U
+      delays := delays+1.U
+      if_reg_delay := delays
+    }.otherwise{
+      delays := 0.U
+      next_pc_selector := 0.U
+      if_reg_delay := delays
+    }
+
+  if_reg_evl := vlsu.io.evl
+  if_reg_emul := vlsu.io.emul
+  if_reg_eew := vlsu.io.eew
+  if_reg_lsuType := vlsu.io.lsuType
+
 dontTouch(lmul_reg)
 dontTouch(next_pc_selector)
 
-  /********
+  /**
    * Vector Decode Stage *
-   ********/
+   **/
 
     id_reg_vl_out := ID.vl_out
     id_reg_z_imm := ID.v_z_imm
@@ -256,19 +317,25 @@ dontTouch(next_pc_selector)
     id_reg_ctl_vset := ID.ctl_v_vset
     id_reg_ctl_v_load := ID.ctl_v_load
     id_reg_ctl_v_ins := ID.ctl_v_ins
+    id_reg_ctl_v_memRead := ID.ctl_v_memRead
+    id_reg_ctl_v_MemWrite := ID.ctl_v_memWrite
     id_reg_instruction := ID.id_instruction
     id_reg_vd_addr := ID.vd_addr
     id_reg_vs1_addr := ID.vs1_addr
     id_reg_vs2_addr := ID.vs2_addr
     id_reg_lmul_v  := if_reg_lmul_v
     ID.id_lmul_vs1in_vs2in := if_reg_lmul_v
+    id_reg_evl := if_reg_evl
+    id_reg_emul := if_reg_emul
+    id_reg_eew := if_reg_eew 
+    id_reg_lsuType := if_reg_lsuType
     
     
 
 
-  /*********
+  /*
    * Vector Execute Stage *
-  **********/
+  **/
 
   EX.func6 := id_reg_ins(31, 26)
   EX.v_ctl_aluop := id_reg_ctl_aluop
@@ -295,10 +362,13 @@ dontTouch(next_pc_selector)
 
   EX.fu_reg_vs1 := id_reg_vs1_addr
   EX.fu_reg_vs2 := id_reg_vs2_addr
+  EX.fu_reg_vs3 := id_reg_vd_addr
+
   EX.fu_ex_reg_vd := ex_reg_vd_addr
   EX.fu_mem_reg_vd := mem_reg_vec_vd_addr
   EX.fu_ex_reg_write := ex_reg_reg_write
   EX.fu_mem_reg_write := mem_reg_vec_reg_write
+  EX.id_reg_vs3data := ID.vs3_data
 
   ex_reg_vtype := id_reg_z_imm
   ex_reg_vec_alu_res := EX.vec_alu_res
@@ -306,15 +376,90 @@ dontTouch(next_pc_selector)
   ex_reg_rd_out := EX.vec_rd_out
   ex_reg_avl_o := EX.vec_avl_o
   ex_reg_valmax_o := EX.vec_valmax_o
+  ex_reg_ctl_v_memRead := id_reg_ctl_v_memRead
+  ex_reg_ctl_v_MemWrite := id_reg_ctl_v_MemWrite
 
   ex_reg_reg_write := id_reg_ctl_RegWrite
   EX.fu_ex_reg_write := ex_reg_reg_write
+  EX.v_MemWrite := id_reg_ctl_v_MemWrite
   ex_reg_vd_addr := id_reg_vd_addr
   ex_reg_lmul_v := id_reg_lmul_v
 
-  /******
-   * Memory Stage *
-   ******/
+  ex_reg_evl := id_reg_evl
+  ex_reg_emul := id_reg_emul
+  ex_reg_eew := id_reg_eew 
+  ex_reg_lsuType := id_reg_lsuType
+  ex_reg_read_data1 := id_reg_rd1
+  ex_reg_vs3 := EX.vs3_data_o
+  ex_reg_v_ins := id_reg_ctl_v_ins
+
+
+// var count = 0.U
+var count64 = 0
+val addrcount = RegInit(0.U(32.W))
+dontTouch(addrcount)
+// var elemntcount = RegInit(0.U(3.W))
+var v_waddr = 0.U
+// dontTouch(addrcount)
+val data = WireInit(0.S(32.W))
+dontTouch(data)
+var next_pc_sel = WireInit(0.U(32.W))
+dontTouch(next_pc_sel)
+MEM.io.v_addr := 0.U
+MEM.io.v_writeData := 0.U
+val vlcount = RegInit(0.U(32.W)) 
+dontTouch(vlcount)
+
+when (vlcount =/= ex_reg_vl.asUInt && ex_reg_ins(6,0) === "b0100111".U){
+//when (vlcount =/= EX.vec_vl.asUInt && ex_reg_ins(6,0) === "b0100111".U){
+//val eew_32_vs3_data = VecInit((0 until 4).map(i => ex_reg_vs3(32*i+31, 32*i).asSInt))
+ val eew_32_vs3_data = VecInit((0 until 4).map(i => EX.vs3_data_o(32*i+31, 32*i).asSInt))
+//val eew_32_vs3_data = VecInit((0 until 4).map(i => ID.id_wbvs3_data(32*i+31, 32*i).asSInt))
+  //val eew_32_vs3_data = VecInit(Seq.fill(4)(0.S(32.W)))
+  dontTouch(eew_32_vs3_data)
+  // eew_32_vs3_data(0) := ex_reg_vs3(31,0).asSInt
+  // eew_32_vs3_data(1) := ex_reg_vs3(63,32).asSInt
+  // eew_32_vs3_data(2) := ex_reg_vs3(95,64).asSInt
+  // eew_32_vs3_data(3) := ex_reg_vs3(127,96).asSInt
+  when(ex_reg_lsuType === 1.U)  {
+    for (count <- 0 until 4){
+
+    // val vs3_data = eew_32_vs3_data
+    MEM.io.v_writeData := eew_32_vs3_data(count).asUInt
+    // count = count + 1.U
+    MEM.io.v_addr := ex_reg_read_data1 + addrcount.asUInt
+    addrcount := addrcount + 4.U
+    next_pc_sel = 1.U}
+   }
+  //.otherwise {
+  //   data := 0.S
+  //   // count = 0.U
+  //    MEM.io.aluResultIn := ex_reg_read_data1.asUInt
+  //  //v_waddr = v_waddr
+  //   next_pc_sel = 1.U
+  // }
+  vlcount := MuxCase(
+    0.U,
+    Array( // 
+      (ex_reg_eew === 8.U) -> (vlcount+ 4.U),
+      (ex_reg_eew === 16.U) -> (vlcount+ 2.U),
+      (ex_reg_eew === 32.U) -> (vlcount+ 1.U),
+      (ex_reg_eew === 64.U) -> (vlcount+ 0.U)
+    )
+    
+  )
+  next_pc_sel = 1.U
+  
+}.otherwise{
+  next_pc_sel = 0.U
+  MEM.io.v_addr := 0.U
+
+}
+
+  
+
+
+
 
   EX.vec_mem_res := ex_reg_vec_alu_res
   mem_reg_vec_alu_out := ex_reg_vec_alu_res
@@ -329,26 +474,25 @@ dontTouch(next_pc_selector)
   mem_reg_lmul_v := ex_reg_lmul_v
 
 
-  /******
+  /**
    * Write Back *
-   ******/
+   **/
 
   EX.vec_wb_res := mem_reg_vec_alu_out
   ID.wb_RegWrite := mem_reg_vec_reg_write
   ID.wb_addr := mem_reg_vec_vd_addr
   ID.id_lmul_count := mem_reg_lmul_v
-
   ID.write_data := mem_reg_vec_alu_out
   ID.ctl_vset := mem_reg_vset
   ID.vl := mem_reg_vec_vl
   ID.vtypei := mem_reg_vtype
-
+  
   // }
   if (C) {
 
-    /*******
+    /*
     * Realingner *
-    ******/
+    **/
     val RA = Module(new Realigner).io
 
     RA.ral_address_i     := pc.io.in.asUInt()
@@ -360,9 +504,9 @@ dontTouch(next_pc_selector)
 
     ral_halt_o           := RA.ral_halt_o
 
-    /*****************
+    /*
     * Compressed Decoder (Fully Combinational) *
-    *****************/
+    */
     val CD = Module(new CompressedDecoder).io
 
     CD.instruction_i := instruction_cd
@@ -388,12 +532,12 @@ dontTouch(next_pc_selector)
 
   val IF_stall = func7 === 1.U && (func3 === 4.U || func3 === 5.U || func3 === 6.U || func3 === 7.U)
 
-  IF.stall := io.stall || EX.stall || ID.stall || IF_stall //stall signal from outside
+  IF.stall := io.stall || EX.stall || ID.stall || IF_stall  //stall signal from outside
   
   // pc.io.halt := Mux(io.imemReq.valid || ~EX.stall || ~ID.stall, 0.B, 1.B)
-  pc.io.halt := Mux(((EX.stall || ID.stall || IF_stall || ~io.imemReq.valid) | ral_halt_o), 1.B, 0.B)
+  pc.io.halt := Mux((((EX.stall || ID.stall || IF_stall || ~io.imemReq.valid) | ral_halt_o))|| next_pc_sel === 1.U  , 1.B, 0.B)
   // vector changes
-  val npc = Mux(next_pc_selector===1.U,pc.io.out,Mux(ID.hdu_pcWrite, Mux(ID.pcSrc, ID.pcPlusOffset.asSInt(), Mux(is_comp, pc.io.pc2, pc.io.pc4)), pc.io.out))
+  val npc = Mux(next_pc_selector===1.U  ,pc.io.out,Mux(ID.hdu_pcWrite, Mux(ID.pcSrc, ID.pcPlusOffset.asSInt(), Mux(is_comp, pc.io.pc2, pc.io.pc4)), pc.io.out))
   pc.io.in := npc
 
   when(ID.hdu_if_reg_write) {
@@ -405,9 +549,9 @@ dontTouch(next_pc_selector)
   }
 
 
-  /******
+  /**
    * Decode Stage *
-   ******/
+   **/
 
   id_reg_rd1 := ID.readData1
   id_reg_rd2 := ID.readData2
@@ -430,30 +574,6 @@ dontTouch(next_pc_selector)
   id_reg_is_csr := ID.is_csr
   id_reg_csr_data := ID.csr_o_data
 
-  // id_reg_vl_out := ID.vl_out
-  // id_reg_vtype_out := ID.vtype_out
-  // id_reg_vstart_out := ID.vstart_out
-  // id_reg_vtype := ID.v_z_imm
-  // id_reg_v_addi_imm := ID.v_addi_imm
-  // id_reg_v0_data := ID.vs0_data
-  // id_reg_v1_data := ID.vs1_data
-  // id_reg_v2_data := ID.vs2_data
-  // id_reg_vd_data := ID.vd_data
-  // id_reg_regWrite := ID.reg_write
-  // id_reg_ctl_memWrite :=ID.ctl_MemWrite
-  // id_reg_ctl_Branch :=ID.ctl_Branch
-  // id_reg_ctl_MemRead :=ID.ctl_MemRead
-  // id_reg_ctl_RegWrite :=ID.ctl_RegWrite
-  // id_reg_ctl_Mem2Reg :=ID.ctl_Mem2Reg
-  // id_reg_ctl_opAsel :=ID.ctl_opAsel
-  // id_reg_ctl_opBsel :=ID.ctl_opBsel
-  // id_reg_ctl_Ex_sel :=ID.ctl_Ex_sel
-  // id_reg_ctl_nextPCsel := ID.ctl_nextPCsel
-  // id_reg_ctl_aluop := ID.ctl_aluop
-  // id_reg_ctl_vset := ID.ctl_vset
-  // id_reg_ctl_v_load := ID.ctl_v_load
-  // id_reg_ctl_v_ins := ID.ctl_v_ins
-  // id_reg_instruction := ID.id_instruction
 
 //  IF.PcWrite := ID.hdu_pcWrite
   ID.id_instruction := if_reg_ins
@@ -471,9 +591,9 @@ dontTouch(next_pc_selector)
   ID.id_ex_regWr := id_reg_ctl_regWrite
   ID.ex_mem_regWr := ex_reg_ctl_regWrite
 
-  /*******
+  /*
    * Execute Stage *
-  ******/
+  **/
 
   //ex_reg_branch := EX.branchAddress
 //  ex_reg_wd := EX.writeData
@@ -488,38 +608,7 @@ dontTouch(next_pc_selector)
   EX.ctl_aluSrc := id_reg_ctl_aluSrc
   EX.ctl_aluOp := id_reg_ctl_aluOp
   EX.ctl_aluSrc1 := id_reg_ctl_aluSrc1
-  //EX.ctl_branch := id_reg_ctl_branch
-  //EX.ctl_jump := id_reg_ctl_jump
-  
-  
-  // EX.id_ex_ins
-  // EX.func6 := id_reg_ins(31, 26)
-  // EX.v_ctl_aluop := id_reg_ctl_aluop
-  // EX.v_ctl_exsel := id_reg_ctl_Ex_sel
-  // EX.v_ctl_mem2reg := id_reg_ctl_memToReg
-  // EX.v_ctl_regwrite := id_reg_ctl_RegWrite
-  // EX.v_ctl_memwrite := id_reg_ctl_memWrite
-  // EX.v_ctl_branch := id_reg_ctl_Branch
-  // EX.v_ctl_memread := id_reg_ctl_memRead
-  // EX.v_ctl_opAsel := id_reg_ctl_opAsel
-  // EX.v_ctl_opBsel := id_reg_ctl_opBsel
-  // EX.v_ctl_nextpcsel := id_reg_ctl_nextPCsel
-  // EX.v_ctl_v_load := id_reg_ctl_v_load
-  // EX.v_ctl_v_ins := id_reg_ctl_v_ins
-  // EX.v_ctl_vset := id_reg_ctl_vset
-  // EX.vs1_data := id_reg_v1_data
-  // EX.vs2_data := id_reg_v2_data
-  // EX.vl := id_reg_vl_out
-  // EX.vstart := id_reg_vstart_out
-  // EX.vd_data := id_reg_vd_data
-  // EX.vma := id_reg_vtype_out(7)
-  // EX.vta := id_reg_vtype_out(6)
-  // EX.vm := id_reg_ins(25)
-  // EX.vs0 := id_reg_v0_data
-  // EX.vd_addr := id_reg_ins(11, 7)
-  // // EX.v_aluc :=
-  // EX.v_sew := id_reg_vtype_out(5, 3)
-  // EX.zimm := id_reg_vtype
+
   
   ex_reg_pc := id_reg_pc
   ex_reg_wra := id_reg_wra
@@ -528,13 +617,9 @@ dontTouch(next_pc_selector)
   ex_reg_ctl_regWrite := id_reg_ctl_regWrite
   ex_reg_is_csr := id_reg_is_csr
   ex_reg_csr_data := id_reg_csr_data
-//  ex_reg_ctl_memRead := id_reg_ctl_memRead
-//  ex_reg_ctl_memWrite := id_reg_ctl_memWrite
+
   ID.id_ex_mem_read := id_reg_ctl_memRead
   ID.ex_mem_mem_read := ex_reg_ctl_memRead
-//  ID.ex_mem_mem_write := ex_reg_ctl_memWrite
-  //EX.ex_mem_regWrite := ex_reg_ctl_regWrite
-  //EX.mem_wb_regWrite := mem_reg_ctl_regWrite
   EX.id_ex_ins := id_reg_ins
   EX.ex_mem_ins := ex_reg_ins
   EX.mem_wb_ins := mem_reg_ins
@@ -553,32 +638,14 @@ dontTouch(next_pc_selector)
     id_reg_ctl_regWrite := id_reg_ctl_regWrite
   }
 
-  /******
+  /**
    * Memory Stage *
-   ******/
+   **/
+
 
   io.dmemReq <> MEM.io.dccmReq
   MEM.io.dccmRsp <> io.dmemRsp
-//  val stall = Wire(Bool())
-//  stall := (ex_reg_ctl_memWrite || ex_reg_ctl_memRead) && !io.dmemRsp.valid
-//  when(MEM.io.stall){
-//    mem_reg_rd := mem_reg_rd
-//    mem_reg_result := mem_reg_result
-////    mem_reg_wra := mem_reg_wra
-//    ex_reg_wra := ex_reg_wra
-//    ex_reg_ctl_memToReg := ex_reg_ctl_memToReg
-////    mem_reg_ctl_memToReg := mem_reg_ctl_memToReg
-//    ex_reg_ctl_regWrite := ex_reg_ctl_regWrite
-//    mem_reg_ctl_regWrite := ex_reg_ctl_regWrite
-//    mem_reg_ins := mem_reg_ins
-//    mem_reg_pc := mem_reg_pc
-//
-//    ex_reg_ctl_memRead := ex_reg_ctl_memRead
-//    ex_reg_ctl_memWrite := ex_reg_ctl_memWrite
-////    ex_reg_wd := ex_reg_wd
-////    ex_reg_result := 0.U
-//
-//  } otherwise{
+
     mem_reg_rd := MEM.io.readData
     mem_reg_result := ex_reg_result
 //    mem_reg_ctl_memToReg := ex_reg_ctl_memToReg
@@ -591,23 +658,28 @@ dontTouch(next_pc_selector)
     ex_reg_wd := EX.writeData
     ex_reg_result := EX.ALUresult
 //  }
+
+  val npc2 = Mux((next_pc_sel===1.U || next_pc_selector === 1.U) ,pc.io.out,Mux(ID.hdu_pcWrite, Mux(ID.pcSrc, ID.pcPlusOffset.asSInt(), Mux(is_comp, pc.io.pc2, pc.io.pc4)), pc.io.out))
+  pc.io.in := npc2
   mem_reg_wra := ex_reg_wra
   mem_reg_ctl_memToReg := ex_reg_ctl_memToReg
   mem_reg_is_csr := ex_reg_is_csr
   mem_reg_csr_data := ex_reg_csr_data
   EX.ex_mem_regWrite := ex_reg_ctl_regWrite
+  MEM.io.v_ins:= ex_reg_v_ins
   MEM.io.aluResultIn := ex_reg_result
   MEM.io.writeData := ex_reg_wd
-  MEM.io.readEnable := ex_reg_ctl_memRead
-  MEM.io.writeEnable := ex_reg_ctl_memWrite
+  MEM.io.readEnable := Mux(ex_reg_v_ins,ex_reg_ctl_v_memRead,ex_reg_ctl_memRead)
+  MEM.io.writeEnable := Mux(ex_reg_v_ins,ex_reg_ctl_v_MemWrite,ex_reg_ctl_memWrite)
   MEM.io.f3 := ex_reg_ins(14,12)
   EX.mem_result := ex_reg_result
   ID.csr_Mem := ex_reg_is_csr
   ID.csr_Mem_data := ex_reg_csr_data
+   
 
-  /********
+  /**
    * Write Back Stage *
-   ********/
+   **/
 
   val wb_data = Wire(UInt(32.W))
   val wb_addr = Wire(UInt(5.W))
@@ -636,9 +708,9 @@ dontTouch(next_pc_selector)
   io.pin := wb_data
   io.Vpin := ID.vs3_data.asUInt
 
-  /******
+  /**
   * RVFI PINS *
-  ******/
+  **/
   if (TRACE) {
     val npcDelay = Reg(Vec(4, UInt(32.W)))
     val rsAddrDelay = for (i <- 0 until 2) yield Reg(Vec(3, UInt(5.W)))

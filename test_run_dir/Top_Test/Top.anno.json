@@ -33,6 +33,38 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>_WIRE_1_0"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>_WIRE_1_1"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>_WIRE_1_2"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>_WIRE_1_3"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>vlcount"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>_WIRE"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Core>addrcount"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Core>next_pc_selector"
   },
   {
@@ -42,6 +74,70 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Core>vlmul_count"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_instr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_vtype"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_UnitStride"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_evl"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_vs3_Addr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_lsuType"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_eew"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_nf"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_emmul"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>io_emul"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>vsew"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>vlmul"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|VLSU>width"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|MemoryFetch>data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|MemoryFetch>addr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|MemoryFetch>io_v_addr"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -201,6 +297,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Execute>io_id_reg_vs3data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Execute>io_fu_ex_reg_vd"
   },
   {
@@ -217,11 +317,19 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Execute>io_fu_reg_vs3"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Execute>io_fu_ex_reg_write"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Execute>io_fu_mem_reg_write"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Execute>io_v_MemWrite"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -242,6 +350,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Execute>io_vec_valmax_o"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|Execute>io_vs3_data_o"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -322,6 +434,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|ALU_>io_v_output"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|ALU_>io_vs3"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -533,6 +649,18 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|InstructionDecode>io_ctl_v_memRead"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|InstructionDecode>io_ctl_v_memWrite"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|InstructionDecode>io_ctl_v_reg_read"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|InstructionDecode>io_write_data"
   },
   {
@@ -582,6 +710,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|InstructionDecode>io_vs3_data"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|InstructionDecode>io_id_wbvs3_data"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -754,6 +886,10 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|vregfile>io_reg_read"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|vregfile>io_vd_dataout"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

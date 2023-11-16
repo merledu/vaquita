@@ -23,6 +23,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
     val ex_result = Input(UInt(32.W))
     val ex_mem_result = Input(UInt(32.W))
     val mem_wb_result = Input(UInt(32.W))
+    
 
     val id_ex_regWr = Input(Bool())
     val ex_mem_regWr = Input(Bool())
@@ -60,7 +61,9 @@ class InstructionDecode(TRACE:Boolean) extends Module {
     val ctl_v_vset = Output(Bool())
     val ctl_v_load = Output(UInt(4.W))
     val ctl_v_ins = Output(Bool())
-
+    val ctl_v_memRead = Output(Bool())
+    val ctl_v_memWrite = Output(Bool())
+    val ctl_v_reg_read = Output(Bool())
     // vector register file
     val write_data = Input(SInt(128.W))
     val wb_addr = Input(UInt(5.W))
@@ -75,6 +78,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
     val vs2_addr = Output(UInt(5.W))
     val vd_addr = Output(UInt(5.W))
     val vs3_data = Output(SInt(128.W))
+    val id_wbvs3_data = Output(SInt(128.W))
 
     // Vector Immd Gen
     val v_z_imm = Output(SInt(32.W))
@@ -178,7 +182,9 @@ class InstructionDecode(TRACE:Boolean) extends Module {
   io.ctl_v_vset := Vcontrol.io.vset
   io.ctl_v_load := Vcontrol.io.v_load
   io.ctl_v_ins := Vcontrol.io.v_ins
-
+  io.ctl_v_memRead := Vcontrol.io.V_MemRead
+  io.ctl_v_memWrite := Vcontrol.io.memWrite
+  io.ctl_v_reg_read := Vcontrol.io.RegRead
   //Register File
   val registers = Module(new Registers)
   val registerRd = io.writeReg
@@ -208,6 +214,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
   io.vs0_data := v_registers.io.vs0_data
   io.vs1_data := v_registers.io.vs1_data
   io.vs2_data := v_registers.io.vs2_data
+  //io.vs3_data := Mux(Vcontrol.io.RegRead && io.wb_RegWrite && io.wb_addr === io.id_instruction(11, 7) ,v_registers.io.vd_dataout  , v_registers.io.vs3_data)
   io.vs3_data := v_registers.io.vs3_data
   io.reg_write := Vcontrol.io.RegWrite
   io.vs1_addr := io.id_instruction(19, 15)
@@ -217,7 +224,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
   v_registers.io.lmul_vs1in_vs2in := io.id_lmul_vs1in_vs2in //grouping counter after decode stage
 
 
-
+  io.id_wbvs3_data := v_registers.io.vd_dataout
   
 
 

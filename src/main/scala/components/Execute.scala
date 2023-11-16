@@ -46,20 +46,22 @@ class Execute(M:Boolean = false) extends Module {
     val v_addi_imm = Input(SInt(32.W))
     val vec_mem_res = Input(SInt(128.W))
     val vec_wb_res = Input(SInt(128.W))
-    
+    val id_reg_vs3data = Input(SInt(128.W))
+
     val fu_ex_reg_vd = Input(UInt(5.W))
     val fu_mem_reg_vd = Input(UInt(5.W))
     val fu_reg_vs1 = Input(UInt(5.W))
     val fu_reg_vs2 = Input(UInt(5.W))
+    val fu_reg_vs3 = Input(UInt(5.W))
     val fu_ex_reg_write = Input(Bool())
     val fu_mem_reg_write = Input(Bool())
-
+    val v_MemWrite = Input(Bool())
     val vec_alu_res = Output(SInt(128.W))
     val vec_vl = Output(SInt(32.W))
     val vec_rd_out = Output(UInt(5.W))
     val vec_avl_o = Output(SInt(32.W))
     val vec_valmax_o = Output(SInt(32.W))
-
+    val vs3_data_o = Output(SInt(128.W))
     val writeData = Output(UInt(32.W))
     val ALUresult = Output(UInt(32.W))
 
@@ -83,6 +85,7 @@ class Execute(M:Boolean = false) extends Module {
   fu.mem_reg_vd := io.fu_mem_reg_vd
   fu.reg_vs1 := io.fu_reg_vs1
   fu.reg_vs2 := io.fu_reg_vs2
+  fu.reg_vs3 := io.fu_reg_vs3
   fu.ex_reg_write := io.fu_ex_reg_write
   fu.mem_reg_write := io.fu_mem_reg_write
 
@@ -148,6 +151,17 @@ class Execute(M:Boolean = false) extends Module {
     vec_alu.io.vs1 := io.vs1_data
   }
   
+  when(fu.forwardC === 1.U){
+    vec_alu.io.vd := io.vec_mem_res
+    io.vs3_data_o := io.vec_mem_res
+  }.elsewhen(fu.forwardC === 2.U){
+    vec_alu.io.vd := io.vec_wb_res
+    io.vs3_data_o := io.vec_wb_res
+  }.otherwise{
+    vec_alu.io.vd := io.vs3_data
+    io.vs3_data_o := io.id_reg_vs3data
+  }
+  
   when(io.v_ctl_exsel === "b0011".U && io.v_ctl_opBsel === 1.U){
     vec_alu.io.in_B := io.zimm.asSInt
   }.elsewhen(io.v_ctl_exsel === "b0100".U && io.v_ctl_opBsel === 1.U){
@@ -202,10 +216,11 @@ class Execute(M:Boolean = false) extends Module {
     vec_config.io.rs1 := 0.U
     vec_config.io.rd := 0.U
     vec_config.io.rs1_readdata := 0.S
-    vec_config.io.current_vl := 0.S
+    vec_config.io.current_vl := io.vl.asSInt
   }
 
   io.vec_vl := vec_config.io.vl
+  // io.vec_vl := io.vl.asSInt
   io.vec_rd_out := vec_config.io.rd_out
   io.vec_avl_o := vec_config.io.avl_o
   io.vec_valmax_o := vec_config.io.valmax_o
