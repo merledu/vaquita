@@ -46,7 +46,7 @@ class Execute(M:Boolean = false) extends Module {
     val v_addi_imm = Input(SInt(32.W))
     val vec_mem_res = Input(SInt(128.W))
     val vec_wb_res = Input(SInt(128.W))
-    val id_reg_vs3data = Input(SInt(128.W))
+    //val id_reg_vs3data = Input(SInt(128.W))
 
     val fu_ex_reg_vd = Input(UInt(5.W))
     val fu_mem_reg_vd = Input(UInt(5.W))
@@ -159,7 +159,7 @@ class Execute(M:Boolean = false) extends Module {
     io.vs3_data_o := io.vec_wb_res
   }.otherwise{
     vec_alu.io.vd := io.vs3_data
-    io.vs3_data_o := io.id_reg_vs3data
+    io.vs3_data_o := io.vs3_data
   }
   
   when(io.v_ctl_exsel === "b0011".U && io.v_ctl_opBsel === 1.U){

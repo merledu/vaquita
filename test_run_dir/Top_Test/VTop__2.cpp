@@ -35,7 +35,7 @@ VL_INLINE_OPT void VTop::_combo__TOP__10(VTop__Syms* __restrict vlSymsp) {
                                                  | (~ (IData)(vlTOPp->Top__DOT__core__DOT__InstructionFetch_io_coreInstrReq_valid))) 
                                                 | (1U 
                                                    == (IData)(vlTOPp->Top__DOT__core__DOT__Realigner__DOT__stateReg))));
-    vlTOPp->Top__DOT__core__DOT___T_164 = ((1U & ((~ 
+    vlTOPp->Top__DOT__core__DOT___T_145 = ((1U & ((~ 
                                                    (((IData)(vlTOPp->Top__DOT__core__DOT__ex_reg_ctl_memRead) 
                                                      & (IData)(vlTOPp->Top__DOT__core__DOT__IDecode__DOT__control_io_branch)) 
                                                     & (((0x1fU 
@@ -177,9 +177,9 @@ VL_INLINE_OPT void VTop::_combo__TOP__10(VTop__Syms* __restrict vlSymsp) {
                                                     ((IData)(4U) 
                                                      + vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg))))
                                             : vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg);
-    vlTOPp->Top__DOT__core__DOT__pc_io_in = ((IData)(vlTOPp->Top__DOT__core__DOT___T_64)
+    vlTOPp->Top__DOT__core__DOT__pc_io_in = ((IData)(vlTOPp->Top__DOT__core__DOT___GEN_13)
                                               ? vlTOPp->Top__DOT__core__DOT__pc__DOT__pc_reg
-                                              : vlTOPp->Top__DOT__core__DOT___T_164);
+                                              : vlTOPp->Top__DOT__core__DOT___T_145);
     vlTOPp->Top__DOT__core__DOT__Realigner_io_ral_address_o 
         = ((((1U == (IData)(vlTOPp->Top__DOT__core__DOT__Realigner__DOT__stateReg)) 
              & (vlTOPp->Top__DOT__core__DOT__pc_io_in 

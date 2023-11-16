@@ -33,19 +33,19 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Core>_WIRE_1_0"
+    "target":"~Top|Core>_WIRE_0"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Core>_WIRE_1_1"
+    "target":"~Top|Core>_WIRE_1"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Core>_WIRE_1_2"
+    "target":"~Top|Core>_WIRE_2"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Core>_WIRE_1_3"
+    "target":"~Top|Core>_WIRE_3"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -53,7 +53,7 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Core>_WIRE"
+    "target":"~Top|Core>next_pc_sel"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -294,10 +294,6 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|Execute>io_vec_wb_res"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|Execute>io_id_reg_vs3data"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
@@ -713,10 +709,6 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|InstructionDecode>io_id_wbvs3_data"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|InstructionDecode>io_v_z_imm"
   },
   {
@@ -849,6 +841,10 @@
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
+    "target":"~Top|vregfile>io_vs3_addr"
+  },
+  {
+    "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|vregfile>io_vd_addr"
   },
   {
@@ -886,10 +882,6 @@
   {
     "class":"firrtl.transforms.DontTouchAnnotation",
     "target":"~Top|vregfile>io_reg_read"
-  },
-  {
-    "class":"firrtl.transforms.DontTouchAnnotation",
-    "target":"~Top|vregfile>io_vd_dataout"
   },
   {
     "class":"firrtl.transforms.DontTouchAnnotation",

@@ -78,7 +78,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
     val vs2_addr = Output(UInt(5.W))
     val vd_addr = Output(UInt(5.W))
     val vs3_data = Output(SInt(128.W))
-    val id_wbvs3_data = Output(SInt(128.W))
+    //val id_wbvs3_data = Output(SInt(128.W))
 
     // Vector Immd Gen
     val v_z_imm = Output(SInt(32.W))
@@ -207,6 +207,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
   v_registers.io.vd_data := io.write_data
   v_registers.io.vs1_addr := io.id_instruction(19, 15)
   v_registers.io.vs2_addr := io.id_instruction(24, 20)
+  v_registers.io.vs3_addr := io.id_instruction(11, 7)
   v_registers.io.vd_addr := io.wb_addr
   v_registers.io.reg_write := io.wb_RegWrite
   v_registers.io.reg_read := Vcontrol.io.RegRead
@@ -224,7 +225,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
   v_registers.io.lmul_vs1in_vs2in := io.id_lmul_vs1in_vs2in //grouping counter after decode stage
 
 
-  io.id_wbvs3_data := v_registers.io.vd_dataout
+  //io.id_wbvs3_data := io.write_data
   
 
 

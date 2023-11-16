@@ -272,21 +272,16 @@ dontTouch(vlmul_count)
         next_pc_selector := 0.U
         if_reg_lmul_v := lmul_reg //paasing fetch stage
     }
-
-
-
-
-
-
     val delays = RegInit(0.U(32.W))
     when( delays =/= vlcount1 && instruction(6,0)==="b0100111".U){
       next_pc_selector := 1.U
       delays := delays+1.U
       if_reg_delay := delays
-    }.otherwise{
-      delays := 0.U
-      next_pc_selector := 0.U
-      if_reg_delay := delays
+    }
+    .otherwise{
+     delays := 0.U
+    //   next_pc_selector := 0.U
+    //   if_reg_delay := delays
     }
 
   if_reg_evl := vlsu.io.evl
@@ -368,7 +363,7 @@ dontTouch(next_pc_selector)
   EX.fu_mem_reg_vd := mem_reg_vec_vd_addr
   EX.fu_ex_reg_write := ex_reg_reg_write
   EX.fu_mem_reg_write := mem_reg_vec_reg_write
-  EX.id_reg_vs3data := ID.vs3_data
+  //EX.id_reg_vs3data := ID.vs3_data
 
   ex_reg_vtype := id_reg_z_imm
   ex_reg_vec_alu_res := EX.vec_alu_res
@@ -422,37 +417,33 @@ when (vlcount =/= ex_reg_vl.asUInt && ex_reg_ins(6,0) === "b0100111".U){
   // eew_32_vs3_data(2) := ex_reg_vs3(95,64).asSInt
   // eew_32_vs3_data(3) := ex_reg_vs3(127,96).asSInt
   when(ex_reg_lsuType === 1.U)  {
-    for (count <- 0 until 4){
+    for (count <- 0 until 3){
 
     // val vs3_data = eew_32_vs3_data
     MEM.io.v_writeData := eew_32_vs3_data(count).asUInt
     // count = count + 1.U
     MEM.io.v_addr := ex_reg_read_data1 + addrcount.asUInt
     addrcount := addrcount + 4.U
-    next_pc_sel = 1.U}
+    //next_pc_sel = 1.U
+  }
    }
   //.otherwise {
   //   data := 0.S
   //   // count = 0.U
   //    MEM.io.aluResultIn := ex_reg_read_data1.asUInt
   //  //v_waddr = v_waddr
-  //   next_pc_sel = 1.U
-  // }
-  vlcount := MuxCase(
-    0.U,
-    Array( // 
-      (ex_reg_eew === 8.U) -> (vlcount+ 4.U),
-      (ex_reg_eew === 16.U) -> (vlcount+ 2.U),
-      (ex_reg_eew === 32.U) -> (vlcount+ 1.U),
-      (ex_reg_eew === 64.U) -> (vlcount+ 0.U)
-    )
+  //next_
+   // )
     
-  )
-  next_pc_sel = 1.U
+  //)
+  //next_pc_sel = 1.U
+  vlcount := vlcount +1.U
   
-}.otherwise{
-  next_pc_sel = 0.U
+}
+.otherwise{
+//   //next_pc_sel = 0.U
   MEM.io.v_addr := 0.U
+  vlcount :=0.U
 
 }
 

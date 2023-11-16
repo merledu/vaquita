@@ -10,6 +10,7 @@ class vregfile extends Module {
   val io = IO (new Bundle {
     val vs1_addr = Input(UInt(5.W))
     val vs2_addr = Input(UInt(5.W))
+    val vs3_addr = Input(UInt(5.W))
     val vd_addr = Input(UInt(5.W))
     val lmul_count = Input(UInt(4.W))
     val lmul_vs1in_vs2in = Input(UInt(4.W))
@@ -21,13 +22,13 @@ class vregfile extends Module {
     val vd_data = Input(SInt(128.W))
     val reg_write = Input(Bool())
     val reg_read = Input(Bool())
-    val vd_dataout =Output(SInt(128.W))
+    
   })
-  io.vd_dataout := io.vd_data
+
   val register = RegInit(VecInit(Seq.fill(32)(0.S(128.W))))
   var vs1_in = io.vs1_addr+io.lmul_vs1in_vs2in
   var vs2_in = io.vs2_addr+io.lmul_vs1in_vs2in
-  var vs3_in = io.vd_addr + io.lmul_vs1in_vs2in
+  var vs3_in = io.vs3_addr + io.lmul_vs1in_vs2in
   var vsd_in = io.vd_addr+io.lmul_count
   dontTouch(vs1_in)
   dontTouch(vs2_in)
