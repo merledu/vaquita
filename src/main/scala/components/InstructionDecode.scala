@@ -70,6 +70,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
     val wb_RegWrite = Input(Bool())
     val id_lmul_count = Input(UInt(4.W))
     val id_lmul_vs1in_vs2in = Input(UInt(4.W))
+    val id_vc3 = Input(UInt(5.W))
     val vs0_data = Output(SInt(128.W))
     val vs1_data = Output(SInt(128.W))
     val vs2_data = Output(SInt(128.W))
@@ -204,6 +205,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
 
   val v_registers = Module(new vregfile)
   dontTouch(v_registers.io)
+  v_registers.io.ins := io.id_instruction
   v_registers.io.vd_data := io.write_data
   v_registers.io.vs1_addr := io.id_instruction(19, 15)
   v_registers.io.vs2_addr := io.id_instruction(24, 20)
@@ -223,7 +225,7 @@ class InstructionDecode(TRACE:Boolean) extends Module {
   io.vd_addr := io.id_instruction(11, 7)
   v_registers.io.lmul_count := io.id_lmul_count //grouping counter after write back stage
   v_registers.io.lmul_vs1in_vs2in := io.id_lmul_vs1in_vs2in //grouping counter after decode stage
-
+  v_registers.io.id_vc3 := io.id_vc3
 
   //io.id_wbvs3_data := io.write_data
   

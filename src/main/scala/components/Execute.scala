@@ -1,6 +1,7 @@
 package nucleusrv.components
 import chisel3._
 import chisel3.util.MuxCase
+import vu._
 
 class Execute(M:Boolean = false) extends Module {
   val io = IO(new Bundle {
@@ -64,6 +65,7 @@ class Execute(M:Boolean = false) extends Module {
     val vs3_data_o = Output(SInt(128.W))
     val writeData = Output(UInt(32.W))
     val ALUresult = Output(UInt(32.W))
+    val vs0_o = Output(SInt(128.W))
 
     val stall = Output(Bool())
   })
@@ -131,7 +133,7 @@ class Execute(M:Boolean = false) extends Module {
   alu.io.aluCtl := aluCtl.io.out
 
   // Vector ALU
-  val vec_alu = Module(new vu.ALU_)
+  val vec_alu = Module(new VALU)
   dontTouch(vec_alu.io)
 
      // Vector forwarding unit
@@ -195,6 +197,7 @@ class Execute(M:Boolean = false) extends Module {
   vec_alu.io.vs0 := io.vs0
   vec_alu.io.vstart := io.vstart.asUInt
   io.vec_alu_res := vec_alu.io.v_output
+  io.vs0_o := vec_alu.io.vs0_o
 
   // Vector Config Module
   val vec_config = Module(new vu.configure)

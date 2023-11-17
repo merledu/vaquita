@@ -40,6 +40,7 @@ class Core(implicit val config:Configs) extends Module{
 
   //vector IF-ID Registers
   val if_reg_lmul_v = RegInit(0.U(4.W))
+  val if_vc3 = RegInit(0.U(4.W))
   val if_reg_evl = RegInit(0.U(8.W))
   val if_reg_emul = RegInit(0.U(4.W))
   val if_reg_eew = RegInit(0.U(10.W))
@@ -149,6 +150,7 @@ class Core(implicit val config:Configs) extends Module{
   val ex_reg_lsuType = RegInit(0.U(4.W))
   val ex_reg_read_data1 = RegInit(0.U(32.W))
   val ex_reg_vs3 = RegInit(0.S(128.W))
+  val ex_reg_vs0 = RegInit(0.S(128.W))
   val ex_reg_v_ins = RegInit(0.B)
 
   // MEM-WB Registers
@@ -211,19 +213,42 @@ class Core(implicit val config:Configs) extends Module{
    * Vector Fetch Stage *
    **/
 
-      // grouping//
+ // grouping//
       //vsetvl not implement (rs2 value)
 var lmul = RegInit(0.U(3.W)) // by default lmul==1
 var vtype = RegInit(0.U(32.W))
+var vsew = RegInit(0.U(3.W))
+var valmax = RegInit(0.U(8.W))
 when(instruction(6,0)==="b1010111".U && instruction(14,12)==="b111".U && (instruction(31)==="b0".U || instruction(31,30)==="b11".U)){
 
   lmul := instruction(22,20)
   vtype := instruction(30,20)
+  vsew := instruction(25,23)
+  val y0 = !lmul(1) && !lmul(0) || lmul(2)
+  val y1 = !lmul(2) && !lmul(1) && lmul(0)
+  val y2 = !lmul(2) && lmul(1) && !lmul(0)
+  val y3 = !lmul(2) && lmul(1) && lmul(0)
+  val lmul_o = Cat(y3, y2, y1, y0)
+  
+  when(vsew === "b000".U){  //sew=8
+      valmax := Cat(lmul_o, 0.U(4.W))
+  }.elsewhen(vsew === "b001".U){ //sew=16
+    valmax := Cat(lmul_o, 0.U(3.W))
+  }.elsewhen(vsew === "b010".U){ //sew=32
+      valmax := Cat(lmul_o, 0.U(2.W))
+  }.elsewhen(vsew ==="b011".U){ //sew=64
+      valmax := Cat(lmul, 0.U(1.W))
+  }
 }
 .otherwise{
   lmul := lmul
   vtype := vtype
+  valmax := valmax
 }
+
+
+
+
 val vlsu = Module (new VLSU)
 dontTouch(vlsu.io)
 vlsu.io.instr := instruction
@@ -231,38 +256,43 @@ vlsu.io.vtype := vtype
 var vlmul_count = WireInit(0.U(32.W))
 // val vtype = WireInit("b010".U(32.W))
 dontTouch(vlmul_count)
-// dontTouch(vtype)
 // working on  only one vector 
-    when (lmul==="b000".U ||  vlsu.io.emul === 1.U || vlsu.io.nf === 1.U ){
+    when (lmul==="b000".U  ){
         vlmul_count := 0.U
     }
     // working on  only two vector continously
-    .elsewhen (lmul==="b001".U ||  vlsu.io.emul === 2.U || vlsu.io.nf === 2.U) {
+    .elsewhen (lmul==="b001".U ) {
         vlmul_count := 1.U
     }
     // working on  only four vector continously
-    .elsewhen (lmul==="b010".U ||  vlsu.io.emul === 4.U || vlsu.io.nf === 4.U){
+    .elsewhen (lmul==="b010".U ){
         vlmul_count := 3.U
     }
     // working on  only eight vector continously
-    .elsewhen (lmul==="b011".U ||  vlsu.io.emul === 8.U || vlsu.io.nf === 8.U){
+    .elsewhen (lmul==="b011".U ){
         vlmul_count := 7.U
     }
-
+    
+    val emul_count = WireInit(0.U(32.W))
     val vlcount1 = WireInit(0.U(32.W))
   when (vlsu.io.emul === 1.U && instruction(6,0)==="b0100111".U){
     vlcount1 := 4.U
+    emul_count := 0.U
   }.elsewhen(vlsu.io.emul === 2.U && instruction(6,0)==="b0100111".U){
-    vlcount1 := 8.U
+    vlcount1 :=8.U
+    emul_count := 1.U
   }.elsewhen(vlsu.io.emul === 4.U && instruction(6,0)==="b0100111".U){
     vlcount1 := 16.U
+    emul_count := 3.U
   }.elsewhen(vlsu.io.emul === 8.U && instruction(6,0)==="b0100111".U){
     vlcount1 := 32.U
+    emul_count := 7.U
   }
 
   var next_pc_selector = WireInit(0.U(32.W))
   val lmul_reg = RegInit(0.U(32.W))
-    when(lmul_reg =/= vlmul_count && ((instruction(6,0)==="b1010111".U && instruction(14,12)=/="b111".U) || instruction(6,0)==="b0100111".U )){
+  val vc3 = RegInit(0.U(5.W))
+    when(lmul_reg =/= vlmul_count && instruction(6,0)==="b1010111".U && instruction(14,12)=/="b111".U){
         next_pc_selector := 1.U
         lmul_reg := lmul_reg +1.U
         if_reg_lmul_v := lmul_reg  //paasing fetch stage
@@ -272,17 +302,52 @@ dontTouch(vlmul_count)
         next_pc_selector := 0.U
         if_reg_lmul_v := lmul_reg //paasing fetch stage
     }
+    val emul_reg = RegInit(0.U(32.W))
+    when(emul_reg =/= emul_count &&  instruction(6,0)==="b0100111".U ){
+  //paasing fetch stage
+        
+        when(vc3 =/= 4.U ){
+           vc3 := vc3 + 1.U
+           if_vc3 := emul_reg + 0.U
+           next_pc_selector := 1.U
+
+        //}.elsewhen (vc3 === 4.U && instruction(6,0)==="b0100111".U ){
+        }.otherwise{
+          if_vc3 := emul_reg + 1.U
+          emul_reg := emul_reg +1.U
+          vc3 := 0.U
+          next_pc_selector := 0.U
+        }
+      }.elsewhen(emul_reg === emul_count &&  instruction(6,0)==="b0100111".U ){
+        //paasing fetch stage
+         
+        when(vc3 =/= 3.U && instruction(6,0)==="b0100111".U ){
+           vc3 := vc3 + 1.U
+           if_vc3 := emul_reg + 0.U
+           emul_reg := emul_reg
+          next_pc_selector := 1.U
+        //}.elsewhen (vc3 === 4.U && instruction(6,0)==="b0100111".U ){
+          }.otherwise{
+          if_vc3 := lmul_reg + 1.U
+          lmul_reg := 0.U
+          next_pc_selector := 0.U
+          vc3 := 0.U
+
+        }
+             
+
+    }
     val delays = RegInit(0.U(32.W))
     when( delays =/= vlcount1 && instruction(6,0)==="b0100111".U){
       next_pc_selector := 1.U
       delays := delays+1.U
       if_reg_delay := delays
     }
-    .otherwise{
-     delays := 0.U
-    //   next_pc_selector := 0.U
+    //.otherwise{
+    // delays := 0.U
+    //next_pc_selector := 0.U
     //   if_reg_delay := delays
-    }
+    //}
 
   if_reg_evl := vlsu.io.evl
   if_reg_emul := vlsu.io.emul
@@ -320,6 +385,7 @@ dontTouch(next_pc_selector)
     id_reg_vs2_addr := ID.vs2_addr
     id_reg_lmul_v  := if_reg_lmul_v
     ID.id_lmul_vs1in_vs2in := if_reg_lmul_v
+    ID.id_vc3 := if_vc3
     id_reg_evl := if_reg_evl
     id_reg_emul := if_reg_emul
     id_reg_eew := if_reg_eew 
@@ -367,6 +433,7 @@ dontTouch(next_pc_selector)
 
   ex_reg_vtype := id_reg_z_imm
   ex_reg_vec_alu_res := EX.vec_alu_res
+  ex_reg_vs0 := EX.vs0_o
   ex_reg_vl := EX.vec_vl
   ex_reg_rd_out := EX.vec_rd_out
   ex_reg_avl_o := EX.vec_avl_o
@@ -389,6 +456,9 @@ dontTouch(next_pc_selector)
   ex_reg_v_ins := id_reg_ctl_v_ins
 
 
+
+
+
 // var count = 0.U
 var count64 = 0
 val addrcount = RegInit(0.U(32.W))
@@ -406,51 +476,28 @@ val vlcount = RegInit(0.U(32.W))
 dontTouch(vlcount)
 
 when (vlcount =/= ex_reg_vl.asUInt && ex_reg_ins(6,0) === "b0100111".U){
-//when (vlcount =/= EX.vec_vl.asUInt && ex_reg_ins(6,0) === "b0100111".U){
-//val eew_32_vs3_data = VecInit((0 until 4).map(i => ex_reg_vs3(32*i+31, 32*i).asSInt))
  val eew_32_vs3_data = VecInit((0 until 4).map(i => EX.vs3_data_o(32*i+31, 32*i).asSInt))
-//val eew_32_vs3_data = VecInit((0 until 4).map(i => ID.id_wbvs3_data(32*i+31, 32*i).asSInt))
-  //val eew_32_vs3_data = VecInit(Seq.fill(4)(0.S(32.W)))
   dontTouch(eew_32_vs3_data)
-  // eew_32_vs3_data(0) := ex_reg_vs3(31,0).asSInt
-  // eew_32_vs3_data(1) := ex_reg_vs3(63,32).asSInt
-  // eew_32_vs3_data(2) := ex_reg_vs3(95,64).asSInt
-  // eew_32_vs3_data(3) := ex_reg_vs3(127,96).asSInt
   when(ex_reg_lsuType === 1.U)  {
     for (count <- 0 until 3){
-
-    // val vs3_data = eew_32_vs3_data
-    MEM.io.v_writeData := eew_32_vs3_data(count).asUInt
-    // count = count + 1.U
-    MEM.io.v_addr := ex_reg_read_data1 + addrcount.asUInt
-    addrcount := addrcount + 4.U
-    //next_pc_sel = 1.U
+      MEM.io.v_writeData := eew_32_vs3_data(count).asUInt
+      MEM.io.v_addr := ex_reg_read_data1 + addrcount.asUInt
+      addrcount := addrcount + 4.U 
+    }
+    next_pc_sel = 1.U
   }
-   }
-  //.otherwise {
-  //   data := 0.S
-  //   // count = 0.U
-  //    MEM.io.aluResultIn := ex_reg_read_data1.asUInt
-  //  //v_waddr = v_waddr
-  //next_
-   // )
-    
-  //)
-  //next_pc_sel = 1.U
-  vlcount := vlcount +1.U
+  vlcount := MuxCase(0.U, Array( // 
+      (ex_reg_eew === 8.U) -> (vlcount+ 4.U),
+      (ex_reg_eew === 16.U) -> (vlcount+ 2.U),
+      (ex_reg_eew === 32.U) -> (vlcount+ 1.U),
+      (ex_reg_eew === 64.U) -> (vlcount+ 0.U)
+  ))
   
-}
-.otherwise{
-//   //next_pc_sel = 0.U
+}.otherwise{
+  next_pc_sel = 0.U
   MEM.io.v_addr := 0.U
-  vlcount :=0.U
-
+  //vlcount :=0.U
 }
-
-  
-
-
-
 
   EX.vec_mem_res := ex_reg_vec_alu_res
   mem_reg_vec_alu_out := ex_reg_vec_alu_res

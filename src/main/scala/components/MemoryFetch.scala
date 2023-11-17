@@ -2,8 +2,6 @@ package nucleusrv.components
 import chisel3._
 import chisel3.util._ 
 
-
-
 class MemoryFetch extends Module {
   val io = IO(new Bundle {
     val aluResultIn: UInt = Input(UInt(32.W))
@@ -11,6 +9,7 @@ class MemoryFetch extends Module {
     val v_ins:Bool = Input(Bool())
     val writeData: UInt = Input(UInt(32.W))
     val v_writeData: UInt = Input(UInt(32.W))
+   // val vs0: UInt = Input(UInt(4.W))
     val writeEnable: Bool = Input(Bool())
     val readEnable: Bool = Input(Bool())
     val readData: UInt = Output(UInt(32.W))
