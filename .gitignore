@@ -66,5 +66,5 @@ jitwatch.out
 .bloop
 project/**/metals.sbt
 
-.bsp
-__pycache__
+/.bsp/*
+/__pycache__/
