@@ -1,5 +1,4 @@
 package vaquita
-// import vec_config
 import chisel3._
 import chisel3.util._
 import alu_obj._
@@ -29,10 +28,11 @@ class VALU(implicit val config: Config) extends Module{
     )
     MuxLookup(2.U, 0.S, lookuptable)
   }
-  def arithmatic_mask(mask:Bool):SInt={
-    val mask_logic = io.mask_arith & io.config_mask
-    Mux(mask_logic,Arithmatic(io.vs1_in, io.vs2_in),Mux(!mask_logic,Fill(32,1.U).asSInt,0.S))
-  }
+  // def arithmatic_mask(mask:Bool):SInt={
+  //   val mask_logic = io.mask_arith & io.config_mask
+  //   Mux(mask_logic,Arithmatic(io.vs1_in, io.vs2_in),Mux(!mask_logic,Fill(32,1.U).asSInt,0.S))
+  // }
 
-  io.vs1_out := arithmatic_mask(1.B)
+  // io.vs1_out := arithmatic_mask(1.B)
+  Arithmatic(io.vs1_in, io.vs2_in)
 }

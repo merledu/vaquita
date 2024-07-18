@@ -65,6 +65,6 @@ class stages extends Module {
 }
 
 
-object stagesMain extends App {
-  chisel3.Driver.execute(args, () => new stages)
-}
+// object stagesMain extends App {
+//   chisel3.Driver.execute(args, () => new stages)
+// }
