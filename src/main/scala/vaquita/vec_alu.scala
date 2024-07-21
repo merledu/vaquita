@@ -7,7 +7,7 @@ import alu_obj._
 //   val ALUOP_SIG_LEN = 9
 // }
 
-class VALU(implicit val config: Config) extends Module{
+class vec_alu(implicit val config: Config) extends Module{
   val io = IO(new Bundle{
   val vs1_in = Input(SInt(config.vlen.W))
   val vs2_in = Input(SInt(32.W))
@@ -28,11 +28,10 @@ class VALU(implicit val config: Config) extends Module{
     )
     MuxLookup(2.U, 0.S, lookuptable)
   }
-  // def arithmatic_mask(mask:Bool):SInt={
-  //   val mask_logic = io.mask_arith & io.config_mask
-  //   Mux(mask_logic,Arithmatic(io.vs1_in, io.vs2_in),Mux(!mask_logic,Fill(32,1.U).asSInt,0.S))
-  // }
-
-  // io.vs1_out := arithmatic_mask(1.B)
-  Arithmatic(io.vs1_in, io.vs2_in)
+  def arithmatic_mask(mask:Bool):SInt={
+    val mask_logic = io.mask_arith & io.config_mask
+    Mux(mask_logic,Arithmatic(io.vs1_in, io.vs2_in),Mux(!mask_logic,Fill(32,1.U).asSInt,0.S))
+  }
+  
+  io.vs1_out := arithmatic_mask(1.B)
 }
