@@ -4,6 +4,7 @@ import chisel3._
 
 trait Config {
   val vlen: Int = 128
-  val reg_count = 32
+  val reg_count :Int = 32
+  val count_lanes = vlen >> 6
   val debug: Boolean = true
 }

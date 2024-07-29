@@ -6,6 +6,8 @@ import chisel3.util._
 class stages extends Module {
   val io = IO(new Bundle {
     // execute stage input
+    // val vl = Input(Bool())
+    // val bits_32_s = Input(SInt(32.W))
 
 
 

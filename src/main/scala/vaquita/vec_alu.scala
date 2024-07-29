@@ -24,7 +24,9 @@ class vec_alu(implicit val config: Config) extends Module{
       3.U -> (vs2_in - vs1_in),//rsub
       9.U -> (vs1_in & vs2_in),// and
       10.U -> (vs1_in | vs2_in),//or
-      11.U -> (vs1_in ^ vs2_in)//xor
+      11.U -> (vs1_in ^ vs2_in),//xor
+      // 37.U -> (vs1_in << vs2_in) //vsll
+      
     )
     MuxLookup(2.U, 0.S, lookuptable)
   }
