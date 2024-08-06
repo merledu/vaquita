@@ -87,8 +87,4 @@ class vec_control_unit(implicit val config: Config,val on : Bool =1.B, val off :
         io.vec_config := off
         
     }
-
-
-
-
     }

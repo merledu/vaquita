@@ -1,6 +1,7 @@
 package vaquita
 import chisel3._
 import chisel3.util._
+import chisel3.stage.ChiselStage
 
 class vec_top extends Module {
     val io = IO(new Bundle{
@@ -8,47 +9,55 @@ class vec_top extends Module {
         val rs1_data = Input(SInt(32.W))
     })
     implicit val config = new Config {}
-    val vec_cu_module = Module(new vec_control_unit)
-    dontTouch(vec_cu_module.io)
-
-    val vec_reg_module = Module(new vec_reg_file)
-    dontTouch(vec_reg_module.io)
-
+    val de_module = Module(new decode_stage)
+    dontTouch(de_module.io)
     val excute_stage_module = Module(new excute_stage)
     dontTouch(excute_stage_module.io)
 
-    val vcsr_module = Module(new Vcsr)
-    dontTouch(vcsr_module.io)
+    val mem_stage_module = Module(new mem_stage)
+    dontTouch(mem_stage_module.io)
 
-    // vec control unit
-    vec_cu_module.io.instr := io.instr
-    // vec reg file
-    vec_reg_module.io.vs1_addr := io.instr(19,15)
-    vec_reg_module.io.vs2_addr := io.instr(24,20)
-    vec_reg_module.io.vd_addr := io.instr(11,7)
-    vec_reg_module.io.vd_data(0) := 99.S
-    vec_reg_module.io.vd_data(1) := 99.S
-    vec_reg_module.io.lmul := 4.U
-    // vec_reg_module.io.vd_data(2) := 99.S
-    // vec_reg_module.io.vd_data(3) := 99.S
-    vec_reg_module.io.reg_write := vec_cu_module.io.reg_write
-    vec_reg_module.io.vtype := vcsr_module.io.vtype_out
+    val wb_stage_module = Module(new wb_stage)
+    dontTouch(wb_stage_module.io)
 
+// -----------------decode stage ---------------------------------
+    de_module.io.instr := io.instr
+    de_module.io.rs1_data := io.rs1_data
 
-    vcsr_module.io.vec_config := vec_cu_module.io.vec_config
-    vcsr_module.io.vtype_input := io.instr(30,20)
+    // -----------------excute stage ---------------------------------
 
-    for (i <- 0 to 7) {
-    for (j <- 0 until config.count_lanes) {
-    excute_stage_module.io.ex_vs1_data_in(i)(j) := MuxLookup(vec_cu_module.io.operand_type,0.S,Array(
-        (0.U) -> vec_reg_module.io.vs1_data(i)(j),
-        (1.U) -> io.rs1_data,
-        (2.U) -> io.instr(19,15).asSInt,
-        (3.U) -> 0.S)
-    )}
+    for (i <- 0 to 7) { // for grouping = 8
+        for (j <- 0 until (config.vlen >> 6)) {
+            excute_stage_module.io.ex_vs1_data_in(i)(j) := de_module.io.vs1_data_out(i)(j)
+            excute_stage_module.io.ex_vs2_data_in(i)(j) := de_module.io.vs2_data_out(i)(j)
+        }
     }
-    for (i <- 0 to 7) {
-    for (j <- 0 to (config.vlen >> 6)-1) {
-    excute_stage_module.io.ex_vs2_data_in(i)(j) := vec_reg_module.io.vs2_data(i)(j)
-}}
+    excute_stage_module.io.ex_sew_in := de_module.io.sew_out
+    excute_stage_module.io.ex_alu_op_in := de_module.io.alu_op_out
+    excute_stage_module.io.ex_instr_in := io.instr
+
+    // -----------------memory stage ---------------------------------
+
+    for (i <- 0 to 7) { // for grouping = 8
+        for (j <- 0 until (config.vlen >> 6)) {
+            mem_stage_module.io.mem_vsd_data_in(i)(j) := excute_stage_module.io.vsd_data_out(i)(j)
+        }}
+   mem_stage_module.io.mem_instr_in := excute_stage_module.io.ex_instr_out
+
+    for (i <- 0 to 7) { // for grouping = 8
+        for (j <- 0 until (config.vlen >> 6)) {
+            wb_stage_module.io.wb_vsd_data_in(i)(j) := mem_stage_module.io.mem_vsd_data_out(i)(j)
+        }}
+    // -----------------write back stage ---------------------------------
+    wb_stage_module.io.wb_instr_in := mem_stage_module.io.mem_instr_out
+    for (i <- 0 to 7) { // for grouping = 8
+        for (j <- 0 until (config.vlen >> 6)) {
+            de_module.io.vsd_data_in(i)(j) := wb_stage_module.io.wb_vsd_data_out(i)(j)
+        }}
+
+       de_module.io.wb_de_instr_in := wb_stage_module.io.wb_instr_out
+}
+
+object top_driver extends App {
+  chisel3.Driver.execute(args, () => new vec_top)
 }

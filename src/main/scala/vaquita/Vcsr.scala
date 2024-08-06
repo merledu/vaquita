@@ -7,12 +7,13 @@ class Vcsr extends Module {
         val vtype_input = Input (UInt (11.W ))            
         // val vl = Input(SInt(32.W))
         val vec_config = Input(Bool())
-        // val vl_out = Output(SInt(32.W))
+        val vl_out = Output(SInt(32.W))
         val vtype_out = Output(UInt(32.W))
         // val vstart_out =Output(SInt(32.W))
+        val sew = Output(UInt(5.W))
 })
-val vtypeReg = RegInit(16.U(32.W))
-val vlReg = RegInit(0.S(32.W))
+val vtypeReg = RegInit(16.U(32.W))//
+val vlReg = RegInit(4.S(32.W))
 val vstart = RegInit(0.S(32.W))
 
 when (io.vec_config === 1.B) {         
@@ -20,7 +21,8 @@ when (io.vec_config === 1.B) {
     // vlReg := io.vl           //update 'vlReg' with 'io.vl_writeback', only when there is vsetvli instruction.
 }
 
-// io.vl_out := vlReg
+io.vl_out := vlReg
 io.vtype_out := vtypeReg
 // io.vstart_out := vstart
+io.sew := vtypeReg(5,3)
 }

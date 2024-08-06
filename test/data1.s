@@ -1,6 +1,7 @@
 .text
 .global main
 main:
-    addi x1,x0,40
-    vsetvli x1,x2, e32, m1,tu,mu
-    vadd.vi v10, v1, 5
+    vadd.vi v2, v1, 5
+    vadd.vi v5, v1, 8
+    vadd.vx v7,v1,x2
+    vadd.vv v10 ,v2,v7
