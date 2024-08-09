@@ -8,7 +8,7 @@ class vec_alu(implicit val config: Config) extends Module{
   val vs1_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))
   val vs2_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))
   val sew = Input(UInt(5.W))
-  val alu_opcode = Input(UInt(9.W))
+  val alu_opcode = Input(UInt(6.W))
   // val mask_arith = Input(Bool())
   // val config_mask = Input(Bool())
   val vsd_out = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))//set sew here
@@ -22,11 +22,11 @@ class vec_alu(implicit val config: Config) extends Module{
       3.U -> (vs2_in - vs1_in),//rsub
       9.U -> (vs1_in & vs2_in),// and
       10.U -> (vs1_in | vs2_in),//or
-      11.U -> (vs1_in ^ vs2_in),//xor
+      11.U -> (vs1_in ^ vs2_in)//xor
       // 37.U -> (vs1_in << vs2_in) //vsll
 
     )
-    MuxLookup(0.U, 0.S, lookuptable)
+    MuxLookup(io.alu_opcode, 0.S, lookuptable)
   }
   // def arith_8(vs1:SInt , vs2:SInt):SInt={
   //   val a = Arithmatic(vs1(63,56).asSInt, vs2(63,56).asSInt)

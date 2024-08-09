@@ -9,6 +9,8 @@ class wb_stage(implicit val config: Config,val on : Bool =1.B, val off : Bool =0
     val wb_vsd_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))
     val wb_instr_in = Input(UInt(32.W))
     val wb_instr_out = Output(UInt(32.W))
+    val wb_reg_write_in = Input(Bool())
+    val wb_reg_write_out = Output(Bool())
     })
     val initValue = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(64.W)))))
     val vsd_data = RegNext(WireDefault(initValue))
@@ -20,4 +22,5 @@ class wb_stage(implicit val config: Config,val on : Bool =1.B, val off : Bool =0
           }
     }
     io.wb_instr_out := RegNext(io.wb_instr_in)
+    io.wb_reg_write_out := RegNext(io.wb_reg_write_in)
 }

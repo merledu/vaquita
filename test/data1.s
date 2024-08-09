@@ -1,7 +1,9 @@
 .text
 .global main
 main:
-    vadd.vi v2, v1, 5
-    vadd.vi v5, v1, 8
-    vadd.vx v7,v1,x2
-    vadd.vv v10 ,v2,v7
+    vadd.vi v2, v1,2
+    vadd.vx v3, v2, x2
+    vadd.vv v4,v2,v3
+    vadd.vv v5,v2,v2
+    vadd.vi v2, v1,7
+    vse32.v v3 ,(x2) 

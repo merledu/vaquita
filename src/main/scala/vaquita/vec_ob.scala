@@ -5,7 +5,7 @@ import chisel3.util._
 // control unit base on function6 (following number is function6 written in decimal)
 
 object alu_obj{
-    val vadd = 0.U(6.W)//ok
+    val vadd = "000000".U(6.W)//ok
     val vsub = 2.U(6.W)//ok
     val vrsub = 3.U(6.W)//ok
     val vminu = 4.U(6.W) //bit
