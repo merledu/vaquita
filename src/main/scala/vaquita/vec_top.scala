@@ -94,17 +94,22 @@ class vec_top extends Module {
    mem_stage_module.io.read_en := excute_stage_module.io.ex_read_en_out
    mem_stage_module.io.mem_rs1_data_in := excute_stage_module.io.ex_rs1_data_out
    mem_stage_module.io.mem_reg_write_in := excute_stage_module.io.ex_reg_write_out
+   
 
 
     for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.vlen >> 6)) {
             wb_stage_module.io.wb_vsd_data_in(i)(j) := mem_stage_module.io.mem_vsd_data_out(i)(j)
+            wb_stage_module.io.wb_vs3_data_in_store :=mem_stage_module.io.vec_read_data_load
+            mem_stage_module.io.mem_vs1_data_vs3_in(i)(j) := excute_stage_module.io.ex_vs1_data_out_vs3(i)(j)
         }}
+        wb_stage_module.io.mem_to_reg := mem_stage_module.io.mem_read_en_out
     // -----------------write back stage ---------------------------------
     wb_stage_module.io.wb_instr_in := mem_stage_module.io.mem_instr_out
     for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.vlen >> 6)) {
             de_module.io.vsd_data_in(i)(j) := wb_stage_module.io.wb_vsd_data_out(i)(j)
+            
         }}
 
        de_module.io.wb_de_instr_in := wb_stage_module.io.wb_instr_out
@@ -113,6 +118,6 @@ class vec_top extends Module {
 
 
 
-object top_driver extends App {
-  chisel3.Driver.execute(args, () => new vec_top)
-}
+// object top_driver extends App {
+//   chisel3.Driver.execute(args, () => new vec_top)
+// }

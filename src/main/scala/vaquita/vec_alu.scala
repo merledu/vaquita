@@ -22,8 +22,15 @@ class vec_alu(implicit val config: Config) extends Module{
       3.U -> (vs2_in - vs1_in),//rsub
       9.U -> (vs1_in & vs2_in),// and
       10.U -> (vs1_in | vs2_in),//or
-      11.U -> (vs1_in ^ vs2_in)//xor
-      // 37.U -> (vs1_in << vs2_in) //vsll
+      11.U -> (vs1_in ^ vs2_in),//xor
+      37.U -> (vs1_in >> vs2_in(10,0)), //vsll
+      "b101000".U -> (vs1_in >> vs2_in(10,0)), //vsrl
+      "b101001".U -> (vs1_in << vs2_in(10,0)), //vsra
+      // bit wise
+      "b000100".U -> ((vs1_in.asUInt < vs2_in.asUInt).asSInt),//minu
+      "b000101".U -> (vs1_in < vs2_in).asSInt,//min
+      "b000110".U -> ((vs1_in.asUInt < vs2_in.asUInt).asSInt),//maxu
+      "b000111".U -> (vs1_in < vs2_in).asSInt//max
 
     )
     MuxLookup(io.alu_opcode, 0.S, lookuptable)

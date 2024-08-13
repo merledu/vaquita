@@ -26,6 +26,7 @@ class excute_stage(implicit val config: Config) extends Module {
         val ex_write_en_out = Output(Bool())
         val ex_read_en_out = Output(Bool())
         val vsd_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))
+        val ex_vs1_data_out_vs3 = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))
 })
 // val a  = RegInit(VecInit(Seq.fill(config.count_lanes)(0.S(64.W))))
 
@@ -60,6 +61,7 @@ vec_alu_module.io.alu_opcode := ex_alu_op_out
 for (i <- 0 to 7) { // for grouping = 8
   for (j <- 0 until (config.vlen >> 6)) {
     io.vsd_data_out(i)(j) := vec_alu_module.io.vsd_out(i)(j)
+    io.ex_vs1_data_out_vs3(i)(j) := io.ex_vs1_data_in(i)(j)
   }}
 
   io.ex_write_en_out := RegNext(io.ex_write_en_in)

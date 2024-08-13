@@ -1,7 +1,6 @@
 package vaquita
 import chisel3._
 import chisel3.util._
-
 class decode_stage(implicit val config: Config) extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
@@ -41,8 +40,10 @@ class decode_stage(implicit val config: Config) extends Module {
     vec_reg_module.io.sew := vcsr_module.io.vtype_out(5,3)
     vec_reg_module.io.vl := vcsr_module.io.vl_out
     vec_reg_module.io.reg_write := io.wb_reg_write_in
+    vec_reg_module.io.reg_write_decode := vec_cu_module.io.reg_write
     vec_reg_module.io.vtype := vcsr_module.io.vtype_out
     vec_reg_module.io.wb_vd_addr := io.wb_de_instr_in(11,7)
+    vec_reg_module.io.store_vs3_to_mem := vec_cu_module.io.store_vs3_to_mem
 
 
     vcsr_module.io.vec_config := vec_cu_module.io.vec_config

@@ -35,13 +35,14 @@ class vec_top_test extends FreeSpec with ChiselScalatestTester {
       dut.io.instr.poke("x020161a7".U)
       dut.io.rs1_data.poke(100.S)
       dut.clock.step(1)
+      dut.io.instr.poke("x02056387".U)
+      dut.io.rs1_data.poke(140.S)
+      dut.clock.step(1)
       dut.io.instr.poke("x0".U)
       dut.io.rs1_data.poke(0.S)
       dut.clock.step(10)
-      // dut.io.instr.poke("x0201e127".U)
-      // dut.io.rs1_data.poke(140.S)
-      // dut.clock.step(10)
       }
+
     }
 }
 
