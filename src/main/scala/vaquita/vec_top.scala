@@ -7,8 +7,10 @@ class vec_top extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
         val rs1_data = Input(SInt(32.W))
+        val dmemReq = Decoupled(new MemRequestIO)
+        val dmemRsp = Flipped(Decoupled(new MemResponseIO))
     })
-    implicit val config = new Config {}
+    implicit val config = new Vaquita_Config {}
     val de_module = Module(new decode_stage)
     dontTouch(de_module.io)
     val excute_stage_module = Module(new excute_stage)
@@ -16,6 +18,9 @@ class vec_top extends Module {
 
     val mem_stage_module = Module(new mem_stage)
     dontTouch(mem_stage_module.io)
+
+    val vec_mem_fetch_module = Module(new vec_mem_fetch)
+    dontTouch(vec_mem_fetch_module.io)
 
     val wb_stage_module = Module(new wb_stage)
     dontTouch(wb_stage_module.io)
@@ -25,6 +30,17 @@ class vec_top extends Module {
 
     // val vec_alu_module = Module(new vec_alu)
     // dontTouch(vec_alu_module.io)
+
+//     io.dmemReq <> vec_mem_fetch_module.io.dccmReq
+//   vec_mem_fetch_module.io.dccmRsp <> io.dmemRsp
+  for (i <- 0 to 7) { // for grouping = 8
+        for (j <- 0 until (config.vlen >> 6)) {
+            vec_mem_fetch_module.io.mem_vs3_data(i)(j) := mem_stage_module.io.vs3_data_out(i)(j)
+        }}
+        vec_mem_fetch_module.io.write_en := mem_stage_module.io.mem_stage_write_en
+        vec_mem_fetch_module.io.read_en := mem_stage_module.io.mem_stage_read_en
+        vec_mem_fetch_module.io.addr := mem_stage_module.io.mem_stage_addr
+        // vec_mem_module.io.dccmReq.ready := 1.B
 
 // -----------------decode stage ---------------------------------
     de_module.io.instr := io.instr
@@ -84,6 +100,9 @@ class vec_top extends Module {
     excute_stage_module.io.ex_reg_write_in := de_module.io.de_reg_write
 
     // -----------------memory stage ---------------------------------
+
+    io.dmemReq <> vec_mem_fetch_module.io.dccmReq
+    vec_mem_fetch_module.io.dccmRsp <> io.dmemRsp
 
     for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.vlen >> 6)) {

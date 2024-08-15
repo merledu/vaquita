@@ -4,7 +4,7 @@ import chisel3.util._
 import chisel3.experimental._
 
 
-class vec_reg_file(implicit val config: Config) extends Module {
+class vec_reg_file(implicit val config: Vaquita_Config) extends Module {
   val io = IO (new Bundle {
     val vs1_addr = Input(UInt(5.W))
     val vs2_addr = Input(UInt(5.W))

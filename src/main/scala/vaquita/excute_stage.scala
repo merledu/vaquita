@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 import javax.xml.transform.OutputKeys
 
-class excute_stage(implicit val config: Config) extends Module {
+class excute_stage(implicit val config: Vaquita_Config) extends Module {
     val io = IO (new Bundle{
         // excute stage inputs
         val ex_vs1_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))

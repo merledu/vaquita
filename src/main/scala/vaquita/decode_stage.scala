@@ -1,7 +1,7 @@
 package vaquita
 import chisel3._
 import chisel3.util._
-class decode_stage(implicit val config: Config) extends Module {
+class decode_stage(implicit val config: Vaquita_Config) extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
         val wb_de_instr_in = Input(UInt(32.W))

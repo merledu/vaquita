@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 import alu_obj._
 
-class vec_alu(implicit val config: Config) extends Module{
+class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val io = IO(new Bundle{
   val vs1_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))
   val vs2_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))
@@ -24,14 +24,23 @@ class vec_alu(implicit val config: Config) extends Module{
       10.U -> (vs1_in | vs2_in),//or
       11.U -> (vs1_in ^ vs2_in),//xor
       37.U -> (vs1_in >> vs2_in(10,0)), //vsll
+
       "b101000".U -> (vs1_in >> vs2_in(10,0)), //vsrl
       "b101001".U -> (vs1_in << vs2_in(10,0)), //vsra
-      // bit wise
+      "b010111".U -> (vs1_in), //vmv
       "b000100".U -> ((vs1_in.asUInt < vs2_in.asUInt).asSInt),//minu
       "b000101".U -> (vs1_in < vs2_in).asSInt,//min
       "b000110".U -> ((vs1_in.asUInt < vs2_in.asUInt).asSInt),//maxu
-      "b000111".U -> (vs1_in < vs2_in).asSInt//max
-
+      "b000111".U -> (vs1_in < vs2_in).asSInt,//max
+      // bit wise
+      "b011000".U -> (vs1_in === vs2_in).asSInt,//vmseq
+      "b011001".U -> (vs1_in =/= vs2_in).asSInt,//vmsne
+      "b011010".U -> (vs1_in > vs2_in).asSInt,//vmsltu
+      "b011011".U -> (vs1_in > vs2_in).asSInt,//vmslt
+      "b011100".U -> (vs1_in >= vs2_in).asSInt,//vmsleu
+      "b011101".U -> (vs1_in >= vs2_in).asSInt,//vmsle
+      "b011110".U -> (vs1_in < vs2_in).asSInt,//vmsgtu
+      "b011111".U -> (vs1_in < vs2_in).asSInt//vmsgt
     )
     MuxLookup(io.alu_opcode, 0.S, lookuptable)
   }
