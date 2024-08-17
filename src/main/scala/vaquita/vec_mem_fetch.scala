@@ -13,7 +13,7 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     val read_en = Input(Bool())
     val dccmReq = Decoupled(new MemRequestIO)
     val dccmRsp = Flipped(Decoupled(new MemResponseIO))
-  })
+  }) 
   io.dccmRsp.ready := true.B
   io.dccmReq.bits.activeByteLane := "b1111".U
   // io.dccmReq.bits.dataRequest := 0.U
@@ -24,8 +24,9 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
   // when(io.read_en===1.B){
     for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.vlen >> 6)) {
-        io.vec_read_data_load(i)(j) := 57.S
+        io.vec_read_data_load(i)(j) := io.dccmRsp.bits.dataResponse.asSInt
       }
+    }
 //-----------vector address ---------------------------start
   val vec_load_store_bit = io.read_en || io.write_en
   dontTouch(vec_load_store_bit)
@@ -63,7 +64,7 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     //   }
     //   }
 
-      }
+      // }
 }
 // note
 // storing data come from vs1 address because in store instruction use the vs2 address
