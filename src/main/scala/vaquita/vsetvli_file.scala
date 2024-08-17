@@ -3,21 +3,30 @@
 // import chisel3.util._
 
 
-// class wb_stage(implicit val config: Vaquita_Config,val on : Bool =1.B, val off : Bool =0.B) extends Module {
+// class vsetvli(implicit val config: Vaquita_Config,val on : Bool =1.B, val off : Bool =0.B) extends Module {
 //   val io = IO (new Bundle {
 //     val lmul = Input(UInt(3.W))
-//     val sew = Input(UInt(3.W))
+//     // val sew = Input(UInt(3.W))
 //   })
 
 // def vl_max_calculate(Lmul:UInt,Sew:UInt):UInt={
-//     val a = (config.vlen*lmul)/sew
-// }
-// when (io.rs1=/=0.U){
-//     when(io.rs1<=vl_max_calculate(2,32)){
-        
-//     }
+//     val a = (config.vlen.U*Lmul)/Sew
+//     a
 // }
 
+// val rs1 = 3.U
+// val vl=RegInit(0.U)
+// val VLMAX = vl_max_calculate(2.U,32.U)
+// when (rs1=/=0.U){
+//     when(rs1<=VLMAX){
+//     vl := rs1
+//     }.elsewhen(rs1 ≥ (2 * VLMAX)){
+//         vl := VLMAX
+//     }
+// }.elsewhen()
+// dontTouch(vl)
+// // val abc = vl_max_calculate(2.U,32.U)
+// // dontTouch(abc)
 // }
 
 // // when (io.lmul==="" and io.sew ==="b")

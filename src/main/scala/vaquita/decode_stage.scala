@@ -38,7 +38,7 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     vec_reg_module.io.vd_addr := io.instr(11,7)
     vec_reg_module.io.lmul := vcsr_module.io.vtype_out(2,0)
     vec_reg_module.io.sew := vcsr_module.io.vtype_out(5,3)
-    vec_reg_module.io.vl := vcsr_module.io.vl_out
+    vec_reg_module.io.vl := vcsr_module.io.vl_out.asSInt
     vec_reg_module.io.reg_write := io.wb_reg_write_in
     vec_reg_module.io.reg_write_decode := vec_cu_module.io.reg_write
     vec_reg_module.io.vtype := vcsr_module.io.vtype_out
@@ -47,7 +47,7 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
 
 
     vcsr_module.io.vec_config := vec_cu_module.io.vec_config
-    vcsr_module.io.vtype_input := io.instr(30,20)
+    vcsr_module.io.instr_in := io.instr
 
     //excute stage
     io.sew_out := vcsr_module.io.sew
