@@ -9,6 +9,8 @@ class vec_top extends Module {
         val rs1_data = Input(SInt(32.W))
         val dmemReq = Decoupled(new MemRequestIO)
         val dmemRsp = Flipped(Decoupled(new MemResponseIO))
+        val hazard_rs1_data_in = Input(UInt(32.W))
+        val vl_rs1_out = Output(UInt(32.W))
         
     })
     implicit val config = new Vaquita_Config {}
@@ -54,6 +56,8 @@ class vec_top extends Module {
     // -----------------excute stage ---------------------------------
 
     // ************forwording unit***********************
+    io.vl_rs1_out := excute_stage_module.io.vl_rs1_out
+    excute_stage_module.io.hazard_rs1 := io.hazard_rs1_data_in
     fu_module.io.mem_vd := mem_stage_module.io.mem_instr_out(11,7)
     fu_module.io.wb_vd := wb_stage_module.io.wb_instr_out(11,7)
     fu_module.io.vs2_vs1_addr_func3 := excute_stage_module.io.ex_instr_out(24,12)

@@ -27,11 +27,15 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
         val ex_read_en_out = Output(Bool())
         val vsd_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))
         val ex_vs1_data_out_vs3 = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))
+        val hazard_rs1 = Input(UInt(32.W))
+        val vl_rs1_out = Output(UInt(32.W))
 })
 // val a  = RegInit(VecInit(Seq.fill(config.count_lanes)(0.S(64.W))))
 
     val vec_alu_module = Module(new vec_alu)
     dontTouch(vec_alu_module.io)
+    val vsetvli_module = Module(new vsetvli)
+    dontTouch(vsetvli_module.io)
 
     // val fu_module = Module(new ForwardingUnit)
     // dontTouch(fu_module.io)
@@ -50,7 +54,7 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
   for (j <- 0 until (config.vlen >> 6)) {
     // vs1_reg_data(i)(j) := io.ex_vs1_data_in(i)(j)
     // vs2_reg_data(i)(j) := io.ex_vs2_data_in(i)(j)
-    vec_alu_module.io.vs1_in(i)(j) := io.ex_vs1_data_in(i)(j)
+    vec_alu_module.io.vs1_in(i)(j) := Mux(io.ex_instr_out(6,0)==="b1010111".U && io.ex_instr_out(14,12)==="b100".U,io.hazard_rs1.asSInt,io.ex_vs1_data_in(i)(j))
     vec_alu_module.io.vs2_in(i)(j) := io.ex_vs2_data_in(i)(j)
   }
 }
@@ -72,4 +76,7 @@ for (i <- 0 to 7) { // for grouping = 8
   // fu_module.io.wb_regWrite := io.wb_reg_write_in
   io.ex_reg_write_out := RegNext(io.ex_reg_write_in)
 
+vsetvli_module.io.instr_in := RegNext(io.ex_instr_in)
+vsetvli_module.io.rs1_in := io.hazard_rs1
+io.vl_rs1_out := vsetvli_module.io.vl
 }
