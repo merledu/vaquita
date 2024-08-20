@@ -65,6 +65,11 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     //   }
 
       // }
+      val write_data = io.mem_vs3_data(0)(0).asUInt
+
+        when(io.write_en){
+    printf("%x\n", write_data)
+  }
 }
 // note
 // storing data come from vs1 address because in store instruction use the vs2 address
