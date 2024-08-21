@@ -45,7 +45,7 @@ class vec_top extends Module {
         }}
         vec_mem_fetch_module.io.write_en := mem_stage_module.io.mem_stage_write_en
         vec_mem_fetch_module.io.read_en := mem_stage_module.io.mem_stage_read_en
-        vec_mem_fetch_module.io.addr := mem_stage_module.io.mem_stage_addr
+        vec_mem_fetch_module.io.addr := RegNext(io.hazard_rs1_data_in)
         // vec_mem_module.io.dccmReq.ready := 1.B
 
 // -----------------decode stage ---------------------------------

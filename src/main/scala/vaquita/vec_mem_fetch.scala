@@ -24,9 +24,11 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
   // when(io.read_en===1.B){
     for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.vlen >> 6)) {
-        io.vec_read_data_load(i)(j) := io.dccmRsp.bits.dataResponse.asSInt
+        io.vec_read_data_load(i)(j) := WireInit(0.S(32.W))// io.dccmRsp.bits.dataResponse.asSInt
       }
     }
+io.vec_read_data_load(0)(0) := io.dccmRsp.bits.dataResponse.asSInt
+
 //-----------vector address ---------------------------start
   val vec_load_store_bit = io.read_en || io.write_en
   dontTouch(vec_load_store_bit)
@@ -41,14 +43,52 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     vec_stall := true.B
     offset := offset + 4.U
   }.otherwise{
-    vec_load_store_counter := RegInit(((128.U*1.U)/32.U)-1.U(32.W))
+    vec_load_store_counter := RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
     vec_stall := false.B
      offset := 0.U
   }
 
     io.dccmReq.bits.addrRequest := io.addr+offset
 //-----------vector address ---------------------------end
+
+  //   val reg_i          = RegInit(0.U(32.W))
+  //   val reg_j          = RegInit(0.U(32.W))
+  //   val reg_k          = RegInit(0.U(32.W))
+  //   val reg_end        = RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
+  //   val reg_up_down    = RegInit(0.U(1.W))
+  //   val lmul           = RegInit(1.U(32.W))
+  //   dontTouch(reg_i)
+  //   dontTouch(reg_i)
+  //   dontTouch(reg_i)
+  //   dontTouch(reg_i)
+  //   dontTouch(reg_i)
+  //   dontTouch(reg_i)
+
+  //   when(io.write_en){
+  //     when(reg_i=/=lmul){
+  //       when(reg_j=/=reg_end){
+  //         when(reg_k===0.B){
+  //           io.dccmReq.bits.dataRequest  := io.mem_vs3_data(reg_i)(reg_j)(31,0).asUInt
+  //           printf("%x\n", io.mem_vs3_data(reg_i)(reg_j)(31,0).asUInt)
+  //           reg_k := 1.B
+  //         }.otherwise{
+  //           io.dccmReq.bits.dataRequest  := io.mem_vs3_data(reg_i)(reg_j)(63,32).asUInt
+  //           printf("%x\n", io.mem_vs3_data(reg_i)(reg_j)(63,32).asUInt)
+  //           reg_k := 0.B
+  //         }
+  //       }.otherwise{
+  //         io.dccmReq.bits.dataRequest  := 0.U
+  //       }
+  //     }.otherwise{
+  //       io.dccmReq.bits.dataRequest  := 0.U
+  //     }
+  // }.otherwise{
+  //   io.dccmReq.bits.dataRequest := 0.U
+  // }
+
 //------------data send to memory-----------------
+
+
   when(io.write_en){
       io.dccmReq.bits.dataRequest := io.mem_vs3_data(0)(0).asUInt
   }.otherwise{
@@ -65,10 +105,13 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     //   }
 
       // }
-      val write_data = io.mem_vs3_data(0)(0).asUInt
 
-        when(io.write_en){
-    printf("%x\n", write_data)
+      
+      
+    val write_data = io.mem_vs3_data(0)(0).asUInt
+
+  when(io.write_en){
+    printf("%x\n", write_data(31,0))
   }
 }
 // note

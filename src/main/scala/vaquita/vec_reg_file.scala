@@ -72,11 +72,10 @@ class vec_reg_file(implicit val config: Vaquita_Config) extends Module {
 }
   }
   def write_vrf(a:Int):Unit ={
-    val ab=0.U
     for (i <- 0 until a) { // for grouping = 8
-      val offset = i.U
+      val write_offset = i.U
       for (j <- 0 until (config.count_lanes)) {
-        vrf(io.wb_vd_addr + offset)(j) := io.vd_data(i)(j)
+        vrf(io.wb_vd_addr + write_offset)(j) := io.vd_data(i)(j)
     }}
   }
 
@@ -109,7 +108,7 @@ for (i <- 0 to 7){
   // }
 io.vs0_data := vrf(0)(0)
 
-  when (io.reg_write) {
+  when (io.reg_write===1.B) {
     when(io.lmul===0.U){
     write_vrf(1)
   }.elsewhen(io.lmul===1.U){
