@@ -78,7 +78,7 @@ class vec_top extends Module {
     .otherwise{
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.vlen >> 6)) {
-            excute_stage_module.io.ex_vs1_data_in(i)(j) := RegNext(de_module.io.vs1_data_out(i)(j))
+            excute_stage_module.io.ex_vs1_data_in(i)(j) := RegNext(de_module.io.vs1_data_out(i)(j))//directly wire from excute stage
         }}
     }
     when(fu_module.io.forwardB===1.U){

@@ -64,7 +64,7 @@ vec_alu_module.io.alu_opcode := ex_alu_op_out
 
 for (i <- 0 to 7) { // for grouping = 8
   for (j <- 0 until (config.vlen >> 6)) {
-    io.vsd_data_out(i)(j) := vec_alu_module.io.vsd_out(i)(j)
+    io.vsd_data_out(i)(j)        := vec_alu_module.io.vsd_out(i)(j)
     io.ex_vs1_data_out_vs3(i)(j) := io.ex_vs1_data_in(i)(j)
   }}
 

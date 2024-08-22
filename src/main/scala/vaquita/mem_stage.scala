@@ -31,16 +31,16 @@ class mem_stage(implicit val config: Vaquita_Config) extends Module {
     val initValue = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(64.W)))))
     val vsd_data = RegNext(WireDefault(initValue))
 
-    val initValue_vs3 = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(64.W)))))
-    val vs3_data = RegNext(WireDefault(initValue))
+    // val initValue_vs3 = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(64.W)))))
+    // val vs3_data = RegNext(WireDefault(initValue))
     
 
     for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.vlen >> 6)) {
             vsd_data(i)(j) := io.mem_vsd_data_in(i)(j)
             io.mem_vsd_data_out(i)(j) := vsd_data(i)(j)
-            vs3_data(i)(j) := io.mem_vs1_data_vs3_in(i)(j)
-            io.vs3_data_out(i)(j) := vs3_data(i)(j)
+            // vs3_data(i)(j) := io.mem_vs1_data_vs3_in(i)(j)
+            io.vs3_data_out(i)(j) := io.mem_vs1_data_vs3_in(i)(j)// vs3_data(i)(j)
             // io.vec_read_data_load(i)(j) := 0.S
           }
     }
