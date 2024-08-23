@@ -7,9 +7,9 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val wb_de_instr_in = Input(UInt(32.W))
         val rs1_data = Input(SInt(32.W))
         val sew_out = Output(UInt(5.W))
-        val vs1_data_out = Output(Vec(8, Vec(config.vlen >> 6, SInt(64.W))))
-        val vs2_data_out = Output(Vec(8, Vec(config.vlen >> 6, SInt(64.W))))
-        val vsd_data_in = Input(Vec(8, Vec(config.vlen >> 6, SInt(64.W))))
+        val vs1_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val vs2_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val vsd_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
         val alu_op_out = Output(UInt(6.W))
         val de_write_en = Output(Bool())
         val de_read_en = Output(Bool())
@@ -56,25 +56,25 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     io.de_reg_write := vec_cu_module.io.reg_write
     def sew_selector_with_element(sew:UInt,rs1:SInt):SInt={
 
-        val element_return = WireInit(0.S(64.W))
+        val element_return = WireInit(0.S(config.XLEN.W))
         val sew8_element  =   WireInit(0.S(8.W))
         val sew16_element =  WireInit(0.S(16.W))
         val sew32_element =  WireInit(0.S(32.W))
-        val sew64_element =  WireInit(0.S(32.W))
+        // val sew64_element =  WireInit(0.S(32.W))
         sew8_element  := rs1
         sew16_element := rs1
         sew32_element := rs1
-        sew64_element := rs1
+        // sew64_element := rs1
 
         when(sew==="b000".U){
-           element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element,sew8_element,sew8_element,sew8_element,sew8_element).asSInt
+           element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element).asSInt
         }.elsewhen(sew==="b001".U){
-           element_return:= Cat(sew16_element,sew16_element,sew16_element,sew16_element).asSInt
+           element_return:= Cat(sew16_element,sew16_element).asSInt
         }.elsewhen(sew==="b010".U){
-           element_return:= Cat(sew32_element,sew32_element).asSInt
+           element_return:= sew32_element
         }
         .otherwise{
-            element_return:=Cat(Fill(59,0.U),rs1).asSInt
+            element_return:= 0.S
         }
         element_return
     }
@@ -89,13 +89,13 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     )}
     }
     for (i <- 0 to 7) {
-        for (j <- 0 to (config.vlen >> 6)-1) {
+        for (j <- 0 to (config.count_lanes)-1) {
             io.vs2_data_out(i)(j) := vec_reg_module.io.vs2_data(i)(j)
     }}
 io.alu_op_out := io.instr(31,26)
 
     for (i <- 0 to 7) {
-        for (j <- 0 to (config.vlen >> 6)-1) {
+        for (j <- 0 to (config.count_lanes)-1) {
             vec_reg_module.io.vd_data(i)(j) := io.vsd_data_in(i)(j)
     }}
 

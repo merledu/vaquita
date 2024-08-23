@@ -5,14 +5,14 @@ import alu_obj._
 
 class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val io = IO(new Bundle{
-  val vs1_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))
-  val vs2_in = Input(Vec(8, Vec(config.count_lanes, SInt(64.W))))
+  val vs1_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs2_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val sew = Input(UInt(3.W))
   val alu_opcode = Input(UInt(6.W))
   // val rs1_hazard_alu_in = Input(UInt(32.W))
   // val mask_arith = Input(Bool())
   // val config_mask = Input(Bool())
-  val vsd_out = Output(Vec(8, Vec(config.count_lanes, SInt(64.W))))//set sew here
+  val vsd_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))//set sew here
 
   })
 
@@ -54,42 +54,43 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
     val vec_sew8_f = WireInit(0.S(8.W))
     val vec_sew8_g = WireInit(0.S(8.W))
     val vec_sew8_h = WireInit(0.S(8.W))
-    val vec_sew8_result = WireInit(0.S(64.W))
-    vec_sew8_a := Arithmatic(vs1(63,56).asSInt, vs2(63,56).asSInt)
-    vec_sew8_b := Arithmatic(vs1(55,48).asSInt, vs2(55,48).asSInt)
-    vec_sew8_c := Arithmatic(vs1(47,40).asSInt, vs2(47,40).asSInt)
-    vec_sew8_d := Arithmatic(vs1(39,32).asSInt, vs2(39,32).asSInt)
+    val vec_sew8_result = WireInit(0.S(config.XLEN.W))
+    // vec_sew8_a := Arithmatic(vs1(63,56).asSInt, vs2(63,56).asSInt)
+    // vec_sew8_b := Arithmatic(vs1(55,48).asSInt, vs2(55,48).asSInt)
+    // vec_sew8_c := Arithmatic(vs1(47,40).asSInt, vs2(47,40).asSInt)
+    // vec_sew8_d := Arithmatic(vs1(39,32).asSInt, vs2(39,32).asSInt)
     vec_sew8_e := Arithmatic(vs1(31,24).asSInt, vs2(31,24).asSInt)
     vec_sew8_f := Arithmatic(vs1(23,16).asSInt, vs2(23,16).asSInt)
     vec_sew8_g := Arithmatic(vs1(15,8).asSInt, vs2(15,8).asSInt)
     vec_sew8_h := Arithmatic(vs1(7,0).asSInt, vs2(7,0).asSInt)
-    vec_sew8_result := Cat(vec_sew8_a,vec_sew8_b,vec_sew8_c,vec_sew8_d,vec_sew8_e,vec_sew8_f,vec_sew8_g,vec_sew8_h).asSInt
+    vec_sew8_result := Cat(vec_sew8_e,vec_sew8_f,vec_sew8_g,vec_sew8_h).asSInt//Cat(vec_sew8_a,vec_sew8_b,vec_sew8_c,vec_sew8_d,vec_sew8_e,vec_sew8_f,vec_sew8_g,vec_sew8_h).asSInt
     vec_sew8_result
   }
 
      def arith_16(vs1:SInt , vs2:SInt):SInt={
-      val vec_sew16_a = WireInit(0.S(16.W))
-      val vec_sew16_b = WireInit(0.S(16.W))
+      // val vec_sew16_a = WireInit(0.S(16.W))
+      // val vec_sew16_b = WireInit(0.S(16.W))
       val vec_sew16_c = WireInit(0.S(16.W))
       val vec_sew16_d = WireInit(0.S(16.W))
-      val vec_sew16_result = WireInit(0.S(64.W))
-      vec_sew16_a := Arithmatic(vs1(63,48).asSInt, vs2(63,48).asSInt)
-      vec_sew16_b := Arithmatic(vs1(47,32).asSInt, vs2(47,32).asSInt)
+      val vec_sew16_result = WireInit(0.S(config.XLEN.W))
+      // vec_sew16_a := Arithmatic(vs1(63,48).asSInt, vs2(63,48).asSInt)
+      // vec_sew16_b := Arithmatic(vs1(47,32).asSInt, vs2(47,32).asSInt)
       vec_sew16_c := Arithmatic(vs1(31,16).asSInt, vs2(31,16).asSInt)
       vec_sew16_d := Arithmatic(vs1(15,0).asSInt, vs2(15,0).asSInt)
-      vec_sew16_result := Cat(vec_sew16_a,vec_sew16_b,vec_sew16_c,vec_sew16_d).asSInt
+      vec_sew16_result := Cat(vec_sew16_c,vec_sew16_d).asSInt//Cat(vec_sew16_a,vec_sew16_b,vec_sew16_c,vec_sew16_d).asSInt
       vec_sew16_result
   }
 
    def arith_32(vs1:SInt , vs2:SInt):SInt={
-    val vec_sew32_a = WireInit(0.S(32.W))
+    // val vec_sew32_a = WireInit(0.S(32.W))
     val vec_sew32_b = WireInit(0.S(32.W))
-    val vec_sew32_result = WireInit(0.S(64.W))
-    vec_sew32_a := Arithmatic(vs1(63,32).asSInt, vs2(63,32).asSInt)
+    val vec_sew32_result = WireInit(0.S(config.XLEN.W))
+    // vec_sew32_a := Arithmatic(vs1(63,32).asSInt, vs2(63,32).asSInt)
     vec_sew32_b := Arithmatic(vs1(31,0).asSInt, vs2(31,0).asSInt)
-    dontTouch(vec_sew32_a)
-    dontTouch(vec_sew32_b)
-    vec_sew32_result := Cat(vec_sew32_a,vec_sew32_b).asSInt
+    // // dontTouch(vec_sew32_a)
+    // // dontTouch(vec_sew32_b)
+    // vec_sew32_result := Cat(vec_sew32_a,vec_sew32_b).asSInt
+    vec_sew32_result := vec_sew32_b
     vec_sew32_result
   }
 
@@ -111,7 +112,7 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
 // }
 dontTouch(arith_32(io.vs1_in(0)(0),io.vs2_in(0)(0)))
 def vec_main_alu(vs1_in:SInt ,vs2_in:SInt):SInt={
-  val arithmatic_wire = WireInit(0.S(64.W))
+  val arithmatic_wire = WireInit(0.S(config.XLEN.W))
   dontTouch(arithmatic_wire)
     when(io.sew==="b000".U){//for sew=8
        arithmatic_wire:= arith_8(vs1_in, vs2_in)
