@@ -7,7 +7,10 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val io = IO(new Bundle{
   val vs1_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val vs2_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs3_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs0_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val sew = Input(UInt(3.W))
+  // val vl = Input(UInt(32.W))
   val alu_opcode = Input(UInt(6.W))
   // val rs1_hazard_alu_in = Input(UInt(32.W))
   // val mask_arith = Input(Bool())

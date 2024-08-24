@@ -8,6 +8,8 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
         // excute stage inputs
         val ex_vs1_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
         val ex_vs2_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val ex_vs3_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val ex_vs0_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
         val ex_sew_in = Input(UInt(5.W))
         val ex_instr_in = Input(UInt(32.W))
         val ex_instr_out = Output(UInt(32.W))
@@ -56,6 +58,8 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
     // vs2_reg_data(i)(j) := io.ex_vs2_data_in(i)(j)
     vec_alu_module.io.vs1_in(i)(j) := Mux(io.ex_instr_out(6,0)==="b1010111".U && io.ex_instr_out(14,12)==="b100".U,io.hazard_rs1.asSInt,io.ex_vs1_data_in(i)(j))
     vec_alu_module.io.vs2_in(i)(j) := io.ex_vs2_data_in(i)(j)
+    vec_alu_module.io.vs3_in(i)(j) := io.ex_vs3_data_in(i)(j)
+    vec_alu_module.io.vs0_in(i)(j) := io.ex_vs0_data_in(i)(j)
   }
 }
 
@@ -65,7 +69,7 @@ vec_alu_module.io.alu_opcode := ex_alu_op_out
 for (i <- 0 to 7) { // for grouping = 8
   for (j <- 0 until (config.count_lanes)) {
     io.vsd_data_out(i)(j)        := vec_alu_module.io.vsd_out(i)(j)
-    io.ex_vs1_data_out_vs3(i)(j) := io.ex_vs1_data_in(i)(j)
+    io.ex_vs1_data_out_vs3(i)(j) := io.ex_vs3_data_in(i)(j)
   }}
 
   io.ex_write_en_out := RegNext(io.ex_write_en_in)

@@ -132,12 +132,13 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     load_reg_i := 0.U
   }
 
-  when(load_reg_j===7.U){
+  when(load_reg_j===7.U){//vec changes
   for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.count_lanes)) {
         io.vec_read_data_load(i)(j) := vsd_data_reg(i)(j)// io.dccmRsp.bits.dataResponse.asSInt
       }
     }
+    //vec changes--------------------------
     io.vec_read_data_load(0)(7) := read_data_last_reg
   }.otherwise{
     for (i <- 0 to 7) { // for grouping = 8
@@ -203,5 +204,3 @@ val store_reg_i          = RegInit(0.U(32.W))
 //     io.dccmReq.bits.dataRequest := 0.U
 //   }
 }
-// note
-// storing data come from vs1 address because in store instruction use the vs2 address

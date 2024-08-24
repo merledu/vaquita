@@ -9,8 +9,10 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val sew_out = Output(UInt(5.W))
         val vs1_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
         val vs2_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-        val vsd_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-        val alu_op_out = Output(UInt(6.W))
+        val vs3_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val vs0_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val vsd_data_in  = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+        val alu_op_out   = Output(UInt(6.W))
         val de_write_en = Output(Bool())
         val de_read_en = Output(Bool())
         val de_reg_write = Output(Bool())
@@ -91,6 +93,8 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     for (i <- 0 to 7) {
         for (j <- 0 to (config.count_lanes)-1) {
             io.vs2_data_out(i)(j) := vec_reg_module.io.vs2_data(i)(j)
+            io.vs3_data_out(i)(j) := vec_reg_module.io.vs3_data(i)(j)
+            io.vs0_data_out(i)(j) := vec_reg_module.io.vs0_data(i)(j)
     }}
 io.alu_op_out := io.instr(31,26)
 
