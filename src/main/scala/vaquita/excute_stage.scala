@@ -65,6 +65,7 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
 
 vec_alu_module.io.sew := next_sew
 vec_alu_module.io.alu_opcode := ex_alu_op_out
+vec_alu_module.io.mask_arith := io.ex_instr_out(25)
 
 for (i <- 0 to 7) { // for grouping = 8
   for (j <- 0 until (config.count_lanes)) {

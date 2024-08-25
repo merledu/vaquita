@@ -10,20 +10,39 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val vs3_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val vs0_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val sew = Input(UInt(3.W))
-  // val vl = Input(UInt(32.W))
+  // val vl = Input(UInt(32.W)) 
   val alu_opcode = Input(UInt(6.W))
   // val rs1_hazard_alu_in = Input(UInt(32.W))
-  // val mask_arith = Input(Bool())
+  val mask_arith = Input(Bool())
   // val config_mask = Input(Bool())
   val vsd_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))//set sew here
 
   })
+  
+  // val vs0_out = Wire(Vec(8, Vec(config.count_lanes, Vec(32, UInt(1.W)))))
+
+  // // Convert each 32-bit vector into 8 segments of 4 bits
+  // for (i <- 0 until 8) {
+  //   for (j <- 0 until config.count_lanes) {
+  //     for (k <- 0 until 32) {
+  //       // Extract each 4-bit segment from the 32-bit input
+  //       vs0_out(i)(j)(k) := io.vs0_in(i)(j)(k) //4*k + 3, 4*k
+  //     }
+  //   }}
+
+    //convert into one array
+  val vs0_mask = Cat((for (i <- 0 to 7) yield {
+  (for (j <- 0 until config.count_lanes) yield {
+    io.vs0_in(i)(j)
+  }).toSeq
+}).flatten.reverse)
+ dontTouch(vs0_mask)
 
   def Arithmatic(vs1_in: SInt, vs2_in: SInt): SInt = {
     val lookuptable = Seq(
       0.U -> (vs1_in + vs2_in),//add
-      2.U -> (vs1_in - vs2_in),//sub
-      3.U -> (vs2_in - vs1_in),//rsub
+      2.U -> (vs2_in - vs1_in),//sub
+      3.U -> (vs1_in - vs2_in),//rsub
       9.U -> (vs1_in & vs2_in),// and
       10.U -> (vs1_in | vs2_in),//or
       11.U -> (vs1_in ^ vs2_in),//xor
@@ -84,18 +103,25 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
       vec_sew16_result
   }
 
-   def arith_32(vs1:SInt , vs2:SInt):SInt={
+   def arith_32(vs1:SInt , vs2:SInt,vs3:SInt,mask_vs0:Bool):SInt={
     // val vec_sew32_a = WireInit(0.S(32.W))
+    dontTouch(mask_vs0)
+    val vsetvli_mask = 0.B
+    val mask_bit_active_element = (mask_vs0===1.B && io.mask_arith===0.B) || io.mask_arith===1.B
+    val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
+    // val mask_bit_active_agnostic = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===1.B
     val vec_sew32_b = WireInit(0.S(32.W))
     val vec_sew32_result = WireInit(0.S(config.XLEN.W))
     // vec_sew32_a := Arithmatic(vs1(63,32).asSInt, vs2(63,32).asSInt)
-    vec_sew32_b := Arithmatic(vs1(31,0).asSInt, vs2(31,0).asSInt)
+    vec_sew32_b := Mux(mask_bit_active_element===1.B,Arithmatic(vs1(31,0).asSInt, vs2(31,0).asSInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
     // // dontTouch(vec_sew32_a)
     // // dontTouch(vec_sew32_b)
     // vec_sew32_result := Cat(vec_sew32_a,vec_sew32_b).asSInt
     vec_sew32_result := vec_sew32_b
     vec_sew32_result
   }
+
+
 
   // def arithmatic_mask(mask:Bool):SInt={
   //   val mask_logic = io.mask_arith & io.config_mask
@@ -113,30 +139,79 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
   //   io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j))
   // }
 // }
-dontTouch(arith_32(io.vs1_in(0)(0),io.vs2_in(0)(0)))
-def vec_main_alu(vs1_in:SInt ,vs2_in:SInt):SInt={
-  val arithmatic_wire = WireInit(0.S(config.XLEN.W))
-  dontTouch(arithmatic_wire)
-    when(io.sew==="b000".U){//for sew=8
-       arithmatic_wire:= arith_8(vs1_in, vs2_in)
-  }
-      .elsewhen(io.sew==="b001".U){//for sew=16
-        arithmatic_wire:=arith_16(vs1_in, vs2_in)
-  }
-      .elsewhen(io.sew==="b010".U){//for sew=32
-        arithmatic_wire := arith_32(vs1_in, vs2_in)
-  }
-  arithmatic_wire
-}
+// val mask = WireInit(0.U(32.W))
+// dontTouch(arith_32(io.vs1_in(0)(0),io.vs2_in(0)(0)))
 
+
+
+// def vec_main_alu(vs1_in:SInt ,vs2_in:SInt):SInt={
+//   val arithmatic_wire = WireInit(0.S(config.XLEN.W))
+//   dontTouch(arithmatic_wire)
+//     when(io.sew==="b000".U){//for sew=8
+//        arithmatic_wire:= arith_8(vs1_in, vs2_in)
+//   }
+//   .elsewhen(io.sew==="b001".U){//for sew=16
+//         arithmatic_wire:=arith_16(vs1_in, vs2_in)
+//   }.elsewhen(io.sew==="b010".U){//for sew=32
+//         val mask = WireInit(0.U(32.W))
+//         arithmatic_wire := arith_32(vs1_in, vs2_in)
+//         }
+//   arithmatic_wire
+// }
+
+
+
+
+
+
+val vl= 4.U
 // call main function
-    for (i <- 0 to 7) { // for grouping = 8
-      for (j <- 0 until (config.count_lanes)) {
-        io.vsd_out(i)(j) := vec_main_alu(io.vs1_in(i)(j),io.vs2_in(i)(j))
-      }}
+// when (io.sew==="b010".U){
+// var concatenated_vs0: UInt = initialValue
+var count_mask = 0.U
+for (i <- 0 to 7) { // for grouping = 8
+  for (j <- 0 until config.count_lanes) {
+    val mask = vs0_mask((i*config.count_lanes)+j) // Extract the lowest 2 bits
+    io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j),io.vs3_in(i)(j),mask)
+    count_mask = count_mask + 1.U
+  }
+}
+  //     }
+  // .elsewhen(io.sew==="b001".U){
+    // for (i <- 0 to 7) { // for grouping = 8
+    //   for (j <- 0 until (config.count_lanes)) {
+    //     io.vsd_out(i)(j) := vec_main_alu(io.vs1_in(i)(j),io.vs2_in(i)(j))
+    //   }}}
+  // .elsewhen(io.sew==="b000".U){
+  //   for (i <- 0 to 7) { // for grouping = 8
+  //     for (j <- 0 until (config.count_lanes)) {
+  //       io.vsd_out(i)(j) := vec_main_alu(io.vs1_in(i)(j),io.vs2_in(i)(j))
+  //     }}
+  // }
   dontTouch(io.vsd_out)
   // io.vs1_out := arithmatic_mask(1.B)
   // io.vs1_out := 0.S
+
+
+
+
+
+// var concatenated_vs0: UInt = initialValue
+
+// for (i <- 0 until 8) { // Loop for grouping = 8
+//   for (j <- 0 until config.count_lanes) {
+//     // Extract the lowest bit of the concatenated value as the mask
+//     var mask = concatenated_vs0(0)
+
+//     // Call the arith_32 function with vs1, vs2, and mask
+//     io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j), mask)
+
+//     // Shift right by 1 bit for the next iteration
+//     concatenated_vs0 = concatenated_vs0 >> 1.U
+//   }
+// }
+
+
 }
 
 // here perform masking and sew logic

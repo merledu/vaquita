@@ -164,8 +164,8 @@ val store_reg_i          = RegInit(0.U(32.W))
           io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt
           printf("%x\n", io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt)
         }.otherwise{
-          io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(3).asUInt
-          printf("%x\n", io.mem_vs3_data(store_reg_i)(3).asUInt)
+          io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(7).asUInt
+          printf("%x\n", io.mem_vs3_data(store_reg_i)(7).asUInt)
           store_reg_j := 0.U
         }
       }.elsewhen(store_reg_j===store_reg_end){
