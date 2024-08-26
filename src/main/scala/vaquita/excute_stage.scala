@@ -17,6 +17,9 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
         val ex_write_en_in = Input(Bool())
         val ex_read_en_in = Input(Bool())
         val ex_rs1_data_in  = Input(SInt(32.W))
+        val vl_in  = Input(UInt(32.W))
+        // val ex_vl_out  = Input(UInt(32.W))
+
         // val mem_vd = Input(UInt(7.W))
         // val wb_vd = Input(UInt(8.W))
         val ex_reg_write_in = Input(Bool())
@@ -51,7 +54,8 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
     val next_sew = RegNext(io.ex_sew_in)
     val ex_alu_op_out = RegNext(io.ex_alu_op_in)
     io.ex_instr_out := RegNext(io.ex_instr_in)
-    
+    vec_alu_module.io.vl := RegNext(io.vl_in)
+    vec_alu_module.io.vl_in   := vsetvli_module.io.vl
     for (i <- 0 to 7) { // for grouping = 8
   for (j <- 0 until (config.count_lanes)) {
     // vs1_reg_data(i)(j) := io.ex_vs1_data_in(i)(j)

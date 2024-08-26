@@ -56,6 +56,9 @@ class vec_top extends Module {
     // -----------------excute stage ---------------------------------
 
     // ************forwording unit***********************
+    de_module.io.vl_rs1_in := RegNext(excute_stage_module.io.vl_rs1_out.asUInt)
+    
+    excute_stage_module.io.vl_in := de_module.io.vl_out
     io.vl_rs1_out := excute_stage_module.io.vl_rs1_out
     excute_stage_module.io.hazard_rs1 := io.hazard_rs1_data_in
     fu_module.io.mem_vd := mem_stage_module.io.mem_instr_out(11,7)

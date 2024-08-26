@@ -17,6 +17,8 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val de_read_en = Output(Bool())
         val de_reg_write = Output(Bool())
         val wb_reg_write_in = Input(Bool())
+        val vl_out = Output(UInt(32.W))
+        val vl_rs1_in =  Input(UInt(32.W))
 
         // val de_rs1_addr = Output(UInt(5.W))
         // val de_rs2_addr = Output(UInt(5.W))
@@ -50,8 +52,9 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
 
     vcsr_module.io.vec_config := vec_cu_module.io.vec_config
     vcsr_module.io.instr_in := io.instr
-
+    vcsr_module.io.vl_rs1_in := io.vl_rs1_in.asUInt
     //excute stage
+    io.vl_out := vcsr_module.io.vl_out.asUInt
     io.sew_out := vcsr_module.io.sew
     io.de_write_en := vec_cu_module.io.mem_write
     io.de_read_en := vec_cu_module.io.mem_read

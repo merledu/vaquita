@@ -10,7 +10,8 @@ class vsetvli(implicit val config: Vaquita_Config,val on : Bool =1.B, val off : 
     val vl = Output(UInt(32.W))
     // val sew = Input(UInt(3.W))
   })
-
+val vl_reg = RegInit(0.U(32.W))
+val vl_wire = WireInit(0.U(32.W))
 val vsetivli_lmul = WireInit(1.U(4.W))
   switch(io.instr_in(22,20)) {
     is(0.U) { vsetivli_lmul := 1.U }
@@ -41,23 +42,31 @@ val vec_config = io.instr_in(6,0)==="b1010111".U && io.instr_in(14,12)==="b111".
 when(vec_config===1.B){
     when (io.instr_in(19,15)=/=0.U){
     when(io.rs1_in<=VLMAX){
-    io.vl := io.rs1_in
+    vl_wire := io.rs1_in
     }.elsewhen(io.rs1_in >= VLMAX){
-        io.vl := VLMAX
+        vl_wire := VLMAX
     }.otherwise{
-        io.vl := 3.U
+        vl_wire := 3.U
     }
    }.elsewhen(io.instr_in(11,7)=/=0.U && io.instr_in(19,15)===0.U){
-    io.vl := VLMAX
+    vl_wire := VLMAX
    }.otherwise{
-    io.vl:=2.U
+    vl_wire:=2.U
    }
 //    .elsewhen(rd===0.U && rs1===0.U){
-//     io.vl := vl
+//     vl_wire := vl
 //     }
 }
 .otherwise{
-    io.vl := 1.U
+    vl_wire := 1.U
 }
-dontTouch(io.vl)
+dontTouch(vl_wire)
+when (vec_config===1.B){
+  vl_reg := vl_wire
+  io.vl := vl_wire
+
+}.otherwise{
+io.vl := vl_reg
+
+}
 }

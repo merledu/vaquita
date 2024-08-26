@@ -10,7 +10,8 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val vs3_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val vs0_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
   val sew = Input(UInt(3.W))
-  // val vl = Input(UInt(32.W)) 
+  val vl = Input(UInt(32.W)) //remove this vl
+  val vl_in = Input(UInt(32.W)) 
   val alu_opcode = Input(UInt(6.W))
   // val rs1_hazard_alu_in = Input(UInt(32.W))
   val mask_arith = Input(Bool())
@@ -18,6 +19,26 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val vsd_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))//set sew here
 
   })
+
+// val abbc = WireInit(0.U(32.W))
+// abbc := io.vl
+
+// // val VL_Map = (1 to config.vlen*8).map(x => x.U(32.W) -> x).toMap
+// // val vl_int = VL_Map.getOrElse(abbc, 3.U)
+
+// val VL_Map = (1 to 10).map(x => x.U(32.W) -> x).toMap
+
+// // Define the key you want to look up
+// val key = 5.U(32.W)
+
+// // Retrieve the value associated with the key
+// val valueOption = VL_Map.get(key)
+// println(VL_Map.keys.mkString(", "))
+
+// println(valueOption,"yessssssssss")
+
+// val scalaInt = UIntToIntConverter.convertUIntToInt(io.vl)
+// println(scalaInt,"yess")
   
   // val vs0_out = Wire(Vec(8, Vec(config.count_lanes, Vec(32, UInt(1.W)))))
 
@@ -164,18 +185,57 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
 
 
 
-val vl= 4.U
+val vl= 4
+val tail = 0.B
 // call main function
 // when (io.sew==="b010".U){
 // var concatenated_vs0: UInt = initialValue
 var count_mask = 0.U
-for (i <- 0 to 7) { // for grouping = 8
-  for (j <- 0 until config.count_lanes) {
-    val mask = vs0_mask((i*config.count_lanes)+j) // Extract the lowest 2 bits
-    io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j),io.vs3_in(i)(j),mask)
-    count_mask = count_mask + 1.U
+
+// for (i <- 0 to 7) { // for grouping = 8
+//   for (j <- 0 until config.count_lanes) {
+//     val mask = vs0_mask((i*config.count_lanes)+j) // Extract the lowest 2 bits
+//     val vl_counter = (i*config.count_lanes)+j
+//     if(io.vl >vl_counter){
+//     io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j),io.vs3_in(i)(j),mask)
+//     count_mask = count_mask + 1.U
+//     }
+//     else{
+//       io.vsd_out(i)(j) := Mux(tail===0.B,io.vs3_in(i)(j),Fill(32,1.U).asSInt)
+//     }
+//   }
+// }
+var vl_counter = 1
+for (i <- 0 until 8) { // Loop through 8 groups
+  for (j <- 0 until config.count_lanes) { // Loop through lanes
+    val idx = (i * config.count_lanes) + j // Compute the index for mask and inputs
+    val mask = vs0_mask(idx) // Extract the mask
+     // Compute the vl_counter based on the current index
+    
+    // Use Mux for conditional assignments
+    io.vsd_out(i)(j) := Mux(io.vl_in >= vl_counter.U,
+      arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j), io.vs3_in(i)(j), mask),
+      Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
+    )
+    vl_counter = vl_counter + 1
+    
+    // Increment count_mask using a separate assignment
+    // count_mask := count_mask + Mux(io.vl > vl_counter.U, 1.U, 0.U)
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
   //     }
   // .elsewhen(io.sew==="b001".U){
     // for (i <- 0 to 7) { // for grouping = 8
