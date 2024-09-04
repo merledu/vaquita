@@ -233,11 +233,11 @@ var vl_counter = 0
     for (i <- 0 until 8) {
       for (j <- 0 until config.count_lanes) {
         val idx = (i * config.count_lanes) + j
-          io.vsd_out(i)(j) := Cat(Mux(io.vl_in > vl_counter.U+1.U,
+          io.vsd_out(i)(j) := Cat(Mux(io.vl_in > vl_counter.U+3.U,
           arith_8(io.vs1_in(i)(j)(31,24).asSInt, io.vs2_in(i)(j)(31,24).asSInt, io.vs3_in(i)(j)(31,24).asSInt, vs0_mask(vl_counter+3)),
           Mux(tail === 0.B, io.vs3_in(i)(j)(31,24).asSInt, Fill(8, 1.U).asSInt)),
 
-          Mux(io.vl_in > vl_counter.U,
+          Mux(io.vl_in > vl_counter.U +2.U,
           arith_8(io.vs1_in(i)(j)(23,16).asSInt, io.vs2_in(i)(j)(23,16).asSInt, io.vs3_in(i)(j)(23,16).asSInt, vs0_mask(vl_counter+2)),
           Mux(tail === 0.B, io.vs3_in(i)(j)(23,16).asSInt, Fill(8, 1.U).asSInt)),
           
