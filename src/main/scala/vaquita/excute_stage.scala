@@ -34,6 +34,8 @@ class excute_stage(implicit val config: Vaquita_Config) extends Module {
         val ex_vs1_data_out_vs3 = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
         val hazard_rs1 = Input(UInt(32.W))
         val vl_rs1_out = Output(UInt(32.W))
+        val ex_lmul_in = Input(UInt(32.W))
+        val ex_lmul_out = Output(UInt(32.W))
 })
 // val a  = RegInit(VecInit(Seq.fill(config.count_lanes)(0.S(64.W))))
 
@@ -88,4 +90,5 @@ for (i <- 0 to 7) { // for grouping = 8
 vsetvli_module.io.instr_in := RegNext(io.ex_instr_in)
 vsetvli_module.io.rs1_in := io.hazard_rs1
 io.vl_rs1_out := vsetvli_module.io.vl
+io.ex_lmul_out := RegNext(io.ex_lmul_in)
 }

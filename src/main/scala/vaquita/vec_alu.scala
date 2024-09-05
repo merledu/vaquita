@@ -66,15 +66,15 @@ dontTouch(mask16)
       9.U -> (vs1_in & vs2_in),// and
       10.U -> (vs1_in | vs2_in),//or
       11.U -> (vs1_in ^ vs2_in),//xor
-      37.U -> (vs1_in >> vs2_in(7,0)), //vsll
+      37.U -> (vs2_in << vs1_in(7,0)), //vsll
 
-      "b101000".U -> (vs1_in >> vs2_in(7,0)), //vsrl
-      "b101001".U -> (vs1_in << vs2_in(7,0)), //vsra
+      "b101000".U -> (vs2_in >> vs1_in(7,0)), //vsrl
+      "b101001".U -> (vs2_in >> vs1_in(7,0)), //vsra
       "b010111".U -> (vs1_in), //vmv 
-      "b000100".U -> ((vs1_in.asUInt > vs2_in.asUInt).asSInt),//minu
-      "b000101".U -> (vs1_in > vs2_in).asSInt,//min
-      "b000110".U -> ((vs1_in.asUInt < vs2_in.asUInt).asSInt),//maxu
-      "b000111".U -> (vs1_in < vs2_in).asSInt,//max
+      "b000100".U -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//minu
+      "b000101".U -> Mux(vs1_in < vs2_in,vs1_in,vs2_in),//min
+      "b000110".U -> (vs1_in.asUInt > vs2_in.asUInt).asSInt,//maxu
+      "b000111".U -> Mux(vs1_in > vs2_in,vs1_in,vs2_in),//max
       // bit wise
       "b011000".U -> (vs1_in === vs2_in).asSInt,//vmseq
       "b011001".U -> (vs1_in =/= vs2_in).asSInt,//vmsne

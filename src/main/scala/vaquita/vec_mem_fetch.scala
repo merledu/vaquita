@@ -13,13 +13,21 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     val read_en = Input(Bool())
     val dccmReq = Decoupled(new MemRequestIO)
     val dccmRsp = Flipped(Decoupled(new MemResponseIO))
-  }) 
+    val mem_lmul_in = Input(UInt(32.W))
+  })
   io.dccmRsp.ready := true.B
   io.dccmReq.bits.activeByteLane := "b1111".U
   // io.dccmReq.bits.dataRequest := 0.U
   // io.dccmReq.bits.addrRequest := io.addr+offset
   io.dccmReq.bits.isWrite := io.write_en
   io.dccmReq.valid := true.B
+val lmul = WireInit(1.U(32.W))
+    switch(io.mem_lmul_in) {
+    is(0.U) { lmul := 1.U }
+    is(1.U) { lmul := 2.U }
+    is(2.U) { lmul := 4.U }
+    is(3.U) { lmul := 8.U }
+  }
 
 //   // when(io.read_en===1.B){
 //     for (i <- 0 to 7) { // for grouping = 8
@@ -33,8 +41,9 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
   val vec_load_store_bit = io.read_en || io.write_en
   dontTouch(vec_load_store_bit)
 
-  val vec_load_store_counter = RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
+  val vec_load_store_counter = RegInit(((config.vlen.U*2.U)/32.U)-1.U(32.W))
   val offset = RegInit(0.U(32.W))
+  // val lmul =io.mem_lmul_in
 
   dontTouch(vec_load_store_counter)
   val vec_stall = WireInit(false.B)
@@ -43,7 +52,23 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     vec_stall := true.B
     offset := offset + 4.U
   }.otherwise{
-    vec_load_store_counter := RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
+    // vec_load_store_counter := RegInit(((config.vlen.U*2.U)/32.U)-1.U(32.W))
+    when (lmul==="b000".U){
+      vec_load_store_counter := ((config.vlen.U*1.U)/32.U)-1.U
+    }
+    .elsewhen (lmul==="b001".U){
+      vec_load_store_counter := ((config.vlen.U*2.U)/32.U)-1.U
+    }
+    .elsewhen (lmul==="b010".U){
+      vec_load_store_counter := ((config.vlen.U*4.U)/32.U)-1.U
+    }
+    .elsewhen (lmul==="b011".U){
+      vec_load_store_counter := ((config.vlen.U*8.U)/32.U)-1.U
+    }.otherwise{
+      vec_load_store_counter := ((config.vlen.U*lmul)/32.U)-1.U
+    }
+    // changes
+
     vec_stall := false.B
      offset := 0.U
   }
@@ -104,9 +129,10 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
 
     val load_reg_i          = RegInit(0.U(32.W))
     val load_reg_j          = RegInit(0.U(32.W))
-    val load_reg_end        = RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
-    val load_lmul           = RegInit(1.U(32.W))
+    val load_reg_end        = RegInit(((config.vlen.U)/32.U)-1.U(32.W))
+    val load_lmul           = lmul//io.mem_lmul_in
     val read_data_last_reg = WireInit(0.S(32.W))
+    // val check_i             = WireInit(0.U(32.))
     dontTouch(load_reg_i)
     dontTouch(load_reg_j)
     dontTouch(load_reg_end)
@@ -119,8 +145,10 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
           load_reg_j := load_reg_j +1.U
           vsd_data_reg(load_reg_i)(load_reg_j) := io.dccmRsp.bits.dataResponse.asSInt
         }.otherwise{
+          vsd_data_reg(load_reg_i)(load_reg_j) := io.dccmRsp.bits.dataResponse.asSInt
           read_data_last_reg := io.dccmRsp.bits.dataResponse.asSInt
           load_reg_j := 0.U
+          load_reg_i := load_reg_i +1.U
         }
       }.elsewhen(load_reg_j===load_reg_end){
         load_reg_i := load_reg_i +1.U
@@ -132,14 +160,14 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     load_reg_i := 0.U
   }
 
-  when(load_reg_j===7.U){//vec changes
+  when(load_reg_i+1.U===lmul && load_reg_j===7.U){//vec changes
   for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.count_lanes)) {
         io.vec_read_data_load(i)(j) := vsd_data_reg(i)(j)// io.dccmRsp.bits.dataResponse.asSInt
       }
     }
     //vec changes--------------------------
-    io.vec_read_data_load(0)(7) := read_data_last_reg
+    io.vec_read_data_load(load_reg_i)(7) := read_data_last_reg
   }.otherwise{
     for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.count_lanes)) {
@@ -152,7 +180,7 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
 val store_reg_i          = RegInit(0.U(32.W))
     val store_reg_j          = RegInit(0.U(32.W))
     val store_reg_end        = RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
-    val store_lmul           = RegInit(1.U(32.W))
+    val store_lmul           = lmul
     dontTouch(store_reg_i)
     dontTouch(store_reg_j)
     dontTouch(store_reg_end)
@@ -167,6 +195,7 @@ val store_reg_i          = RegInit(0.U(32.W))
           io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(7).asUInt
           printf("%x\n", io.mem_vs3_data(store_reg_i)(7).asUInt)
           store_reg_j := 0.U
+          store_reg_i := store_reg_i +1.U
         }
       }.elsewhen(store_reg_j===store_reg_end){
         store_reg_i := store_reg_i +1.U

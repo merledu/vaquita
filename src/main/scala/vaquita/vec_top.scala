@@ -57,6 +57,7 @@ class vec_top extends Module {
 
     // ************forwording unit***********************
     de_module.io.vl_rs1_in := RegNext(excute_stage_module.io.vl_rs1_out.asUInt)
+    excute_stage_module.io.ex_lmul_in := de_module.io.lmul_out
     
     excute_stage_module.io.vl_in := de_module.io.vl_out
     io.vl_rs1_out := excute_stage_module.io.vl_rs1_out
@@ -150,6 +151,7 @@ class vec_top extends Module {
 
     io.dmemReq <> vec_mem_fetch_module.io.dccmReq
     vec_mem_fetch_module.io.dccmRsp <> io.dmemRsp
+    vec_mem_fetch_module.io.mem_lmul_in := excute_stage_module.io.ex_lmul_out
 
 
     for (i <- 0 to 7) { // for grouping = 8

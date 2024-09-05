@@ -10,7 +10,8 @@ class Vcsr(implicit val config: Vaquita_Config) extends Module {
         val vl_out = Output(UInt(32.W))
         val vtype_out = Output(UInt(32.W))
         // val vstart_out =Output(SInt(32.W))
-        val sew = Output(UInt(5.W))
+        val sew  = Output(UInt(5.W))
+        val lmul = Output(UInt(32.W))
         // val out1 = Output(UInt(5.W))
 })
 val vtypeReg = RegInit(16.U(32.W))//
@@ -65,5 +66,6 @@ io.vl_out := io.vl_rs1_in
 io.vtype_out := vtypeReg
 // io.vstart_out := vstart
 io.sew := vtypeReg(5,3)
+io.lmul := vtypeReg(2,0)
 dontTouch(vl)
 }
