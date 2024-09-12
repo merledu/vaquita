@@ -58,7 +58,18 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
 }
 dontTouch(mask16)
 
-  def Arithmatic(vs1_in: SInt, vs2_in: SInt): SInt = {
+
+// def bit_alu(vs1_in: SInt, vs2_in: SInt): UInt = {
+//   val bitVector = WireDefault(VecInit(Seq.fill(8)(false.B)))
+  
+//   // Compute the bitVector
+//   for (i <- 0 until 8) {
+//     bitVector(i) := Mux(vs1_in(i) === vs2_in(i), true.B, false.B)
+//   }
+//   // Convert bitVector to UInt
+//   Cat(bitVector.reverse).asUInt
+// }
+  def Arithmatic(vs1_in: SInt, vs2_in: SInt,vs3:SInt): SInt = {
     val lookuptable = Seq(
       0.U -> (vs1_in + vs2_in),//add
       2.U -> (vs2_in - vs1_in),//sub
@@ -73,17 +84,17 @@ dontTouch(mask16)
       "b010111".U -> (vs1_in), //vmv 
       "b000100".U -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//minu
       "b000101".U -> Mux(vs1_in < vs2_in,vs1_in,vs2_in),//min
-      "b000110".U -> (vs1_in.asUInt > vs2_in.asUInt).asSInt,//maxu
+      "b000110".U -> Mux(vs1_in.asUInt > vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//maxu
       "b000111".U -> Mux(vs1_in > vs2_in,vs1_in,vs2_in),//max
-      // bit wise
-      "b011000".U -> (vs1_in === vs2_in).asSInt,//vmseq
-      "b011001".U -> (vs1_in =/= vs2_in).asSInt,//vmsne
-      "b011010".U -> (vs1_in > vs2_in).asSInt,//vmsltu
-      "b011011".U -> (vs1_in > vs2_in).asSInt,//vmslt
-      "b011100".U -> (vs1_in >= vs2_in).asSInt,//vmsleu
-      "b011101".U -> (vs1_in >= vs2_in).asSInt,//vmsle
-      "b011110".U -> (vs1_in < vs2_in).asSInt,//vmsgtu
-      "b011111".U -> (vs1_in < vs2_in).asSInt//vmsgt
+      // bit wise      //(~(vs1_in.asUInt ^ vs2_in.asUInt)).asSInt,//vmseq
+      "b011000".U -> Mux(vs1_in===vs2_in,vs1_in,vs3),
+      "b011001".U -> Mux(vs1_in=/=vs2_in,vs2_in,vs3),//vmsne
+      "b011010".U -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in,vs3),//vmsltu
+      "b011011".U -> Mux(vs1_in < vs2_in,vs1_in,vs3),//vmslt
+      "b011100".U -> Mux(vs1_in.asUInt <= vs2_in.asUInt,vs1_in,vs3),//vmsleu
+      "b011101".U -> Mux(vs1_in <= vs2_in,vs1_in,vs3),//vmsle
+      "b011110".U -> Mux(vs1_in.asUInt > vs2_in.asUInt,vs1_in,vs3),//vmsgtu
+      "b011111".U -> Mux(vs1_in > vs2_in,vs1_in,vs3)//vmsgt
     )
     MuxLookup(io.alu_opcode, 0.S, lookuptable)
   }
@@ -133,7 +144,7 @@ dontTouch(mask16)
     val vec_sew32_b = WireInit(0.S(32.W))
     val vec_sew32_result = WireInit(0.S(config.XLEN.W))
     // vec_sew32_a := Arithmatic(vs1(63,32).asSInt, vs2(63,32).asSInt)
-    vec_sew32_b := Mux(mask_bit_active_element===1.B,Arithmatic(vs1, vs2),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
+    vec_sew32_b := Mux(mask_bit_active_element===1.B,Arithmatic(vs1, vs2,vs3),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
     // // dontTouch(vec_sew32_a)
     // // dontTouch(vec_sew32_b)
     // vec_sew32_result := Cat(vec_sew32_a,vec_sew32_b).asSInt
@@ -149,7 +160,7 @@ dontTouch(mask16)
     val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
     val vec_sew16_result = WireInit(0.S(16.W))
     dontTouch(vec_sew16_result)
-    vec_sew16_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
+    vec_sew16_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt,vs3),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
     vec_sew16_result
   }
 
@@ -161,7 +172,7 @@ dontTouch(mask16)
     val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
     val vec_sew8_result = WireInit(0.S(8.W))
     dontTouch(vec_sew8_result)
-    vec_sew8_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
+    vec_sew8_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt,vs3),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
     vec_sew8_result 
   }
 
