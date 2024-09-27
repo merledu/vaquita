@@ -46,17 +46,18 @@ class vec_alu(implicit val config: Vaquita_Config) extends Module{
 
 
     //convert into one array
-  val vs0_mask = Cat((for (i <- 0 to 7) yield {
-  (for (j <- 0 until config.count_lanes) yield {
-    io.vs0_in(i)(j)
-  }).toSeq
-}).flatten.reverse)
+    val vs0_mask = (io.vs0_in.asUInt)(config.vlen,0)
+//   val vs0_mask = Cat((for (i <- 0 to 7) yield {
+//   (for (j <- 0 until config.count_lanes) yield {
+//     io.vs0_in(i)(j)
+//   }).toSeq
+// }).flatten.reverse)
  dontTouch(vs0_mask)
-   val mask16=WireInit(VecInit(Seq.fill(config.vlen/2+2)(3.U(2.W)))) 
- for (i <- 0 until config.vlen/2+2) {
-  mask16(i) := vs0_mask(2 * i + 1, 2 * i)
-}
-dontTouch(mask16)
+//    val mask16=WireInit(VecInit(Seq.fill(config.vlen/2+2)(3.U(2.W)))) 
+//  for (i <- 0 until config.vlen/2+2) {
+//   mask16(i) := vs0_mask(2 * i + 1, 2 * i)
+// }
+// dontTouch(mask16)
 
 
 // def bit_alu(vs1_in: SInt, vs2_in: SInt): UInt = {
@@ -68,6 +69,95 @@ dontTouch(mask16)
 //   }
 //   // Convert bitVector to UInt
 //   Cat(bitVector.reverse).asUInt
+// def return_int():Int={
+//   var count1 = 0
+//   val a = WireInit(0.U(32.W))
+//   for (i <- 0 until config.vlen){
+//       a := Mux(count1.U <= io.vl_in,count1.U,count1.U)
+//       count1 = count1  +1 
+//   }
+//   print("yes",a.litValue.toInt)
+//   a.litValue.toInt
+// }
+// def return_int(): Int = {
+//   // Initialize a UInt to hold the result
+//   var result = 0.U
+
+//   // Iterate through the range
+//   for (i <- 0 until 8) {
+//     // Use Mux to select the value based on the condition and accumulate
+//     result = Mux(io.vl_in === i.U, i.U, result)
+//   }
+
+//   // Convert the result to Int and return
+//   result.litValue.toInt
+// }
+
+// val abc1 = return_int()
+def comp_element_fn(counter:UInt):SInt={
+  val cat_element = WireInit(0.S(32.W))
+  val comp_fn_value = comparison_func().asSInt
+  val comp_shift     = 0
+  val output_comp_Data = VecInit(Seq.tabulate(config.count_lanes)(i => comp_fn_value(32 * (i + 1) - 1, 32 * i)))
+  dontTouch(cat_element)
+  val comp_1bt_cn       = WireInit(VecInit(Seq.fill(32)(0.U(32.W))))
+  dontTouch(comp_1bt_cn)
+          for (i <- 1 to 31) {
+            comp_1bt_cn(i) := ((io.vl_in) - (32.U * counter))
+            when(comp_1bt_cn(i) === i.U) {
+              cat_element  := Cat(io.vs3_in(0)(counter)(31,i), output_comp_Data(counter)(i-1, 0)).asSInt
+            }.elsewhen(comp_1bt_cn(i)===32.U || (comp_1bt_cn(i)/32.U)>0.U){
+              cat_element := output_comp_Data(counter).asSInt 
+            }
+          }
+        cat_element
+}
+
+
+
+def comparison_operators(vs1_in:SInt,vs2_in:SInt):Bool={
+    val comparison_table = Seq(
+      "b011000".U -> (vs1_in===vs2_in),//vmseq
+      "b011001".U -> (vs1_in.asUInt =/= vs2_in.asUInt),//vmsne
+      "b011010".U -> (vs1_in.asUInt < vs2_in.asUInt),//vmsltu
+      "b011011".U -> (vs1_in < vs2_in),//vmslt
+      "b011100".U -> (vs1_in.asUInt <= vs2_in.asUInt),//vmsleu
+      "b011101".U -> (vs1_in <= vs2_in),//vmsle
+      "b011110".U -> (vs1_in.asUInt > vs2_in.asUInt),//vmsgtu
+      "b011111".U -> (vs1_in > vs2_in)//vmsgt
+    )
+      MuxLookup(io.alu_opcode, 0.B, comparison_table)
+  }
+
+def comparison_func(): UInt = {
+  // val comparison_wire                = WireInit(0.U(config.vlen.W))
+  val comparison_vec_bit_wires       = WireInit(VecInit(Seq.fill(config.vlen)(0.B)))
+  val comp_1b       = WireInit(VecInit(Seq.fill(config.vlen)(0.B)))
+  val comp_0b       = WireInit(VecInit(Seq.fill(config.vlen)(0.B)))
+  val comp_vs3       = WireInit(VecInit(Seq.fill(config.vlen)(0.B)))
+  dontTouch(comparison_vec_bit_wires)
+  val vs3_bit  =  io.vs3_in.asUInt(config.vlen,0)
+  dontTouch(vs3_bit)
+  dontTouch(comp_0b)
+  dontTouch(comp_1b)
+  dontTouch(comp_vs3)
+  var counter = 0
+    for (i <- 0 until 8) {
+      for (j <- 0 until config.count_lanes) {
+    var comparison = comparison_operators(io.vs1_in(i)(j), io.vs2_in(i)(j))
+    comp_1b(counter)  := (io.mask_arith && comparison)  || (!(io.mask_arith) && comparison && vs0_mask(counter))
+    comp_vs3(counter) := (!(vs0_mask(counter)) && !(io.mask_arith))
+    comp_0b(counter)  := (io.mask_arith && !comparison)
+      comparison_vec_bit_wires(counter) := MuxCase(0.B, Array(
+        (comp_0b(counter)  === 1.B)  -> 0.B,
+        (comp_vs3(counter) === 1.B)  -> vs3_bit(counter),
+        (comp_1b(counter)  === 1.B)  -> 1.B
+      ))
+      counter = counter + 1
+      }
+      }
+  comparison_vec_bit_wires.asUInt
+}
 // }
   def Arithmatic(vs1_in: SInt, vs2_in: SInt,vs3:SInt): SInt = {
     val lookuptable = Seq(
@@ -85,16 +175,7 @@ dontTouch(mask16)
       "b000100".U -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//minu
       "b000101".U -> Mux(vs1_in < vs2_in,vs1_in,vs2_in),//min
       "b000110".U -> Mux(vs1_in.asUInt > vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//maxu
-      "b000111".U -> Mux(vs1_in > vs2_in,vs1_in,vs2_in),//max
-      // bit wise      //(~(vs1_in.asUInt ^ vs2_in.asUInt)).asSInt,//vmseq
-      "b011000".U -> Mux(vs1_in===vs2_in,vs1_in,vs3),
-      "b011001".U -> Mux(vs1_in=/=vs2_in,vs2_in,vs3),//vmsne
-      "b011010".U -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in,vs3),//vmsltu
-      "b011011".U -> Mux(vs1_in < vs2_in,vs1_in,vs3),//vmslt
-      "b011100".U -> Mux(vs1_in.asUInt <= vs2_in.asUInt,vs1_in,vs3),//vmsleu
-      "b011101".U -> Mux(vs1_in <= vs2_in,vs1_in,vs3),//vmsle
-      "b011110".U -> Mux(vs1_in.asUInt > vs2_in.asUInt,vs1_in,vs3),//vmsgtu
-      "b011111".U -> Mux(vs1_in > vs2_in,vs1_in,vs3)//vmsgt
+      "b000111".U -> Mux(vs1_in > vs2_in,vs1_in,vs2_in)//max      
     )
     MuxLookup(io.alu_opcode, 0.S, lookuptable)
   }
@@ -239,6 +320,7 @@ var count_mask = 0.U
 //     }
 //   }
 // }
+val comp_bit = "b011000".U === io.alu_opcode
 when(io.sew==="b000".U){
 var vl_counter = 0
     for (i <- 0 until 8) {
@@ -276,7 +358,7 @@ var vl_counter = 0
     // var counter_of_2 = 0
     for (i <- 0 until 8) {
       for (j <- 0 until config.count_lanes) {
-        val idx = (i * config.count_lanes) + j
+        val idx = (i * config.count_lanes) + jvs3_in
         // val mask = vs0_mask(idx+1,idx)
           io.vsd_out(i)(j) := Cat(Mux(io.vl_in > vl_counter.U+1.U,
           arith_16(io.vs1_in(i)(j)(31,16).asSInt, io.vs2_in(i)(j)(31,16).asSInt, io.vs3_in(i)(j)(31,16).asSInt, vs0_mask(vl_counter+1)),
@@ -301,16 +383,33 @@ var vl_counter = 0
 
   }.elsewhen(io.sew==="b010".U){//sew = 32
     var vl_counter = 1
+    
+    // val vec_elements = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(config.XLEN.W)))))
+    when(comp_bit===0.B){
     for (i <- 0 until 8) {
       for (j <- 0 until config.count_lanes) {
         val idx = (i * config.count_lanes) + j
         val mask = vs0_mask(idx)
-            io.vsd_out(i)(j) := Mux(io.vl_in >= vl_counter.U,
-          arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j), io.vs3_in(i)(j), mask),
+            io.vsd_out(i)(j) := Mux(io.vl_in >= vl_counter.U,arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j), io.vs3_in(i)(j), mask),
           Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
-        )
+        )}
         vl_counter = vl_counter + 1
+      }
+      }
+      .otherwise{
+      var vl_counter1 = 1
+      var counter2 = 0
+      for (j <- 0 until config.count_lanes) {
+            io.vsd_out(0)(j) := Mux(io.vl_in > vl_counter1.U,comp_element_fn(counter2.U), Mux(tail === 0.B, io.vs3_in(0)(j), Fill(32, 1.U).asSInt))
+            vl_counter1    = vl_counter1 + 32
+            counter2 = counter2 + 1
+            }
+        for (i <- 1 until 8) {
+          for (j <- 0 until config.count_lanes) {
+            io.vsd_out(i)(j) := Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
+            }
       }}
+        
   }.otherwise{
     var vl_counter = 1
     for (i <- 0 until 8) {

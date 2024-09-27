@@ -160,14 +160,14 @@ val lmul = WireInit(1.U(32.W))
     load_reg_i := 0.U
   }
 
-  when(load_reg_i+1.U===lmul && load_reg_j===3.U){//vec changes
+  when(load_reg_i+1.U===lmul && load_reg_j===(config.vlen.U/32.U-1.U)){//vec changes
   for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.count_lanes)) {
         io.vec_read_data_load(i)(j) := vsd_data_reg(i)(j)// io.dccmRsp.bits.dataResponse.asSInt
       }
     }
     //vec changes--------------------------
-    io.vec_read_data_load(load_reg_i)(3) := read_data_last_reg
+    io.vec_read_data_load(load_reg_i)((config.vlen.U/32.U-1.U)) := read_data_last_reg
   }.otherwise{
     for (i <- 0 to 7) { // for grouping = 8
       for (j <- 0 until (config.count_lanes)) {
@@ -192,8 +192,8 @@ val store_reg_i          = RegInit(0.U(32.W))
           io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt
           printf("%x\n", io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt)
         }.otherwise{
-          io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(3).asUInt
-          printf("%x\n", io.mem_vs3_data(store_reg_i)(3).asUInt)
+          io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)((config.vlen.U/32.U-1.U)).asUInt
+          printf("%x\n", io.mem_vs3_data(store_reg_i)((config.vlen.U/32.U-1.U)).asUInt)
           store_reg_j := 0.U
           store_reg_i := store_reg_i +1.U
         }
