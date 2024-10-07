@@ -148,10 +148,12 @@ class vec_top extends Module {
     excute_stage_module.io.ex_reg_write_in := de_module.io.de_reg_write
 
     // -----------------memory stage ---------------------------------
-
+    // val comparison_bit_f6 = mem_stage_module.io.mem_instr_out(31,26)==="b011000".U || mem_stage_module.io.mem_instr_out(31,26)==="b011001".U || mem_stage_module.io.mem_instr_out(31,26)==="b011010".U || mem_stage_module.io.mem_instr_out(31,26)==="b011011".U || mem_stage_module.io.mem_instr_out(31,26)==="b011100".U || mem_stage_module.io.mem_instr_out(31,26)==="b011101".U || mem_stage_module.io.mem_instr_out(31,26)==="b011110".U || mem_stage_module.io.mem_instr_out(31,26)==="b011111".U
+    // val comparison_bit_f3 = mem_stage_module.io.mem_instr_out(14,12)==="b000".U || mem_stage_module.io.mem_instr_out(14,12)==="b011".U || mem_stage_module.io.mem_instr_out(14,12)==="b100".U
     io.dmemReq <> vec_mem_fetch_module.io.dccmReq
     vec_mem_fetch_module.io.dccmRsp <> io.dmemRsp
     vec_mem_fetch_module.io.mem_lmul_in := excute_stage_module.io.ex_lmul_out
+    // vec_mem_fetch_module.io.vec_comparison_bit := comparison_bit_f6 && comparison_bit_f3
 
 
     for (i <- 0 to 7) { // for grouping = 8

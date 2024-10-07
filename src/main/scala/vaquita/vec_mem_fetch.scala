@@ -14,6 +14,7 @@ class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
     val dccmReq = Decoupled(new MemRequestIO)
     val dccmRsp = Flipped(Decoupled(new MemResponseIO))
     val mem_lmul_in = Input(UInt(32.W))
+    // val vec_comparison_bit = Input(Bool())
   })
   io.dccmRsp.ready := true.B
   io.dccmReq.bits.activeByteLane := "b1111".U
@@ -189,11 +190,14 @@ val store_reg_i          = RegInit(0.U(32.W))
       when(store_reg_i=/=store_lmul){
         when(store_reg_j=/=store_reg_end){
           store_reg_j := store_reg_j +1.U
-          io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt
+          io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt //Mux(io.vec_comparison_bit && store_reg_i>1.U,"hdeadbeef".U,)
           printf("%x\n", io.mem_vs3_data(store_reg_i)(store_reg_j).asUInt)
         }.otherwise{
           io.dccmReq.bits.dataRequest  := io.mem_vs3_data(store_reg_i)((config.vlen.U/32.U-1.U)).asUInt
           printf("%x\n", io.mem_vs3_data(store_reg_i)((config.vlen.U/32.U-1.U)).asUInt)
+          // for (i <- 1 to 56){
+            // printf("%x\n","hdeadbeef".U)
+          // }
           store_reg_j := 0.U
           store_reg_i := store_reg_i +1.U
         }
