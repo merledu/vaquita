@@ -5,95 +5,22 @@ import alu_obj._
 
 class vec_alu(implicit val config: Vaquita_Config) extends Module{
   val io = IO(new Bundle{
-  val vs1_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-  val vs2_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-  val vs3_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-  val vs0_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-  val sew = Input(UInt(3.W))
-  val vl = Input(UInt(32.W)) //remove this vl
-  val vl_in = Input(UInt(32.W)) 
-  val alu_opcode = Input(UInt(6.W))
-  // val rs1_hazard_alu_in = Input(UInt(32.W))
-  val mask_arith = Input(Bool())
-  // val config_mask = Input(Bool())
-  val vsd_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs1_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs2_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs3_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val vs0_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+  val sew          = Input(UInt(3.W))
+  val vl           = Input(UInt(32.W)) //remove this vl
+  val vl_in        = Input(UInt(32.W)) 
+  val alu_opcode   = Input(UInt(6.W))
+  val mask_arith   = Input(Bool())
+  val vsd_out      = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
 
   })
-
-// val abbc = WireInit(0.U(32.W))
-// abbc := io.vl
-
-// // val VL_Map = (1 to config.vlen*8).map(x => x.U(32.W) -> x).toMap
-// // val vl_int = VL_Map.getOrElse(abbc, 3.U)
-
-// val VL_Map = (1 to 10).map(x => x.U(32.W) -> x).toMap
-
-// // Define the key you want to look up
-// val key = 5.U(32.W)
-
-// // Retrieve the value associated with the key
-// val valueOption = VL_Map.get(key)
-// println(VL_Map.keys.mkString(", "))
-
-// println(valueOption,"yessssssssss")
-
-// val scalaInt = UIntToIntConverter.convertUIntToInt(io.vl)
-// println(scalaInt,"yess")
-  
-  // val vs0_out_sew16 = Wire(Vec(8*2, Vec(2, UInt(2.W))))
-
-//---------------------------for sew32----------------------  // Convert each 32-bit vector into 8 segments of 4 bits  
-
-
     //convert into one array
     val vs0_mask = (io.vs0_in.asUInt)(config.vlen,0)
-//   val vs0_mask = Cat((for (i <- 0 to 7) yield {
-//   (for (j <- 0 until config.count_lanes) yield {
-//     io.vs0_in(i)(j)
-//   }).toSeq
-// }).flatten.reverse)
  dontTouch(vs0_mask)
-//    val mask16=WireInit(VecInit(Seq.fill(config.vlen/2+2)(3.U(2.W)))) 
-//  for (i <- 0 until config.vlen/2+2) {
-//   mask16(i) := vs0_mask(2 * i + 1, 2 * i)
-// }
-// dontTouch(mask16)
 
-
-// def bit_alu(vs1_in: SInt, vs2_in: SInt): UInt = {
-//   val bitVector = WireDefault(VecInit(Seq.fill(8)(false.B)))
-  
-//   // Compute the bitVector
-//   for (i <- 0 until 8) {
-//     bitVector(i) := Mux(vs1_in(i) === vs2_in(i), true.B, false.B)
-//   }
-//   // Convert bitVector to UInt
-//   Cat(bitVector.reverse).asUInt
-// def return_int():Int={
-//   var count1 = 0
-//   val a = WireInit(0.U(32.W))
-//   for (i <- 0 until config.vlen){
-//       a := Mux(count1.U <= io.vl_in,count1.U,count1.U)
-//       count1 = count1  +1 
-//   }
-//   print("yes",a.litValue.toInt)
-//   a.litValue.toInt
-// }
-// def return_int(): Int = {
-//   // Initialize a UInt to hold the result
-//   var result = 0.U
-
-//   // Iterate through the range
-//   for (i <- 0 until 8) {
-//     // Use Mux to select the value based on the condition and accumulate
-//     result = Mux(io.vl_in === i.U, i.U, result)
-//   }
-
-//   // Convert the result to Int and return
-//   result.litValue.toInt
-// }
-
-// val abc1 = return_int()
 def comp_element_fn(sew:Int,counter:UInt):SInt={
   val cat_element = WireInit(0.S(32.W))
   val comp_fn_value = comparison_func(sew).asSInt
@@ -113,8 +40,6 @@ def comp_element_fn(sew:Int,counter:UInt):SInt={
         cat_element
 }
 
-
-
 def comparison_operators(vs1_in:SInt,vs2_in:SInt):Bool={
     val comparison_table = Seq(
       "b011000".U -> (vs1_in===vs2_in),//vmseq
@@ -124,7 +49,9 @@ def comparison_operators(vs1_in:SInt,vs2_in:SInt):Bool={
       "b011100".U -> (vs1_in.asUInt >= vs2_in.asUInt),//vmsleu
       "b011101".U -> (vs1_in >= vs2_in),//vmsle
       "b011110".U -> (vs1_in.asUInt < vs2_in.asUInt),//vmsgtu
-      "b011111".U -> (vs1_in < vs2_in)//vmsgt
+      "b011111".U -> (vs1_in < vs2_in),//vmsgt
+      "b010001".U -> Mux((vs1_in +& vs2_in).asUInt < "hffffffff".U,1.B,0.B)//vmadc
+      // "b011111".U -> (vs1_in < vs2_in)//vmsbc
     )
       MuxLookup(io.alu_opcode, 0.B, comparison_table)
   }
@@ -185,7 +112,25 @@ def comparison_func(sew: Int): UInt = {
 
 
 // }
-  def Arithmatic(vs1_in: SInt, vs2_in: SInt,vs3:SInt,sew:UInt): SInt = {
+  def Arithmatic(vs1_in: SInt, vs2_in: SInt,vs3:SInt,sew:Int,v0_bit_mask:UInt): SInt = {
+    val maxUInt32 = "hFFFFFFFF".U(32.W)
+    val sum = WireInit(0.S(33.W))
+    val sub = WireInit(0.S(33.W))
+    sub := (vs2_in -& vs1_in)
+    sum := (vs1_in.asUInt +& vs2_in.asUInt).asSInt
+
+    val maxValue = (1.S << (sew - 1)) - 1.S 
+  val minValue = -(1.S << (sew - 1)) 
+
+
+// Overflow for addition
+val positiveOverflowAdd = (vs1_in(sew - 1) === 0.U && vs2_in(sew - 1) === 0.U && sum(sew - 1) === 1.U)
+val negativeOverflowAdd = (vs1_in(sew - 1) === 1.U && vs2_in(sew - 1) === 1.U && sum(sew - 1) === 0.U)
+
+// Overflow for subtraction
+val positiveOverflowSub = (vs2_in(sew - 1) === 0.U && vs1_in(sew - 1) === 1.U && sub(sew - 1) === 1.U)
+val negativeOverflowSub = (vs2_in(sew - 1) === 1.U && vs1_in(sew - 1) === 0.U && sub(sew - 1) === 0.U)
+
     val lookuptable = Seq(
       0.U -> (vs1_in + vs2_in),//add
       2.U -> (vs2_in - vs1_in),//sub
@@ -193,159 +138,112 @@ def comparison_func(sew: Int): UInt = {
       9.U -> (vs1_in & vs2_in),// and
       10.U -> (vs1_in | vs2_in),//or
       11.U -> (vs1_in ^ vs2_in),//xor
-      37.U -> (vs2_in << (vs1_in.asUInt%sew)), //vsll
+      37.U -> (vs2_in << (vs1_in.asUInt%sew.U)), //vsll
 
-      "b101000".U -> (vs2_in.asUInt >> (vs1_in.asUInt%sew)).asSInt, //vsrl
-      "b101001".U -> ((vs2_in >> (vs1_in.asUInt%sew)).asSInt), //vsra
+      "b101000".U -> (vs2_in.asUInt >> (vs1_in.asUInt%sew.U)).asSInt, //vsrl
+      "b101001".U -> ((vs2_in >> (vs1_in.asUInt%sew.U)).asSInt), //vsra
       "b010111".U -> (vs1_in), //vmv 
       "b000100".U -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//minu
       "b000101".U -> Mux(vs1_in < vs2_in,vs1_in,vs2_in),//min
       "b000110".U -> Mux(vs1_in.asUInt > vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//maxu
-      "b000111".U -> Mux(vs1_in > vs2_in,vs1_in,vs2_in)//max      
+      "b000111".U -> Mux(vs1_in > vs2_in,vs1_in,vs2_in),//max
+      "b100000".U -> Mux(sum(32), "hFFFFFFFF".U, sum(31,0)).asSInt,//vsaddu
+      "b100001".U -> (Mux(positiveOverflowAdd, maxValue, Mux(negativeOverflowAdd, minValue, sum))),//vsadd
+      "b100010".U -> Mux(vs2_in.asUInt < vs1_in.asUInt, 0.U,vs2_in.asUInt - vs1_in.asUInt ).asSInt,//vssubu
+      "b100011".U -> Mux(positiveOverflowSub, maxValue, Mux(negativeOverflowSub, minValue, sub(31, 0).asSInt)),//vssub
+      "b010000".U -> (vs1_in.asUInt + vs2_in.asUInt + v0_bit_mask).asSInt, //vadc
+      "b010010".U -> (vs2_in.asUInt - vs1_in.asUInt - v0_bit_mask).asSInt //vsbc
+      // "b101010".U ->   vs1_in,//vnsra
+      // "b101010".U ->  vs1_in,//vadc
+      // "b101010".U ->  vs1_in,//vsbc
+      // "b101010".U ->  vs1_in
     )
     MuxLookup(io.alu_opcode, 0.S, lookuptable)
   }
-  // def arith_8(vs1:SInt , vs2:SInt):SInt={
-  //   val vec_sew8_a = WireInit(0.S(8.W))
-  //   val vec_sew8_b = WireInit(0.S(8.W))
-  //   val vec_sew8_c = WireInit(0.S(8.W))
-  //   val vec_sew8_d = WireInit(0.S(8.W))
-  //   val vec_sew8_e = WireInit(0.S(8.W))
-  //   val vec_sew8_f = WireInit(0.S(8.W))
-  //   val vec_sew8_g = WireInit(0.S(8.W))
-  //   val vec_sew8_h = WireInit(0.S(8.W))
-  //   val vec_sew8_result = WireInit(0.S(config.XLEN.W))
-  //   // vec_sew8_a := Arithmatic(vs1(63,56).asSInt, vs2(63,56).asSInt)
-  //   // vec_sew8_b := Arithmatic(vs1(55,48).asSInt, vs2(55,48).asSInt)
-  //   // vec_sew8_c := Arithmatic(vs1(47,40).asSInt, vs2(47,40).asSInt)
-  //   // vec_sew8_d := Arithmatic(vs1(39,32).asSInt, vs2(39,32).asSInt)
-  //   vec_sew8_e := Arithmatic(vs1(31,24).asSInt, vs2(31,24).asSInt)
-  //   vec_sew8_f := Arithmatic(vs1(23,16).asSInt, vs2(23,16).asSInt)
-  //   vec_sew8_g := Arithmatic(vs1(15,8).asSInt, vs2(15,8).asSInt)
-  //   vec_sew8_h := Arithmatic(vs1(7,0).asSInt, vs2(7,0).asSInt)
-  //   vec_sew8_result := Cat(vec_sew8_e,vec_sew8_f,vec_sew8_g,vec_sew8_h).asSInt//Cat(vec_sew8_a,vec_sew8_b,vec_sew8_c,vec_sew8_d,vec_sew8_e,vec_sew8_f,vec_sew8_g,vec_sew8_h).asSInt
-  //   vec_sew8_result
-  // }
-
-  //    def arith_16(vs1:SInt , vs2:SInt):SInt={
-  //     // val vec_sew16_a = WireInit(0.S(16.W))
-  //     // val vec_sew16_b = WireInit(0.S(16.W))
-  //     val vec_sew16_c = WireInit(0.S(16.W))
-  //     val vec_sew16_d = WireInit(0.S(16.W))
-  //     val vec_sew16_result = WireInit(0.S(config.XLEN.W))
-  //     // vec_sew16_a := Arithmatic(vs1(63,48).asSInt, vs2(63,48).asSInt)
-  //     // vec_sew16_b := Arithmatic(vs1(47,32).asSInt, vs2(47,32).asSInt)
-  //     vec_sew16_c := Arithmatic(vs1(31,16).asSInt, vs2(31,16).asSInt)
-  //     vec_sew16_d := Arithmatic(vs1(15,0).asSInt, vs2(15,0).asSInt)
-  //     vec_sew16_result := Cat(vec_sew16_c,vec_sew16_d).asSInt//Cat(vec_sew16_a,vec_sew16_b,vec_sew16_c,vec_sew16_d).asSInt
-  //     vec_sew16_result
-  // }
-
+  
    def arith_32(vs1:SInt , vs2:SInt,vs3:SInt,mask_vs0:Bool):SInt={
-    // val vec_sew32_a = WireInit(0.S(32.W))
     dontTouch(mask_vs0)
     val vsetvli_mask = 0.B
     val mask_bit_active_element = (mask_vs0===1.B && io.mask_arith===0.B) || io.mask_arith===1.B
     val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
-    // val mask_bit_active_agnostic = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===1.B
     val vec_sew32_b = WireInit(0.S(32.W))
     val vec_sew32_result = WireInit(0.S(config.XLEN.W))
-    // vec_sew32_a := Arithmatic(vs1(63,32).asSInt, vs2(63,32).asSInt)
-    vec_sew32_b := Mux(mask_bit_active_element===1.B,Arithmatic(vs1, vs2,vs3,32.U),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
-    // // dontTouch(vec_sew32_a)
-    // // dontTouch(vec_sew32_b)
-    // vec_sew32_result := Cat(vec_sew32_a,vec_sew32_b).asSInt
+    when(io.alu_opcode==="b010000".U || io.alu_opcode==="b010010".U){
+    vec_sew32_b := (Arithmatic(vs1, vs2,vs3,32,mask_vs0.asUInt)).asSInt
+    }.otherwise{
+    vec_sew32_b := Mux(mask_bit_active_element===1.B,Arithmatic(vs1, vs2,vs3,32,mask_vs0.asUInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
+    }
     vec_sew32_result := vec_sew32_b
     vec_sew32_result
   }
 
      def arith_16(vs1:SInt , vs2:SInt,vs3:SInt,mask_vs0:Bool):SInt={
-    // val vec_sew32_a = WireInit(0.S(32.W))
     dontTouch(mask_vs0)
     val vsetvli_mask = 0.B
     val mask_bit_active_element = (mask_vs0===1.B && io.mask_arith===0.B) || io.mask_arith===1.B
     val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
     val vec_sew16_result = WireInit(0.S(16.W))
     dontTouch(vec_sew16_result)
-    vec_sew16_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt,vs3,16.U),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
+    when(io.alu_opcode==="b010000".U || io.alu_opcode==="b010010".U){
+    vec_sew16_result := (Arithmatic(vs1.asSInt, vs2.asSInt,vs3,16,mask_vs0.asUInt)).asSInt
+    }.otherwise{
+    vec_sew16_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt,vs3,16,mask_vs0.asUInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
+    }
     vec_sew16_result
   }
 
   def arith_8(vs1:SInt , vs2:SInt,vs3:SInt,mask_vs0:Bool):SInt={
-    // val vec_sew32_a = WireInit(0.S(32.W))
     dontTouch(mask_vs0)
     val vsetvli_mask = 0.B
     val mask_bit_active_element = (mask_vs0===1.B && io.mask_arith===0.B) || io.mask_arith===1.B
     val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
     val vec_sew8_result = WireInit(0.S(8.W))
     dontTouch(vec_sew8_result)
-    vec_sew8_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt,vs3,8.U),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
+    when(io.alu_opcode==="b010000".U || io.alu_opcode==="b010010".U){
+    vec_sew8_result := (Arithmatic(vs1.asSInt, vs2.asSInt,vs3,8,mask_vs0.asUInt)).asSInt
+    }.otherwise{
+    vec_sew8_result := Mux(mask_bit_active_element===1.B,Arithmatic(vs1.asSInt, vs2.asSInt,vs3,8,mask_vs0.asUInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U).asSInt)).asSInt
+    }
     vec_sew8_result 
   }
 
+  // Function for vslideup
+def vslideup(input: SInt, slide_amount:UInt,mask:Bool,vs3:SInt,counter:UInt): SInt = {
+  val shifted = Wire(SInt(32.W))
+  val in_i = WireInit(0.U(32.W))
+  val in_j = WireInit(0.U(32.W))
+  when(slide_amount+counter < (config.vlen.U/32.U)){
+    in_i := 0.U
+    in_j := slide_amount
+  }otherwise{
+    in_i := (slide_amount+counter)/(config.vlen.U/32.U)
+    in_j := (slide_amount+counter)%(config.vlen.U/32.U)
+  }
 
+  shifted := Mux(mask===0.B && io.mask_arith===0.B,vs3,Mux(slide_amount < 32.U, (io.vs2_in(in_i)(in_j)).asSInt, vs3))
+  shifted
+}
 
-  // def arithmatic_mask(mask:Bool):SInt={
-  //   val mask_logic = io.mask_arith & io.config_mask
-  //   Mux(mask_logic,Arithmatic(io.vs1_in, io.vs2_in),Mux(!mask_logic,Fill(32,1.U).asSInt,0.S))
-  // }
-  // when(io.sew==="b000".U){
-  //   for (i <- 0 to 7) {
-  //  val a =  Arithmatic(io.vs1_in(0)(0), io.vs2_in(1)(1)
-  //  )
-  //   }
-  // }
-  
-  // for (i <- 0 to 7) { // for grouping = 8
-  // for (j <- 0 until (config.count_lanes)) {
-  //   io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j))
-  // }
+// Function for vslidedown
+def vslidedown(input: SInt, slide_amount: UInt): SInt = {
+  val shifted = Wire(SInt(32.W))
+  shifted := Mux(slide_amount < 32.U, (input >> slide_amount).asSInt, 0.S)
+  shifted
+}
+
+// // Function for vrgather
+// def vrgather(input: Vec[Vec[SInt]], indices: Vec[Vec[UInt]], i: Int, j: Int): SInt = {
+//   // Gathers element from input based on indices provided in indices vector
+//   // Ensures index is within bounds, else returns zero
+//   val index = indices(i)(j)
+//   Mux(index < input.length.U, input(i)(index), 0.S)
 // }
-// val mask = WireInit(0.U(32.W))
-// dontTouch(arith_32(io.vs1_in(0)(0),io.vs2_in(0)(0)))
-
-
-
-// def vec_main_alu(vs1_in:SInt ,vs2_in:SInt):SInt={
-//   val arithmatic_wire = WireInit(0.S(config.XLEN.W))
-//   dontTouch(arithmatic_wire)
-//     when(io.sew==="b000".U){//for sew=8
-//        arithmatic_wire:= arith_8(vs1_in, vs2_in)
-//   }
-//   .elsewhen(io.sew==="b001".U){//for sew=16
-//         arithmatic_wire:=arith_16(vs1_in, vs2_in)
-//   }.elsewhen(io.sew==="b010".U){//for sew=32
-//         val mask = WireInit(0.U(32.W))
-//         arithmatic_wire := arith_32(vs1_in, vs2_in)
-//         }
-//   arithmatic_wire
-// }
-
-
-
-
 
 
 val vl= 4
 val tail = 0.B
 // call main function
-// when (io.sew==="b010".U){
-// var concatenated_vs0: UInt = initialValue
 var count_mask = 0.U
-
-// for (i <- 0 to 7) { // for grouping = 8
-//   for (j <- 0 until config.count_lanes) {
-//     val mask = vs0_mask((i*config.count_lanes)+j) // Extract the lowest 2 bits
-//     val vl_counter = (i*config.count_lanes)+j
-//     if(io.vl >vl_counter){
-//     io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j),io.vs3_in(i)(j),mask)
-//     count_mask = count_mask + 1.U
-//     }
-//     else{
-//       io.vsd_out(i)(j) := Mux(tail===0.B,io.vs3_in(i)(j),Fill(32,1.U).asSInt)
-//     }
-//   }
-// }
 val comp_bit = "b011000".U === io.alu_opcode || "b011001".U === io.alu_opcode || "b011010".U === io.alu_opcode || "b011011".U === io.alu_opcode || "b011100".U === io.alu_opcode || "b011101".U === io.alu_opcode || "b011110".U === io.alu_opcode || "b011111".U === io.alu_opcode
 when(io.sew==="b000".U){
   when(comp_bit===0.B){
@@ -384,23 +282,15 @@ var vl_counter = 0
             io.vsd_out(i)(j) := Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
             }
       }}
-
-
-
   }.elsewhen(io.sew==="b001".U){//sew=16
   when(comp_bit===0.B){
-    val vec_sew16_a = WireInit(0.S(16.W))
     val vec_sew16_b = WireInit(0.S(16.W))
-    // val sew16_result = WireInit(0.S(32.W))
-    dontTouch(vec_sew16_a)
     dontTouch(vec_sew16_b)
     val sew16_result = WireInit(0.S(config.XLEN.W))
     var vl_counter = 0
-    // var counter_of_2 = 0
     for (i <- 0 until 8) {
       for (j <- 0 until config.count_lanes) {
         val idx = (i * config.count_lanes) + j
-        // val mask = vs0_mask(idx+1,idx)
           io.vsd_out(i)(j) := Cat(Mux(io.vl_in > vl_counter.U+1.U,
           arith_16(io.vs1_in(i)(j)(31,16).asSInt, io.vs2_in(i)(j)(31,16).asSInt, io.vs3_in(i)(j)(31,16).asSInt, vs0_mask(vl_counter+1)),
           Mux(tail === 0.B, io.vs3_in(i)(j)(31,16).asSInt, Fill(16, 1.U).asSInt)),
@@ -408,8 +298,6 @@ var vl_counter = 0
           Mux(io.vl_in > vl_counter.U,
           arith_16(io.vs1_in(i)(j)(15,0).asSInt, io.vs2_in(i)(j)(15,0).asSInt, io.vs3_in(i)(j)(15,0).asSInt, vs0_mask(vl_counter)),
           Mux(tail === 0.B, io.vs3_in(i)(j)(15,0).asSInt, Fill(16, 1.U).asSInt))).asSInt
-          // io.vsd_out(i)(j) := sew16_result 
-          // counter_of_2 = counter_of_2  + 1
           vl_counter = vl_counter + 2 //counter_of_2 * 2
       }}}
       .otherwise{
@@ -425,33 +313,25 @@ var vl_counter = 0
             io.vsd_out(i)(j) := Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
             }
       }}
-
-
-
-
-
-
-
-
-
-
-  }.elsewhen(io.sew==="b010".U){//sew = 32
-    
-    
-    // val vec_elements = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(config.XLEN.W)))))
-    when(comp_bit===0.B){
-       var vl_counter = 1
-    for (i <- 0 until 8) {
-      for (j <- 0 until config.count_lanes) {
-        val idx = (i * config.count_lanes) + j
-        val mask = vs0_mask(idx)
-            io.vsd_out(i)(j) := Mux(io.vl_in >= vl_counter.U,
-          arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j), io.vs3_in(i)(j), mask),
-          Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
-        )
-        vl_counter = vl_counter + 1
-      }}
-      }
+  }.elsewhen(io.sew==="b010".U){//sew = 32    
+    when(comp_bit === 0.B) {
+  var vl_counter = 1
+  for (i <- 0 until 8) {
+    for (j <- 0 until config.count_lanes) {
+      val idx = (i * config.count_lanes) + j
+      val mask = vs0_mask(idx)
+      io.vsd_out(i)(j) := Mux(io.vl_in >= vl_counter.U,
+        MuxLookup(io.alu_opcode, arith_32(io.vs1_in(i)(j),io.vs2_in(i)(j), io.vs3_in(i)(j), mask), Seq(
+          "b001110".U -> Mux(io.vs1_in(i)(j) <8.S,vslideup(io.vs2_in(i)(j), (io.vs1_in(0)(0)(10,0)),mask,io.vs3_in(i)(j),vl_counter.U),io.vs3_in(i)(j)),
+          "b001111".U -> vslidedown(io.vs1_in(i)(j), vl_counter.U)
+          // "b001100".U -> vrgather(io.vs1_in(i)(j), io.vs2_in(i)(j))
+        )),
+        Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
+      )
+      vl_counter = vl_counter + 1
+    }
+  }
+}
       .otherwise{
       var vl_counter1 = 1
       var counter2 = 0
@@ -479,55 +359,4 @@ var vl_counter = 0
         vl_counter = vl_counter + 1
       }}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //     }
-  // .elsewhen(io.sew==="b001".U){
-    // for (i <- 0 to 7) { // for grouping = 8
-    //   for (j <- 0 until (config.count_lanes)) {
-    //     io.vsd_out(i)(j) := vec_main_alu(io.vs1_in(i)(j),io.vs2_in(i)(j))
-    //   }}}
-  // .elsewhen(io.sew==="b000".U){
-  //   for (i <- 0 to 7) { // for grouping = 8
-  //     for (j <- 0 until (config.count_lanes)) {
-  //       io.vsd_out(i)(j) := vec_main_alu(io.vs1_in(i)(j),io.vs2_in(i)(j))
-  //     }}
-  // }
-  // io.vs1_out := arithmatic_mask(1.B)
-  // io.vs1_out := 0.S
-
-
-
-
-
-// var concatenated_vs0: UInt = initialValue
-
-// for (i <- 0 until 8) { // Loop for grouping = 8
-//   for (j <- 0 until config.count_lanes) {
-//     // Extract the lowest bit of the concatenated value as the mask
-//     var mask = concatenated_vs0(0)
-
-//     // Call the arith_32 function with vs1, vs2, and mask
-//     io.vsd_out(i)(j) := arith_32(io.vs1_in(i)(j), io.vs2_in(i)(j), mask)
-
-//     // Shift right by 1 bit for the next iteration
-//     concatenated_vs0 = concatenated_vs0 >> 1.U
-//   }
-// }
-
-
 }
-
-// here perform masking and sew logic

@@ -20,10 +20,6 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val vl_out = Output(UInt(32.W))
         val vl_rs1_in =  Input(UInt(32.W))
         val lmul_out = Output(UInt(32.W))
-
-        // val de_rs1_addr = Output(UInt(5.W))
-        // val de_rs2_addr = Output(UInt(5.W))
-        // val rs1_data_out = Output(SInt(32.W))
     })
     val vec_cu_module = Module(new vec_control_unit)
     dontTouch(vec_cu_module.io)
@@ -67,11 +63,9 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val sew8_element  =   WireInit(0.S(8.W))
         val sew16_element =  WireInit(0.S(16.W))
         val sew32_element =  WireInit(0.S(32.W))
-        // val sew64_element =  WireInit(0.S(32.W))
         sew8_element  := rs1
         sew16_element := rs1
         sew32_element := rs1
-        // sew64_element := rs1
 
         when(sew==="b000".U){
            element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element).asSInt
