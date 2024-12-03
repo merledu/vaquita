@@ -57,25 +57,25 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     io.de_write_en := vec_cu_module.io.mem_write
     io.de_read_en := vec_cu_module.io.mem_read
     io.de_reg_write := vec_cu_module.io.reg_write
-    def sew_selector_with_element(sew:UInt,rs1:SInt):SInt={
+    def sew_selector_with_element(sew:UInt,rs1:UInt):UInt={
 
-        val element_return = WireInit(0.S(config.XLEN.W))
-        val sew8_element  =   WireInit(0.S(8.W))
-        val sew16_element =  WireInit(0.S(16.W))
-        val sew32_element =  WireInit(0.S(32.W))
-        sew8_element  := rs1
-        sew16_element := rs1
-        sew32_element := rs1
+        val element_return = WireInit(0.U(config.XLEN.W))
+        val sew8_element  =   WireInit(0.U(8.W))
+        val sew16_element =  WireInit(0.U(16.W))
+        val sew32_element =  WireInit(0.U(32.W))
+        sew8_element  := Cat(Fill(3,0.U),rs1)
+        sew16_element := Cat(Fill(11,0.U),rs1)
+        sew32_element := Cat(Fill(27,0.U),rs1)
 
         when(sew==="b000".U){
-           element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element).asSInt
+           element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element)
         }.elsewhen(sew==="b001".U){
-           element_return:= Cat(sew16_element,sew16_element).asSInt
+           element_return:= Cat(sew16_element,sew16_element)
         }.elsewhen(sew==="b010".U){
            element_return:= sew32_element
         }
         .otherwise{
-            element_return:= 0.S
+            element_return:= 0.U
         }
         element_return
     }
@@ -85,7 +85,7 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     io.vs1_data_out(i)(j) := MuxLookup(vec_cu_module.io.operand_type,0.S,Array(
         (0.U) -> vec_reg_module.io.vs1_data(i)(j),
         (1.U) -> io.rs1_data,
-        (2.U) -> sew_selector_with_element(vcsr_module.io.sew,io.instr(19,15).asSInt),
+        (2.U) -> sew_selector_with_element(vcsr_module.io.sew,io.instr(19,15)).asSInt,
         (3.U) -> 0.S)
     )}
     }

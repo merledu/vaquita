@@ -208,26 +208,29 @@ val negativeOverflowSub = (vs2_in(sew - 1) === 1.U && vs1_in(sew - 1) === 0.U &&
   }
 
   // Function for vslideup
-def vslideup(input: SInt, slide_amount:UInt,mask:Bool,vs3:SInt,counter:UInt): SInt = {
+def vslideup(input: SInt, slide_amount:UInt,mask_vs0:Bool,vs3:SInt,i_incre:UInt): SInt = {
   val shifted = Wire(SInt(32.W))
-  val in_i = WireInit(0.U(32.W))
-  val in_j = WireInit(0.U(32.W))
-  when(slide_amount+counter < (config.vlen.U/32.U)){
-    in_i := 0.U
-    in_j := slide_amount
-  }otherwise{
-    in_i := (slide_amount+counter)/(config.vlen.U/32.U)
-    in_j := (slide_amount+counter)%(config.vlen.U/32.U)
-  }
-
-  shifted := Mux(mask===0.B && io.mask_arith===0.B,vs3,Mux(slide_amount < 32.U, (io.vs2_in(in_i)(in_j)).asSInt, vs3))
+  val in_i = WireInit(0.U(33.W))
+  val in_j = WireInit(0.U(10.W))
+  val vsetvli_mask = 0.B
+    val mask_bit_active_element = (mask_vs0===1.B && io.mask_arith===0.B) || io.mask_arith===1.B
+    val mask_bit_undisturb = mask_vs0===0.B && io.mask_arith===0.B && vsetvli_mask===0.B
+    dontTouch(in_i)
+    dontTouch(in_j)
+    dontTouch(slide_amount)
+  // Mux(mask_bit_active_element===1.B,Arithmatic(vs1, vs2,vs3,32,mask_vs0.asUInt),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
+  in_i := (slide_amount)/(config.vlen.U/32.U)+i_incre
+  in_j := (slide_amount)%(config.vlen.U/32.U)
+  shifted := Mux(mask_bit_active_element===1.B,(io.vs2_in(in_i)(in_j)),Mux(mask_bit_undisturb===1.B,vs3,Fill(32,1.U).asSInt)).asSInt
   shifted
 }
 
+
+
 // Function for vslidedown
 def vslidedown(input: SInt, slide_amount: UInt): SInt = {
-  val shifted = Wire(SInt(32.W))
-  shifted := Mux(slide_amount < 32.U, (input >> slide_amount).asSInt, 0.S)
+  val shifted = WireInit(0.S(32.W))
+  // shifted := Mux(mask===1.B && io.mask_arith===0.B || io.mask_arith===1.B,(io.vs2_in(in_i)(in_j)).asSInt, vs3)
   shifted
 }
 
@@ -239,13 +242,14 @@ def vslidedown(input: SInt, slide_amount: UInt): SInt = {
 //   Mux(index < input.length.U, input(i)(index), 0.S)
 // }
 
+val slide_instr =  "b001110".U === io.alu_opcode || "b001111".U === io.alu_opcode
 
 val vl= 4
 val tail = 0.B
 // call main function
 var count_mask = 0.U
 val comp_bit = "b011000".U === io.alu_opcode || "b011001".U === io.alu_opcode || "b011010".U === io.alu_opcode || "b011011".U === io.alu_opcode || "b011100".U === io.alu_opcode || "b011101".U === io.alu_opcode || "b011110".U === io.alu_opcode || "b011111".U === io.alu_opcode
-when(io.sew==="b000".U){
+when(io.sew==="b000".U && slide_instr===0.B){
   when(comp_bit===0.B){
 var vl_counter = 0
     for (i <- 0 until 8) {
@@ -282,7 +286,7 @@ var vl_counter = 0
             io.vsd_out(i)(j) := Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
             }
       }}
-  }.elsewhen(io.sew==="b001".U){//sew=16
+  }.elsewhen(io.sew==="b001".U && slide_instr===0.B){//sew=16
   when(comp_bit===0.B){
     val vec_sew16_b = WireInit(0.S(16.W))
     dontTouch(vec_sew16_b)
@@ -313,21 +317,25 @@ var vl_counter = 0
             io.vsd_out(i)(j) := Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
             }
       }}
-  }.elsewhen(io.sew==="b010".U){//sew = 32    
+  }.elsewhen(io.sew==="b010".U  && slide_instr===0.B){//sew = 32    
     when(comp_bit === 0.B) {
   var vl_counter = 1
   for (i <- 0 until 8) {
     for (j <- 0 until config.count_lanes) {
       val idx = (i * config.count_lanes) + j
       val mask = vs0_mask(idx)
+      // val slide_value = WireInit(0.U(33.W))
+      // val vs1_value = WireInit(0.U(33.W))
+      // vs1_value := io.vs1_in(0)(0).asUInt
+      // slide_value := (vs1_value+vl_counter.U-1.U)
       io.vsd_out(i)(j) := Mux(io.vl_in >= vl_counter.U,
         MuxLookup(io.alu_opcode, arith_32(io.vs1_in(i)(j),io.vs2_in(i)(j), io.vs3_in(i)(j), mask), Seq(
-          "b001110".U -> Mux(io.vs1_in(i)(j) <8.S,vslideup(io.vs2_in(i)(j), (io.vs1_in(0)(0)(10,0)),mask,io.vs3_in(i)(j),vl_counter.U),io.vs3_in(i)(j)),
-          "b001111".U -> vslidedown(io.vs1_in(i)(j), vl_counter.U)
+          "b001110".U ->    0.S//Mux(io.vs1_in(i)(j) < 8.S,vslideup(io.vs2_in(i)(j), slide_value,mask,io.vs3_in(i)(j),"b001110".U),io.vs3_in(i)(j)),
+          // "b001111".U -> vslidedown(io.vs1_in(i)(j), vl_counter.U)
           // "b001100".U -> vrgather(io.vs1_in(i)(j), io.vs2_in(i)(j))
-        )),
+        )),//in this place use the comparison logic
         Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt)
-      )
+      )     
       vl_counter = vl_counter + 1
     }
   }
@@ -346,7 +354,67 @@ var vl_counter = 0
             }
       }}
         
-  }.otherwise{
+  }.elsewhen(slide_instr===1.B && io.sew === "b10".U){ //for slide instructions and sew 32
+    var vl_counter = 1  
+    var vstart = 0  
+    // val slideup_value = WireInit(0.U(33.W))
+    val slidedown_value = WireInit(0.U(33.W))
+    val vs1_value = WireInit(0.U(33.W))
+    // val maxStartOffset = WireInit(0.U(32.W))
+    vs1_value := io.vs1_in(0)(0).asUInt
+    val slide_vec_wire = WireInit(VecInit(Seq.fill(8){VecInit(Seq.fill(8) {0.U(32.W)})}))
+    val maxStartOffset = WireInit(VecInit(Seq.fill(8){VecInit(Seq.fill(8) {0.U(32.W)})}))
+
+    dontTouch(slide_vec_wire)
+    for (i <- 0 until 8) {
+      for (j <- 0 until config.count_lanes) {
+          // val idx  = (i * config.count_lanes) + j
+    // val mask = vs0_mask((i * config.count_lanes) + j)
+    
+        slidedown_value := (vs1_value+vl_counter.U-1.U)
+        maxStartOffset(i)(j) := Mux((vstart.U) > vs1_value, (vstart.U), vs1_value)
+        slide_vec_wire(i)(j) := (vstart.U) - vs1_value
+        when(io.alu_opcode==="b001110".U){ // for slide up //   Mux(i.U>0.U && j.U===0.U && vs1_value=/=0.U,,(j.U-vs1_value))("b1111".U).asSInt
+        
+          io.vsd_out(i)(j) := Mux(
+            io.vl_in >= vl_counter.U,
+            Mux(
+              vstart.S < maxStartOffset(i)(j).asSInt && vstart.S >= 0.S,
+              io.vs3_in(i)(j),
+              Mux(
+                vstart.S >= maxStartOffset(i)(j).asSInt && vstart.S < io.vl_in.asSInt,
+                vslideup(
+                  io.vs2_in(i)(j),
+                  (slide_vec_wire(i)(j))%8.U,
+                  (vs0_mask((i * config.count_lanes) + j)),
+                  io.vs3_in(i)(j),
+                  Mux(
+                    vs1_value===0.U,
+                    i.U,
+                    (slide_vec_wire(i)(j))/8.U
+                  )
+                ),
+                0.S
+              )
+            ),
+            Mux(
+              tail === 0.B,
+              io.vs3_in(i)(j),
+              Fill(32, 1.U).asSInt
+            )
+          )
+  }.otherwise{ /// for slide down
+    io.vsd_out(i)(j) := 0.S//Mux(io.vl_in >= vl_counter.U, vslideup(io.vs2_in(i)(j), slidedown_value,(vs0_mask((i * config.count_lanes) + j)),io.vs3_in(i)(j),i.U),
+        // Mux(tail === 0.B, io.vs3_in(i)(j), Fill(32, 1.U).asSInt))
+        }
+        
+      vl_counter = vl_counter + 1
+      vstart = vstart + 1
+      }
+    }
+
+  }
+  .otherwise{
     var vl_counter = 1
     for (i <- 0 until 8) {
       for (j <- 0 until config.count_lanes) {
