@@ -67,13 +67,13 @@ class vec_top extends Module {
     fu_module.io.instr_in := excute_stage_module.io.ex_instr_out
     fu_module.io.mem_regWrite := mem_stage_module.io.mem_reg_write_out
     fu_module.io.wb_regWrite := wb_stage_module.io.wb_reg_write_out
-    when(fu_module.io.forwardA===1.U){
+    when(fu_module.io.forward_a===1.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs1_data_in(i)(j) := mem_stage_module.io.mem_vsd_data_out(i)(j)
         }}
     }
-    .elsewhen(fu_module.io.forwardA===2.U){
+    .elsewhen(fu_module.io.forward_a===2.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs1_data_in(i)(j) := wb_stage_module.io.wb_vsd_data_out(i)(j)
@@ -85,13 +85,13 @@ class vec_top extends Module {
             excute_stage_module.io.ex_vs1_data_in(i)(j) := RegNext(de_module.io.vs1_data_out(i)(j))//directly wire from excute stage
         }}
     }
-    when(fu_module.io.forwardB===1.U){
+    when(fu_module.io.forward_b===1.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs2_data_in(i)(j) := mem_stage_module.io.mem_vsd_data_out(i)(j)
         }
     }
-    }.elsewhen(fu_module.io.forwardB===2.U){
+    }.elsewhen(fu_module.io.forward_b===2.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs2_data_in(i)(j) := wb_stage_module.io.wb_vsd_data_out(i)(j)
@@ -103,13 +103,13 @@ class vec_top extends Module {
         }}
     }
     //for vs3
-    when(fu_module.io.forwardC===1.U){
+    when(fu_module.io.forward_c===1.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs3_data_in(i)(j) := mem_stage_module.io.mem_vsd_data_out(i)(j)
         }
     }
-    }.elsewhen(fu_module.io.forwardC===2.U){
+    }.elsewhen(fu_module.io.forward_c===2.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs3_data_in(i)(j) := wb_stage_module.io.wb_vsd_data_out(i)(j)
@@ -121,13 +121,13 @@ class vec_top extends Module {
         }}
     }
     //for vs0
-    when(fu_module.io.forwardD===1.U){
+    when(fu_module.io.forward_d===1.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs0_data_in(i)(j) := mem_stage_module.io.mem_vsd_data_out(i)(j)
         }
     }
-    }.elsewhen(fu_module.io.forwardD===2.U){
+    }.elsewhen(fu_module.io.forward_d===2.U){
         for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             excute_stage_module.io.ex_vs0_data_in(i)(j) := wb_stage_module.io.wb_vsd_data_out(i)(j)
