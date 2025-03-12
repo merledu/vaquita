@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 
 
-class mem_stage(implicit val config: Vaquita_Config) extends Module {
+class MemStage(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle {
     val mem_vsd_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val mem_vsd_data_out = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))

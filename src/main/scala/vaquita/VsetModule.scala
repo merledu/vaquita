@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 
 
-class vsetvli(implicit val config: Vaquita_Config,val on : Bool =1.B, val off : Bool =0.B) extends Module {
+class VsetModule(implicit val config: VaquitaConfig,val on : Bool =1.B, val off : Bool =0.B) extends Module {
   val io = IO (new Bundle {
     val rs1_in = Input(UInt(32.W))
     val instr_in = Input(UInt(32.W))

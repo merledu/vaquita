@@ -1,7 +1,7 @@
 package vaquita
 import chisel3._
 import chisel3.util._
-class decode_stage(implicit val config: Vaquita_Config) extends Module {
+class DecodeStage(implicit val config: VaquitaConfig) extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
         val wb_de_instr_in = Input(UInt(32.W))
@@ -21,13 +21,13 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val vl_rs1_in =  Input(UInt(32.W))
         val lmul_out = Output(UInt(32.W))
     })
-    val vec_cu_module = Module(new vec_control_unit)
+    val vec_cu_module = Module(new VecControlUnit)
     dontTouch(vec_cu_module.io)
 
-    val vec_reg_module = Module(new vec_reg_file)
+    val vec_reg_module = Module(new VecRegFile)
     dontTouch(vec_reg_module.io)
 
-    val vcsr_module = Module(new Vcsr)
+    val vcsr_module = Module(new VCSR)
     dontTouch(vcsr_module.io)
 
     // vec control unit

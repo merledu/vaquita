@@ -2,7 +2,7 @@ package vaquita
 
 import chisel3._
 
-trait Vaquita_Config {
+trait VaquitaConfig {
   val vlen: Int      = 256
   val reg_count :Int = 32
   val XLEN :Int = 32

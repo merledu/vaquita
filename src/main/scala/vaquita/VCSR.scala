@@ -2,7 +2,7 @@ package vaquita
 import chisel3._
 import chisel3.util._
 
-class Vcsr(implicit val config: Vaquita_Config) extends Module {
+class VCSR(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle{
     val instr_in = Input (UInt (32.W ))            
     val vl_rs1_in = Input(UInt(32.W))

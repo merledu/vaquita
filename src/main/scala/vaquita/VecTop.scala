@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.stage.ChiselStage
 
-class vec_top extends Module {
+class VecTop extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
         val rs1_data = Input(SInt(32.W))
@@ -13,19 +13,19 @@ class vec_top extends Module {
         val vl_rs1_out = Output(UInt(32.W))
         
     })
-    implicit val config = new Vaquita_Config {}
-    val de_module = Module(new decode_stage)
+    implicit val config = new VaquitaConfig {}
+    val de_module = Module(new DecodeStage)
     dontTouch(de_module.io)
-    val excute_stage_module = Module(new excute_stage)
+    val excute_stage_module = Module(new ExcuteStage)
     dontTouch(excute_stage_module.io)
 
-    val mem_stage_module = Module(new mem_stage)
+    val mem_stage_module = Module(new MemStage)
     dontTouch(mem_stage_module.io)
 
-    val vec_mem_fetch_module = Module(new vec_mem_fetch)
+    val vec_mem_fetch_module = Module(new VecMemFetch)
     dontTouch(vec_mem_fetch_module.io)
 
-    val wb_stage_module = Module(new wb_stage)
+    val wb_stage_module = Module(new WBStage)
     dontTouch(wb_stage_module.io)
 
     val fu_module = Module(new ForwardingUnit)

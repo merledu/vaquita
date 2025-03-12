@@ -4,7 +4,7 @@ import chisel3.util._
 import chisel3.experimental._
 
 
-class vec_mem_fetch(implicit val config: Vaquita_Config) extends Module {
+class VecMemFetch(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle {
     val addr = Input(UInt(32.W))
     val mem_vs3_data       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
