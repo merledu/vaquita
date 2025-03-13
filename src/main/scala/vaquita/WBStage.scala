@@ -15,8 +15,8 @@ class WBStage(implicit val config: VaquitaConfig,val on : Bool =1.B, val off : B
     val wb_reg_write_out = Output(Bool())
     val mem_to_reg = Input(Bool())
     })
-    val initValue = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(config.XLEN.W)))))
-    val vsd_data = RegNext(WireDefault(initValue))
+    val init_value = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(config.XLEN.W)))))
+    val vsd_data = RegNext(WireDefault(init_value))
 
     val mem_to_reg = RegNext(io.mem_to_reg)
 
