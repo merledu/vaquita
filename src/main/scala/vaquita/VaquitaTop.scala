@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 import chisel3.stage.ChiselStage
 
-class VecTop extends Module {
+class VaquitaTop extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
         val rs1_data = Input(SInt(32.W))
@@ -31,14 +31,6 @@ class VecTop extends Module {
     val fu_module = Module(new ForwardingUnit)
     dontTouch(fu_module.io)
 
-    // val vec_share_mem_module = Module(new vec_share_mem)
-    // dontTouch(vec_share_mem_module.io)
-
-    // val vec_alu_module = Module(new vec_alu)
-    // dontTouch(vec_alu_module.io)
-
-//     io.dmemReq <> vec_mem_fetch_module.io.dccmReq
-//   vec_mem_fetch_module.io.dccmRsp <> io.dmemRsp
   for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
             vec_mem_fetch_module.io.mem_vs3_data(i)(j) := mem_stage_module.io.vs3_data_out(i)(j)
