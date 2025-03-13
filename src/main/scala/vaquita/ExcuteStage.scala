@@ -1,7 +1,6 @@
 package vaquita
 import chisel3._
 import chisel3.util._
-import javax.xml.transform.OutputKeys
 
 class ExcuteStage(implicit val config: VaquitaConfig) extends Module {
     val io = IO (new Bundle{
