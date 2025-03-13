@@ -29,10 +29,8 @@ val lmul = WireInit(1.U(32.W))
 
 //-----------vector address ---------------------------start
   val vec_load_store_bit = io.read_en || io.write_en
-  dontTouch(vec_load_store_bit)
   val vec_load_store_counter = RegInit(((config.vlen.U*2.U)/32.U)-1.U(32.W))
   val offset = RegInit(0.U(32.W))
-  dontTouch(vec_load_store_counter)
   val vec_stall = WireInit(false.B)
   when(vec_load_store_bit===1.B && vec_load_store_counter=/=0.U){
     vec_load_store_counter := vec_load_store_counter - 1.U
@@ -74,12 +72,7 @@ val lmul = WireInit(1.U(32.W))
     val load_reg_end        = RegInit(((config.vlen.U)/32.U)-1.U(32.W))
     val load_lmul           = lmul//io.mem_lmul_in
     val read_data_last_reg = WireInit(0.S(32.W))
-    dontTouch(load_reg_i)
-    dontTouch(load_reg_j)
-    dontTouch(load_reg_end)
-    dontTouch(load_lmul)
     val read_en_reg = RegNext(io.read_en)
-    dontTouch(read_en_reg)
     when(read_en_reg){
       when(load_reg_i=/=load_lmul){
         when(load_reg_j=/=load_reg_end){
@@ -122,10 +115,6 @@ val store_reg_i          = RegInit(0.U(32.W))
     val store_reg_j          = RegInit(0.U(32.W))
     val store_reg_end        = RegInit(((config.vlen.U*1.U)/32.U)-1.U(32.W))
     val store_lmul           = lmul
-    dontTouch(store_reg_i)
-    dontTouch(store_reg_j)
-    dontTouch(store_reg_end)
-    dontTouch(store_lmul)
     when(io.write_en){
       when(store_reg_i=/=store_lmul){
         when(store_reg_j=/=store_reg_end){
@@ -150,4 +139,15 @@ val store_reg_i          = RegInit(0.U(32.W))
     store_reg_i := 0.U
     io.dccmReq.bits.dataRequest  := 0.U
   }
+  dontTouch(load_reg_i)
+  dontTouch(load_reg_j)
+  dontTouch(load_reg_end)
+  dontTouch(load_lmul)
+  dontTouch(store_reg_i)
+  dontTouch(store_reg_j)
+  dontTouch(store_reg_end)
+  dontTouch(store_lmul)
+  dontTouch(read_en_reg)
+  dontTouch(vec_load_store_bit)
+  dontTouch(vec_load_store_counter)
 }
