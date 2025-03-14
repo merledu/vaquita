@@ -87,19 +87,12 @@ class DecodeStage(implicit val config: VaquitaConfig) extends Module {
         (1.U) -> io.rs1_data,
         (2.U) -> sew_selector_with_element(vcsr_module.io.sew,io.instr(19,15)).asSInt,
         (3.U) -> 0.S)
-    )}
-    }
-    for (i <- 0 to 7) {
-        for (j <- 0 to (config.count_lanes)-1) {
-            io.vs2_data_out(i)(j) := vec_reg_module.io.vs2_data(i)(j)
-            io.vs3_data_out(i)(j) := vec_reg_module.io.vs3_data(i)(j)
-            io.vs0_data_out(i)(j) := vec_reg_module.io.vs0_data(i)(j)
+    )
     }}
-io.alu_op_out := io.instr(31,26)
-
-    for (i <- 0 to 7) {
-        for (j <- 0 to (config.count_lanes)-1) {
-            vec_reg_module.io.vd_data(i)(j) := io.vsd_data_in(i)(j)
-    }}
+    io.vs2_data_out <> vec_reg_module.io.vs2_data
+    io.vs3_data_out <> vec_reg_module.io.vs3_data
+    io.vs0_data_out <> vec_reg_module.io.vs0_data
+    io.alu_op_out := io.instr(31,26)
+    vec_reg_module.io.vd_data <> io.vsd_data_in
 
 }
