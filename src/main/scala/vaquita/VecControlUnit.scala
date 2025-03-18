@@ -95,4 +95,4 @@ class VecControlUnit(implicit val config: VaquitaConfig,val on : Bool =1.B, val 
         io.store_vs3_to_mem := off
         
     }
-    }
+}
