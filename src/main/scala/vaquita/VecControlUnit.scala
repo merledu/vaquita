@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 
 
-class vec_control_unit(implicit val config: Vaquita_Config,val on : Bool =1.B, val off : Bool =0.B) extends Module {
+class VecControlUnit(implicit val config: VaquitaConfig,val on : Bool =1.B, val off : Bool =0.B) extends Module {
   val io = IO (new Bundle {
     val instr = Input(UInt(32.W))
     val reg_write =  Output(Bool())
@@ -95,4 +95,4 @@ class vec_control_unit(implicit val config: Vaquita_Config,val on : Bool =1.B, v
         io.store_vs3_to_mem := off
         
     }
-    }
+}

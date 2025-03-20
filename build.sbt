@@ -2,10 +2,10 @@
 scalaVersion     := "2.12.13"
 version          := "0.1.0"
 organization     := "com.github.merledu"
-name := "vaquita"
+name             := "vaquita"
 libraryDependencies ++= Seq(
   "edu.berkeley.cs" %% "chisel3" % "3.5.6",
-  "edu.berkeley.cs" %% "chiseltest" % "0.3.2" % "test"
+  "edu.berkeley.cs" %% "chiseltest" % "0.5.6" % "test" // Updated chiseltest version
 )
 scalacOptions ++= Seq(
   "-Xsource:2.11",

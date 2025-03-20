@@ -1,7 +1,7 @@
 package vaquita
 import chisel3._
 import chisel3.util._
-class decode_stage(implicit val config: Vaquita_Config) extends Module {
+class DecodeStage(implicit val config: VaquitaConfig) extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))
         val wb_de_instr_in = Input(UInt(32.W))
@@ -21,13 +21,13 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val vl_rs1_in =  Input(UInt(32.W))
         val lmul_out = Output(UInt(32.W))
     })
-    val vec_cu_module = Module(new vec_control_unit)
+    val vec_cu_module = Module(new VecControlUnit)
     dontTouch(vec_cu_module.io)
 
-    val vec_reg_module = Module(new vec_reg_file)
+    val vec_reg_module = Module(new VecRegFile)
     dontTouch(vec_reg_module.io)
 
-    val vcsr_module = Module(new Vcsr)
+    val vcsr_module = Module(new VCSR)
     dontTouch(vcsr_module.io)
 
     // vec control unit
@@ -57,25 +57,25 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     io.de_write_en := vec_cu_module.io.mem_write
     io.de_read_en := vec_cu_module.io.mem_read
     io.de_reg_write := vec_cu_module.io.reg_write
-    def sew_selector_with_element(sew:UInt,rs1:UInt):UInt={
+    def sew_selector_with_element(sew:UInt,rs1:SInt):SInt={
 
-        val element_return = WireInit(0.U(config.XLEN.W))
-        val sew8_element  =   WireInit(0.U(8.W))
-        val sew16_element =  WireInit(0.U(16.W))
-        val sew32_element =  WireInit(0.U(32.W))
-        sew8_element  := Cat(Fill(3,0.U),rs1)
-        sew16_element := Cat(Fill(11,0.U),rs1)
-        sew32_element := Cat(Fill(27,0.U),rs1)
+        val element_return = WireInit(0.S(config.XLEN.W))
+        val sew8_element  =   WireInit(0.S(8.W))
+        val sew16_element =  WireInit(0.S(16.W))
+        val sew32_element =  WireInit(0.S(32.W))
+        sew8_element  := Cat(Mux(rs1(4)===1.B,Fill(3,1.U),Fill(3,0.U)),rs1).asSInt
+        sew16_element := Cat(Mux(rs1(4)===1.B,Fill(11,1.U),Fill(11,0.U)),rs1).asSInt
+        sew32_element := Cat(Mux(rs1(4)===1.B,Fill(27,1.U),Fill(27,0.U)),rs1).asSInt
 
         when(sew==="b000".U){
-           element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element)
+           element_return:= Cat(sew8_element,sew8_element,sew8_element,sew8_element).asSInt
         }.elsewhen(sew==="b001".U){
-           element_return:= Cat(sew16_element,sew16_element)
+           element_return:= Cat(sew16_element,sew16_element).asSInt
         }.elsewhen(sew==="b010".U){
            element_return:= sew32_element
         }
         .otherwise{
-            element_return:= 0.U
+            element_return:= 0.S
         }
         element_return
     }
@@ -85,21 +85,14 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
     io.vs1_data_out(i)(j) := MuxLookup(vec_cu_module.io.operand_type,0.S,Array(
         (0.U) -> vec_reg_module.io.vs1_data(i)(j),
         (1.U) -> io.rs1_data,
-        (2.U) -> sew_selector_with_element(vcsr_module.io.sew,io.instr(19,15)).asSInt,
+        (2.U) -> sew_selector_with_element(vcsr_module.io.sew,io.instr(19,15).asSInt),
         (3.U) -> 0.S)
-    )}
-    }
-    for (i <- 0 to 7) {
-        for (j <- 0 to (config.count_lanes)-1) {
-            io.vs2_data_out(i)(j) := vec_reg_module.io.vs2_data(i)(j)
-            io.vs3_data_out(i)(j) := vec_reg_module.io.vs3_data(i)(j)
-            io.vs0_data_out(i)(j) := vec_reg_module.io.vs0_data(i)(j)
+    )
     }}
-io.alu_op_out := io.instr(31,26)
-
-    for (i <- 0 to 7) {
-        for (j <- 0 to (config.count_lanes)-1) {
-            vec_reg_module.io.vd_data(i)(j) := io.vsd_data_in(i)(j)
-    }}
+    io.vs2_data_out <> vec_reg_module.io.vs2_data
+    io.vs3_data_out <> vec_reg_module.io.vs3_data
+    io.vs0_data_out <> vec_reg_module.io.vs0_data
+    io.alu_op_out := io.instr(31,26)
+    vec_reg_module.io.vd_data <> io.vsd_data_in
 
 }

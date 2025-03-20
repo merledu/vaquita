@@ -4,7 +4,7 @@ import chisel3.util._
 import chisel3.experimental._
 
 
-class vec_reg_file(implicit val config: Vaquita_Config) extends Module {
+class VecRegFile(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle {
     val vs1_addr = Input(UInt(5.W))
     val vs2_addr = Input(UInt(5.W))
@@ -20,21 +20,16 @@ class vec_reg_file(implicit val config: Vaquita_Config) extends Module {
     val vs2_data = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val vs3_data = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val vs0_data = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
-    // val vs0_data = Output (SInt(config.vlen.W))
     val func3 = Input(UInt(3.W))
     val store_vs3_to_mem = Input(Bool())
     val reg_write_decode = Input(Bool())
-    // val mask_bits = Output(Vec(8, UInt(4.W)))
   })
   val vrf = RegInit(VecInit(Seq.fill(config.reg_count){VecInit(Seq.fill(config.count_lanes) {0.S(config.XLEN.W)})}))
   dontTouch(vrf)
  val vl=3.U
   val vs3_addr = io.vd_addr//decode vs3 addr
-  // val Mux_vs3_addr = Mux(config.vlen.U===128.U,RegNext(vs3_addr),vs3_addr)
-  // dontTouch(Mux_vs3_addr)
   val vs0_addr = 0.U
   def read_vrf(a:Int):Unit={
-    // when(io.store_vs3_to_mem===0.B){
     when((io.reg_write === 1.B) && (io.vs1_addr === io.wb_vd_addr && 0.U===io.func3 && (io.vs2_addr =/= io.wb_vd_addr)) && io.store_vs3_to_mem===0.B){
       for (i <- 0 until a) { // for grouping = 8
       val offset = i.U
@@ -86,21 +81,6 @@ class vec_reg_file(implicit val config: Vaquita_Config) extends Module {
         io.vs0_data(i)(j) := vrf(vs0_addr + offset)(j)
   }}
   }
-//   }
-//   .otherwise{
-//     when((io.reg_write === 1.B) && (io.vd_addr === io.wb_vd_addr)){
-//       for (i <- 0 until a) { // for grouping = 8
-//       val offset = i.U
-//       for (j <- 0 until (config.count_lanes)) {
-//         io.vs1_data(i)(j) := io.vd_data(io.vd_addr + offset)(j)
-        
-//   }}}.otherwise{
-//     for (i <- 0 until a) { // for grouping = 8
-//       val offset = i.U
-//       for (j <- 0 until (config.count_lanes)) {
-//         io.vs1_data(i)(j) := vrf(io.vd_addr + offset)(j)
-//   }}}
-// }
   }
   def write_vrf(a:Int):Unit ={
     for (i <- 0 until a) { // for grouping = 8
@@ -131,16 +111,6 @@ for (i <- 0 to 7){
   } .otherwise{
     read_vrf(1)
   }
-
-  // def mask_Selector():Unit = {
-  //   val sew = 2//sew 32
-  //   val count = 0
-  //   when (count <= io.vl){
-  //   for (i <- 0 to sew){
-  //     io.mask_bits := vrf()
-  //   }}
-  // }
-// io.vs0_data := vrf(0)(0)
 
   when (io.reg_write===1.B) {
     when(io.lmul===0.U){
