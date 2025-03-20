@@ -48,7 +48,8 @@
 /qbin
 
 # sbt's target directories
-/target/
+/project/*
+/target/*
 /project/**/target/
 /test/macro-annot/target/
 /test/files/target/
@@ -68,3 +69,6 @@ project/**/metals.sbt
 
 /.bsp/*
 /__pycache__/
+
+# test run dir
+/test_run_dir/vec_top_test/*
