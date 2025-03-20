@@ -41,8 +41,8 @@ Vaquita is currently integrated with the [NucleusRV](https://github.com/merledu/
 ## Usage  
 
 ### Prerequisites  
-- **RISCV GCC Toolchain**: Install the RISC-V toolchain for compilation and testing  
-- **Imperas RISC-V Compliance Tools**: For instruction set compliance testing  
+- [**RISCV GCC Toolchain**](https://github.com/riscv-collab/riscv-gnu-toolchain.git): Install the RISC-V toolchain for compilation and testing  
+- [**Imperas RISC-V Compliance Tools**](https://github.com/riscv-ovpsim/imperas-riscv-tests): For instruction set compliance testing  
 
 ### Building the Co-Processor with NucleusRV
 1. Clone the repository:  
