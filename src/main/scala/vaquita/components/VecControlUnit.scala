@@ -1,6 +1,7 @@
 package vaquita.components
 import chisel3._
 import chisel3.util._
+import vaquita.configparameter.VaquitaConfig
 
 
 class VecControlUnit(implicit val config: VaquitaConfig) extends Module {
@@ -14,85 +15,36 @@ class VecControlUnit(implicit val config: VaquitaConfig) extends Module {
     val vec_config       = Output(Bool())
     val store_vs3_to_mem = Output(Bool())
     })
-    //config 
-        when(io.instr(6,0)==="b1010111".U && io.instr(14,12)==="b111".U){
-            io.mem_write    := 0.B
-            io.operand_type := "b11".U
-            io.mem_read     := 0.B
-            io.reg_write    := 0.B
-            io.mem_to_reg := 0.B
-            io.vec_config := 1.B
-            io.store_vs3_to_mem := 0.B
-            
 
+  def checkCondition(opcode: UInt, funct3: UInt): Bool = {
+    (opcode === "b1010111".U && (funct3 === "b111".U || funct3 === "b000".U || funct3 === "b100".U || funct3 === "b011".U)) ||
+    (opcode === "b0100111".U) ||
+    (opcode === "b0000111".U)
+  }
+
+  def setValues(memWrite: Bool, operandType: UInt, memRead: Bool, regWrite: Bool, memToReg: Bool, vecConfig: Bool, storeVs3ToMem: Bool): Unit = {
+    io.mem_write        := memWrite
+    io.operand_type     := operandType
+    io.mem_read         := memRead
+    io.reg_write        := regWrite
+    io.mem_to_reg       := memToReg
+    io.vec_config       := vecConfig
+    io.store_vs3_to_mem := storeVs3ToMem
+  }
+
+  setValues(false.B, "b11".U, false.B, false.B, false.B, false.B, false.B) // Default values
+
+    switch(io.instr(6,0)) {
+        is("b1010111".U) {   
+        switch(io.instr(14,12)) {
+            is("b111".U) { setValues(false.B, "b11".U, false.B, false.B, false.B, true.B, false.B) }//vec config
+            is("b000".U) { setValues(false.B, "b00".U, false.B, true.B, false.B, false.B, false.B) }//vec to vec
+            is("b100".U) { setValues(false.B, "b01".U, false.B, true.B, false.B, false.B, false.B) }//vec to scalar
+            is("b011".U) { setValues(false.B, "b10".U, false.B, true.B, false.B, false.B, false.B) }//vec to immediate
         }
-        //vec to vec
-        .elsewhen(io.instr(6,0)==="b1010111".U && io.instr(14,12)==="b000".U){
-            io.mem_write := 0.B
-            io.operand_type := "b00".U
-            io.mem_read := 0.B
-            io.reg_write := 1.B
-            io.mem_to_reg := 0.B
-            io.vec_config := 0.B
-            io.store_vs3_to_mem := 0.B
-            
-
         }
-        //vec to scalar
-        .elsewhen(io.instr(6,0)==="b1010111".U && io.instr(14,12)==="b100".U){
-            io.mem_write := 0.B
-            io.operand_type := "b01".U
-            io.mem_read := 0.B
-            io.reg_write := 1.B
-            io.mem_to_reg := 0.B
-            io.vec_config := 0.B
-            io.store_vs3_to_mem := 0.B
-            
-
-        }
-        //vec to immediate
-        .elsewhen(io.instr(6,0)==="b1010111".U && io.instr(14,12)==="b011".U){
-            io.mem_write := 0.B
-            io.operand_type := "b10".U
-            io.mem_read := 0.B
-            io.reg_write := 1.B
-            io.mem_to_reg := 0.B
-            io.vec_config := 0.B
-            io.store_vs3_to_mem := 0.B
-        }
-
-        //store
-        .elsewhen(io.instr(6,0)==="b0100111".U){
-            io.mem_write := 1.B
-            io.operand_type := "b00".U
-            io.mem_read := 0.B
-            io.reg_write := 0.B
-            io.mem_to_reg := 0.B
-            io.vec_config := 0.B
-            io.store_vs3_to_mem := 1.B
-            
-
-        }
-
-        //load
-        .elsewhen(io.instr(6,0)==="b0000111".U){
-            io.mem_write := 0.B
-            io.operand_type := "b11".U
-            io.mem_read := 1.B
-            io.reg_write := 1.B
-            io.mem_to_reg := 1.B
-            io.vec_config := 0.B
-            io.store_vs3_to_mem := 0.B
-        }
-
-        .otherwise{
-        io.mem_write := 0.B
-        io.operand_type := "b11".U
-        io.mem_read := 0.B
-        io.reg_write := 0.B
-        io.mem_to_reg := 0.B
-        io.vec_config := 0.B
-        io.store_vs3_to_mem := 0.B
-        
+        is("b0100111".U) { setValues(true.B,  "b00".U, false.B, false.B, false.B, false.B, true.B) } //vec store
+        is("b0000111".U) { setValues(false.B, "b11".U, true.B, true.B,   true.B, false.B, false.B) } // vec load
     }
+  
 }
