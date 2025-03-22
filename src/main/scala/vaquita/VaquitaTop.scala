@@ -2,6 +2,15 @@ package vaquita
 import chisel3._
 import chisel3.util._
 import chisel3.stage.ChiselStage
+import vaquita.pipeline.DecodeStage
+import vaquita.pipeline.ExcuteStage
+import vaquita.pipeline.MemStage
+import vaquita.pipeline.WBStage
+import vaquita.components.VecMemFetch
+import vaquita.components.ForwardingUnit
+import vaquita.configparameter.VaquitaConfig
+import vaquita.components.MemRequestIO
+import vaquita.components.MemResponseIO
 
 class VaquitaTop extends Module {
     val io = IO(new Bundle{
@@ -13,19 +22,19 @@ class VaquitaTop extends Module {
         val vl_rs1_out = Output(UInt(32.W))
         
     })
-    implicit val config = new VaquitaConfig {}
-    val de_module = Module(new DecodeStage)
+    implicit val vec_config = VaquitaConfig (256,32,32,8)
+    val de_module = Module(new DecodeStage()(vec_config))
     dontTouch(de_module.io)
-    val excute_stage_module = Module(new ExcuteStage)
+    val excute_stage_module = Module(new ExcuteStage()(vec_config))
     dontTouch(excute_stage_module.io)
 
-    val mem_stage_module = Module(new MemStage)
+    val mem_stage_module = Module(new MemStage()(vec_config))
     dontTouch(mem_stage_module.io)
 
     val vec_mem_fetch_module = Module(new VecMemFetch)
     dontTouch(vec_mem_fetch_module.io)
 
-    val wb_stage_module = Module(new WBStage)
+    val wb_stage_module = Module(new WBStage()(vec_config))
     dontTouch(wb_stage_module.io)
 
     val fu_module = Module(new ForwardingUnit)
@@ -114,7 +123,7 @@ class VaquitaTop extends Module {
     vec_mem_fetch_module.io.mem_lmul_in := excute_stage_module.io.ex_lmul_out
     // vec_mem_fetch_module.io.vec_comparison_bit := comparison_bit_f6 && comparison_bit_f3
 
-    val wb_vs3_data_in_store = VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.S(config.XLEN.W)))))
+    val wb_vs3_data_in_store = VecInit(Seq.fill(8)(VecInit(Seq.fill(vec_config.count_lanes)(0.S(vec_config.XLEN.W)))))
     
     mem_stage_module.io.mem_vsd_data_in     <> excute_stage_module.io.vsd_data_out
     mem_stage_module.io.mem_instr_in        := excute_stage_module.io.ex_instr_out

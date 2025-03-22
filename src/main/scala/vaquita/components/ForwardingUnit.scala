@@ -1,6 +1,7 @@
 
-package vaquita
+package vaquita.components
 import chisel3._
+
 
 class ForwardingUnit extends Module {
   val io = IO(new Bundle {

@@ -1,7 +1,8 @@
-package vaquita
+package vaquita.components
 import chisel3._
 import chisel3.util._
-
+import ALUObj._
+import vaquita.configparameter.VaquitaConfig
 class VecALU(implicit val config: VaquitaConfig) extends Module{
   val io = IO(new Bundle{
   val vs1_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
@@ -69,7 +70,7 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
 
   def comparison_operators(vs1_in:SInt,vs2_in:SInt):Bool={
     val comparison_table = Seq(
-      "b011000".U -> (vs1_in===vs2_in),//vmseq
+       vadd -> (vs1_in===vs2_in),//vmseq
       "b011001".U -> (vs1_in.asUInt =/= vs2_in.asUInt),//vmsne
       "b011010".U -> (vs1_in.asUInt > vs2_in.asUInt),//vmsltu
       "b011011".U -> (vs1_in > vs2_in),//vmslt

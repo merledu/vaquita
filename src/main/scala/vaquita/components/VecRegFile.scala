@@ -1,8 +1,8 @@
-package vaquita
+package vaquita.components
 import chisel3._
 import chisel3.util._
 import chisel3.experimental._
-
+import vaquita.configparameter.VaquitaConfig
 
 class VecRegFile(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle {

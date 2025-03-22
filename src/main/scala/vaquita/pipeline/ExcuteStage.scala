@@ -1,6 +1,9 @@
-package vaquita
+package vaquita.pipeline
 import chisel3._
 import chisel3.util._
+import vaquita.components.VecALU
+import vaquita.components.VsetModule
+import vaquita.configparameter.VaquitaConfig
 
 class ExcuteStage(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle{

@@ -1,6 +1,11 @@
-package vaquita
+package vaquita.pipeline
 import chisel3._
 import chisel3.util._
+import vaquita.components.VecControlUnit
+import vaquita.components.VecRegFile
+import vaquita.components.VCSR
+import vaquita.configparameter.VaquitaConfig
+
 class DecodeStage(implicit val config: VaquitaConfig) extends Module {
     val io = IO(new Bundle{
         val instr = Input(UInt(32.W))

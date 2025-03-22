@@ -1,6 +1,7 @@
-package vaquita
+package vaquita.pipeline
 import chisel3._
 import chisel3.util._
+import vaquita.configparameter.VaquitaConfig
 
 
 class MemStage(implicit val config: VaquitaConfig) extends Module {
