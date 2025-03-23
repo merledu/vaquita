@@ -17,7 +17,6 @@ class DecodeStageIO(implicit val config: VaquitaConfig) extends Bundle {
     val de_read_en      = Output(Bool())
     val de_reg_write    = Output(Bool())
     val wb_reg_write_in = Input(Bool())
-    val vl_out          = Output(UInt(32.W))
     val vl_rs1_in       = Input(UInt(32.W))
     val lmul_out        = Output(UInt(32.W))
 }
@@ -65,7 +64,6 @@ class DecodeStage(implicit val config: VaquitaConfig) extends Module {
 
     /** de_io Output Wiring */
     io.de_io.lmul_out     := vcsr_module.io.lmul
-    io.de_io.vl_out       := vcsr_module.io.vl_out.asUInt
     io.de_io.sew_out      := vcsr_module.io.sew
     io.de_io.de_write_en  := vec_cu_module.io.mem_write
     io.de_io.de_read_en   := vec_cu_module.io.mem_read

@@ -47,7 +47,6 @@ class VaquitaTop extends Module {
     DE.de_io.vl_rs1_in := RegNext(EX.vl_rs1_out.asUInt)
     EX.ex_lmul_in := DE.de_io.lmul_out
     
-    EX.vl_in := DE.de_io.vl_out
     io.vl_rs1_out := EX.vl_rs1_out
     EX.hazard_rs1 := io.hazard_rs1_data_in
     FU.mem_vd := MEM.mem_instr_out(11,7)

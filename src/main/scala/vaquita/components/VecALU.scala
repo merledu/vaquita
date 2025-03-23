@@ -10,7 +10,7 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
     val vs3_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val vs0_in       = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val sew          = Input(UInt(3.W))
-    val vl           = Input(UInt(32.W)) //remove this vl
+    // val vl           = Input(UInt(32.W)) //remove this vl
     val vl_in        = Input(UInt(32.W)) 
     val alu_opcode   = Input(UInt(6.W))
     val mask_arith   = Input(Bool())
