@@ -44,7 +44,6 @@ class DecodeStage(implicit val config: VaquitaConfig) extends Module {
     val vec_reg_module = Module(new VecRegFile)
     val vcsr_module = Module(new VCSR)
 
-    /** Vector de_io Unit Wiring */
     vec_cu_module.io.instr := io.de_io.instr
 
     /** Vector Register File Wiring */
@@ -77,7 +76,7 @@ class DecodeStage(implicit val config: VaquitaConfig) extends Module {
     /** ALU Operation */
     io.de_io.alu_op_out := io.de_io.instr(31, 26)
 
-    /** Function to Select SEW Elements */
+    /** "Generate an element based on SEW from a 5-bit immediate value */
     def sew_selector_with_element(sew:UInt,rs1:SInt):SInt={
 
         val element_return = WireInit(0.S(config.XLEN.W))
