@@ -48,17 +48,17 @@ class VaquitaTop extends Module {
         // vec_mem_module.io.dccmReq.ready := 1.B
 
 // -----------------decode stage ---------------------------------
-    de_module.io.instr := io.instr
-    de_module.io.rs1_data := io.rs1_data
-    de_module.io.wb_reg_write_in  := wb_stage_module.io.wb_reg_write_out
+    de_module.io.de_io.instr := io.instr
+    de_module.io.de_io.rs1_data := io.rs1_data
+    de_module.io.de_io.wb_reg_write_in  := wb_stage_module.io.wb_reg_write_out
 
     // -----------------excute stage ---------------------------------
 
     // ************forwording unit***********************
-    de_module.io.vl_rs1_in := RegNext(excute_stage_module.io.vl_rs1_out.asUInt)
-    excute_stage_module.io.ex_lmul_in := de_module.io.lmul_out
+    de_module.io.de_io.vl_rs1_in := RegNext(excute_stage_module.io.vl_rs1_out.asUInt)
+    excute_stage_module.io.ex_lmul_in := de_module.io.de_io.lmul_out
     
-    excute_stage_module.io.vl_in := de_module.io.vl_out
+    excute_stage_module.io.vl_in := de_module.io.de_io.vl_out
     io.vl_rs1_out := excute_stage_module.io.vl_rs1_out
     excute_stage_module.io.hazard_rs1 := io.hazard_rs1_data_in
     fu_module.io.mem_vd := mem_stage_module.io.mem_instr_out(11,7)
@@ -73,7 +73,7 @@ class VaquitaTop extends Module {
         excute_stage_module.io.ex_vs1_data_in <> wb_stage_module.io.wb_vsd_data_out
     }
     .otherwise{
-            excute_stage_module.io.ex_vs1_data_in <> RegNext(de_module.io.vs1_data_out)//directly wire from excute stage
+            excute_stage_module.io.ex_vs1_data_in <> RegNext(de_module.io.de_vec_io.vs1_data_out)//directly wire from excute stage
     }
     when(fu_module.io.forward_b===1.U){
 
@@ -84,7 +84,7 @@ class VaquitaTop extends Module {
             excute_stage_module.io.ex_vs2_data_in <> wb_stage_module.io.wb_vsd_data_out
     }.otherwise{
   
-            excute_stage_module.io.ex_vs2_data_in <> RegNext(de_module.io.vs2_data_out)
+            excute_stage_module.io.ex_vs2_data_in <> RegNext(de_module.io.de_vec_io.vs2_data_out)
     }
     //for vs3
     when(fu_module.io.forward_c===1.U){
@@ -95,7 +95,7 @@ class VaquitaTop extends Module {
             excute_stage_module.io.ex_vs3_data_in <> wb_stage_module.io.wb_vsd_data_out
     }.otherwise{
         
-            excute_stage_module.io.ex_vs3_data_in <> RegNext(de_module.io.vs3_data_out)
+            excute_stage_module.io.ex_vs3_data_in <> RegNext(de_module.io.de_vec_io.vs3_data_out)
     }
     //for vs0
     when(fu_module.io.forward_d===1.U){
@@ -104,16 +104,16 @@ class VaquitaTop extends Module {
     }.elsewhen(fu_module.io.forward_d===2.U){
         excute_stage_module.io.ex_vs0_data_in <> wb_stage_module.io.wb_vsd_data_out
     }.otherwise{
-        excute_stage_module.io.ex_vs0_data_in <> RegNext(de_module.io.vs0_data_out)
+        excute_stage_module.io.ex_vs0_data_in <> RegNext(de_module.io.de_vec_io.vs0_data_out)
     }
     
-    excute_stage_module.io.ex_sew_in := de_module.io.sew_out
-    excute_stage_module.io.ex_alu_op_in := de_module.io.alu_op_out
+    excute_stage_module.io.ex_sew_in := de_module.io.de_io.sew_out
+    excute_stage_module.io.ex_alu_op_in := de_module.io.de_io.alu_op_out
     excute_stage_module.io.ex_instr_in := io.instr
-    excute_stage_module.io.ex_read_en_in := de_module.io.de_read_en
-    excute_stage_module.io.ex_write_en_in := de_module.io.de_write_en
+    excute_stage_module.io.ex_read_en_in := de_module.io.de_io.de_read_en
+    excute_stage_module.io.ex_write_en_in := de_module.io.de_io.de_write_en
     excute_stage_module.io.ex_rs1_data_in := io.rs1_data
-    excute_stage_module.io.ex_reg_write_in := de_module.io.de_reg_write
+    excute_stage_module.io.ex_reg_write_in := de_module.io.de_io.de_reg_write
 
     // -----------------memory stage ---------------------------------
     // val comparison_bit_f6 = mem_stage_module.io.mem_instr_out(31,26)==="b011000".U || mem_stage_module.io.mem_instr_out(31,26)==="b011001".U || mem_stage_module.io.mem_instr_out(31,26)==="b011010".U || mem_stage_module.io.mem_instr_out(31,26)==="b011011".U || mem_stage_module.io.mem_instr_out(31,26)==="b011100".U || mem_stage_module.io.mem_instr_out(31,26)==="b011101".U || mem_stage_module.io.mem_instr_out(31,26)==="b011110".U || mem_stage_module.io.mem_instr_out(31,26)==="b011111".U
@@ -143,8 +143,8 @@ class VaquitaTop extends Module {
     // -----------------write back stage ---------------------------------
     wb_stage_module.io.wb_instr_in := mem_stage_module.io.mem_instr_out
     
-    de_module.io.vsd_data_in <> wb_stage_module.io.wb_vsd_data_out
-       de_module.io.wb_de_instr_in := wb_stage_module.io.wb_instr_out
+    de_module.io.de_vec_io.vsd_data_in <> wb_stage_module.io.wb_vsd_data_out
+       de_module.io.de_io.wb_de_instr_in := wb_stage_module.io.wb_instr_out
        wb_stage_module.io.wb_reg_write_in := mem_stage_module.io.mem_reg_write_out
 }
 
