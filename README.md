@@ -1,6 +1,3 @@
-# Vaquita
-
-A CHISEL based RISC-V Vector (RVV) v1.0 Extension Coprocessor Generator.
 
 # Vaquita: RISC-V Vector Co-Processor  
 A CHISEL-based RISC-V Vector (RVV) v1.0 Extension Coprocessor Generator.
@@ -10,6 +7,9 @@ Vaquita is currently integrated with the [NucleusRV](https://github.com/merledu/
 ---
 
 ## Features  
+1. Supports configurable VLEN (Vector Length) 
+2. Designed for seamless integration with In-Order cores.
+3. 4 stage Pipeline execution for optimal throughput and latency.
 
 ### Instruction Coverage  
 - **Vector-to-Vector Instructions**: 25 implemented  
@@ -20,14 +20,8 @@ Vaquita is currently integrated with the [NucleusRV](https://github.com/merledu/
 - Fully validated using the [**RISC-V Imperas Compliance Test Suite**](https://github.com/riscv-ovpsim/imperas-riscv-tests)
 - Configuration tested with:  
   - **VLEN**: 256  
-  - **LMUL**: ≥ 1  
-  - Supported **SEW**: 8, 16, 32  
-
-### Hardware Specifications  
-- **VLEN (Vector Length)**: 256 bits  
-- **Architecture**: 4-stage co-processor pipeline for optimal throughput and latency  
-
----
+  - **LMUL**: 1 , 2 , 4 , 8  
+  - Supported **SEW**: 8 , 16 , 32  
 
 ## Diagram
 ### System Diagram of vaquita
@@ -38,39 +32,45 @@ Vaquita is currently integrated with the [NucleusRV](https://github.com/merledu/
 
 ---
 
-## Usage  
+# How to Run/Build Vaquita
 
-### Prerequisites  
-- [**RISCV GCC Toolchain**](https://github.com/riscv-collab/riscv-gnu-toolchain.git): Install the RISC-V toolchain for compilation and testing  
-- [**Imperas RISC-V Compliance Tools**](https://github.com/riscv-ovpsim/imperas-riscv-tests): For instruction set compliance testing  
 
-### Building the Co-Processor with NucleusRV
-1. Clone the repository:  
+## 1. Building the Vaquita Co-Processor
+
+Clone the repository:  
 ```bash  
    git clone --recurse-submodule https://github.com/merledu/nucleusrv.git -b vec_dev_csr
    cd nucleusrv
 ```
+### 1.1. Generating the Coprocessor with NRV(In-Order Core)
 
-2. Building with SBT
-  Run this command is SBT shell
+Building with SBT
+  Run this command in SBT shell
 ```bash
 testOnly nucleusrv.components.TopTest -- -DwriteVcd=1 -DprogramFile=/path/to/instructions/hex
 ```
-3. To Run imperas test cases
-```bash 
-make compliance ISA=rv32i_m DEVICE=Vi TEST=<test case name>
+
+### 1.2. Generating the Coprocessor without In-Order core
+
+This step generates only the coprocessor without integrating it with an in-order core. The command below runs the VaquitaDriver, which is responsible for generating the coprocessor design in Verilog. The -mem 4096 argument specifies the memory allocation for the process.
+
+Run the following command in the terminal to generate the Verilog file:
+
+```bash
+sbt "runMain vaquita.VaquitaDriver" -mem 4096
 ```
-to find the test case name from 
-```
-./imperas-riscv-tests/riscv-test-suite/rv32i_m/<devise name>/Makefrag
-```
+Once the command executes successfully, the Verilog file will be available in the /VaquitaTop.v
 
 
-# Running Imperas Test Cases  
 
-To validate the compliance of the Vaquita RISC-V Vector Co-Processor with the RISC-V specifications, you can execute Imperas test cases using the steps outlined below.  
+## 2. Running Imperas Test Cases 
+To validate the compliance of the Vaquita RISC-V Vector Co-Processor with the RISC-V specifications, you can execute Imperas test cases using the steps outlined below.
 
-## Command to Execute Test Cases  
+### 2.1. Prerequisites  
+- [**RISCV GCC Toolchain**](https://github.com/riscv-collab/riscv-gnu-toolchain.git): Install the RISC-V toolchain for compilation and testing  
+- [**Imperas RISC-V Compliance Tools**](https://github.com/riscv-ovpsim/imperas-riscv-tests): For instruction set compliance testing  
+
+### 2.2. Command to Execute Test Cases  
 
 Use the following command to run a specific test case:  
 
