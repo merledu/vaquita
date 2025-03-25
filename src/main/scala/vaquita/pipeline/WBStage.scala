@@ -1,6 +1,7 @@
-package vaquita
+package vaquita.pipeline
 import chisel3._
 import chisel3.util._
+import vaquita.configparameter.VaquitaConfig
 
 
 class WBStage(implicit val config: VaquitaConfig,val on : Bool =1.B, val off : Bool =0.B) extends Module {

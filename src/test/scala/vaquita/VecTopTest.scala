@@ -3,10 +3,12 @@ import chisel3._
 import chisel3.tester._
 import org.scalatest.FreeSpec
 import chisel3.experimental.BundleLiterals._
+import vaquita.configparameter.VaquitaConfig
+
 
 class VecTopTest extends FreeSpec with ChiselScalatestTester {
   "vec top test" in {
-    implicit val config = new VaquitaConfig {}
+    implicit val config = new VaquitaConfig (256,32,32,8)
     test(new VaquitaTop) { dut =>
     dut.io.instr.poke(0.U)
     dut.io.rs1_data.poke(0.S)
