@@ -12,9 +12,9 @@ Vaquita is currently integrated with the [NucleusRV](https://github.com/merledu/
 3. 4 stage Pipeline execution for optimal throughput and latency.
 
 ### Instruction Coverage  
-- **Vector-to-Vector Instructions**: 25 implemented  
-- **Vector-to-Scalar Instructions**: 29 implemented  
-- **Vector-to-Immediate Instructions**: 19 implemented  
+- [**Vector-to-Vector Instructions**](/ImplementedInstructions/vec-to-vec-type) 
+- [**Vector-to-Scalar Instructions**](/ImplementedInstructions/vec-to-scalar-type)
+- [**Vector-to-Immediate Instructions**](/ImplementedInstructions/vec-to-immediate-type)
 
 ### Testing and Compliance  
 - Fully validated using the [**RISC-V Imperas Compliance Test Suite**](https://github.com/riscv-ovpsim/imperas-riscv-tests)
