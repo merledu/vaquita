@@ -20,6 +20,7 @@ class vec_reg_file(implicit val config: Vaquita_Config) extends Module {
     val vs2_data = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val vs3_data = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val vs0_data = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
+    val vec_reg_data_out_vrf = Output(Vec(32, Vec(config.count_lanes, SInt(config.XLEN.W))))
     // val vs0_data = Output (SInt(config.vlen.W))
     val func3 = Input(UInt(3.W))
     val store_vs3_to_mem = Input(Bool())
@@ -155,4 +156,6 @@ for (i <- 0 to 7){
     write_vrf(1)
   }
     }
+    io.vec_reg_data_out_vrf <> vrf
+    
 }

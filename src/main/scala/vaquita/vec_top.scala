@@ -11,6 +11,8 @@ class vec_top extends Module {
         val dmemRsp = Flipped(Decoupled(new MemResponseIO))
         val hazard_rs1_data_in = Input(UInt(32.W))
         val vl_rs1_out = Output(UInt(32.W))
+        val vec_data_out = Output(Vec(32, Vec(8, SInt(32.W))))
+        val vec_data_out_fpga = Output(Vec(8, Vec(8, SInt(32.W))))  //to resolve fpga removing signals
         
     })
     implicit val config = new Vaquita_Config {}
@@ -191,6 +193,11 @@ class vec_top extends Module {
 
        de_module.io.wb_de_instr_in := wb_stage_module.io.wb_instr_out
        wb_stage_module.io.wb_reg_write_in := mem_stage_module.io.mem_reg_write_out
+
+        io.vec_data_out <> de_module.io.vec_reg_data_out
+        io.vec_data_out_fpga <> wb_stage_module.io.wb_vsd_data_out
+
+       
 }
 
 

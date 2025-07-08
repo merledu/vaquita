@@ -20,6 +20,7 @@ class decode_stage(implicit val config: Vaquita_Config) extends Module {
         val vl_out = Output(UInt(32.W))
         val vl_rs1_in =  Input(UInt(32.W))
         val lmul_out = Output(UInt(32.W))
+        val vec_reg_data_out = Output(Vec(32, Vec(config.count_lanes, SInt(config.XLEN.W))))
     })
     val vec_cu_module = Module(new vec_control_unit)
     dontTouch(vec_cu_module.io)
@@ -101,5 +102,5 @@ io.alu_op_out := io.instr(31,26)
         for (j <- 0 to (config.count_lanes)-1) {
             vec_reg_module.io.vd_data(i)(j) := io.vsd_data_in(i)(j)
     }}
-
+   io.vec_reg_data_out <> vec_reg_module.io.vec_reg_data_out_vrf 
 }
