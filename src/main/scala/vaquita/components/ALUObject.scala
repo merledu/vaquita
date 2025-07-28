@@ -46,5 +46,16 @@ object ALUObj{
     val vnclipu      = 46.U(6.W)
     val vnclip       = 47.U(6.W)
     val vwredsumu    = 48.U(6.W)
+
+    // val vwaddu       = 
+    // val vwsubu       =
+    // val vwadd        =
+    // val vwsub        =
+    // val vwaddu_wv    =
+    // val vwsubu_wv    =
+    // val vwadd_wv     =
+    // val vwsub_wv     =
+
+
     val vwredsum     = 59.U(6.W)
 }

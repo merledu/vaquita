@@ -23,6 +23,7 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
         val func3 = Input(UInt(3.W))
         val store_vs3_to_mem = Input(Bool())
         val reg_write_decode = Input(Bool())
+        val de_instr   = Input(UInt(32.W))
     })
     val vrf = RegInit(VecInit(Seq.fill(config.reg_count){VecInit(Seq.fill(config.count_lanes) {0.S(config.XLEN.W)})}))
     dontTouch(vrf)
@@ -99,14 +100,16 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
 
       }
     }
-
-    when(io.lmul===0.U){
+    val lmul_wire        = WireInit(0.U(5.W))
+    val narrow_instr     = io.de_instr(31,26) === "d44".U || io.de_instr(31,26) === "d45".U || io.de_instr(31,26) === "d46".U || io.de_instr(31,26) === "d47".U
+    lmul_wire      := Mux(narrow_instr , io.lmul+1.U,io.lmul)
+    when(lmul_wire===0.U){
       read_vrf(1)
-    }.elsewhen(io.lmul===1.U){
+    }.elsewhen(lmul_wire===1.U){
       read_vrf(2)
-    }.elsewhen(io.lmul===2.U){
+    }.elsewhen(lmul_wire===2.U){
       read_vrf(4)
-    }.elsewhen(io.lmul===3.U){
+    }.elsewhen(lmul_wire===3.U){
       read_vrf(8)
     } .otherwise{
       read_vrf(1)

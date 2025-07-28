@@ -31,9 +31,4 @@ class ForwardingUnit extends Module {
     io.forward_c := forwardLogic(vs3_addr, io.mem_vd, io.wb_vd, io.mem_regWrite, io.wb_regWrite)
     io.forward_d := forwardLogic(0.U, io.mem_vd, io.wb_vd, io.mem_regWrite, io.wb_regWrite)
 
-    io.forward_a := DontCare
-    io.forward_b := DontCare
-    io.forward_c := DontCare
-    io.forward_d := DontCare
-
 }
