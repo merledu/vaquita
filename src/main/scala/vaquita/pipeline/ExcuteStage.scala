@@ -37,11 +37,15 @@ class ExcuteStage(implicit val config: VaquitaConfig) extends Module {
       val ex_alu_op_out = RegNext(io.ex_alu_op_in)
       io.ex_instr_out := RegNext(io.ex_instr_in)
       vec_alu_module.io.vl_in   := vsetvli_module.io.vl
+      vec_alu_module.io.rs1_in := io.hazard_rs1
+      vec_alu_module.io.lmul   := io.ex_lmul_in
+      vec_alu_module.io.func3   := RegNext(io.ex_instr_in(14,12))
 
-    val sew_selector = new SewSelector()
+    // val sew_selector = new SewSelector()
     for (i <- 0 to 7) { // for grouping = 8
         for (j <- 0 until (config.count_lanes)) {
-            vec_alu_module.io.vs1_in(i)(j) := Mux(io.ex_instr_out(6,0)==="b1010111".U && io.ex_instr_out(14,12)==="b100".U,sew_selector.sew_selector_with_element(next_sew,io.hazard_rs1.asSInt),io.ex_vs1_data_in(i)(j))
+            vec_alu_module.io.vs1_in(i)(j) := Mux(io.ex_instr_out(6,0)==="b1010111".U && io.ex_instr_out(14,12)==="b100".U,io.hazard_rs1.asSInt,io.ex_vs1_data_in(i)(j))
+            // vec_alu_module.io.vs1_in(i)(j) := Mux(io.ex_instr_out(6,0)==="b1010111".U && io.ex_instr_out(14,12)==="b100".U,sew_selector.sew_selector_with_element(next_sew,io.hazard_rs1.asSInt),io.ex_vs1_data_in(i)(j))
     }}
     vec_alu_module.io.vs2_in <> io.ex_vs2_data_in
     vec_alu_module.io.vs3_in <> io.ex_vs3_data_in

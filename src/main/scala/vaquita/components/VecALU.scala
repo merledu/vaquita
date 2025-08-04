@@ -12,6 +12,9 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
     val sew          = Input(UInt(3.W))
     // val vl           = Input(UInt(32.W)) //remove this vl
     val vl_in        = Input(UInt(32.W)) 
+    val rs1_in        = Input(UInt(32.W))
+    val lmul       = Input(UInt(32.W))  
+    val func3        =Input(UInt(3.W))
     val alu_opcode   = Input(UInt(6.W))
     val mask_arith   = Input(Bool())
     val vsd_out      = Output(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
@@ -180,6 +183,9 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
       vnclip_u := fixed_round_mode(vs2_in.asUInt,(vs2_in.asUInt >> shift_vs1_amount),shift_vs1_amount,vxrm)
       val vnclip_s   = WireInit(0.S(32.W))
       vnclip_s := fixed_round_mode(vs2_in.asUInt,(vs2_in >> shift_vs1_amount).asUInt,shift_vs1_amount,vxrm).asSInt
+
+      val multi = WireInit(0.S(33.W))
+      multi := fixed_round_mode(vs2_in.asUInt,(vs2_in * vs1_in).asUInt,vs1_in.asUInt,vxrm).asSInt
       
       val result = WireInit(0.S(32.W))
 
@@ -211,7 +217,8 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
         vnsrl ->   (vs2_in.asUInt >> (Mux(sew.U===8.U ,vs1_in(3,0), vs1_in(4,0)))).asSInt,
         vnsra ->   (vs2_in >> (Mux(sew.U===8.U ,vs1_in(3,0), vs1_in(4,0)))).asSInt,  //("habcd45".U.asSInt >> 2.U).asSInt  //
         vnclipu  ->  Mux(sew.U===16.U,(Mux(vnclip_u>=65535.U,65535.U,vnclip_u).asSInt),(Mux(vnclip_u>=255.U,255.U,vnclip_u).asSInt)) ,   //Mux(sew.U===8.U,Mux(vnclip_u>255.U,255.U,vnclip_u),Mux(sew.U===16.U,Mux(vnclip_u>=65535.U,65535.U,vnclip_u),0.U)).asSInt,
-        vnclip   ->  Mux(vnclip_s > maxValue, maxValue,Mux(vnclip_s < minValue, minValue, vnclip_s))
+        vnclip   ->  Mux(vnclip_s > maxValue, maxValue,Mux(vnclip_s < minValue, minValue, vnclip_s)),
+        vsmul    -> Mux(multi > maxValue, maxValue,Mux(multi < minValue, minValue, multi))//vsaddu
 
         
         // fixed_round_mode(vs2_in.asUInt,(vs2_in >> ((Mux(sew.U===8.U ,vs1_in(3,0), vs1_in(4,0))))).asUInt,(Mux(sew.U===8.U ,vs1_in(3,0), vs1_in(4,0))),vxrm).asSInt
@@ -266,7 +273,7 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
         }
       vec_sew8_result 
     }
-    val slide_instr =  "b001110".U === io.alu_opcode || "b001111".U === io.alu_opcode
+    val slide_instr =  "b001110".U === io.alu_opcode || "b001111".U === io.alu_opcode || vrgather === io.alu_opcode
     val vl= 4
     val tail = 0.B
     val narrow_bit = WireInit(0.B)
@@ -275,7 +282,7 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
     var count_mask = 0.U
     val comp_bit = "b011000".U === io.alu_opcode || "b011001".U === io.alu_opcode || "b011010".U === io.alu_opcode || "b011011".U === io.alu_opcode || "b011100".U === io.alu_opcode || "b011101".U === io.alu_opcode || "b011110".U === io.alu_opcode || "b011111".U === io.alu_opcode
     //code changes
-   
+   val red_sum = vwredsumu===io.alu_opcode || vwredsum===io.alu_opcode
    
    
     when(io.sew==="b000".U){
@@ -339,14 +346,16 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
           val tail = 0.B
           val vsetvli_mask = 0.B
           val vs2_sew8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.vlen / 8)(0.U(8.W))))))
-val vsd_sew8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.vlen / 8)(0.U(8.W))))))
-val vsout_sew8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.vlen / 8)(0.U(8.W))))))
+          val vs1_sew8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.vlen / 8)(0.U(8.W))))))
+          val vsd_sew8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.vlen / 8)(0.U(8.W))))))
+          val vsout_sew8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.vlen / 8)(0.U(8.W))))))
 
 // 1. Split XLEN-wide data into 8-bit chunks
 for (i <- 0 until 8) {
   for (j <- 0 until config.count_lanes) {
     for (k <- 0 until (config.XLEN / 8)) {
       val idx = j * (config.XLEN / 8) + k
+      vs1_sew8(i)(idx) := io.vs1_in(i)(j).asUInt()(8*(k+1)-1, 8*k)
       vs2_sew8(i)(idx) := io.vs2_in(i)(j).asUInt()(8*(k+1)-1, 8*k)
       vsd_sew8(i)(idx) := io.vs3_in(i)(j).asUInt()(8*(k+1)-1, 8*k)
     }
@@ -354,17 +363,28 @@ for (i <- 0 until 8) {
 }
 
 // 2. Perform vector operation based on io.aluopcode (SEW = 8 level)
-val slide_amount = io.vs1_in(0)(0).asUInt  // used by vslideup/vslidedown
-val gather_indices = io.vs1_in             // used by vrgather
+val slide_amount = Cat(Fill(3,0.U),io.vs1_in(0)(0)(4,0))  // used by vslideup/vslidedown
+dontTouch(slide_amount)
+// val gather_indices = io.vs1_in             // used by vrgather
 var elem_idx = 0
-val byteWidth8 = config.vlen / 8
+val byteWidth8 = Wire(UInt(32.W))
+byteWidth8 := config.vlen.U / 8.U
 val byteWidth = Wire(UInt(32.W))
-byteWidth := (byteWidth8).U
+byteWidth := (byteWidth8)
 val log2ByteWidth = Wire(UInt(32.W))
-
- log2ByteWidth := (log2Ceil(byteWidth8).U)
+// when(io.lmul==="b001".U){
+// log2ByteWidth := (log2Ceil(config.vlen *2/ 8).U)
+// }.elsewhen(io.lmul==="b010".U){
+// log2ByteWidth := (log2Ceil(config.vlen *4/ 8).U)
+// }.elsewhen(io.lmul==="b011".U){
+// log2ByteWidth := (log2Ceil(config.vlen *8/ 8).U)
+// }.otherwise{
+  log2ByteWidth := (log2Ceil(config.vlen / 8).U)
+// }
+ 
 val vlen_wire = Wire(UInt(32.W))
-vlen_wire :=  (config.vlen.U)
+vlen_wire :=  (config.vlen.U/8.U)
+val vs1_idx = WireInit(0.U(32.W))
 
 
 for (i <- 0 until 8) {
@@ -375,50 +395,63 @@ for (i <- 0 until 8) {
     val vs3_val = vsd_sew8(i)(j)  // old value
     val elem_idx_wire = Wire(UInt(33.W))
         elem_idx_wire := elem_idx.U
+        
+        when(io.func3==="b100".U){
+          vs1_idx := io.rs1_in
+        }.elsewhen(io.func3==="b011".U){ //for imm
+          vs1_idx := io.vs1_in(0)(0)(4,0).asUInt
+        }.otherwise{
+          vs1_idx :=vs1_sew8(i)(j)
+        }
     
     
 
     // Default output is tail value
     var result_val = WireInit(0.U(32.W))
 
-      when(vslideup === io.alu_opcode) {
-        val slide_target_idx = elem_idx.U - slide_amount
-        // val slide_vec_idx  = slide_target_idx / (config.vlen / 8).U
-        // val slide_byte_idx = slide_target_idx % (config.vlen / 8).U
-        val slide_vec_idx  = slide_target_idx >> log2ByteWidth //for row
-        val slide_byte_idx = slide_target_idx & (byteWidth - 1.U)  //for column
-        val slide_valid = (slide_amount <= elem_idx.U)
-        val vs2_val = Mux(slide_valid, vs2_sew8(slide_vec_idx)(slide_byte_idx), 0.U)
+      // when(vslideup === io.alu_opcode) {
+      //   val slide_target_idx = elem_idx.U - slide_amount
+      //   // val slide_vec_idx  = slide_target_idx / (config.vlen / 8).U
+      //   // val slide_byte_idx = slide_target_idx % (config.vlen / 8).U
+      //   val slide_vec_idx  = slide_target_idx >> log2ByteWidth //for row
+      //   val slide_byte_idx = slide_target_idx & (byteWidth - 1.U)  //for column
+      //   val slide_valid = (slide_amount <= elem_idx.U)
+      //   val vs2_val = Mux(slide_valid, vs2_sew8(slide_vec_idx)(slide_byte_idx), 0.U)
         
 
-        result_val := Mux(
-          slide_valid && (io.vl_in > elem_idx.U),
-          Mux(mask_bit_active_element, vs2_val, Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U))),
-          Mux(tail === 0.B, vs3_val, Fill(8, 1.U))
-        )
-      }
-      // Some instructions such as vslidedown and vrgather may read indices past vl or even VLMAX in source vector register groups. The
-      // general policy is to return the value 0 when the index is greater than VLMAX in the source vector register group.
+      //   result_val := Mux(
+      //     slide_valid && (io.vl_in > elem_idx.U),
+      //     Mux(mask_bit_active_element, vs2_val, Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U))),
+      //     Mux(tail === 0.B, vs3_val, Fill(8, 1.U))
+      //   )
+      // }
+      // // Some instructions such as vslidedown and vrgather may read indices past vl or even VLMAX in source vector register groups. The
+      // // general policy is to return the value 0 when the index is greater than VLMAX in the source vector register group.
 
-      .elsewhen(vslidedown === io.alu_opcode) {
-        val slide_target_idx_down  = Wire(UInt(33.W))
+      // .else
+      
+      // when(vslidedown === io.alu_opcode) {
+      //   val slide_target_idx_down  = Wire(UInt(33.W))
         
-          slide_target_idx_down := elem_idx_wire + slide_amount
-          val slide_valid = slide_target_idx_down < vlen_wire 
-          val slide_vec_idx  = slide_target_idx_down >> log2ByteWidth //for row
-          val slide_byte_idx = slide_target_idx_down & (byteWidth - 1.U)  //for column
+      //     slide_target_idx_down := elem_idx_wire + slide_amount
+      //     val slide_valid = Wire(Bool())
+      //     val slide_vec_idx_down = Wire(UInt(32.W))
+      //     val slide_byte_idx_down = Wire(UInt(32.W))
+      //     slide_valid := slide_target_idx_down < vlen_wire 
+      //     slide_vec_idx_down  := slide_target_idx_down >> log2ByteWidth //for row
+      //     slide_byte_idx_down := slide_target_idx_down % (config.vlen / 8).U//& (byteWidth - 1.U)  //for column
 
-          val vs2_val = Mux(slide_valid,
-            vs2_sew8(slide_vec_idx)(slide_byte_idx),
-            0.U // fallback value if out-of-bounds
-          )
+      //     val vs2_val = Mux(slide_valid,
+      //       vs2_sew8(slide_vec_idx_down)(slide_byte_idx_down),
+      //       0.U // fallback value if out-of-bounds
+      //     )
 
-          result_val := Mux(
-            elem_idx.U >= io.vl_in, // Elements beyond VL (set to tail or undisturbed)
-            Mux(tail === 0.B, vs3_val, Fill(8, 1.U)),
-            Mux(mask_bit_active_element, vs2_val,
-              Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U)))
-        )
+      //     result_val := Mux(
+      //       elem_idx.U >= io.vl_in, // Elements beyond VL (set to tail or undisturbed)
+      //       Mux(tail === 0.B, vs3_val, Fill(8, 1.U)),
+      //       Mux(mask_bit_active_element, vs2_val,
+      //         Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U)))
+      //   )
 
 
 
@@ -435,21 +468,35 @@ for (i <- 0 until 8) {
         //   Mux(mask_bit_active_element, vs2_val, Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U))),
         //   Mux(tail === 0.B, vs3_val, Fill(8, 1.U))
         // )
-      }
-
-      // .elsewhen(vrgather===io.alu_opcode) {
-      //   val gather_idx = gather_indices(i)(j).asUInt
-      //   val gather_valid = (gather_idx < config.vlen.U)
-      //   val vs2_val = Mux(gather_valid, vs2_sew8(gather_idx / (config.vlen / 8).U)(gather_idx % (config.vlen / 8).U), 0.U)
-
-      //   result_val := Mux(
-      //     gather_valid && (io.vl_in > vl_counter.U),
-      //     Mux(mask_bit_active_element, vs2_val, Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U))),
-      //     Mux(tail === 0.B, vs3_val, Fill(8, 1.U))
-      //   )
       // }
+
+      // .else
+      when(vrgather===io.alu_opcode) {
+        
+        val gather_valid = Wire(Bool())
+        gather_valid := (vs1_idx < byteWidth8)
+        dontTouch(vs1_idx)
+        
+
+        val slide_vec_idx_gather = Wire(UInt(32.W))
+          val slide_byte_idx_gather = Wire(UInt(32.W))
+          slide_vec_idx_gather  := vs1_idx >> log2ByteWidth //for row
+          slide_byte_idx_gather := vs1_idx & (byteWidth - 1.U)  //for column
+
+
+        // val gather_valid_out_idx = (gather_idx < config.vlen.U/8.U)
+
+        // val vs2_val_gather = Mux(gather_valid, vs2_sew8(gather_idx / (config.vlen / 8).U)(gather_idx % (config.vlen / 8).U), 0.U)
+        val vs2_val_gather = Mux(gather_valid, vs2_sew8(slide_vec_idx_gather)(slide_byte_idx_gather), 0.U)
+
+        result_val := Mux(
+          (io.vl_in > elem_idx.U),
+          Mux(mask_bit_active_element, vs2_val_gather, Mux(mask_bit_undisturb, vs3_val, Fill(8, 1.U))),
+          Mux(tail === 0.B, vs3_val, Fill(8, 1.U))
+        )
+      }
       .otherwise{
-        result_val := Mux(tail === 0.B, vs3_val, Fill(8, 1.U))
+        result_val := Mux(tail === 0.B, 5.U, Fill(8, 1.U))
       }
     
 
@@ -484,15 +531,21 @@ for (i <- 0 until 8) {
 // }
 
 // 3. Reconstruct back into XLEN-wide outputs
+// val assembled = Wire(Vec(8, Vec(config.count_lanes, Vec(config.XLEN / 8, UInt(8.W)))))
+// dontTouch(assembled)
+
 for (i <- 0 until 8) {
   for (j <- 0 until config.count_lanes) {
-    val assembled = Wire(Vec(config.XLEN / 8, UInt(8.W)))
-    for (k <- 0 until config.XLEN / 8) {
-      assembled(k) := vsout_sew8(i)(j * (config.XLEN / 8) + k)
-    }
-    io.vsd_out(i)(j) := assembled.reverse.reduce(Cat(_,_)).asSInt
+    val base = j * 4 // 4 bytes = 32 bits
+    io.vsd_out(i)(j) := Cat(
+      vsout_sew8(i)(base + 3),
+      vsout_sew8(i)(base + 2),
+      vsout_sew8(i)(base + 1),
+      vsout_sew8(i)(base)
+    ).asSInt
   }
 }
+
 
         }
 
@@ -509,6 +562,7 @@ for (i <- 0 until 8) {
 
 
         .otherwise{
+          
         var vl_counter = 0
         for (i <- 0 until 8) {
           for (j <- 0 until config.count_lanes) {
