@@ -4,7 +4,7 @@ import chisel3.util._
 import vaquita.configparameter.VaquitaConfig
 
 
-class WBStage(implicit val config: VaquitaConfig,val on : Bool =1.B, val off : Bool =0.B) extends Module {
+class WBStage(implicit val config: VaquitaConfig) extends Module {
   val io = IO (new Bundle {
     val wb_vsd_data_in = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
     val wb_vs3_data_in_store = Input(Vec(8, Vec(config.count_lanes, SInt(config.XLEN.W))))
