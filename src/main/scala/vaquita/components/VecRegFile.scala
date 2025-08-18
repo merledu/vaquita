@@ -47,7 +47,7 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
           io.vs1_data(i)(j) := vrf(io.vs1_addr + offset)(j)
           io.vs3_data(i)(j) := vrf(vs3_addr + offset)(j)
           io.vs0_data(i)(j) := vrf(vs0_addr + offset)(j)
-    }}}.elsewhen((io.reg_write === 1.B) && (io.vd_addr === io.wb_vd_addr  && io.store_vs3_to_mem===1.B) ){//use next vs3 addr for store instruction
+    }}}.elsewhen((io.reg_write === 1.B) && (io.vd_addr === io.wb_vd_addr  && io.store_vs3_to_mem===1.B) ){
         for (i <- 0 until a) { // for grouping = 8
         val offset = i.U
         for (j <- 0 until (config.count_lanes)) {

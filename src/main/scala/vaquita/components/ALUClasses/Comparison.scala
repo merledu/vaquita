@@ -36,7 +36,7 @@ class Comparison(implicit val config: VaquitaConfig)extends Module {
         val vsetvli_mask = Wire(Bool())
         vsetvli_mask := 0.B
         val tail = Wire(Bool())
-        val comp_bool = WireInit(VecInit(Seq.fill(config.vlen)(false.B)))
+        val comp_bool = WireInit(VecInit((0 until config.vlen).map(i => vs3(0).asUInt(i).asBool))) //WireInit(VecInit(Seq.fill(config.vlen)((vs3(0).asUInt)(elem_idx).asBool)))
         val comp_wire = Wire(UInt(config.vlen.W))
         comp_wire := comp_bool.asUInt
         tail := 0.B
@@ -51,7 +51,7 @@ class Comparison(implicit val config: VaquitaConfig)extends Module {
                 Mux(mask_bit_active_element,comparison_operators(vs1(i)(j).asSInt,vs2(i)(j).asSInt,alu_opcode), Mux(mask_bit_undisturb, (vs3(0).asUInt)(elem_idx).asBool, 1.B)),
                 Mux(tail === 0.B, (vs3(0).asUInt)(elem_idx).asBool, 1.B)
                 )
-                elem_idx = elem_idx +1
+                elem_idx = elem_idx + 1
             }
         }
         var high = sew-1
@@ -63,7 +63,7 @@ class Comparison(implicit val config: VaquitaConfig)extends Module {
         }
         for (i <- 1 until 8) {
             for (j <- 0 until sew_lanes) {
-                result_val(i)(j) := Mux(tail === 0.B, vs3(i)(j).asUInt, Fill(sew, 1.U)) //vs3(i)(j).asUInt
+                result_val(i)(j) := "hdeadbeef".U //vs3(i)(j).asUInt
             }
         }
         result_val

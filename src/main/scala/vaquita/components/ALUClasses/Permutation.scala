@@ -32,10 +32,10 @@ class Permutation(implicit val config: VaquitaConfig) {
             valid_wire := (vs1_idx <= elem_idx)
         }
         .elsewhen(vslidedown === alu_opcode) {
-            valid_wire := slide_target_idx_down < sew_lanes
+            valid_wire := slide_target_idx_down < lmul_valid_cat
         }
         .elsewhen(vrgather===alu_opcode) {
-            valid_wire := (vs1_idx < sew_lanes)
+            valid_wire := (vs1_idx < lmul_valid_cat)
         }.otherwise{
             valid_wire := 0.B
         }
@@ -97,7 +97,7 @@ class Permutation(implicit val config: VaquitaConfig) {
             slide_byte_idx(i)(j) := slide_target_idx(i)(j) & (sew_lanes.U - 1.U)  //for column
             vs2_val(i)(j)        := Mux(valid_idx(i)(j), vs2(slide_vec_idx(i)(j))(slide_byte_idx(i)(j)), 0.U)
             result_r(i)(j) := Mux(
-                (vl > elem_idx.U && Mux(vrgather===alu_opcode,1.B,valid_idx(i)(j))),
+                (vl > elem_idx.U && Mux(vslideup===alu_opcode,valid_idx(i)(j),1.B)),
                 Mux(mask_bit_active_element1(i)(j), vs2_val(i)(j), Mux(mask_bit_undisturb1(i)(j), vs3_val, Fill(sew, 1.U))),
                 Mux(tail === 0.B, vs3_val, Fill(sew, 1.U))
             )
