@@ -33,7 +33,7 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
       }
 
     //convert into one array
-    val vs0_mask = io.vs0_in.asUInt()(config.vlen,0)
+    val vs0_mask = io.vs0_in.asUInt()(config.vlen-1,0)
     // val vs0_mask_bool = Wire(Vec(256, Bool()))
 
     // for (i <- 0 until 256) {
@@ -156,68 +156,66 @@ class VecALU(implicit val config: VaquitaConfig) extends Module{
     val result_8 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.lane8)(0.U(8.W))))))
     val result_16 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.lane16)(0.U(16.W))))))
     val result_32 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(config.count_lanes)(0.U(32.W))))))
-    // dontTouch(comp_8)
-    // when(io.sew==="b000".U){
-    //   when (arith_valid){
-    //     result_8 <> arith_8.arith_8_result(vs1_8,vs2_8,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8)
-    //   }
-    //   // .elsewhen(slide_valid){
-    //   //   result_8 <> Permutation_8.permutation(vs1_8,vs2_8,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8,io.func3,io.lmul)
-    //   // }
-    //   // .elsewhen (narrow_valid){
-    //   //   result_8 <> narrow_8.narrow_result(vs1_8,vs2_16,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8)
-    //   // }
-    //   .elsewhen(comp_valid){
-    //     result_8 <> comp_8.main_comp(vs1_8,vs2_8,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8)
-    //   }
+    when(io.sew==="b000".U){
+      when (arith_valid){
+        result_8 <> arith_8.arith_8_result(vs1_8,vs2_8,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8)
+      }
+      .elsewhen(slide_valid){
+        result_8 <> Permutation_8.permutation(vs1_8,vs2_8,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8,io.func3,io.lmul)
+      }
+      .elsewhen (narrow_valid){
+        result_8 <> narrow_8.narrow_result(vs1_8,vs2_16,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8)
+      }
+      .elsewhen(comp_valid){
+        result_8 <> comp_8.main_comp(vs1_8,vs2_8,vs3_8,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane8,8)
+      }
+      // connect wires with io.vsd out***********************
+      for (i <- 0 until 8) {
+        var base = 0 
+        for (j <- 0 until config.count_lanes) {
+          io.vsd_out(i)(j) := Cat(
+            result_8(i)(base + 3),
+            result_8(i)(base + 2),
+            result_8(i)(base + 1),
+            result_8(i)(base)
+          ).asSInt
+          base = base + 4
+        }
+      }
+    }
+    .elsewhen(io.sew==="b001".U){
+      when (arith_valid){
+        result_16 <> arith_16.arith_8_result(vs1_16,vs2_16,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16)
+      }
+      .elsewhen(slide_valid){
+        result_16 <> Permutation_8.permutation(vs1_16,vs2_16,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16,io.func3,io.lmul)
+      }
+      .elsewhen (narrow_valid){
+        result_16 <> narrow_16.narrow_result(vs1_16,vs2_32,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16)
+      }
+      .elsewhen(comp_valid){
+        result_16 <> comp_16.main_comp(vs1_16,vs2_16,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16)
+      }
     //   // connect wires with io.vsd out***********************
-    //   for (i <- 0 until 8) {
-    //     var base = 0 
-    //     for (j <- 0 until config.count_lanes) {
-    //       io.vsd_out(i)(j) := Cat(
-    //         result_8(i)(base + 3),
-    //         result_8(i)(base + 2),
-    //         result_8(i)(base + 1),
-    //         result_8(i)(base)
-    //       ).asSInt
-    //       base = base + 4
-    //     }
-    //   }
-    // }
-    // .elsewhen(io.sew==="b001".U){
-    //   when (arith_valid){
-    //     result_16 <> arith_16.arith_8_result(vs1_16,vs2_16,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16)
-    //   }
-    //   .elsewhen(slide_valid){
-    //     result_16 <> Permutation_8.permutation(vs1_16,vs2_16,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16,io.func3,io.lmul)
-    //   }
-    //   .elsewhen (narrow_valid){
-    //     result_16 <> narrow_16.narrow_result(vs1_16,vs2_32,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16)
-    //   }
-    //   .elsewhen(comp_valid){
-    //     result_16 <> comp_16.main_comp(vs1_16,vs2_16,vs3_16,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.lane16,16)
-    //   }
-    // //   // connect wires with io.vsd out***********************
-    //   for (i <- 0 until 8) {
-    //     var base = 0 
-    //     for (j <- 0 until config.count_lanes) {
-    //       io.vsd_out(i)(j) := Cat(
-    //         result_16(i)(base + 1),
-    //         result_16(i)(base)
-    //       ).asSInt
-    //       base = base + 2
-    //     }
-    //   }
-    // }
-    // .else
-    when(io.sew==="b010".U){
+      for (i <- 0 until 8) {
+        var base = 0 
+        for (j <- 0 until config.count_lanes) {
+          io.vsd_out(i)(j) := Cat(
+            result_16(i)(base + 1),
+            result_16(i)(base)
+          ).asSInt
+          base = base + 2
+        }
+      }
+    }
+    .elsewhen(io.sew==="b010".U){
       when (arith_valid){
         result_32 <> arith_32.arith_8_result(vs1_32,vs2_32,vs3_32,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.count_lanes,32)
       }
-      // .elsewhen(slide_valid){
-      //   val Permutation_8 = new Permutation()(config)
-      //   result_32 <> Permutation_8.permutation(vs1_32,vs2_32,vs3_32,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.count_lanes,32,io.func3,io.lmul)
-      // }
+      .elsewhen(slide_valid){
+        val Permutation_8 = new Permutation()(config)
+        result_32 <> Permutation_8.permutation(vs1_32,vs2_32,vs3_32,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.count_lanes,32,io.func3,io.lmul)
+      }
       .elsewhen(comp_valid){
         result_32 <> comp_32.main_comp(vs1_32,vs2_32,vs3_32,vs0_mask,io.alu_opcode,rs1_imm_value,io.vl_in,io.mask_arith,config.count_lanes,32)
       }

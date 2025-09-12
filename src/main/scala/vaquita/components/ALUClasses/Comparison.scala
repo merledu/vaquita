@@ -7,14 +7,14 @@ import vaquita.configparameter.VaquitaConfig
 class Comparison(implicit val config: VaquitaConfig)extends Module {
     def comparison_operators(vs1_in:SInt,vs2_in:SInt,alu_opcode:UInt):Bool={
       val comparison_table = Seq(
-        vmseq  -> (vs1_in===vs2_in),//vmseq
-        vmsne  -> (vs1_in.asUInt =/= vs2_in.asUInt),//vmsne
-        vmsltu -> (vs1_in.asUInt > vs2_in.asUInt),//vmsltu
-        vmslt  -> (vs1_in > vs2_in),//vmslt
-        vmsleu -> (vs1_in.asUInt >= vs2_in.asUInt),//vmsleu
-        vmsle  -> (vs1_in >= vs2_in),//vmsle
-        vmsgtu -> (vs1_in.asUInt < vs2_in.asUInt),//vmsgtu
-        vmsgt  -> (vs1_in < vs2_in),//vmsgt
+        vmseq  -> (vs1_in === vs2_in),                     // vmseq
+        vmsne  -> (vs1_in.asUInt =/= vs2_in.asUInt),       // vmsne
+        vmsltu -> (vs1_in.asUInt <  vs2_in.asUInt),        // vmsltu
+        vmslt  -> (vs1_in        <  vs2_in),               // vmslt
+        vmsleu -> (vs1_in.asUInt <= vs2_in.asUInt),        // vmsleu
+        vmsle  -> (vs1_in        <= vs2_in),               // vmsle
+        vmsgtu -> (vs1_in.asUInt >  vs2_in.asUInt),        // vmsgtu
+        vmsgt  -> (vs1_in        >  vs2_in),               // vmsgt
         vmadc  -> Mux((vs1_in +& vs2_in).asUInt < "hffffffff".U,1.B,0.B)//vmadc
         // "b011111".U -> (vs1_in < vs2_in)//vmsbc
       )

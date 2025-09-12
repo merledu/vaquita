@@ -18,12 +18,13 @@ class NarrowIns(implicit val config: VaquitaConfig) extends Module {
       val vnclip_s   = WireInit(0.S(32.W))
       vnclip_s := fixed_round_mode.fixed_round_mode(vs2_in.asUInt,(vs2_in >> shift_vs1_amount).asUInt,shift_vs1_amount,vxrm).asSInt
       val result = WireInit(0.S(32.W))
+      val maxU = ((1.U << sew) - 1.U)
       result := MuxLookup(alu_opcode, 0.S(32.W), Seq(
         // vnsrl  -> (vs2_in.asUInt >> (rs1_in%sew.U)).asSInt,
         // vnsra  -> ((vs2_in >> (rs1_in%sew.U)).asSInt),
         vnsrl  ->   (vs2_in.asUInt >> (Mux(sew.U===8.U ,vs1_in(3,0), vs1_in(4,0)))).asSInt,
         vnsra  ->   (vs2_in >> (Mux(sew.U===8.U ,vs1_in(3,0), vs1_in(4,0)))).asSInt,  //("habcd45".U.asSInt >> 2.U).asSInt  //
-        vnclipu ->  Mux(sew.U===16.U,(Mux(vnclip_u>=65535.U,65535.U,vnclip_u).asSInt),(Mux(vnclip_u>=255.U,255.U,vnclip_u).asSInt)) ,   //Mux(sew.U===8.U,Mux(vnclip_u>255.U,255.U,vnclip_u),Mux(sew.U===16.U,Mux(vnclip_u>=65535.U,65535.U,vnclip_u),0.U)).asSInt,
+        vnclipu ->  Mux(vnclip_u >= maxU, maxU, vnclip_u).asSInt,
         vnclip  ->  Mux(vnclip_s > maxValue, maxValue,Mux(vnclip_s < minValue, minValue, vnclip_s))
       ))
       // printf(p"vs1 = 0x${Hexadecimal(wire_vs1(4,0))}  , vs2 = 0x${Hexadecimal(wire_vs2)} ,  result =  0x${Hexadecimal(result)}  , sew = 0x${Hexadecimal(sew.U)} \n")
@@ -38,7 +39,9 @@ class NarrowIns(implicit val config: VaquitaConfig) extends Module {
       mask_bit_active_element := (mask_vs0===1.B && mask_arith25===0.B) || mask_arith25===1.B
       mask_bit_undisturb := mask_vs0===0.B && mask_arith25===0.B && vsetvli_mask===0.B
       dontTouch(vec_sew8_result)
-      vec_sew8_result := Mux(mask_bit_active_element===1.B,narrow_ins(vs1.asSInt, vs2.asSInt,vs3.asSInt,sew,mask_vs0.asUInt,alu_opcode,rs1).asUInt,Mux(mask_bit_undisturb===1.B,vs3,Fill(16,1.U))).asUInt
+      vec_sew8_result := Mux(mask_bit_active_element===1.B,
+                             narrow_ins(vs1.asSInt, vs2.asSInt,vs3.asSInt,sew,mask_vs0.asUInt,alu_opcode,rs1).asUInt,
+                             Mux(mask_bit_undisturb===1.B, vs3, Fill(sew, 1.U))).asUInt
       vec_sew8_result.asUInt
     }
     def narrow_result(

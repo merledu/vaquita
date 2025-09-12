@@ -35,6 +35,7 @@ class Arith(implicit val config: VaquitaConfig) extends Module {
       // multi := fixed_round_mode(vs2_in.asUInt,(vs2_in * vs1_in).asUInt,vs1_in.asUInt,vxrm).asSInt
       
       val result = WireInit(0.S(32.W))
+      val shamt = rs1_in(log2Ceil(sew)-1, 0)
 
       result := MuxLookup(alu_opcode, 0.S(32.W), Seq(
         vadd   -> (vs1_in + vs2_in),//add
@@ -43,9 +44,9 @@ class Arith(implicit val config: VaquitaConfig) extends Module {
         vand   -> (vs1_in & vs2_in),// and
         vor    -> (vs1_in | vs2_in),//or
         vxor   -> (vs1_in ^ vs2_in),//xor
-        vsll   -> (vs2_in << (rs1_in%sew.U)), //vsll
-        vsrl   -> (vs2_in.asUInt >> (rs1_in%sew.U)).asSInt, //vsrl
-        vsra   -> ((vs2_in >> (rs1_in%sew.U)).asSInt), //vsra
+        vsll   -> (vs2_in << shamt),                                  // vsll
+        vsrl   -> (vs2_in.asUInt >> shamt).asSInt,                    // vsrl
+        vsra   -> (vs2_in >> shamt).asSInt,                            // vsra
         vmv    -> (vs1_in), //vmv 
         vminu  -> Mux(vs1_in.asUInt < vs2_in.asUInt,vs1_in.asUInt,vs2_in.asUInt).asSInt,//minu
         vmin   -> Mux(vs1_in < vs2_in,vs1_in,vs2_in),//min
@@ -53,7 +54,7 @@ class Arith(implicit val config: VaquitaConfig) extends Module {
         vmax   -> Mux(vs1_in > vs2_in,vs1_in,vs2_in),//max
         vsaddu -> Mux(sum(32), "hFFFFFFFF".U, sum(31,0)).asSInt,//vsaddu
         vsadd  -> (Mux(positiveOverflowAdd, maxValue, Mux(negativeOverflowAdd, minValue, sum))),//vsadd
-        vssub  -> Mux(vs2_in.asUInt < vs1_in.asUInt, 0.U,vs2_in.asUInt - vs1_in.asUInt ).asSInt,//vssubu
+        vssubu  -> Mux(vs2_in.asUInt < vs1_in.asUInt, 0.U,vs2_in.asUInt - vs1_in.asUInt ).asSInt,//vssubu
         vssub  -> Mux(positiveOverflowSub, maxValue, Mux(negativeOverflowSub, minValue, sub(31, 0).asSInt)),//vssub
         vadc   -> (vs1_in.asUInt + vs2_in.asUInt + v0_bit_mask).asSInt, //vadc
         vsbc   -> (vs2_in.asUInt - vs1_in.asUInt - v0_bit_mask).asSInt, //vsbc

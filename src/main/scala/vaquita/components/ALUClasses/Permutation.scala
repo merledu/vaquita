@@ -67,13 +67,13 @@ class Permutation(implicit val config: VaquitaConfig) {
         val log2ByteWidth = Wire(UInt(32.W))
         val vs1_idx = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(config.XLEN.W))))))
         val result_r = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(sew.W))))))
-        val slide_target_idx = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(sew.W))))))
+        val slide_target_idx = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(32.W))))))
         val valid_idx = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.B)))))
         val mask_bit_active_element1 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.B)))))
         val mask_bit_undisturb1 = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.B)))))
 
-        val slide_vec_idx  = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(sew.W))))))
-        val slide_byte_idx = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(sew.W))))))
+        val slide_vec_idx  = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(32.W))))))
+        val slide_byte_idx = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(32.W))))))
         val vs2_val        = WireInit(VecInit(Seq.fill(8)(VecInit(Seq.fill(sew_lanes)(0.U(sew.W))))))
 
 

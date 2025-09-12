@@ -101,15 +101,16 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
       }
     }
     val lmul_wire        = WireInit(0.U(5.W))
-    val narrow_instr     = io.de_instr(31,26) === "d44".U || io.de_instr(31,26) === "d45".U || io.de_instr(31,26) === "d46".U || io.de_instr(31,26) === "d47".U
-    lmul_wire      := Mux(narrow_instr , io.lmul+1.U,io.lmul)
-    when(lmul_wire===0.U){
+    val narrow_f6       = io.de_instr(31,26)
+    val isNarrowOp     = narrow_f6 === "d44".U || narrow_f6 === "d45".U || narrow_f6 === "d46".U || narrow_f6 === "d47".U
+    val lmul_read        = Mux(isNarrowOp, Mux(io.lmul === 3.U, 3.U, io.lmul + 1.U), io.lmul)
+    when(lmul_read===0.U){
       read_vrf(1)
-    }.elsewhen(lmul_wire===1.U){
+    }.elsewhen(lmul_read===1.U){
       read_vrf(2)
-    }.elsewhen(lmul_wire===2.U){
+    }.elsewhen(lmul_read===2.U){
       read_vrf(4)
-    }.elsewhen(lmul_wire===3.U){
+    }.elsewhen(lmul_read===3.U){
       read_vrf(8)
     } .otherwise{
       read_vrf(1)
