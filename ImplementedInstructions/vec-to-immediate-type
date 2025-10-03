@@ -1,0 +1,17 @@
+1	vadd
+2	vrsub
+3	vand
+4	vor
+5	vxor
+6	vmv
+7	vmseq
+8	vmsne
+9	vmsleu
+10	vmsle
+11	vmsgtu
+12	vmsgt
+13	vsll
+14	vsrl
+15	vsra
+16	vsaddu
+17	vsadd
