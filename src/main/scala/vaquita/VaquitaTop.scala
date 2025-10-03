@@ -104,12 +104,9 @@ class VaquitaTop extends Module {
     EX.ex_reg_write_in := DE.de_io.de_reg_write
 
     // -----------------memory stage ---------------------------------
-    // val comparison_bit_f6 = MEM.mem_instr_out(31,26)==="b011000".U || MEM.mem_instr_out(31,26)==="b011001".U || MEM.mem_instr_out(31,26)==="b011010".U || MEM.mem_instr_out(31,26)==="b011011".U || MEM.mem_instr_out(31,26)==="b011100".U || MEM.mem_instr_out(31,26)==="b011101".U || MEM.mem_instr_out(31,26)==="b011110".U || MEM.mem_instr_out(31,26)==="b011111".U
-    // val comparison_bit_f3 = MEM.mem_instr_out(14,12)==="b000".U || MEM.mem_instr_out(14,12)==="b011".U || MEM.mem_instr_out(14,12)==="b100".U
     io.dmemReq           <> MemFetch.dccmReq
     MemFetch.dccmRsp     <> io.dmemRsp
     MemFetch.mem_lmul_in := EX.ex_lmul_out
-    // MemFetch.vec_comparison_bit := comparison_bit_f6 && comparison_bit_f3
 
     val wb_vs3_data_in_store = VecInit(Seq.fill(8)(VecInit(Seq.fill(vec_config.count_lanes)(0.S(vec_config.XLEN.W)))))
     

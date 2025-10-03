@@ -23,6 +23,7 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
         val func3 = Input(UInt(3.W))
         val store_vs3_to_mem = Input(Bool())
         val reg_write_decode = Input(Bool())
+        val de_instr   = Input(UInt(32.W))
     })
     val vrf = RegInit(VecInit(Seq.fill(config.reg_count){VecInit(Seq.fill(config.count_lanes) {0.S(config.XLEN.W)})}))
     dontTouch(vrf)
@@ -46,7 +47,7 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
           io.vs1_data(i)(j) := vrf(io.vs1_addr + offset)(j)
           io.vs3_data(i)(j) := vrf(vs3_addr + offset)(j)
           io.vs0_data(i)(j) := vrf(vs0_addr + offset)(j)
-    }}}.elsewhen((io.reg_write === 1.B) && (io.vd_addr === io.wb_vd_addr  && io.store_vs3_to_mem===1.B) ){//use next vs3 addr for store instruction
+    }}}.elsewhen((io.reg_write === 1.B) && (io.vd_addr === io.wb_vd_addr  && io.store_vs3_to_mem===1.B) ){
         for (i <- 0 until a) { // for grouping = 8
         val offset = i.U
         for (j <- 0 until (config.count_lanes)) {
@@ -99,14 +100,17 @@ class VecRegFile(implicit val config: VaquitaConfig) extends Module {
 
       }
     }
-
-    when(io.lmul===0.U){
+    val lmul_wire        = WireInit(0.U(5.W))
+    val narrow_f6       = io.de_instr(31,26)
+    val isNarrowOp     = narrow_f6 === "d44".U || narrow_f6 === "d45".U || narrow_f6 === "d46".U || narrow_f6 === "d47".U
+    val lmul_read        = Mux(isNarrowOp, Mux(io.lmul === 3.U, 3.U, io.lmul + 1.U), io.lmul)
+    when(lmul_read===0.U){
       read_vrf(1)
-    }.elsewhen(io.lmul===1.U){
+    }.elsewhen(lmul_read===1.U){
       read_vrf(2)
-    }.elsewhen(io.lmul===2.U){
+    }.elsewhen(lmul_read===2.U){
       read_vrf(4)
-    }.elsewhen(io.lmul===3.U){
+    }.elsewhen(lmul_read===3.U){
       read_vrf(8)
     } .otherwise{
       read_vrf(1)

@@ -29,7 +29,7 @@ class MemStage(implicit val config: VaquitaConfig) extends Module {
   vsd_data            <> io.mem_vsd_data_in
   io.mem_vsd_data_out <> vsd_data
   vs3_data            <> io.mem_vs1_data_vs3_in
-  io.vs3_data_out     <> vs3_data//io.mem_vs1_data_vs3_in(i)(j)// vs3_data(i)(j)
+  io.vs3_data_out     <> vs3_data
   io.mem_instr_out      := RegNext(io.mem_instr_in)
   io.mem_stage_write_en := RegNext(io.write_en)
   io.mem_stage_read_en  := RegNext(io.read_en)

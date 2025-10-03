@@ -56,6 +56,8 @@ class DecodeStage(implicit val config: VaquitaConfig) extends Module {
     vec_reg_module.io.vtype            := vcsr_module.io.vtype_out
     vec_reg_module.io.wb_vd_addr       := io.de_io.wb_de_instr_in(11, 7)
     vec_reg_module.io.store_vs3_to_mem := vec_cu_module.io.store_vs3_to_mem
+    vec_reg_module.io.de_instr         := io.de_io.instr
+    
 
     /** Vector CSR Module Wiring */
     vcsr_module.io.vec_config := vec_cu_module.io.vec_config
